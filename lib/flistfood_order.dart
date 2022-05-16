@@ -1,15 +1,21 @@
 library flistfood_order;
 
+import 'package:flutter/material.dart';
+
 /// A Calculator.
 // class Calculator {
 //   /// Returns [value] plus 1.
 //   int addOne(int value) => value + 1;
 // }
 
-class FlistFoodOrder {
-  int instance = 0;
+class FlistFoodOrder extends ChangeNotifier {
+  String _message = 'Ciao!';
 
-  int addOne() => instance + 1;
+  String get message => _message;
 
-  int removeOne() => instance - 1;
+  void setMessage(String message) {
+    _message = message;
+
+    notifyListeners();
+  }
 }
