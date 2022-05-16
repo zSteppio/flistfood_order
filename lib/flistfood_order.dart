@@ -9,7 +9,7 @@ library flistfood_order;
 class FlistFoodOrder {
   int instance = 0;
 
-  void addOne() => instance + 1;
+  int addOne() => instance + 1;
 
-  void removeOne() => instance - 1;
+  int removeOne() => instance - 1;
 }
