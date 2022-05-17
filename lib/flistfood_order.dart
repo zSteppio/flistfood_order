@@ -29,12 +29,11 @@ class FlistFoodOrderTest extends ChangeNotifier {
 /// e il formato anche in caso di null per inizializzare il prodotto in maniera
 /// corretta.
 class FlistFoodOrderNewProduct extends ChangeNotifier {
-  late Product _product;
-  Format? _format;
+  final Product product;
+  final Format? format;
   int _mode = 0;
 
-  Product get product => _product;
-  Format? get format => _format;
+  FlistFoodOrderNewProduct({required this.product, required this.format});
 
   void getProductVariation() {
     List<Ingredient> selectedIngridients = [];
