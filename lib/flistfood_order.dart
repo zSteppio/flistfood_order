@@ -234,8 +234,4 @@ class FlistFoodOrderTest extends ChangeNotifier {
 //   }
 // }
 
-class FlistFoodOrderAddOrder extends ChangeNotifier {
-  late Detail _detail;
-
-  Detail get detail => _detail;
-}
+class FlistFoodOrderAddOrder extends ChangeNotifier {}

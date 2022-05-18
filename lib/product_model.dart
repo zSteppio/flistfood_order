@@ -8,12 +8,12 @@ class FFProduct extends ChangeNotifier {
   double newPrice;
   double price;
   int sectionId;
-  List<Format>? formats;
-  List<Ingredient>? ingredients;
-  List<Alternative>? alternatives;
-  List<CookingType>? cookingTypes;
-  List<Foodlist>? foodlists;
-  List<FoodListsDefinition>? foodListsDefinition;
+  List<FFFormat>? formats;
+  List<FFIngredient>? ingredients;
+  List<FFAlternative>? alternatives;
+  List<FFCookingType>? cookingTypes;
+  List<FFFoodlist>? foodlists;
+  List<FFFoodListsDefinition>? foodListsDefinition;
 
   FFProduct({
     required this.id,
@@ -32,13 +32,13 @@ class FFProduct extends ChangeNotifier {
   });
 
   late FFProduct _product;
-  Format? _format;
+  FFFormat? _format;
   int _mode = 0;
 
   FFProduct get product => _product;
-  Format? get format => _format;
+  FFFormat? get format => _format;
 
-  void getProductVariation({Format? format}) {
+  void getProductVariation({FFFormat? format}) {
     _product = FFProduct(
       id: id,
       name: name,
@@ -53,7 +53,7 @@ class FFProduct extends ChangeNotifier {
       foodlists: foodlists,
     );
 
-    List<Ingredient> selectedIngridients = [];
+    List<FFIngredient> selectedIngridients = [];
 
     //* Settaggio del prezzo nel caso ci siano formati
     if (format != null) {
@@ -63,8 +63,8 @@ class FFProduct extends ChangeNotifier {
     }
 
     //* Recupero delle alternative di default
-    for (Alternative alternative in product.alternatives ?? []) {
-      for (Food food in alternative.foods ?? []) {
+    for (FFAlternative alternative in product.alternatives ?? []) {
+      for (FFFood food in alternative.foods ?? []) {
         food.isSelected = false;
         if (food.foodId == alternative.defaultFoodId) {
           food.isSelected = true;
@@ -73,7 +73,7 @@ class FFProduct extends ChangeNotifier {
     }
 
     //* Recupero del tipo di cotture di default
-    for (CookingType cookingType in product.cookingTypes ?? []) {
+    for (FFCookingType cookingType in product.cookingTypes ?? []) {
       cookingType.isSelected = false;
     }
     if (product.cookingTypes != null &&
@@ -83,7 +83,7 @@ class FFProduct extends ChangeNotifier {
     }
 
     //* Recupero degli ingredienti di default
-    for (Ingredient ingredient in product.ingredients ?? []) {
+    for (FFIngredient ingredient in product.ingredients ?? []) {
       if (ingredient.isMainIngredient) {
         ingredient.selected = true;
       } else {
@@ -93,12 +93,12 @@ class FFProduct extends ChangeNotifier {
     }
 
     //* Recupero della foodList di default
-    for (Foodlist foodList in product.foodlists ?? []) {
+    for (FFFoodlist foodList in product.foodlists ?? []) {
       if (product.foodListsDefinition != null &&
           product.foodListsDefinition!.any((e) => e.foodListId == foodList.id)) {
         _mode = product.foodListsDefinition!.firstWhere((e) => e.foodListId == foodList.id).mode;
 
-        for (FoodDetail foodDetail in foodList.foods ?? []) {
+        for (FFFoodDetail foodDetail in foodList.foods ?? []) {
           if (_mode == FoodListModeEnum.maxFreeAndOtherWithCost ||
               _mode == FoodListModeEnum.maxIngredientFree) {
             foodDetail.hiddenPrice = true;
@@ -115,14 +115,14 @@ class FFProduct extends ChangeNotifier {
   }
 }
 
-class Format {
+class FFFormat {
   String? format;
   final double price;
 
-  Format({this.format, required this.price});
+  FFFormat({this.format, required this.price});
 }
 
-class Ingredient {
+class FFIngredient {
   int foodId;
   String? food;
   bool hidden;
@@ -134,7 +134,7 @@ class Ingredient {
   bool canDouble;
   bool canTriple;
 
-  Ingredient({
+  FFIngredient({
     required this.foodId,
     this.food,
     required this.hidden,
@@ -148,13 +148,13 @@ class Ingredient {
   });
 }
 
-class Alternative {
+class FFAlternative {
   int foodListId;
   String? foodListName;
   int defaultFoodId;
-  List<Food>? foods;
+  List<FFFood>? foods;
 
-  Alternative({
+  FFAlternative({
     required this.foodListId,
     this.foodListName,
     required this.defaultFoodId,
@@ -162,13 +162,13 @@ class Alternative {
   });
 }
 
-class CookingType {
+class FFCookingType {
   int id;
   String? name;
   int? priority;
   bool isSelected;
 
-  CookingType({
+  FFCookingType({
     required this.id,
     this.name,
     this.priority,
@@ -176,13 +176,13 @@ class CookingType {
   });
 }
 
-class Food {
+class FFFood {
   int foodId;
   String? foodName;
   double price;
   bool isSelected;
 
-  Food({
+  FFFood({
     required this.foodId,
     this.foodName,
     required this.price,
@@ -190,7 +190,7 @@ class Food {
   });
 }
 
-class FoodListsDefinition {
+class FFFoodListsDefinition {
   bool x2;
   bool x3;
   int maxQty;
@@ -198,7 +198,7 @@ class FoodListsDefinition {
   int foodListId;
   int mode;
 
-  FoodListsDefinition({
+  FFFoodListsDefinition({
     required this.foodListId,
     required this.maxQty,
     required this.minQty,
@@ -208,8 +208,8 @@ class FoodListsDefinition {
   });
 }
 
-class Foodlist {
-  Foodlist({
+class FFFoodlist {
+  FFFoodlist({
     this.foods,
     this.id,
     this.name,
@@ -219,7 +219,7 @@ class Foodlist {
     this.hidden,
   });
 
-  List<FoodDetail>? foods;
+  List<FFFoodDetail>? foods;
   int? id;
   String? name;
   List<int>? priceListIds;
@@ -228,8 +228,8 @@ class Foodlist {
   bool? hidden;
 }
 
-class FoodDetail {
-  FoodDetail({
+class FFFoodDetail {
+  FFFoodDetail({
     this.categoryName,
     this.allergenIds,
     this.productsCounts,
@@ -261,7 +261,7 @@ class FoodDetail {
   bool hiddenPrice;
   int? productId;
   bool? fromPlatForm;
-  List<Translation>? translations;
+  List<FFTranslation>? translations;
   int? id;
   String? name;
   String? shortName;
@@ -274,8 +274,8 @@ class FoodDetail {
 
 @CopyWith()
 @JsonSerializable(includeIfNull: false)
-class Translation {
-  Translation({
+class FFTranslation {
+  FFTranslation({
     this.language,
     this.name,
     this.description,

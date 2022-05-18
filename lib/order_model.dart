@@ -1,7 +1,7 @@
 part of 'flistfood_order.dart';
 
-class Order {
-  Order({
+class FFOrder {
+  FFOrder({
     this.id,
     this.number = 0,
     this.source,
@@ -33,23 +33,23 @@ class Order {
   String? ticketId;
   DateTime? mustBeReadyOn;
   int? exitValue;
-  List<Detail> details;
+  List<FFDetail> details;
   String userId;
   String? user;
   String ownerId;
   String? ownerName;
-  DeliveryInfo? deliveryInfo;
+  FFDeliveryInfo? deliveryInfo;
   int paymentStatus;
   String? seatNumber;
   String? note;
 }
 
-class DeliveryInfo {
-  DeliveryInfo();
+class FFDeliveryInfo {
+  FFDeliveryInfo();
 }
 
-class Detail {
-  Detail({
+class FFDetail {
+  FFDetail({
     this.id,
     required this.productId,
     this.productName,
@@ -84,15 +84,15 @@ class Detail {
   int? cookingTypeId;
   String? cookingType;
   String? format;
-  List<Variation> variations;
+  List<FFVariation> variations;
   int state;
   String? menuId;
   String? menuName;
 }
 
 // ignore: must_be_immutable
-class Variation extends Equatable {
-  Variation({
+class FFVariation extends Equatable {
+  FFVariation({
     required this.foodId,
     this.foodName,
     required this.price,
