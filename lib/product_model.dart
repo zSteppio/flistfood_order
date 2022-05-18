@@ -46,6 +46,7 @@ class FFProduct extends ChangeNotifier {
       minOrdinableQuantity: minOrdinableQuantity,
       price: price,
       sectionId: sectionId,
+      formats: formats,
       alternatives: alternatives,
       ingredients: ingredients,
       cookingTypes: cookingTypes,
@@ -108,6 +109,143 @@ class FFProduct extends ChangeNotifier {
 
           foodDetail.selected = false;
         }
+      }
+    }
+
+    notifyListeners();
+  }
+
+  //* Settaggio delle alternative
+  void setAlternative({
+    required int foodId,
+    required FFAlternative alternative,
+  }) {
+    var selectedFood = alternative.foods?.firstWhere((e) => e.isSelected == true);
+    selectedFood?.isSelected = false;
+
+    var food = alternative.foods?.firstWhere((e) => e.foodId == foodId);
+    food?.isSelected = true;
+
+    product.newPrice -= selectedFood?.price ?? 0.0;
+
+    product.newPrice += food?.price ?? 0.0;
+
+    notifyListeners();
+  }
+
+  //* Settaggio tipi di cottura
+  void selectCookingType({required int cookingTypeId}) {
+    product.cookingTypes?.firstWhere((e) => e.isSelected == true).isSelected = false;
+    var selected = product.cookingTypes?.firstWhere((e) => e.id == cookingTypeId);
+    selected?.isSelected = true;
+    notifyListeners();
+  }
+
+  //* Settaggio ingredienti
+  void setIngredient({required FFIngredient ingredient, required bool selected}) {
+    if (ingredient.canRemove) {
+      FFIngredient selectedIngridient =
+          product.ingredients!.firstWhere((e) => e.foodId == ingredient.foodId);
+
+      selectedIngridient.selected = selected;
+
+      if (ingredient.isMainIngredient == false) {
+        if (selectedIngridient.selected == true) {
+          product.newPrice += selectedIngridient.variationPrice;
+        } else if (selectedIngridient.selected == false) {
+          product.newPrice -= selectedIngridient.variationPrice;
+        }
+      }
+
+      notifyListeners();
+    }
+  }
+
+  void setFoodList({required int foodId, required FFFoodlist foodList, required bool selected}) {
+    var quantity =
+        product.foodListsDefinition!.firstWhere((e) => e.foodListId == foodList.id).maxQty;
+    List copyList = [];
+    List lastVariationPrice = [];
+
+    for (FFFoodDetail food
+        in foodList.foods!.where((e) => e.selected == true && e.isFree == false)) {
+      lastVariationPrice.add(food);
+      if (lastVariationPrice.length >= 2) {
+        lastVariationPrice.remove(1);
+      }
+    }
+
+    for (FFFoodDetail food in foodList.foods!.where((e) => e.selected == true)) {
+      copyList.add(food);
+    }
+
+    bool checkQuantity = quantity > copyList.length ||
+        foodList.foods?.firstWhere((e) => e.id == foodId).selected == true;
+
+    FFFoodDetail selectedfood = foodList.foods!.firstWhere((e) => e.id == foodId);
+    selectedfood.selected = selected;
+
+    if (_mode == FoodListModeEnum.maxIngredientWithCost && checkQuantity) {
+      if (selectedfood.selected == true) {
+        product.newPrice += selectedfood.variationPrice ?? 0;
+      } else if (selectedfood.selected == false) {
+        product.newPrice -= selectedfood.variationPrice ?? 0;
+      }
+    } else if (_mode == FoodListModeEnum.maxIngredientFree && checkQuantity) {
+      foodList.foods?.forEach((e) => e.isFree = false);
+      foodList.foods?.where((e) => e.selected == true).forEach((e) => e.isFree = true);
+    } else if (_mode == FoodListModeEnum.maxFreeAndOtherWithCost) {
+      //* Selezionati maggiori della quantità
+      if (copyList.length > quantity) {
+        foodList.foods
+            ?.where((e) => e.id != selectedfood.id && e.selected != true)
+            .forEach((e) => e.hiddenPrice = false);
+
+        if (selectedfood.selected == true) {
+          product.newPrice += selectedfood.variationPrice ?? 0;
+        } else if (selectedfood.selected == false) {
+          product.newPrice -= selectedfood.variationPrice ?? 0;
+        }
+      }
+
+      //* Selezionati minori della quantità
+      else if (copyList.length < quantity) {
+        for (FFFoodDetail food in foodList.foods ?? []) {
+          food.hiddenPrice = true;
+          food.isFree = false;
+
+          if (food.selected) {
+            food.isFree = true;
+          }
+
+          if (!selectedfood.selected) {
+            product.newPrice -= lastVariationPrice.first.variationPrice ?? 0;
+          }
+        }
+      }
+
+      //* Selezionati uguali della quantità
+      else if (copyList.length == quantity) {
+        for (FFFoodDetail food in foodList.foods ?? []) {
+          food.isFree = false;
+          if (food.selected) {
+            food.isFree == true;
+            food.hiddenPrice = true;
+          } else {
+            food.hiddenPrice = false;
+          }
+        }
+      }
+      if (foodList.foods?.any((e) => e.selected) == false) {
+        foodList.foods?.forEach((e) => e.hiddenPrice = true);
+      }
+    }
+    //* Logica Scelta Libera
+    else if (_mode == 0) {
+      if (selectedfood.selected == true) {
+        product.newPrice += selectedfood.variationPrice ?? 0;
+      } else if (selectedfood.selected == false) {
+        product.newPrice -= selectedfood.variationPrice ?? 0;
       }
     }
 
