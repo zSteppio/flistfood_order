@@ -1,6 +1,6 @@
 part of 'flistfood_order.dart';
 
-class Product extends ChangeNotifier {
+class FFProduct extends ChangeNotifier {
   int id;
   String? name;
   int? preferredCookingTypeId;
@@ -15,7 +15,7 @@ class Product extends ChangeNotifier {
   List<Foodlist>? foodlists;
   List<FoodListsDefinition>? foodListsDefinition;
 
-  Product({
+  FFProduct({
     required this.id,
     this.name,
     this.preferredCookingTypeId,
@@ -31,19 +31,33 @@ class Product extends ChangeNotifier {
     this.foodlists,
   });
 
-  late Product _product;
+  late FFProduct _product;
   Format? _format;
   int _mode = 0;
 
-  Product get product => _product;
+  FFProduct get product => _product;
   Format? get format => _format;
 
-  void getProductVariation() {
+  void getProductVariation({Format? format}) {
+    _product = FFProduct(
+      id: id,
+      name: name,
+      preferredCookingTypeId: preferredCookingTypeId,
+      minOrdinableQuantity: minOrdinableQuantity,
+      price: price,
+      sectionId: sectionId,
+      alternatives: alternatives,
+      ingredients: ingredients,
+      cookingTypes: cookingTypes,
+      foodListsDefinition: foodListsDefinition,
+      foodlists: foodlists,
+    );
+
     List<Ingredient> selectedIngridients = [];
 
     //* Settaggio del prezzo nel caso ci siano formati
     if (format != null) {
-      product.newPrice = format!.price;
+      product.newPrice = format.price;
     } else {
       product.newPrice = product.price;
     }
