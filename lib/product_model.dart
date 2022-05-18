@@ -38,22 +38,26 @@ class FFProduct extends ChangeNotifier {
   FFProduct get product => _product;
   FFFormat? get format => _format;
 
-  void getProductVariation({FFFormat? format}) {
+  void setProduct(FFProduct product) {
     _product = FFProduct(
-      id: id,
-      name: name,
-      preferredCookingTypeId: preferredCookingTypeId,
-      minOrdinableQuantity: minOrdinableQuantity,
-      price: price,
-      sectionId: sectionId,
-      formats: formats,
-      alternatives: alternatives,
-      ingredients: ingredients,
-      cookingTypes: cookingTypes,
-      foodListsDefinition: foodListsDefinition,
-      foodlists: foodlists,
+      id: product.id,
+      name: product.name,
+      preferredCookingTypeId: product.preferredCookingTypeId,
+      minOrdinableQuantity: product.minOrdinableQuantity,
+      price: product.price,
+      sectionId: product.sectionId,
+      formats: product.formats,
+      alternatives: product.alternatives,
+      ingredients: product.ingredients,
+      cookingTypes: product.cookingTypes,
+      foodListsDefinition: product.foodListsDefinition,
+      foodlists: product.foodlists,
     );
 
+    notifyListeners();
+  }
+
+  void getProductVariation({FFFormat? format}) {
     List<FFIngredient> selectedIngridients = [];
 
     //* Settaggio del prezzo nel caso ci siano formati
