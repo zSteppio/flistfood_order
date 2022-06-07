@@ -31,44 +31,20 @@ class FFProduct extends ChangeNotifier {
     this.foodlists,
   });
 
-  late FFProduct _product;
-  FFFormat? _format;
   int _mode = 0;
-
-  FFProduct get product => _product;
-  FFFormat? get format => _format;
-
-  void setProduct(FFProduct product) {
-    _product = FFProduct(
-      id: product.id,
-      name: product.name,
-      preferredCookingTypeId: product.preferredCookingTypeId,
-      minOrdinableQuantity: product.minOrdinableQuantity,
-      price: product.price,
-      sectionId: product.sectionId,
-      formats: product.formats,
-      alternatives: product.alternatives,
-      ingredients: product.ingredients,
-      cookingTypes: product.cookingTypes,
-      foodListsDefinition: product.foodListsDefinition,
-      foodlists: product.foodlists,
-    );
-
-    notifyListeners();
-  }
 
   void getProductVariation({FFFormat? format}) {
     List<FFIngredient> selectedIngridients = [];
 
     //* Settaggio del prezzo nel caso ci siano formati
     if (format != null) {
-      product.newPrice = format.price;
+      newPrice = format.price;
     } else {
-      product.newPrice = product.price;
+      newPrice = price;
     }
 
     //* Recupero delle alternative di default
-    for (FFAlternative alternative in product.alternatives ?? []) {
+    for (FFAlternative alternative in alternatives ?? []) {
       for (FFFood food in alternative.foods ?? []) {
         food.isSelected = false;
         if (food.foodId == alternative.defaultFoodId) {
@@ -78,17 +54,15 @@ class FFProduct extends ChangeNotifier {
     }
 
     //* Recupero del tipo di cotture di default
-    for (FFCookingType cookingType in product.cookingTypes ?? []) {
+    for (FFCookingType cookingType in cookingTypes ?? []) {
       cookingType.isSelected = false;
     }
-    if (product.cookingTypes != null &&
-        product.cookingTypes!.any((e) => e.id == product.preferredCookingTypeId)) {
-      product.cookingTypes?.firstWhere((e) => e.id == product.preferredCookingTypeId).isSelected =
-          true;
+    if (cookingTypes != null && cookingTypes!.any((e) => e.id == preferredCookingTypeId)) {
+      cookingTypes?.firstWhere((e) => e.id == preferredCookingTypeId).isSelected = true;
     }
 
     //* Recupero degli ingredienti di default
-    for (FFIngredient ingredient in product.ingredients ?? []) {
+    for (FFIngredient ingredient in ingredients ?? []) {
       if (ingredient.isMainIngredient) {
         ingredient.selected = true;
       } else {
@@ -98,20 +72,22 @@ class FFProduct extends ChangeNotifier {
     }
 
     //* Recupero della foodList di default
-    for (FFFoodlist foodList in product.foodlists ?? []) {
-      if (product.foodListsDefinition != null &&
-          product.foodListsDefinition!.any((e) => e.foodListId == foodList.id)) {
-        _mode = product.foodListsDefinition!.firstWhere((e) => e.foodListId == foodList.id).mode;
+    for (FFFoodlist foodList in foodlists ?? []) {
+      if (foodListsDefinition != null &&
+          foodListsDefinition!.any((e) => e.foodListId == foodList.id)) {
+        // _mode = foodListsDefinition!.firstWhere((e) => e.foodListId == foodList.id).mode;
 
-        for (FFFoodDetail foodDetail in foodList.foods ?? []) {
-          if (_mode == FoodListModeEnum.maxFreeAndOtherWithCost ||
-              _mode == FoodListModeEnum.maxIngredientFree) {
-            foodDetail.hiddenPrice = true;
-          } else if (_mode == FoodListModeEnum.maxIngredientWithCost) {
-            foodDetail.hiddenPrice = false;
-          }
+        var mode =
+            foodListsDefinition!.firstWhere((element) => element.foodListId == foodList.id).mode;
 
-          foodDetail.selected = false;
+        if (mode == 3 || mode == 2) {
+          foodList.foods?.forEach((element) => element.hiddenPrice = true);
+        }
+        if (mode == 1) {
+          foodList.foods?.forEach((element) => element.hiddenPrice = false);
+        }
+        for (FFFoodDetail i in foodList.foods ?? []) {
+          i.selected = false;
         }
       }
     }
@@ -130,17 +106,17 @@ class FFProduct extends ChangeNotifier {
     var food = alternative.foods?.firstWhere((e) => e.foodId == foodId);
     food?.isSelected = true;
 
-    product.newPrice -= selectedFood?.price ?? 0.0;
+    newPrice -= selectedFood?.price ?? 0.0;
 
-    product.newPrice += food?.price ?? 0.0;
+    newPrice += food?.price ?? 0.0;
 
     notifyListeners();
   }
 
   //* Settaggio tipi di cottura
   void selectCookingType({required int cookingTypeId}) {
-    product.cookingTypes?.firstWhere((e) => e.isSelected == true).isSelected = false;
-    var selected = product.cookingTypes?.firstWhere((e) => e.id == cookingTypeId);
+    cookingTypes?.firstWhere((e) => e.isSelected == true).isSelected = false;
+    var selected = cookingTypes?.firstWhere((e) => e.id == cookingTypeId);
     selected?.isSelected = true;
     notifyListeners();
   }
@@ -149,15 +125,15 @@ class FFProduct extends ChangeNotifier {
   void setIngredient({required FFIngredient ingredient, required bool selected}) {
     if (ingredient.canRemove) {
       FFIngredient selectedIngridient =
-          product.ingredients!.firstWhere((e) => e.foodId == ingredient.foodId);
+          ingredients!.firstWhere((e) => e.foodId == ingredient.foodId);
 
       selectedIngridient.selected = selected;
 
       if (ingredient.isMainIngredient == false) {
         if (selectedIngridient.selected == true) {
-          product.newPrice += selectedIngridient.variationPrice;
+          newPrice += selectedIngridient.variationPrice;
         } else if (selectedIngridient.selected == false) {
-          product.newPrice -= selectedIngridient.variationPrice;
+          newPrice -= selectedIngridient.variationPrice;
         }
       }
 
@@ -166,8 +142,7 @@ class FFProduct extends ChangeNotifier {
   }
 
   void setFoodList({required int foodId, required FFFoodlist foodList, required bool selected}) {
-    var quantity =
-        product.foodListsDefinition!.firstWhere((e) => e.foodListId == foodList.id).maxQty;
+    var quantity = foodListsDefinition!.firstWhere((e) => e.foodListId == foodList.id).maxQty;
     List copyList = [];
     List lastVariationPrice = [];
 
@@ -179,26 +154,41 @@ class FFProduct extends ChangeNotifier {
       }
     }
 
-    for (FFFoodDetail food in foodList.foods!.where((e) => e.selected == true)) {
-      copyList.add(food);
-    }
-
-    bool checkQuantity = quantity > copyList.length ||
-        foodList.foods?.firstWhere((e) => e.id == foodId).selected == true;
-
-    FFFoodDetail selectedfood = foodList.foods!.firstWhere((e) => e.id == foodId);
-    selectedfood.selected = selected;
-
-    if (_mode == FoodListModeEnum.maxIngredientWithCost && checkQuantity) {
-      if (selectedfood.selected == true) {
-        product.newPrice += selectedfood.variationPrice ?? 0;
-      } else if (selectedfood.selected == false) {
-        product.newPrice -= selectedfood.variationPrice ?? 0;
+    if (_mode == FoodListModeEnum.maxIngredientWithCost) {
+      for (var e in foodList.foods!.where((e) => e.selected == true)) {
+        copyList.add(e);
       }
-    } else if (_mode == FoodListModeEnum.maxIngredientFree && checkQuantity) {
-      foodList.foods?.forEach((e) => e.isFree = false);
-      foodList.foods?.where((e) => e.selected == true).forEach((e) => e.isFree = true);
+      if (quantity > copyList.length ||
+          foodList.foods?.firstWhere((e) => e.id == foodId).selected == true) {
+        FFFoodDetail selectedfood = foodList.foods!.firstWhere((e) => e.id == foodId);
+        selectedfood.selected = selected;
+
+        if (selectedfood.selected == true) {
+          newPrice += selectedfood.variationPrice ?? 0;
+        } else if (selectedfood.selected == false) {
+          newPrice -= selectedfood.variationPrice ?? 0;
+        }
+      }
+    } else if (_mode == FoodListModeEnum.maxIngredientFree) {
+      for (var e in foodList.foods!.where((e) => e.selected == true)) {
+        copyList.add(e);
+      }
+      if (quantity > copyList.length ||
+          foodList.foods?.firstWhere((e) => e.id == foodId).selected == true) {
+        FFFoodDetail selectedfood = foodList.foods!.firstWhere((e) => e.id == foodId);
+        selectedfood.selected = selected;
+
+        foodList.foods?.forEach((e) => e.isFree = false);
+        foodList.foods?.where((e) => e.selected == true).forEach((e) => e.isFree = true);
+      }
     } else if (_mode == FoodListModeEnum.maxFreeAndOtherWithCost) {
+      FFFoodDetail selectedfood = foodList.foods!.firstWhere((e) => e.id == foodId);
+      selectedfood.selected = selected;
+
+      for (FFFoodDetail food in foodList.foods!.where((e) => e.selected == true)) {
+        copyList.add(food);
+      }
+
       //* Selezionati maggiori della quantità
       if (copyList.length > quantity) {
         foodList.foods
@@ -206,26 +196,18 @@ class FFProduct extends ChangeNotifier {
             .forEach((e) => e.hiddenPrice = false);
 
         if (selectedfood.selected == true) {
-          product.newPrice += selectedfood.variationPrice ?? 0;
+          newPrice += selectedfood.variationPrice ?? 0;
         } else if (selectedfood.selected == false) {
-          product.newPrice -= selectedfood.variationPrice ?? 0;
+          newPrice -= selectedfood.variationPrice ?? 0;
         }
       }
 
       //* Selezionati minori della quantità
       else if (copyList.length < quantity) {
-        for (FFFoodDetail food in foodList.foods ?? []) {
-          food.hiddenPrice = true;
-          food.isFree = false;
+        foodList.foods?.forEach((e) => e.hiddenPrice = true);
 
-          if (food.selected) {
-            food.isFree = true;
-          }
-
-          if (!selectedfood.selected) {
-            product.newPrice -= lastVariationPrice.first.variationPrice ?? 0;
-          }
-        }
+        foodList.foods?.forEach((e) => e.isFree = false);
+        foodList.foods?.where((e) => e.selected == true).forEach((e) => e.isFree = true);
       }
 
       //* Selezionati uguali della quantità
@@ -239,6 +221,9 @@ class FFProduct extends ChangeNotifier {
             food.hiddenPrice = false;
           }
         }
+        if (selectedfood.selected == false) {
+          newPrice -= lastVariationPrice.first.variationPrice ?? 0;
+        }
       }
       if (foodList.foods?.any((e) => e.selected) == false) {
         foodList.foods?.forEach((e) => e.hiddenPrice = true);
@@ -246,10 +231,12 @@ class FFProduct extends ChangeNotifier {
     }
     //* Logica Scelta Libera
     else if (_mode == 0) {
+      FFFoodDetail selectedfood = foodList.foods!.firstWhere((e) => e.id == foodId);
+      selectedfood.selected = selected;
       if (selectedfood.selected == true) {
-        product.newPrice += selectedfood.variationPrice ?? 0;
+        newPrice += selectedfood.variationPrice ?? 0;
       } else if (selectedfood.selected == false) {
-        product.newPrice -= selectedfood.variationPrice ?? 0;
+        newPrice -= selectedfood.variationPrice ?? 0;
       }
     }
 
