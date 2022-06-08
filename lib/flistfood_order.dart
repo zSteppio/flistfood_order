@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:json_annotation/json_annotation.dart';
 part 'product_model.dart';
 part 'order_model.dart';
+part 'flistfood_order.g.dart';
 
 class FoodListModeEnum {
   static const maxIngredientWithCost = 1;
