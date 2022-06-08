@@ -15,17 +15,17 @@ class FoodListModeEnum {
   static const maxFreeAndOtherWithCost = 3;
 }
 
-class FlistFoodOrderTest extends ChangeNotifier {
-  String _message = 'Ciao!';
+// class FlistFoodOrderTest extends ChangeNotifier {
+//   String _message = 'Ciao!';
 
-  String get message => _message;
+//   String get message => _message;
 
-  void setMessage(String message) {
-    _message = message;
+//   void setMessage(String message) {
+//     _message = message;
 
-    notifyListeners();
-  }
-}
+//     notifyListeners();
+//   }
+// }
 
 class FlistFoodOrder extends ChangeNotifier {
   late FFProduct _product;
@@ -34,6 +34,21 @@ class FlistFoodOrder extends ChangeNotifier {
 
   void setProduct({required String productJson}) {
     _product = jsonDecode(productJson);
+  }
+
+  void setProductFoodList({required String foodListJson}) {
+    List<FFFoodlist> foodLists = [];
+    FFFoodlist findedFood;
+
+    List<FFFoodlist> initialFoodList = jsonDecode(foodListJson);
+
+    for (FFFoodListsDefinition foodListDefinition in _product.foodListsDefinition ?? []) {
+      if (initialFoodList.any((e) => e.id == foodListDefinition.foodListId)) {
+        findedFood = initialFoodList.firstWhere((e) => e.id == foodListDefinition.foodListId);
+        foodLists.add(findedFood);
+      }
+    }
+    _product.foodlists = foodLists;
   }
 
   void getProductVariation({FFFormat? format}) {
