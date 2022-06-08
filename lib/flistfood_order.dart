@@ -42,9 +42,7 @@ class FlistFoodOrder extends ChangeNotifier {
     List<FFFoodlist> foodLists = [];
     FFFoodlist findedFood;
 
-    var tagsJson = jsonDecode(foodListJson)['tags'];
-
-    List<FFFoodlist> initialFoodList = List.from(tagsJson);
+    List<FFFoodlist> initialFoodList = List<FFFoodlist>.from(jsonDecode(foodListJson));
 
     for (FFFoodListsDefinition foodListDefinition in _product.foodListsDefinition ?? []) {
       if (initialFoodList.any((e) => e.id == foodListDefinition.foodListId)) {
