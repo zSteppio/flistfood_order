@@ -33,6 +33,24 @@ class FFProduct extends ChangeNotifier {
 
   int _mode = 0;
 
+  FFProduct getProduct() {
+    return FFProduct(
+      id: id,
+      name: name,
+      preferredCookingTypeId: preferredCookingTypeId,
+      minOrdinableQuantity: minOrdinableQuantity,
+      newPrice: newPrice,
+      price: price,
+      sectionId: sectionId,
+      formats: formats,
+      ingredients: ingredients,
+      alternatives: alternatives,
+      cookingTypes: cookingTypes,
+      foodListsDefinition: foodListsDefinition,
+      foodlists: foodlists,
+    );
+  }
+
   void getProductVariation({FFFormat? format}) {
     List<FFIngredient> selectedIngridients = [];
 
