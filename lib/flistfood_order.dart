@@ -1,6 +1,7 @@
 library flistfood_order;
 
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:copy_with_extension/copy_with_extension.dart';
 import 'package:equatable/equatable.dart';
@@ -35,6 +36,7 @@ class FlistFoodOrder extends ChangeNotifier {
 
   void setProduct({required String productJson}) {
     _product = jsonDecode(productJson);
+    log(_product.toString());
   }
 
   void setProductFoodList({required String foodListJson}) {
