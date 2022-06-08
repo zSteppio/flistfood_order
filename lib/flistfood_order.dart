@@ -51,7 +51,13 @@ class FlistFoodOrder extends ChangeNotifier {
     _product.foodlists = foodLists;
   }
 
-  void getProductVariation({FFFormat? format}) {
+  void getProductVariation({String? formatJson}) {
+    FFFormat? format;
+
+    if (formatJson != null) {
+      format = jsonDecode(formatJson);
+    }
+
     List<FFIngredient> selectedIngridients = [];
 
     //* Settaggio del prezzo nel caso ci siano formati
