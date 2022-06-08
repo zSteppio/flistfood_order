@@ -35,15 +35,16 @@ class FlistFoodOrder extends ChangeNotifier {
   FFProduct get product => _product;
 
   void setProduct({required String productJson}) {
-    _product = jsonDecode(productJson);
-    log(_product.toString());
+    _product = FFProduct.fromJson(jsonDecode(productJson));
   }
 
   void setProductFoodList({required String foodListJson}) {
     List<FFFoodlist> foodLists = [];
     FFFoodlist findedFood;
 
-    List<FFFoodlist> initialFoodList = jsonDecode(foodListJson);
+    var tagsJson = jsonDecode(foodListJson)['tags'];
+
+    List<FFFoodlist> initialFoodList = List.from(tagsJson);
 
     for (FFFoodListsDefinition foodListDefinition in _product.foodListsDefinition ?? []) {
       if (initialFoodList.any((e) => e.id == foodListDefinition.foodListId)) {
