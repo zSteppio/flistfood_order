@@ -54,8 +54,6 @@ class FlistFoodOrder extends ChangeNotifier {
       }
     }
     _product.foodlists = foodLists;
-
-    notifyListeners();
   }
 
   void getProductVariation({String? formatJson}) {
