@@ -54,6 +54,8 @@ class FlistFoodOrder extends ChangeNotifier {
       }
     }
     _product.foodlists = foodLists;
+
+    notifyListeners();
   }
 
   void getProductVariation({String? formatJson}) {
@@ -148,8 +150,7 @@ class FlistFoodOrder extends ChangeNotifier {
   //* Settaggio tipi di cottura
   void selectCookingType({required int cookingTypeId}) {
     _product.cookingTypes?.firstWhere((e) => e.isSelected == true).isSelected = false;
-    var selected = _product.cookingTypes?.firstWhere((e) => e.id == cookingTypeId);
-    selected?.isSelected = true;
+    _product.cookingTypes?.firstWhere((e) => e.id == cookingTypeId).isSelected = true;
     notifyListeners();
   }
 
