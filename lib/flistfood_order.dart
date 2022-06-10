@@ -173,9 +173,10 @@ class FlistFoodOrder extends ChangeNotifier {
   }
 
   void setFoodList({required int foodId, required FFFoodlist foodList, required bool selected}) {
-    var mode = product.foodListsDefinition!
+    var mode = _product.foodListsDefinition!
         .firstWhere((element) => element.foodListId == foodList.id)
         .mode;
+    log(mode.toString());
     var quantity =
         _product.foodListsDefinition!.firstWhere((e) => e.foodListId == foodList.id).maxQty;
     List copyList = [];
