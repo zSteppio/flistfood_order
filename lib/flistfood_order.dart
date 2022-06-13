@@ -194,8 +194,8 @@ class FlistFoodOrder extends ChangeNotifier {
         } else if (selectedfood.selected == false) {
           _product.newPrice -= selectedfood.variationPrice ?? 0;
         }
-        notifyListeners();
       }
+      notifyListeners();
     } else if (mode == FoodListModeEnum.maxIngredientFree) {
       log('mode 2');
 
@@ -209,9 +209,8 @@ class FlistFoodOrder extends ChangeNotifier {
 
         foodList.foods?.forEach((e) => e.isFree = false);
         foodList.foods?.where((e) => e.selected == true).forEach((e) => e.isFree = true);
-
-        notifyListeners();
       }
+      notifyListeners();
     } else if (mode == FoodListModeEnum.maxFreeAndOtherWithCost) {
       log('mode 3');
 
