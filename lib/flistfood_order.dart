@@ -180,6 +180,7 @@ class FlistFoodOrder extends ChangeNotifier {
     }
 
     if (mode == FoodListModeEnum.maxIngredientWithCost) {
+      log('mode 1');
       for (var e in foodList.foods!.where((e) => e.selected == true)) {
         copyList.add(e);
       }
@@ -196,6 +197,8 @@ class FlistFoodOrder extends ChangeNotifier {
         notifyListeners();
       }
     } else if (mode == FoodListModeEnum.maxIngredientFree) {
+      log('mode 2');
+
       for (var e in foodList.foods!.where((e) => e.selected == true)) {
         copyList.add(e);
       }
@@ -210,6 +213,8 @@ class FlistFoodOrder extends ChangeNotifier {
         notifyListeners();
       }
     } else if (mode == FoodListModeEnum.maxFreeAndOtherWithCost) {
+      log('mode 3');
+
       FFFoodDetail selectedfood = foodList.foods!.firstWhere((e) => e.id == foodId);
       selectedfood.selected = selected;
 
@@ -261,6 +266,8 @@ class FlistFoodOrder extends ChangeNotifier {
     }
     //* Logica Scelta Libera
     else if (mode == 0) {
+      log('mode 0');
+
       FFFoodDetail selectedfood = foodList.foods!.firstWhere((e) => e.id == foodId);
       selectedfood.selected = selected;
       if (selectedfood.selected == true) {
