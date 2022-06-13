@@ -17,18 +17,6 @@ class FoodListModeEnum {
   static const maxFreeAndOtherWithCost = 3;
 }
 
-// class FlistFoodOrderTest extends ChangeNotifier {
-//   String _message = 'Ciao!';
-
-//   String get message => _message;
-
-//   void setMessage(String message) {
-//     _message = message;
-
-//     notifyListeners();
-//   }
-// }
-
 class FlistFoodOrder extends ChangeNotifier {
   late FFProduct _product;
 
@@ -176,9 +164,10 @@ class FlistFoodOrder extends ChangeNotifier {
     var mode = _product.foodListsDefinition!
         .firstWhere((element) => element.foodListId == foodList.id)
         .mode;
-    log(mode.toString());
+
     var quantity =
         _product.foodListsDefinition!.firstWhere((e) => e.foodListId == foodList.id).maxQty;
+
     List copyList = [];
     List lastVariationPrice = [];
 
@@ -204,6 +193,7 @@ class FlistFoodOrder extends ChangeNotifier {
         } else if (selectedfood.selected == false) {
           _product.newPrice -= selectedfood.variationPrice ?? 0;
         }
+        notifyListeners();
       }
     } else if (mode == FoodListModeEnum.maxIngredientFree) {
       for (var e in foodList.foods!.where((e) => e.selected == true)) {
@@ -216,6 +206,8 @@ class FlistFoodOrder extends ChangeNotifier {
 
         foodList.foods?.forEach((e) => e.isFree = false);
         foodList.foods?.where((e) => e.selected == true).forEach((e) => e.isFree = true);
+
+        notifyListeners();
       }
     } else if (mode == FoodListModeEnum.maxFreeAndOtherWithCost) {
       FFFoodDetail selectedfood = foodList.foods!.firstWhere((e) => e.id == foodId);
@@ -264,6 +256,8 @@ class FlistFoodOrder extends ChangeNotifier {
       if (foodList.foods?.any((e) => e.selected) == false) {
         foodList.foods?.forEach((e) => e.hiddenPrice = true);
       }
+
+      notifyListeners();
     }
     //* Logica Scelta Libera
     else if (mode == 0) {
