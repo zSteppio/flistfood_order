@@ -1245,7 +1245,7 @@ abstract class _$FFOrderCWProxy {
 
   FFOrder user(String? user);
 
-  FFOrder userId(String userId);
+  FFOrder userId(String? userId);
 
   /// This function **does support** nullification of nullable fields. All `null` values passed to `non-nullable` fields will be ignored. You can also use `FFOrder(...).copyWith.fieldName(...)` to override fields one at a time with nullification support.
   ///
@@ -1346,7 +1346,7 @@ class _$FFOrderCWProxyImpl implements _$FFOrderCWProxy {
   FFOrder user(String? user) => this(user: user);
 
   @override
-  FFOrder userId(String userId) => this(userId: userId);
+  FFOrder userId(String? userId) => this(userId: userId);
 
   @override
 
@@ -1459,10 +1459,10 @@ class _$FFOrderCWProxyImpl implements _$FFOrderCWProxy {
           ? _value.user
           // ignore: cast_nullable_to_non_nullable
           : user as String?,
-      userId: userId == const $CopyWithPlaceholder() || userId == null
+      userId: userId == const $CopyWithPlaceholder()
           ? _value.userId
           // ignore: cast_nullable_to_non_nullable
-          : userId as String,
+          : userId as String?,
     );
   }
 }
@@ -2033,7 +2033,7 @@ FFProduct _$FFProductFromJson(Map<String, dynamic> json) => FFProduct(
       minOrdinableQuantity: json['minOrdinableQuantity'] as int? ?? 0,
       newPrice: (json['newPrice'] as num?)?.toDouble() ?? 0,
       price: (json['price'] as num).toDouble(),
-      sectionId: json['sectionId'] as int,
+      sectionId: json['sectionId'] as int? ?? 0,
       formats: (json['formats'] as List<dynamic>?)
           ?.map((e) => FFFormat.fromJson(e as Map<String, dynamic>))
           .toList(),
@@ -2369,7 +2369,7 @@ FFOrder _$FFOrderFromJson(Map<String, dynamic> json) => FFOrder(
       details: (json['details'] as List<dynamic>)
           .map((e) => FFDetail.fromJson(e as Map<String, dynamic>))
           .toList(),
-      userId: json['userId'] as String,
+      userId: json['userId'] as String?,
       user: json['user'] as String?,
       ownerId: json['ownerId'] as String,
       ownerName: json['ownerName'] as String?,
@@ -2403,7 +2403,7 @@ Map<String, dynamic> _$FFOrderToJson(FFOrder instance) {
   writeNotNull('mustBeReadyOn', instance.mustBeReadyOn?.toIso8601String());
   writeNotNull('exitValue', instance.exitValue);
   val['details'] = instance.details.map((e) => e.toJson()).toList();
-  val['userId'] = instance.userId;
+  writeNotNull('userId', instance.userId);
   writeNotNull('user', instance.user);
   val['ownerId'] = instance.ownerId;
   writeNotNull('ownerName', instance.ownerName);
