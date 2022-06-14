@@ -15,7 +15,7 @@ class FFOrder {
     this.mustBeReadyOn,
     this.exitValue,
     required this.details,
-    required this.userId,
+    this.userId,
     this.user,
     required this.ownerId,
     this.ownerName,
@@ -37,7 +37,7 @@ class FFOrder {
   DateTime? mustBeReadyOn;
   int? exitValue;
   List<FFDetail> details;
-  String userId;
+  String? userId;
   String? user;
   String ownerId;
   String? ownerName;

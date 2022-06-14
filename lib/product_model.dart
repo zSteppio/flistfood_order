@@ -24,7 +24,7 @@ class FFProduct {
     this.minOrdinableQuantity = 0,
     this.newPrice = 0,
     required this.price,
-    required this.sectionId,
+    this.sectionId = 0,
     this.formats,
     this.ingredients,
     this.alternatives,

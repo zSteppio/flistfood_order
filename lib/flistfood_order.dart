@@ -5,11 +5,14 @@ import 'dart:developer';
 
 import 'package:copy_with_extension/copy_with_extension.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:json_annotation/json_annotation.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 part 'product_model.dart';
 part 'order_model.dart';
 part 'flistfood_order.g.dart';
+part 'order_local_storage.dart';
 
 class FoodListModeEnum {
   static const maxIngredientWithCost = 1;
@@ -22,6 +25,13 @@ class FlistFoodOrder extends ChangeNotifier {
 
   FFProduct get product => _product;
 
+  //*---------------------------------------------------------------------------
+  //* Variazioni
+  //*---------------------------------------------------------------------------
+
+  //?---------------------------------------------------------------------------
+  //? Configurazione iniziale
+  //?---------------------------------------------------------------------------
   void setProduct({required String productJson}) {
     _product = FFProduct.fromJson(jsonDecode(productJson));
   }
@@ -53,14 +63,14 @@ class FlistFoodOrder extends ChangeNotifier {
 
     List<FFIngredient> selectedIngridients = [];
 
-    //* Settaggio del prezzo nel caso ci siano formati
+    // Settaggio del prezzo nel caso ci siano formati
     if (format != null) {
       _product.newPrice = format.price;
     } else {
       _product.newPrice = _product.price;
     }
 
-    //* Recupero delle alternative di default
+    // Recupero delle alternative di default
     for (FFAlternative alternative in _product.alternatives ?? []) {
       for (FFFood food in alternative.foods ?? []) {
         food.isSelected = false;
@@ -70,7 +80,7 @@ class FlistFoodOrder extends ChangeNotifier {
       }
     }
 
-    //* Recupero del tipo di cotture di default
+    // Recupero del tipo di cotture di default
     for (FFCookingType cookingType in _product.cookingTypes ?? []) {
       cookingType.isSelected = false;
     }
@@ -80,7 +90,7 @@ class FlistFoodOrder extends ChangeNotifier {
           true;
     }
 
-    //* Recupero degli ingredienti di default
+    // Recupero degli ingredienti di default
     for (FFIngredient ingredient in _product.ingredients ?? []) {
       if (ingredient.isMainIngredient) {
         ingredient.selected = true;
@@ -90,12 +100,10 @@ class FlistFoodOrder extends ChangeNotifier {
       selectedIngridients.add(ingredient);
     }
 
-    //* Recupero della foodList di default
+    // Recupero della foodList di default
     for (FFFoodlist foodList in _product.foodlists ?? []) {
       if (_product.foodListsDefinition != null &&
           _product.foodListsDefinition!.any((e) => e.foodListId == foodList.id)) {
-        // _mode = foodListsDefinition!.firstWhere((e) => e.foodListId == foodList.id).mode;
-
         var mode = _product.foodListsDefinition!
             .firstWhere((element) => element.foodListId == foodList.id)
             .mode;
@@ -115,7 +123,11 @@ class FlistFoodOrder extends ChangeNotifier {
     notifyListeners();
   }
 
-  //* Settaggio delle alternative
+  //?---------------------------------------------------------------------------
+  //? Settaggi delle singole variazioni
+  //?---------------------------------------------------------------------------
+
+  // Settaggio delle alternative
   void setAlternative({
     required int foodId,
     required FFAlternative alternative,
@@ -133,7 +145,7 @@ class FlistFoodOrder extends ChangeNotifier {
     notifyListeners();
   }
 
-  //* Settaggio tipi di cottura
+  // Settaggio tipi di cottura
   void selectCookingType({required int cookingTypeId}) {
     _product.cookingTypes?.firstWhere((e) => e.isSelected == true).isSelected = false;
     _product.cookingTypes?.firstWhere((e) => e.id == cookingTypeId).isSelected = true;
@@ -180,7 +192,6 @@ class FlistFoodOrder extends ChangeNotifier {
     }
 
     if (mode == FoodListModeEnum.maxIngredientWithCost) {
-      log('mode 1');
       for (var e in foodList.foods!.where((e) => e.selected == true)) {
         copyList.add(e);
       }
@@ -197,8 +208,6 @@ class FlistFoodOrder extends ChangeNotifier {
         notifyListeners();
       }
     } else if (mode == FoodListModeEnum.maxIngredientFree) {
-      log('mode 2');
-
       for (var e in foodList.foods!.where((e) => e.selected == true)) {
         copyList.add(e);
       }
@@ -213,8 +222,6 @@ class FlistFoodOrder extends ChangeNotifier {
         notifyListeners();
       }
     } else if (mode == FoodListModeEnum.maxFreeAndOtherWithCost) {
-      log('mode 3');
-
       FFFoodDetail selectedfood = foodList.foods!.firstWhere((e) => e.id == foodId);
       selectedfood.selected = selected;
 
@@ -266,8 +273,6 @@ class FlistFoodOrder extends ChangeNotifier {
     }
     //* Logica Scelta Libera
     else if (mode == 0) {
-      log('mode 0');
-
       FFFoodDetail selectedfood = foodList.foods!.firstWhere((e) => e.id == foodId);
       selectedfood.selected = selected;
       if (selectedfood.selected == true) {
@@ -279,78 +284,312 @@ class FlistFoodOrder extends ChangeNotifier {
 
     notifyListeners();
   }
+
+  //*---------------------------------------------------------------------------
+  //* Ordine
+  //*---------------------------------------------------------------------------
+
+  List<FFOrder>? _orders = [];
+  FFOrder? _order;
+  int _totalQuantity = 0;
+
+  List<FFOrder>? get orders => _orders;
+  //FFOrder? get order => _order;
+  int get totalQuantity => _totalQuantity;
+
+  //?---------------------------------------------------------------------------
+  //? Aggiunta all'ordine
+  //?---------------------------------------------------------------------------
+
+  void addProductOrDetailToOrder({
+    required String currentServicePoint,
+    FFProduct? product,
+    FFDetail? detailProduct,
+    FFFormat? formatProduct,
+    required String ownerId,
+    required String ownerName,
+    required String? userId,
+  }) async {
+    _order = await getCurrentOrder(currentServicePoint: currentServicePoint);
+    var productId = detailProduct?.productId ?? product!.id;
+    String? cookingTypeName;
+    int? cookingTypeId;
+
+    List<FFVariation> variations = [];
+
+    if (detailProduct == null) {
+      //* Recupero del cookingName selezionato
+      for (FFCookingType cookingType in product?.cookingTypes
+              ?.where((e) => e.isSelected && product.preferredCookingTypeId != e.id) ??
+          []) {
+        cookingTypeName = cookingType.name ?? '';
+        cookingTypeId = cookingType.id;
+      }
+
+      //* Recupero e settaggio delle alternative
+      for (FFAlternative alternative in product?.alternatives ?? []) {
+        for (var food in alternative.foods!
+            .where((e) => e.isSelected == true && alternative.defaultFoodId != e.foodId)) {
+          variations.add(FFVariation(
+            foodId: food.foodId,
+            price: food.price,
+            foodName: food.foodName,
+            alternative: true,
+            variationType: 1,
+          ));
+
+          if (alternative.defaultFoodId == food.foodId && !food.isSelected) {
+            variations.add(FFVariation(
+              foodId: food.foodId,
+              price: food.price,
+              foodName: food.foodName,
+              alternative: true,
+              variationType: -1,
+            ));
+          }
+        }
+      }
+
+      //* Recupero e settaggio degli ingredienti
+      for (FFIngredient ingredient in product?.ingredients ?? []) {
+        if (ingredient.isMainIngredient && !ingredient.selected) {
+          variations.add(FFVariation(
+              foodId: ingredient.foodId, price: 0, foodName: ingredient.food, variationType: -1));
+        } else if (!ingredient.isMainIngredient && ingredient.selected) {
+          variations.add(FFVariation(
+            foodId: ingredient.foodId,
+            price: ingredient.variationPrice,
+            foodName: ingredient.food,
+            variationType: 1,
+          ));
+        }
+      }
+
+      //* Recupero e settaggio foodlist
+      for (FFFoodlist foodList in product?.foodlists ?? []) {
+        for (FFFoodDetail food in foodList.foods?.where((e) => e.selected) ?? []) {
+          variations.add(FFVariation(
+            foodId: food.id ?? 0,
+            price: food.isFree ? 0 : food.variationPrice ?? 0,
+            variationType: 1,
+            foodName: food.name,
+          ));
+        }
+      }
+    } else {
+      variations = detailProduct.variations;
+    }
+
+    if (_order != null) {
+      var formatName = detailProduct?.format ?? formatProduct?.format;
+
+      bool productExist = _order!.details.any((e) =>
+          e.productId == productId &&
+          listEquals(e.variations, variations) &&
+          e.cookingTypeId == cookingTypeId &&
+          e.format == formatName);
+
+      if (detailProduct != null && !productExist) {
+        FFDetail singleProduct = _order!.details.firstWhere((e) =>
+            e.productId == productId &&
+                listEquals(e.variations, detailProduct.variations) &&
+                e.cookingTypeId == detailProduct.cookingTypeId ||
+            e.format == formatName);
+        singleProduct.quantity += 1;
+        singleProduct.totalPrice = singleProduct.unitPrice * singleProduct.quantity;
+      } else if (productExist) {
+        FFDetail singleProduct = _order!.details.firstWhere((e) =>
+            e.productId == productId &&
+            listEquals(e.variations, variations) &&
+            e.cookingTypeId == detailProduct?.cookingTypeId &&
+            e.format == detailProduct?.format);
+
+        singleProduct.quantity += 1;
+        singleProduct.totalPrice = singleProduct.unitPrice * singleProduct.quantity;
+      } else {
+        _order!.details.add(FFDetail(
+          format: formatProduct?.format,
+          productId: productId,
+          productName: product?.name ?? detailProduct!.productName,
+          sectionId: product?.sectionId ?? 0,
+          unitPrice: product?.newPrice != 0
+              ? product?.newPrice ?? detailProduct!.unitPrice
+              : formatProduct?.price ?? product!.price,
+          quantity: 1,
+          totalPrice: product?.newPrice != 0
+              ? product?.newPrice ?? detailProduct!.totalPrice
+              : formatProduct?.price ?? product!.price,
+          variations: variations,
+          cookingTypeId: cookingTypeId,
+          cookingType: cookingTypeName,
+        ));
+      }
+
+      double totalPrice = 0;
+      _order!.details.map((e) => e.totalPrice).forEach((e) {
+        totalPrice += e;
+      });
+
+      _order = FFOrder(
+        servicePointId: currentServicePoint,
+        serviceType: 2,
+        details: _order!.details,
+        source: 'T',
+        paymentStatus: 0,
+        userId: userId,
+        ownerId: ownerId,
+        ownerName: ownerName,
+        totalPrice: totalPrice,
+      );
+    } else {
+      List<FFDetail> orderProducts = [];
+      {
+        orderProducts.add(FFDetail(
+          format: formatProduct?.format,
+          sectionId: product?.sectionId ?? 0,
+          productId: productId,
+          productName: product?.name ?? detailProduct!.productName,
+          unitPrice: product?.newPrice != 0
+              ? product?.newPrice ?? detailProduct!.unitPrice
+              : formatProduct?.price ?? product!.price,
+          quantity: 1,
+          totalPrice: product?.newPrice != 0
+              ? product?.newPrice ?? detailProduct!.totalPrice
+              : formatProduct?.price ?? product!.price,
+          variations: variations,
+          cookingTypeId: cookingTypeId,
+          cookingType: cookingTypeName,
+        ));
+      }
+
+      _order = FFOrder(
+        servicePointId: currentServicePoint,
+        serviceType: 2,
+        source: 'T',
+        paymentStatus: 0,
+        details: orderProducts,
+        userId: userId,
+        ownerId: ownerId,
+        ownerName: ownerName,
+        totalPrice: orderProducts.first.totalPrice,
+      );
+    }
+
+    _order!.details.map((e) => e.quantity).forEach((e) {
+      _totalQuantity += e;
+    });
+
+    await saveCurrentOrder(newOrder: _order!, currentServicePoint: currentServicePoint);
+    //emit(OrderSuccessState(order: order, totalQuantity: totalQuantity));
+    notifyListeners();
+  }
+
+  void removeProductToOrder({
+    required String currentServicePoint,
+    FFProduct? product,
+    FFDetail? detailProduct,
+    required String ownerId,
+    required String? userId,
+    required String ownerName,
+  }) async {
+    _order = await getCurrentOrder(currentServicePoint: currentServicePoint);
+    if (_order != null) {
+      //* Imposto un id per i prodotti o dettaglio
+      var id = detailProduct?.productId ?? product?.id;
+      var variation = detailProduct?.variations ?? [];
+
+      //* Seleziono un prodotto
+      FFDetail selected = _order!.details.firstWhere((e) =>
+          e.productId == id &&
+          listEquals(e.variations, variation) &&
+          e.cookingTypeId == detailProduct?.cookingTypeId &&
+          e.format == detailProduct?.format);
+
+      //* Controlla la quantità per vedere se rimuoverlo dalla lista
+      if (selected.quantity >= 1) {
+        selected.quantity -= 1;
+        selected.totalPrice = selected.unitPrice * selected.quantity;
+      }
+      if (selected.quantity == 0) {
+        _order!.details.removeWhere((e) =>
+            e.productId == selected.productId &&
+            listEquals(e.variations, variation) &&
+            e.cookingTypeId == detailProduct?.cookingTypeId &&
+            e.format == detailProduct?.format);
+      }
+
+      //*
+      double totalPrice = 0;
+      _order!.details.map((e) => e.totalPrice).forEach((e) {
+        totalPrice += e;
+      });
+
+      _order!.details.map((e) => e.quantity).forEach((e) {
+        _totalQuantity += e;
+      });
+
+      _order = FFOrder(
+        servicePointId: currentServicePoint,
+        serviceType: 2,
+        source: 'T',
+        paymentStatus: 0,
+        details: _order!.details,
+        userId: userId,
+        ownerId: ownerId,
+        ownerName: ownerName,
+        totalPrice: totalPrice,
+      );
+
+      await saveCurrentOrder(newOrder: _order!, currentServicePoint: currentServicePoint);
+
+      _orders = await getAllOrders();
+      if (_order!.details.isEmpty) {
+        _orders?.removeWhere((e) => e.servicePointId == currentServicePoint);
+        await saveAllOrders(orders: _orders ?? []);
+      }
+      // if (orders == null || orders.isEmpty) {
+      //   emit(const OrderEmptyState());
+      // } else {
+      //   emit(OrderSuccessState(order: order, totalQuantity: totalQuantity));
+      // }
+      notifyListeners();
+    }
+  }
+
+  void deleteOrderByServicePointId(String servicePointId) async {
+    var orders = await getAllOrders();
+
+    orders?.removeWhere((e) => e.servicePointId == servicePointId);
+    await saveAllOrders(orders: orders ?? []);
+    _orders = orders;
+
+    notifyListeners();
+  }
+
+  void removeOrders() async {
+    await deleteAllOrders();
+    _orders = [];
+    notifyListeners();
+  }
+
+  void getOrderByCurrentServicePoint({required String currentServicePoint}) async {
+    _order = await getCurrentOrder(currentServicePoint: currentServicePoint);
+    if (_order != null && currentServicePoint != '') {
+      _order!.details.map((e) => e.quantity).forEach((e) {
+        _totalQuantity += e;
+      });
+
+      notifyListeners();
+    }
+  }
+
+  void getAllOrdersFromStorage() async {
+    _orders = await getAllOrders();
+    notifyListeners();
+    // if (_orders != null && _orders!.isNotEmpty) {
+    //   emit(OrdersForCartSuccessState(orders: _orders ?? []));
+    // } else {
+    //   emit(const OrderEmptyState());
+    // }
+  }
 }
-
-/// Chiamare come prima cosa [getProductVariation] passandogli il prodotto
-/// e il formato anche in caso di null per inizializzare il prodotto in maniera
-/// corretta.
-// class FlistFoodOrderNewProduct extends ChangeNotifier {
-//   final Product product;
-//   final Format? format;
-//   int _mode = 0;
-
-//   FlistFoodOrderNewProduct({required this.product, required this.format});
-
-//   void getProductVariation() {
-//     List<Ingredient> selectedIngridients = [];
-
-//     //* Settaggio del prezzo nel caso ci siano formati
-//     if (format != null) {
-//       product.newPrice = format!.price;
-//     } else {
-//       product.newPrice = product.price;
-//     }
-
-//     //* Recupero delle alternative di default
-//     for (Alternative alternative in product.alternatives ?? []) {
-//       for (Food food in alternative.foods ?? []) {
-//         food.isSelected = false;
-//         if (food.foodId == alternative.defaultFoodId) {
-//           food.isSelected = true;
-//         }
-//       }
-//     }
-
-//     //* Recupero del tipo di cotture di default
-//     for (CookingType cookingType in product.cookingTypes ?? []) {
-//       cookingType.isSelected = false;
-//     }
-//     if (product.cookingTypes != null &&
-//         product.cookingTypes!.any((e) => e.id == product.preferredCookingTypeId)) {
-//       product.cookingTypes?.firstWhere((e) => e.id == product.preferredCookingTypeId).isSelected =
-//           true;
-//     }
-
-//     //* Recupero degli ingredienti di default
-//     for (Ingredient ingredient in product.ingredients ?? []) {
-//       if (ingredient.isMainIngredient) {
-//         ingredient.selected = true;
-//       } else {
-//         ingredient.selected = false;
-//       }
-//       selectedIngridients.add(ingredient);
-//     }
-
-//     //* Recupero della foodList di default
-//     for (Foodlist foodList in product.foodlists ?? []) {
-//       if (product.foodListsDefinition != null &&
-//           product.foodListsDefinition!.any((e) => e.foodListId == foodList.id)) {
-//         _mode = product.foodListsDefinition!.firstWhere((e) => e.foodListId == foodList.id).mode;
-
-//         for (FoodDetail foodDetail in foodList.foods ?? []) {
-//           if (_mode == FoodListModeEnum.maxFreeAndOtherWithCost ||
-//               _mode == FoodListModeEnum.maxIngredientFree) {
-//             foodDetail.hiddenPrice = true;
-//           } else if (_mode == FoodListModeEnum.maxIngredientWithCost) {
-//             foodDetail.hiddenPrice = false;
-//           }
-
-//           foodDetail.selected = false;
-//         }
-//       }
-//     }
-
-//     notifyListeners();
-//   }
-
-class FlistFoodOrderAddOrder extends ChangeNotifier {}
