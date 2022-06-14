@@ -294,7 +294,7 @@ class FlistFoodOrder extends ChangeNotifier {
   int _totalQuantity = 0;
 
   List<FFOrder>? get orders => _orders;
-  //FFOrder? get order => _order;
+  FFOrder? get order => _order;
   int get totalQuantity => _totalQuantity;
 
   //?---------------------------------------------------------------------------
