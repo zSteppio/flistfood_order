@@ -302,13 +302,23 @@ class FlistFoodOrder extends ChangeNotifier {
 
   void addProductOrDetailToOrder({
     required String currentServicePoint,
-    FFProduct? product,
-    FFDetail? detailProduct,
+    String? productJson,
+    String? detailProductJson,
     FFFormat? formatProduct,
     required String ownerId,
     required String ownerName,
     required String? userId,
   }) async {
+    FFProduct? product;
+    FFDetail? detailProduct;
+
+    if (productJson != null) {
+      FFProduct.fromJson(jsonDecode(productJson));
+    }
+    if (detailProductJson != null) {
+      FFDetail.fromJson(jsonDecode(detailProductJson));
+    }
+
     _order = await getCurrentOrder(currentServicePoint: currentServicePoint);
     var productId = detailProduct?.productId ?? product!.id;
     String? cookingTypeName;
@@ -485,12 +495,21 @@ class FlistFoodOrder extends ChangeNotifier {
 
   void removeProductToOrder({
     required String currentServicePoint,
-    FFProduct? product,
-    FFDetail? detailProduct,
+    String? productJson,
+    String? detailProductJson,
     required String ownerId,
     required String? userId,
     required String ownerName,
   }) async {
+    FFProduct? product;
+    FFDetail? detailProduct;
+
+    if (productJson != null) {
+      FFProduct.fromJson(jsonDecode(productJson));
+    }
+    if (detailProductJson != null) {
+      FFDetail.fromJson(jsonDecode(detailProductJson));
+    }
     _order = await getCurrentOrder(currentServicePoint: currentServicePoint);
     if (_order != null) {
       //* Imposto un id per i prodotti o dettaglio
