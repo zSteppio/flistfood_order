@@ -1,12 +1,9 @@
 library flistfood_order;
 
 import 'dart:convert';
-import 'dart:developer';
-
 import 'package:copy_with_extension/copy_with_extension.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 part 'product_model.dart';
@@ -20,7 +17,7 @@ class FoodListModeEnum {
   static const maxFreeAndOtherWithCost = 3;
 }
 
-class FlistFoodOrder extends ChangeNotifier {
+class FlistFoodVariation extends ChangeNotifier {
   late FFProduct _product;
 
   FFProduct get product => _product;
@@ -284,11 +281,13 @@ class FlistFoodOrder extends ChangeNotifier {
 
     notifyListeners();
   }
+}
 
-  //*---------------------------------------------------------------------------
-  //* Ordine
-  //*---------------------------------------------------------------------------
+//*---------------------------------------------------------------------------
+//* Ordine
+//*---------------------------------------------------------------------------
 
+class FlistFoodOrder extends ChangeNotifier {
   List<FFOrder>? _orders = [];
   FFOrder? _order;
   int _totalQuantity = 0;
