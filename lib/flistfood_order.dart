@@ -313,10 +313,10 @@ class FlistFoodOrder extends ChangeNotifier {
     FFDetail? detailProduct;
 
     if (productJson != null) {
-      FFProduct.fromJson(jsonDecode(productJson));
+      product = FFProduct.fromJson(jsonDecode(productJson));
     }
     if (detailProductJson != null) {
-      FFDetail.fromJson(jsonDecode(detailProductJson));
+      detailProduct = FFDetail.fromJson(jsonDecode(detailProductJson));
     }
 
     _order = await getCurrentOrder(currentServicePoint: currentServicePoint);
@@ -329,7 +329,7 @@ class FlistFoodOrder extends ChangeNotifier {
     if (detailProduct == null) {
       //* Recupero del cookingName selezionato
       for (FFCookingType cookingType in product?.cookingTypes
-              ?.where((e) => e.isSelected && product.preferredCookingTypeId != e.id) ??
+              ?.where((e) => e.isSelected && product?.preferredCookingTypeId != e.id) ??
           []) {
         cookingTypeName = cookingType.name ?? '';
         cookingTypeId = cookingType.id;
@@ -401,8 +401,8 @@ class FlistFoodOrder extends ChangeNotifier {
       if (detailProduct != null && !productExist) {
         FFDetail singleProduct = _order!.details.firstWhere((e) =>
             e.productId == productId &&
-                listEquals(e.variations, detailProduct.variations) &&
-                e.cookingTypeId == detailProduct.cookingTypeId ||
+                listEquals(e.variations, detailProduct?.variations) &&
+                e.cookingTypeId == detailProduct?.cookingTypeId ||
             e.format == formatName);
         singleProduct.quantity += 1;
         singleProduct.totalPrice = singleProduct.unitPrice * singleProduct.quantity;
@@ -505,10 +505,10 @@ class FlistFoodOrder extends ChangeNotifier {
     FFDetail? detailProduct;
 
     if (productJson != null) {
-      FFProduct.fromJson(jsonDecode(productJson));
+      product = FFProduct.fromJson(jsonDecode(productJson));
     }
     if (detailProductJson != null) {
-      FFDetail.fromJson(jsonDecode(detailProductJson));
+      detailProduct = FFDetail.fromJson(jsonDecode(detailProductJson));
     }
     _order = await getCurrentOrder(currentServicePoint: currentServicePoint);
     if (_order != null) {
