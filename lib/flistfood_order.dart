@@ -2,6 +2,7 @@ library flistfood_order;
 
 import 'dart:convert';
 import 'package:copy_with_extension/copy_with_extension.dart';
+import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
 import 'package:json_annotation/json_annotation.dart';
@@ -291,10 +292,12 @@ class FlistFoodOrder extends ChangeNotifier {
   List<FFOrder>? _orders = [];
   FFOrder? _order;
   int _totalQuantity = 0;
+  bool _apiError = false;
 
   List<FFOrder>? get orders => _orders;
   FFOrder? get order => _order;
   int get totalQuantity => _totalQuantity;
+  bool get apiError => _apiError;
 
   //?---------------------------------------------------------------------------
   //? Aggiunta all'ordine
@@ -609,5 +612,63 @@ class FlistFoodOrder extends ChangeNotifier {
     // } else {
     //   emit(const OrderEmptyState());
     // }
+  }
+
+  void sendOrder({
+    required String currentServicePoint,
+    required String phoneNumber,
+    required String? seatNumber,
+    required int hour,
+    required int minute,
+    required String note,
+    required int paymentMethod,
+    required String userName,
+  }) async {
+    FFOrder? order = await getCurrentOrder(currentServicePoint: currentServicePoint);
+
+    if (order == null) {
+      return;
+    }
+
+    var currentTime = DateTime.now();
+
+    try {
+      order.note = note;
+      order.seatNumber = seatNumber;
+
+      order.paymentType = paymentMethod;
+      order.ownerName = null;
+      FFDeliveryInfo deliveryInfo = FFDeliveryInfo(
+          paymentType: paymentMethod, phoneNumber: phoneNumber, customerName: userName);
+
+      order.deliveryInfo = deliveryInfo;
+
+      var mustBeReadyOn =
+          DateTime(currentTime.year, currentTime.month, currentTime.day, hour, minute).toLocal();
+
+      order.mustBeReadyOn = mustBeReadyOn.toUtc();
+
+      if (order.userId != null) {
+        await Dio().post('https://flistfood-webapi-menu.azurewebsites.net/api/v3/orders',
+            data: (jsonEncode(order)), queryParameters: {'confirm': true});
+      } else {
+        await Dio().post('https://flistfood-webapi-menu.azurewebsites.net/api/v3/orders/anonymous',
+            data: (jsonEncode(order)), queryParameters: {'confirm': true});
+      }
+
+      // try {
+      //   await orderRepository.confirmOrder(orderId: order.id ?? '');
+      // } catch (e) {
+      //   emit(OrderErrorState(error: e));
+      // }
+    } catch (e) {
+      _apiError = true;
+      notifyListeners();
+      return;
+    }
+
+    deleteOrderByServicePointId(currentServicePoint);
+
+    notifyListeners();
   }
 }
