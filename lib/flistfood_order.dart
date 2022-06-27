@@ -494,6 +494,7 @@ class FlistFoodOrder extends ChangeNotifier {
     await saveCurrentOrder(newOrder: _order!, currentServicePoint: currentServicePoint);
     //emit(OrderSuccessState(order: order, totalQuantity: totalQuantity));
     notifyListeners();
+    return;
   }
 
   void removeProductToOrder({
