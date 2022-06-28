@@ -580,8 +580,9 @@ class FlistFoodOrder extends ChangeNotifier {
       // } else {
       //   emit(OrderSuccessState(order: order, totalQuantity: totalQuantity));
       // }
-      notifyListeners();
+
     }
+    notifyListeners();
     return;
   }
 
