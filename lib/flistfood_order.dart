@@ -278,6 +278,8 @@ class FlistFoodVariation extends ChangeNotifier {
       } else if (selectedfood.selected == false) {
         _product.newPrice -= selectedfood.variationPrice ?? 0;
       }
+
+      notifyListeners();
     }
 
     notifyListeners();
