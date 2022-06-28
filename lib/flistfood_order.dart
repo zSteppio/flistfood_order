@@ -576,6 +576,7 @@ class FlistFoodOrder extends ChangeNotifier {
       // }
       notifyListeners();
     }
+    return;
   }
 
   void deleteOrderByServicePointId(String servicePointId) async {
