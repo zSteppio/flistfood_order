@@ -281,13 +281,8 @@ class FlistFoodVariation extends ChangeNotifier {
 
       notifyListeners();
     }
-    var selectedfood = foodList.foods!.firstWhere((e) => e.id == foodId).selected;
-    !getSelected(selected: selectedfood);
-    notifyListeners();
-  }
 
-  bool getSelected({required bool selected}) {
-    return selected;
+    notifyListeners();
   }
 }
 
