@@ -281,9 +281,10 @@ class FlistFoodVariation extends ChangeNotifier {
 
       notifyListeners();
     }
-
     notifyListeners();
   }
+
+  void getSelected({required bool selected}) => selected;
 }
 
 //*---------------------------------------------------------------------------
