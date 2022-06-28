@@ -487,14 +487,22 @@ class FlistFoodOrder extends ChangeNotifier {
       );
     }
 
-    _order!.details.map((e) => e.quantity).forEach((e) {
-      _totalQuantity += e;
-    });
+    _totalQuantityCalc(order: _order!);
 
     await saveCurrentOrder(newOrder: _order!, currentServicePoint: currentServicePoint);
     //emit(OrderSuccessState(order: order, totalQuantity: totalQuantity));
     notifyListeners();
     return;
+  }
+
+  void _totalQuantityCalc({required FFOrder order}) {
+    int rawQuantity = 0;
+    for (var detail in order.details) {
+      rawQuantity += detail.quantity;
+    }
+
+    _totalQuantity = rawQuantity;
+    notifyListeners();
   }
 
   void removeProductToOrder({
@@ -546,9 +554,7 @@ class FlistFoodOrder extends ChangeNotifier {
         totalPrice += e;
       });
 
-      _order!.details.map((e) => e.quantity).forEach((e) {
-        _totalQuantity += e;
-      });
+      _totalQuantityCalc(order: _order!);
 
       _order = FFOrder(
         servicePointId: currentServicePoint,
@@ -598,9 +604,7 @@ class FlistFoodOrder extends ChangeNotifier {
   void getOrderByCurrentServicePoint({required String currentServicePoint}) async {
     _order = await getCurrentOrder(currentServicePoint: currentServicePoint);
     if (_order != null && currentServicePoint != '') {
-      _order!.details.map((e) => e.quantity).forEach((e) {
-        _totalQuantity += e;
-      });
+      _totalQuantityCalc(order: _order!);
 
       notifyListeners();
     }
