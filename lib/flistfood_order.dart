@@ -274,6 +274,8 @@ class FlistFoodVariation extends ChangeNotifier {
       } else if (selectedfood.selected == false) {
         _product.newPrice -= selectedfood.variationPrice ?? 0;
       }
+
+      notifyListeners();
     }
 
     notifyListeners();
@@ -571,6 +573,7 @@ class FlistFoodOrder extends ChangeNotifier {
       if (_order!.details.isEmpty) {
         _orders?.removeWhere((e) => e.servicePointId == currentServicePoint);
         await saveAllOrders(orders: _orders ?? []);
+        notifyListeners();
       }
       // if (orders == null || orders.isEmpty) {
       //   emit(const OrderEmptyState());
