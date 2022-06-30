@@ -576,6 +576,7 @@ class FlistFoodOrder extends ChangeNotifier {
       if (_order!.details.isEmpty) {
         _orders?.removeWhere((e) => e.servicePointId == currentServicePoint);
         await saveAllOrders(orders: _orders ?? []);
+        notifyListeners();
       }
       // if (orders == null || orders.isEmpty) {
       //   emit(const OrderEmptyState());
