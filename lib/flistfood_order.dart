@@ -204,7 +204,6 @@ class FlistFoodVariation extends ChangeNotifier {
         } else if (selectedfood.selected == false) {
           _product.newPrice -= selectedfood.variationPrice ?? 0;
         }
-        notifyListeners();
       }
     } else if (mode == FoodListModeEnum.maxIngredientFree) {
       for (var e in foodList.foods!.where((e) => e.selected == true)) {
@@ -217,8 +216,6 @@ class FlistFoodVariation extends ChangeNotifier {
 
         foodList.foods?.forEach((e) => e.isFree = false);
         foodList.foods?.where((e) => e.selected == true).forEach((e) => e.isFree = true);
-
-        notifyListeners();
       }
     } else if (mode == FoodListModeEnum.maxFreeAndOtherWithCost) {
       FFFoodDetail selectedfood = foodList.foods!.firstWhere((e) => e.id == foodId);
@@ -267,8 +264,6 @@ class FlistFoodVariation extends ChangeNotifier {
       if (foodList.foods?.any((e) => e.selected) == false) {
         foodList.foods?.forEach((e) => e.hiddenPrice = true);
       }
-
-      notifyListeners();
     }
     //* Logica Scelta Libera
     else if (mode == 0) {
@@ -282,6 +277,7 @@ class FlistFoodVariation extends ChangeNotifier {
     }
 
     notifyListeners();
+    return;
   }
 }
 
