@@ -1,6 +1,7 @@
 library flistfood_order;
 
 import 'dart:convert';
+import 'dart:developer';
 import 'package:copy_with_extension/copy_with_extension.dart';
 import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';
@@ -632,12 +633,14 @@ class FlistFoodOrder extends ChangeNotifier {
     FFOrder? order = await getCurrentOrder(currentServicePoint: currentServicePoint);
 
     if (order == null) {
+      log('ordine nullo');
       return;
     }
 
     var currentTime = DateTime.now();
 
     try {
+      log('sono entrato');
       order.note = note;
       order.seatNumber = seatNumber;
 
@@ -654,9 +657,11 @@ class FlistFoodOrder extends ChangeNotifier {
       order.mustBeReadyOn = mustBeReadyOn.toUtc();
 
       if (order.userId != null) {
+        log('userId != null');
         await Dio().post('https://flistfood-webapi-menu.azurewebsites.net/api/v3/orders',
             data: (jsonEncode(order)), queryParameters: {'confirm': true});
       } else {
+        log('userId == null');
         await Dio().post('https://flistfood-webapi-menu.azurewebsites.net/api/v3/orders/anonymous',
             data: (jsonEncode(order)), queryParameters: {'confirm': true});
       }
@@ -667,12 +672,14 @@ class FlistFoodOrder extends ChangeNotifier {
       //   emit(OrderErrorState(error: e));
       // }
     } catch (e) {
+      log('error');
       _apiError = true;
       notifyListeners();
       return;
     }
 
     deleteOrderByServicePointId(currentServicePoint);
+    log('Ordine cancellato');
 
     notifyListeners();
   }
