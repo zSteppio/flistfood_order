@@ -630,7 +630,6 @@ class FlistFoodOrder extends ChangeNotifier {
     required int paymentMethod,
     required String userName,
   }) async {
-    log(currentServicePoint.toString());
     FFOrder? order = await getCurrentOrder(currentServicePoint: currentServicePoint);
 
     if (order == null) {
@@ -658,22 +657,22 @@ class FlistFoodOrder extends ChangeNotifier {
       order.mustBeReadyOn = mustBeReadyOn.toUtc();
 
       if (order.userId != null) {
-        log('userId != null');
+        log('userId != null quindi faccio la chiamata');
         await Dio().post('https://flistfood-webapi-menu.azurewebsites.net/api/v3/orders',
             data: (jsonEncode(order)), queryParameters: {'confirm': true});
+        notifyListeners();
       } else {
         log('userId == null');
         await Dio().post('https://flistfood-webapi-menu.azurewebsites.net/api/v3/orders/anonymous',
             data: (jsonEncode(order)), queryParameters: {'confirm': true});
+        notifyListeners();
       }
-
       // try {
       //   await orderRepository.confirmOrder(orderId: order.id ?? '');
       // } catch (e) {
       //   emit(OrderErrorState(error: e));
       // }
     } catch (e) {
-      log('error');
       _apiError = true;
       notifyListeners();
       return;
