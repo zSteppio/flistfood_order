@@ -674,13 +674,14 @@ class FlistFoodOrder extends ChangeNotifier {
       // }
     } catch (e) {
       _apiError = true;
+      log(_apiError.toString());
       notifyListeners();
-      return;
     }
 
     deleteOrderByServicePointId(currentServicePoint);
     log('Ordine cancellato');
 
     notifyListeners();
+    return;
   }
 }
