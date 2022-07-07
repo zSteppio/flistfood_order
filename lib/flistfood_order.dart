@@ -630,6 +630,7 @@ class FlistFoodOrder extends ChangeNotifier {
     required int paymentMethod,
     required String userName,
   }) async {
+    log(currentServicePoint.toString());
     FFOrder? order = await getCurrentOrder(currentServicePoint: currentServicePoint);
 
     if (order == null) {
