@@ -21,8 +21,10 @@ class FoodListModeEnum {
 
 class FlistFoodVariation extends ChangeNotifier {
   late FFProduct _product;
+  late FFFoodlist _foodlist;
 
   FFProduct get product => _product;
+  FFFoodlist get foodList => _foodlist;
 
   //*---------------------------------------------------------------------------
   //* Variazioni
@@ -171,8 +173,8 @@ class FlistFoodVariation extends ChangeNotifier {
     }
   }
 
-  void setFoodList({required int foodId, required FFFoodlist foodList, required bool selected}) {
-    FFFoodDetail selectedfood = foodList.foods!.firstWhere((e) => e.id == foodId);
+  void setFoodList({required int foodId, required bool selected}) {
+    FFFoodDetail selectedfood = _foodlist.foods!.firstWhere((e) => e.id == foodId);
     selectedfood.selected = selected;
 
     notifyListeners();
