@@ -172,111 +172,8 @@ class FlistFoodVariation extends ChangeNotifier {
   }
 
   void setFoodList({required int foodId, required FFFoodlist foodList, required bool selected}) {
-    var mode = _product.foodListsDefinition!
-        .firstWhere((element) => element.foodListId == foodList.id)
-        .mode;
-
-    var quantity =
-        _product.foodListsDefinition!.firstWhere((e) => e.foodListId == foodList.id).maxQty;
-
-    List copyList = [];
-    List lastVariationPrice = [];
-
-    for (FFFoodDetail food
-        in foodList.foods!.where((e) => e.selected == true && e.isFree == false)) {
-      lastVariationPrice.add(food);
-      if (lastVariationPrice.length >= 2) {
-        lastVariationPrice.remove(1);
-      }
-    }
-
-    if (mode == FoodListModeEnum.maxIngredientWithCost) {
-      for (var e in foodList.foods!.where((e) => e.selected == true)) {
-        copyList.add(e);
-      }
-      if (quantity > copyList.length ||
-          foodList.foods?.firstWhere((e) => e.id == foodId).selected == true) {
-        FFFoodDetail selectedfood = foodList.foods!.firstWhere((e) => e.id == foodId);
-        selectedfood.selected = selected;
-
-        if (selectedfood.selected == true) {
-          _product.newPrice += selectedfood.variationPrice ?? 0;
-        } else if (selectedfood.selected == false) {
-          _product.newPrice -= selectedfood.variationPrice ?? 0;
-        }
-      }
-    } else if (mode == FoodListModeEnum.maxIngredientFree) {
-      for (var e in foodList.foods!.where((e) => e.selected == true)) {
-        copyList.add(e);
-      }
-      if (quantity > copyList.length ||
-          foodList.foods?.firstWhere((e) => e.id == foodId).selected == true) {
-        FFFoodDetail selectedfood = foodList.foods!.firstWhere((e) => e.id == foodId);
-        selectedfood.selected = selected;
-
-        foodList.foods?.forEach((e) => e.isFree = false);
-        foodList.foods?.where((e) => e.selected == true).forEach((e) => e.isFree = true);
-      }
-    } else if (mode == FoodListModeEnum.maxFreeAndOtherWithCost) {
-      FFFoodDetail selectedfood = foodList.foods!.firstWhere((e) => e.id == foodId);
-      selectedfood.selected = selected;
-
-      for (FFFoodDetail food in foodList.foods!.where((e) => e.selected == true)) {
-        copyList.add(food);
-      }
-
-      //* Selezionati maggiori della quantità
-      if (copyList.length > quantity) {
-        foodList.foods
-            ?.where((e) => e.id != selectedfood.id && e.selected != true)
-            .forEach((e) => e.hiddenPrice = false);
-
-        if (selectedfood.selected == true) {
-          _product.newPrice += selectedfood.variationPrice ?? 0;
-        } else if (selectedfood.selected == false) {
-          _product.newPrice -= selectedfood.variationPrice ?? 0;
-        }
-      }
-
-      //* Selezionati minori della quantità
-      else if (copyList.length < quantity) {
-        foodList.foods?.forEach((e) => e.hiddenPrice = true);
-
-        foodList.foods?.forEach((e) => e.isFree = false);
-        foodList.foods?.where((e) => e.selected == true).forEach((e) => e.isFree = true);
-      }
-
-      //* Selezionati uguali della quantità
-      else if (copyList.length == quantity) {
-        for (FFFoodDetail food in foodList.foods ?? []) {
-          food.isFree = false;
-          if (food.selected) {
-            food.isFree == true;
-            food.hiddenPrice = true;
-          } else {
-            food.hiddenPrice = false;
-          }
-        }
-        if (selectedfood.selected == false) {
-          _product.newPrice -= lastVariationPrice.first.variationPrice ?? 0;
-        }
-      }
-      if (foodList.foods?.any((e) => e.selected) == false) {
-        foodList.foods?.forEach((e) => e.hiddenPrice = true);
-      }
-    }
-    //* Logica Scelta Libera
-    else if (mode == 0) {
-      FFFoodDetail selectedfood = foodList.foods!.firstWhere((e) => e.id == foodId);
-      selectedfood.selected = selected;
-      if (selectedfood.selected == true) {
-        _product.newPrice += selectedfood.variationPrice ?? 0;
-      } else if (selectedfood.selected == false) {
-        _product.newPrice -= selectedfood.variationPrice ?? 0;
-      }
-
-      notifyListeners();
-    }
+    FFFoodDetail selectedfood = foodList.foods!.firstWhere((e) => e.id == foodId);
+    selectedfood.selected = selected;
 
     notifyListeners();
     return;
@@ -685,3 +582,109 @@ class FlistFoodOrder extends ChangeNotifier {
     return;
   }
 }
+
+ /* var mode = _product.foodListsDefinition!
+        .firstWhere((element) => element.foodListId == foodList.id)
+        .mode;
+
+    var quantity =
+        _product.foodListsDefinition!.firstWhere((e) => e.foodListId == foodList.id).maxQty;
+
+    List copyList = [];
+    List lastVariationPrice = [];
+
+    for (FFFoodDetail food
+        in foodList.foods!.where((e) => e.selected == true && e.isFree == false)) {
+      lastVariationPrice.add(food);
+      if (lastVariationPrice.length >= 2) {
+        lastVariationPrice.remove(1);
+      }
+    }
+
+    if (mode == FoodListModeEnum.maxIngredientWithCost) {
+      for (var e in foodList.foods!.where((e) => e.selected == true)) {
+        copyList.add(e);
+      }
+      if (quantity > copyList.length ||
+          foodList.foods?.firstWhere((e) => e.id == foodId).selected == true) {
+        FFFoodDetail selectedfood = foodList.foods!.firstWhere((e) => e.id == foodId);
+        selectedfood.selected = selected;
+
+        if (selectedfood.selected == true) {
+          _product.newPrice += selectedfood.variationPrice ?? 0;
+        } else if (selectedfood.selected == false) {
+          _product.newPrice -= selectedfood.variationPrice ?? 0;
+        }
+      }
+    } else if (mode == FoodListModeEnum.maxIngredientFree) {
+      for (var e in foodList.foods!.where((e) => e.selected == true)) {
+        copyList.add(e);
+      }
+      if (quantity > copyList.length ||
+          foodList.foods?.firstWhere((e) => e.id == foodId).selected == true) {
+        FFFoodDetail selectedfood = foodList.foods!.firstWhere((e) => e.id == foodId);
+        selectedfood.selected = selected;
+
+        foodList.foods?.forEach((e) => e.isFree = false);
+        foodList.foods?.where((e) => e.selected == true).forEach((e) => e.isFree = true);
+      }
+    } else if (mode == FoodListModeEnum.maxFreeAndOtherWithCost) {
+      FFFoodDetail selectedfood = foodList.foods!.firstWhere((e) => e.id == foodId);
+      selectedfood.selected = selected;
+
+      for (FFFoodDetail food in foodList.foods!.where((e) => e.selected == true)) {
+        copyList.add(food);
+      }
+
+      // Selezionati maggiori della quantità
+      if (copyList.length > quantity) {
+        foodList.foods
+            ?.where((e) => e.id != selectedfood.id && e.selected != true)
+            .forEach((e) => e.hiddenPrice = false);
+
+        if (selectedfood.selected == true) {
+          _product.newPrice += selectedfood.variationPrice ?? 0;
+        } else if (selectedfood.selected == false) {
+          _product.newPrice -= selectedfood.variationPrice ?? 0;
+        }
+      }
+
+      // Selezionati minori della quantità
+      else if (copyList.length < quantity) {
+        foodList.foods?.forEach((e) => e.hiddenPrice = true);
+
+        foodList.foods?.forEach((e) => e.isFree = false);
+        foodList.foods?.where((e) => e.selected == true).forEach((e) => e.isFree = true);
+      }
+
+      // Selezionati uguali della quantità
+      else if (copyList.length == quantity) {
+        for (FFFoodDetail food in foodList.foods ?? []) {
+          food.isFree = false;
+          if (food.selected) {
+            food.isFree == true;
+            food.hiddenPrice = true;
+          } else {
+            food.hiddenPrice = false;
+          }
+        }
+        if (selectedfood.selected == false) {
+          _product.newPrice -= lastVariationPrice.first.variationPrice ?? 0;
+        }
+      }
+      if (foodList.foods?.any((e) => e.selected) == false) {
+        foodList.foods?.forEach((e) => e.hiddenPrice = true);
+      }
+    }
+    //Logica Scelta Libera
+    else if (mode == 0) {
+      FFFoodDetail selectedfood = foodList.foods!.firstWhere((e) => e.id == foodId);
+      selectedfood.selected = selected;
+      if (selectedfood.selected == true) {
+        _product.newPrice += selectedfood.variationPrice ?? 0;
+      } else if (selectedfood.selected == false) {
+        _product.newPrice -= selectedfood.variationPrice ?? 0;
+      }
+
+      notifyListeners();
+    } */
