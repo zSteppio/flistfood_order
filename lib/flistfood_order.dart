@@ -640,7 +640,7 @@ class FlistFoodOrder extends ChangeNotifier {
     var currentTime = DateTime.now();
 
     try {
-      log('sono entrato');
+      log('sono entrato nel try');
       order.note = note;
       order.seatNumber = seatNumber;
 
@@ -657,12 +657,12 @@ class FlistFoodOrder extends ChangeNotifier {
       order.mustBeReadyOn = mustBeReadyOn.toUtc();
 
       if (order.userId != null) {
-        log('userId != null quindi faccio la chiamata');
+        log('userId != null quindi faccio la chiamata come utente');
         await Dio().post('https://flistfood-webapi-menu.azurewebsites.net/api/v3/orders',
             data: (jsonEncode(order)), queryParameters: {'confirm': true});
         notifyListeners();
       } else {
-        log('userId == null');
+        log('userId == null quindi faccio la chimata come anonimo');
         await Dio().post('https://flistfood-webapi-menu.azurewebsites.net/api/v3/orders/anonymous',
             data: (jsonEncode(order)), queryParameters: {'confirm': true});
         notifyListeners();
@@ -674,7 +674,7 @@ class FlistFoodOrder extends ChangeNotifier {
       // }
     } catch (e) {
       _apiError = true;
-      log(_apiError.toString());
+      log('errore api: $_apiError');
       notifyListeners();
     }
 

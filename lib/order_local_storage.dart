@@ -31,7 +31,7 @@ Future<FFOrder?> getCurrentOrder({required String currentServicePoint}) async {
 
   var orderRaw = prefs.getString('orders');
 
-/*   log(orderRaw.toString(), name: 'Ordine'); */
+  log(orderRaw.toString(), name: 'Ordine');
 
   //* Controllo se ho già degli ordini in corso
   if (orderRaw != null) {
