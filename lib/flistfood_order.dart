@@ -674,7 +674,7 @@ class FlistFoodOrder extends ChangeNotifier {
       // }
     } catch (e) {
       _apiError = true;
-      log('errore api: $_apiError');
+      log('$e');
       notifyListeners();
     }
 
