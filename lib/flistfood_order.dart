@@ -176,6 +176,8 @@ class FlistFoodVariation extends ChangeNotifier {
         .firstWhere((element) => element.foodListId == foodList.id)
         .mode;
 
+    log(mode.toString(), name: 'Modalità della foodList');
+
     var quantity =
         _product.foodListsDefinition!.firstWhere((e) => e.foodListId == foodList.id).maxQty;
 
@@ -199,10 +201,14 @@ class FlistFoodVariation extends ChangeNotifier {
         FFFoodDetail selectedfood = foodList.foods!.firstWhere((e) => e.id == foodId);
         selectedfood.selected = selected;
 
+        log(selectedfood.selected.toString(), name: 'Cibo selezionato');
+
         if (selectedfood.selected == true) {
           _product.newPrice += selectedfood.variationPrice ?? 0;
+          log(_product.newPrice.toString(), name: 'Prezzo aggiunto');
         } else if (selectedfood.selected == false) {
           _product.newPrice -= selectedfood.variationPrice ?? 0;
+          log(_product.newPrice.toString(), name: 'Prezzo diminuito');
         }
       }
     } else if (mode == FoodListModeEnum.maxIngredientFree) {
