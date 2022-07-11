@@ -40,6 +40,7 @@ class FlistFoodVariation extends ChangeNotifier {
   void setProductFoodList({required String foodListJson}) {
     List<FFFoodlist> foodLists = [];
     FFFoodlist findedFoodList;
+    _singleFoodDetail = [];
 
     Iterable foodListJsonI = jsonDecode(foodListJson);
 
@@ -53,7 +54,6 @@ class FlistFoodVariation extends ChangeNotifier {
 
         for (FFFoodDetail food in findedFoodList.foods ?? []) {
           _singleFoodDetail.add(SingleFoodDetail(id: food.id!, selected: food.selected));
-          log(jsonEncode(_singleFoodDetail));
         }
       }
     }
@@ -302,6 +302,7 @@ class FlistFoodVariation extends ChangeNotifier {
 
       notifyListeners();
     }
+    log(jsonEncode(_singleFoodDetail));
 
     notifyListeners();
     return;
