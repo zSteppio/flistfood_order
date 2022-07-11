@@ -39,7 +39,7 @@ class FlistFoodVariation extends ChangeNotifier {
 
   void setProductFoodList({required String foodListJson}) {
     List<FFFoodlist> foodLists = [];
-    FFFoodlist findedFood;
+    FFFoodlist findedFoodList;
 
     Iterable foodListJsonI = jsonDecode(foodListJson);
 
@@ -48,8 +48,13 @@ class FlistFoodVariation extends ChangeNotifier {
 
     for (FFFoodListsDefinition foodListDefinition in _product.foodListsDefinition ?? []) {
       if (initialFoodList.any((e) => e.id == foodListDefinition.foodListId)) {
-        findedFood = initialFoodList.firstWhere((e) => e.id == foodListDefinition.foodListId);
-        foodLists.add(findedFood);
+        findedFoodList = initialFoodList.firstWhere((e) => e.id == foodListDefinition.foodListId);
+        foodLists.add(findedFoodList);
+
+        for (FFFoodDetail food in findedFoodList.foods ?? []) {
+          _singleFoodDetail.add(SingleFoodDetail(id: food.id!, selected: food.selected));
+          log(jsonEncode(_singleFoodDetail));
+        }
       }
     }
 
@@ -125,8 +130,6 @@ class FlistFoodVariation extends ChangeNotifier {
             name: 'Conteggio dei food nella foodlIst');
         for (FFFoodDetail food in foodList.foods ?? []) {
           food.selected = false;
-          _singleFoodDetail.add(SingleFoodDetail(id: food.id!, selected: food.selected));
-          log(jsonEncode(_singleFoodDetail));
         }
       }
     }
