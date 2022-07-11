@@ -117,6 +117,9 @@ class FlistFoodVariation extends ChangeNotifier {
         if (mode == 1) {
           foodList.foods?.forEach((element) => element.hiddenPrice = false);
         }
+
+        log(foodList.foods?.length.toString() ?? 'Vuoto',
+            name: 'Conteggio dei food nella foodlIst');
         for (FFFoodDetail food in foodList.foods ?? []) {
           food.selected = false;
           _singleFoodDetail.add(SingleFoodDetail(id: food.id!, selected: food.selected));
