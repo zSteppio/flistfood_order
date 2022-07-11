@@ -53,7 +53,7 @@ class FlistFoodVariation extends ChangeNotifier {
     }
 
     _product.foodlists = foodLists;
-    log(_product.foodlists.toString());
+    log(jsonEncode(_product.foodlists), name: 'Set food list');
   }
 
   void getProductVariation({String? formatJson}) {
