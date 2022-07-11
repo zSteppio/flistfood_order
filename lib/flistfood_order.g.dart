@@ -2022,6 +2022,65 @@ extension $FFVariationCopyWith on FFVariation {
   _$FFVariationCWProxy get copyWith => _$FFVariationCWProxyImpl(this);
 }
 
+abstract class _$SingleFoodDetailCWProxy {
+  SingleFoodDetail id(int id);
+
+  SingleFoodDetail selected(bool selected);
+
+  /// This function **does support** nullification of nullable fields. All `null` values passed to `non-nullable` fields will be ignored. You can also use `SingleFoodDetail(...).copyWith.fieldName(...)` to override fields one at a time with nullification support.
+  ///
+  /// Usage
+  /// ```dart
+  /// SingleFoodDetail(...).copyWith(id: 12, name: "My name")
+  /// ````
+  SingleFoodDetail call({
+    int? id,
+    bool? selected,
+  });
+}
+
+/// Proxy class for `copyWith` functionality. This is a callable class and can be used as follows: `instanceOfSingleFoodDetail.copyWith(...)`. Additionally contains functions for specific fields e.g. `instanceOfSingleFoodDetail.copyWith.fieldName(...)`
+class _$SingleFoodDetailCWProxyImpl implements _$SingleFoodDetailCWProxy {
+  final SingleFoodDetail _value;
+
+  const _$SingleFoodDetailCWProxyImpl(this._value);
+
+  @override
+  SingleFoodDetail id(int id) => this(id: id);
+
+  @override
+  SingleFoodDetail selected(bool selected) => this(selected: selected);
+
+  @override
+
+  /// This function **does support** nullification of nullable fields. All `null` values passed to `non-nullable` fields will be ignored. You can also use `SingleFoodDetail(...).copyWith.fieldName(...)` to override fields one at a time with nullification support.
+  ///
+  /// Usage
+  /// ```dart
+  /// SingleFoodDetail(...).copyWith(id: 12, name: "My name")
+  /// ````
+  SingleFoodDetail call({
+    Object? id = const $CopyWithPlaceholder(),
+    Object? selected = const $CopyWithPlaceholder(),
+  }) {
+    return SingleFoodDetail(
+      id: id == const $CopyWithPlaceholder() || id == null
+          ? _value.id
+          // ignore: cast_nullable_to_non_nullable
+          : id as int,
+      selected: selected == const $CopyWithPlaceholder() || selected == null
+          ? _value.selected
+          // ignore: cast_nullable_to_non_nullable
+          : selected as bool,
+    );
+  }
+}
+
+extension $SingleFoodDetailCopyWith on SingleFoodDetail {
+  /// Returns a callable class that can be used as follows: `instanceOfSingleFoodDetail.copyWith(...)` or like so:`instanceOfSingleFoodDetail.copyWith.fieldName(...)`.
+  _$SingleFoodDetailCWProxy get copyWith => _$SingleFoodDetailCWProxyImpl(this);
+}
+
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
@@ -2542,3 +2601,15 @@ Map<String, dynamic> _$FFVariationToJson(FFVariation instance) {
   writeNotNull('variationType', instance.variationType);
   return val;
 }
+
+SingleFoodDetail _$SingleFoodDetailFromJson(Map<String, dynamic> json) =>
+    SingleFoodDetail(
+      id: json['id'] as int,
+      selected: json['selected'] as bool,
+    );
+
+Map<String, dynamic> _$SingleFoodDetailToJson(SingleFoodDetail instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'selected': instance.selected,
+    };

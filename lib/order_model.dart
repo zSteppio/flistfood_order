@@ -163,3 +163,15 @@ class FFVariation extends Equatable {
   factory FFVariation.fromJson(Map<String, dynamic> json) => _$FFVariationFromJson(json);
   Map<String, dynamic> toJson() => _$FFVariationToJson(this);
 }
+
+@CopyWith()
+@JsonSerializable(includeIfNull: false, explicitToJson: true)
+class SingleFoodDetail {
+  int id;
+  bool selected;
+
+  SingleFoodDetail({required this.id, required this.selected});
+
+  factory SingleFoodDetail.fromJson(Map<String, dynamic> json) => _$SingleFoodDetailFromJson(json);
+  Map<String, dynamic> toJson() => _$SingleFoodDetailToJson(this);
+}

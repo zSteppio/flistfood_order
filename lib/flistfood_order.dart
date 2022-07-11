@@ -19,13 +19,6 @@ class FoodListModeEnum {
   static const maxFreeAndOtherWithCost = 3;
 }
 
-class SingleFoodDetail {
-  int id;
-  bool selected;
-
-  SingleFoodDetail({required this.id, required this.selected});
-}
-
 class FlistFoodVariation extends ChangeNotifier {
   late FFProduct _product;
   List<SingleFoodDetail> _singleFoodDetail = [];
@@ -127,6 +120,7 @@ class FlistFoodVariation extends ChangeNotifier {
         for (FFFoodDetail food in foodList.foods ?? []) {
           food.selected = false;
           _singleFoodDetail.add(SingleFoodDetail(id: food.id!, selected: food.selected));
+          log(jsonEncode(_singleFoodDetail));
         }
       }
     }
