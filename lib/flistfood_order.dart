@@ -59,6 +59,7 @@ class FlistFoodVariation extends ChangeNotifier {
         foodLists.add(findedFood);
       }
     }
+
     _product.foodlists = foodLists;
   }
 
@@ -111,6 +112,9 @@ class FlistFoodVariation extends ChangeNotifier {
 
     // Recupero della foodList di default
     for (FFFoodlist foodList in _product.foodlists ?? []) {
+      for (FFFoodDetail food in foodList.foods?.where((e) => e.hidden != false) ?? []) {
+        _singleFoodDetail.add(SingleFoodDetail(id: food.id!, selected: food.selected));
+      }
       if (_product.foodListsDefinition != null &&
           _product.foodListsDefinition!.any((e) => e.foodListId == foodList.id)) {
         var mode = _product.foodListsDefinition!
@@ -193,10 +197,6 @@ class FlistFoodVariation extends ChangeNotifier {
 
     List copyList = [];
     List lastVariationPrice = [];
-
-    for (FFFoodDetail food in foodList.foods?.where((e) => e.hidden != false) ?? []) {
-      _singleFoodDetail.add(SingleFoodDetail(id: food.id!, selected: food.selected));
-    }
 
     for (FFFoodDetail food
         in foodList.foods!.where((e) => e.selected == true && e.isFree == false)) {
