@@ -58,7 +58,6 @@ class FlistFoodVariation extends ChangeNotifier {
 
   void getProductVariation({String? formatJson}) {
     FFFormat? format;
-    _singleFoodDetail = [];
 
     if (formatJson != null) {
       format = jsonDecode(formatJson);
@@ -105,6 +104,7 @@ class FlistFoodVariation extends ChangeNotifier {
 
     // Recupero della foodList di default
     for (FFFoodlist foodList in _product.foodlists ?? []) {
+      log('Dentro la foodList');
       if (_product.foodListsDefinition != null &&
           _product.foodListsDefinition!.any((e) => e.foodListId == foodList.id)) {
         var mode = _product.foodListsDefinition!
