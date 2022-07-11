@@ -19,10 +19,19 @@ class FoodListModeEnum {
   static const maxFreeAndOtherWithCost = 3;
 }
 
+class SingleFoodDetail {
+  int id;
+  bool selected;
+
+  SingleFoodDetail({required this.id, required this.selected});
+}
+
 class FlistFoodVariation extends ChangeNotifier {
   late FFProduct _product;
+  List<SingleFoodDetail> _singleFoodDetail = [];
 
   FFProduct get product => _product;
+  List<SingleFoodDetail> get singleFoodDetail => _singleFoodDetail;
 
   //*---------------------------------------------------------------------------
   //* Variazioni
@@ -55,6 +64,7 @@ class FlistFoodVariation extends ChangeNotifier {
 
   void getProductVariation({String? formatJson}) {
     FFFormat? format;
+    _singleFoodDetail = [];
 
     if (formatJson != null) {
       format = jsonDecode(formatJson);
@@ -184,6 +194,10 @@ class FlistFoodVariation extends ChangeNotifier {
     List copyList = [];
     List lastVariationPrice = [];
 
+    for (FFFoodDetail food in foodList.foods?.where((e) => e.hidden != false) ?? []) {
+      _singleFoodDetail.add(SingleFoodDetail(id: food.id!, selected: food.selected));
+    }
+
     for (FFFoodDetail food
         in foodList.foods!.where((e) => e.selected == true && e.isFree == false)) {
       lastVariationPrice.add(food);
@@ -200,6 +214,7 @@ class FlistFoodVariation extends ChangeNotifier {
           foodList.foods?.firstWhere((e) => e.id == foodId).selected == true) {
         FFFoodDetail selectedfood = foodList.foods!.firstWhere((e) => e.id == foodId);
         selectedfood.selected = selected;
+        _singleFoodDetail.firstWhere((e) => e.id == selectedfood.id).selected = selected;
 
         log(selectedfood.selected.toString(), name: 'Cibo selezionato');
 
@@ -219,6 +234,7 @@ class FlistFoodVariation extends ChangeNotifier {
           foodList.foods?.firstWhere((e) => e.id == foodId).selected == true) {
         FFFoodDetail selectedfood = foodList.foods!.firstWhere((e) => e.id == foodId);
         selectedfood.selected = selected;
+        _singleFoodDetail.firstWhere((e) => e.id == selectedfood.id).selected = selected;
 
         foodList.foods?.forEach((e) => e.isFree = false);
         foodList.foods?.where((e) => e.selected == true).forEach((e) => e.isFree = true);
@@ -275,6 +291,8 @@ class FlistFoodVariation extends ChangeNotifier {
     else if (mode == 0) {
       FFFoodDetail selectedfood = foodList.foods!.firstWhere((e) => e.id == foodId);
       selectedfood.selected = selected;
+      _singleFoodDetail.firstWhere((e) => e.id == selectedfood.id).selected = selected;
+
       if (selectedfood.selected == true) {
         _product.newPrice += selectedfood.variationPrice ?? 0;
       } else if (selectedfood.selected == false) {
