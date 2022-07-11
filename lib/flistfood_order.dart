@@ -57,6 +57,7 @@ class FlistFoodVariation extends ChangeNotifier {
   }
 
   void getProductVariation({String? formatJson}) {
+    log('Dentro la get product variation');
     FFFormat? format;
 
     if (formatJson != null) {
@@ -101,6 +102,8 @@ class FlistFoodVariation extends ChangeNotifier {
       }
       selectedIngridients.add(ingredient);
     }
+
+    log(_product.foodlists?.length.toString() ?? 'Foodlist vuota', name: 'Prima del for');
 
     // Recupero della foodList di default
     for (FFFoodlist foodList in _product.foodlists ?? []) {
