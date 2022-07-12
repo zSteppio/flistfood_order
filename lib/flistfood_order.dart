@@ -53,6 +53,24 @@ class FlistFoodVariation extends ChangeNotifier {
     }
 
     _product.foodlists = foodLists;
+
+    for (FFFoodlist foodList in _product.foodlists ?? []) {
+      if (_product.foodListsDefinition != null &&
+          _product.foodListsDefinition!.any((e) => e.foodListId == foodList.id)) {
+        var mode = _product.foodListsDefinition!
+            .firstWhere((element) => element.foodListId == foodList.id)
+            .mode;
+
+        if (mode == FoodListModeEnum.maxFreeAndOtherWithCost ||
+            mode == FoodListModeEnum.maxIngredientFree) {
+          foodList.foods?.forEach((element) => element.hiddenPrice = true);
+        }
+        if (mode == FoodListModeEnum.maxIngredientWithCost) {
+          foodList.foods?.forEach((element) => element.hiddenPrice = false);
+        }
+      }
+    }
+
     log(jsonEncode(_product.foodlists), name: 'Set food list');
   }
 
