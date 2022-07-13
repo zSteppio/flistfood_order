@@ -22,6 +22,7 @@ class FoodListModeEnum {
 
 class FlistFoodVariation extends ChangeNotifier {
   late FFProduct _product;
+  List<FFFoodDetail> foodListHistory = [];
 
   FFProduct get product => _product;
 
@@ -208,20 +209,11 @@ class FlistFoodVariation extends ChangeNotifier {
     log(mode.toString(), name: 'Modalità della foodList');
 
     List<FFFoodDetail> selectedIngredients = [];
-    List lastVariationPrice = [];
-
-    for (FFFoodDetail food
-        in foodList.foods!.where((e) => e.selected == true && !e.isFree == true)) {
-      lastVariationPrice.add(food);
-      if (lastVariationPrice.length >= 2) {
-        lastVariationPrice.remove(1);
-      }
-    }
 
     switch (mode) {
       //* Massimi ingredienti con costo ----------------------------------------
       case FoodListModeEnum.maxIngredientWithCost:
-        for (var food in foodList.foods!.where((e) => e.selected == true)) {
+        for (var food in foodList.foods!.where((e) => e.selected)) {
           selectedIngredients.add(food);
         }
 
@@ -232,7 +224,7 @@ class FlistFoodVariation extends ChangeNotifier {
 
           log(selectedfood.selected.toString(), name: 'Cibo selezionato');
 
-          if (selectedfood.selected == true) {
+          if (selectedfood.selected) {
             _product.newPrice += selectedfood.variationPrice ?? 0;
             log(_product.newPrice.toString(), name: 'Prezzo aggiunto');
           } else if (selectedfood.selected == false) {
@@ -245,7 +237,7 @@ class FlistFoodVariation extends ChangeNotifier {
 
       //* Massimi ingredienti gratuiti -----------------------------------------
       case FoodListModeEnum.maxIngredientFree:
-        for (var food in foodList.foods!.where((e) => e.selected == true)) {
+        for (var food in foodList.foods!.where((e) => e.selected)) {
           selectedIngredients.add(food);
         }
 
@@ -255,7 +247,7 @@ class FlistFoodVariation extends ChangeNotifier {
           selectedfood.selected = selected;
 
           foodList.foods?.forEach((e) => e.isFree = false);
-          foodList.foods?.where((e) => e.selected == true).forEach((e) => e.isFree = true);
+          foodList.foods?.where((e) => e.selected).forEach((e) => e.isFree = true);
         }
         notifyListeners();
         break;
@@ -265,7 +257,12 @@ class FlistFoodVariation extends ChangeNotifier {
         FFFoodDetail selectedfood = foodList.foods!.firstWhere((e) => e.id == foodId);
         selectedfood.selected = selected;
 
-        for (FFFoodDetail food in foodList.foods!.where((e) => e.selected == true)) {
+        foodListHistory.add(selectedfood);
+        if (selectedfood.selected == false) {
+          foodListHistory.removeWhere((e) => e.id == selectedfood.id);
+        }
+
+        for (FFFoodDetail food in foodList.foods!.where((e) => e.selected)) {
           selectedIngredients.add(food);
         }
 
@@ -275,7 +272,7 @@ class FlistFoodVariation extends ChangeNotifier {
               ?.where((e) => e.id != selectedfood.id && e.selected != true)
               .forEach((e) => e.hiddenPrice = false);
 
-          if (selectedfood.selected == true) {
+          if (selectedfood.selected) {
             _product.newPrice += selectedfood.variationPrice ?? 0;
           } else if (selectedfood.selected == false) {
             _product.newPrice -= selectedfood.variationPrice ?? 0;
@@ -287,7 +284,7 @@ class FlistFoodVariation extends ChangeNotifier {
           foodList.foods?.forEach((e) => e.hiddenPrice = true);
 
           foodList.foods?.forEach((e) => e.isFree = false);
-          foodList.foods?.where((e) => e.selected == true).forEach((e) => e.isFree = true);
+          foodList.foods?.where((e) => e.selected).forEach((e) => e.isFree = true);
         }
 
         // Selezionati uguali della quantità
@@ -295,14 +292,14 @@ class FlistFoodVariation extends ChangeNotifier {
           for (FFFoodDetail foodDetail in foodList.foods ?? []) {
             foodDetail.isFree = false;
             if (foodDetail.selected) {
-              foodDetail.isFree == true;
+              foodDetail.isFree;
               foodDetail.hiddenPrice = true;
             } else {
               foodDetail.hiddenPrice = false;
             }
           }
           if (selectedfood.selected == false) {
-            _product.newPrice -= lastVariationPrice.first.variationPrice ?? 0;
+            _product.newPrice -= foodListHistory.last.variationPrice ?? 0;
           }
         }
         if (foodList.foods?.any((e) => e.selected) == false) {
