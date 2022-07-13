@@ -210,7 +210,8 @@ class FlistFoodVariation extends ChangeNotifier {
     List<FFFoodDetail> selectedIngredients = [];
     List lastVariationPrice = [];
 
-    for (FFFoodDetail food in foodList.foods!.where((e) => e.selected && !e.isFree)) {
+    for (FFFoodDetail food
+        in foodList.foods!.where((e) => e.selected == true && !e.isFree == true)) {
       lastVariationPrice.add(food);
       if (lastVariationPrice.length >= 2) {
         lastVariationPrice.remove(1);
