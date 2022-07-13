@@ -22,7 +22,7 @@ class FoodListModeEnum {
 
 class FlistFoodVariation extends ChangeNotifier {
   late FFProduct _product;
-  //List<FFFoodDetail> foodListHistory = [];
+  List<FFFoodDetail> foodListHistory = [];
 
   FFProduct get product => _product;
 
@@ -277,6 +277,11 @@ class FlistFoodVariation extends ChangeNotifier {
           } else if (selectedfood.selected == false) {
             _product.newPrice -= selectedfood.variationPrice ?? 0;
           }
+          if (selectedfood.selected) {
+            foodListHistory.add(selectedfood);
+          } else {
+            foodListHistory.removeWhere((e) => e.id == selectedfood.id);
+          }
         }
 
         // Selezionati minori della quantità
@@ -299,7 +304,7 @@ class FlistFoodVariation extends ChangeNotifier {
             }
           }
           if (selectedfood.selected == false) {
-            _product.newPrice -= selectedfood.variationPrice ?? 0;
+            _product.newPrice -= foodListHistory.first.variationPrice ?? 0;
           }
         }
         if (foodList.foods?.any((e) => e.selected) == false) {
