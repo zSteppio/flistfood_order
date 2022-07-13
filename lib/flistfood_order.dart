@@ -57,16 +57,18 @@ class FlistFoodVariation extends ChangeNotifier {
     for (FFFoodlist foodList in _product.foodlists ?? []) {
       if (_product.foodListsDefinition != null &&
           _product.foodListsDefinition!.any((e) => e.foodListId == foodList.id)) {
-        var mode = _product.foodListsDefinition!
-            .firstWhere((element) => element.foodListId == foodList.id)
-            .mode;
+        var mode =
+            _product.foodListsDefinition!.firstWhere((e) => e.foodListId == foodList.id).mode;
 
         if (mode == FoodListModeEnum.maxFreeAndOtherWithCost ||
             mode == FoodListModeEnum.maxIngredientFree) {
-          foodList.foods?.forEach((element) => element.hiddenPrice = true);
+          foodList.foods?.forEach((e) => e.hiddenPrice = true);
         }
         if (mode == FoodListModeEnum.maxIngredientWithCost) {
-          foodList.foods?.forEach((element) => element.hiddenPrice = false);
+          foodList.foods?.forEach((e) => e.hiddenPrice = false);
+        }
+        for (FFFoodDetail food in foodList.foods ?? []) {
+          food.selected = false;
         }
       }
     }
@@ -199,7 +201,7 @@ class FlistFoodVariation extends ChangeNotifier {
 
   void setFoodList({required int foodId, required FFFoodlist foodList, required bool selected}) {
     FFFoodListsDefinition foodListsDefinitionSelected =
-        _product.foodListsDefinition!.firstWhere((element) => element.foodListId == foodList.id);
+        _product.foodListsDefinition!.firstWhere((e) => e.foodListId == foodList.id);
 
     var mode = foodListsDefinitionSelected.mode;
     var quantity = foodListsDefinitionSelected.maxQty;
@@ -218,8 +220,8 @@ class FlistFoodVariation extends ChangeNotifier {
     switch (mode) {
       //* Massimi ingredienti con costo ----------------------------------------
       case FoodListModeEnum.maxIngredientWithCost:
-        for (var e in foodList.foods!.where((e) => e.selected)) {
-          selectedIngredients.add(e);
+        for (var food in foodList.foods!.where((e) => e.selected == true)) {
+          selectedIngredients.add(food);
         }
 
         if (quantity > selectedIngredients.length ||
@@ -242,8 +244,8 @@ class FlistFoodVariation extends ChangeNotifier {
 
       //* Massimi ingredienti gratuiti -----------------------------------------
       case FoodListModeEnum.maxIngredientFree:
-        for (var e in foodList.foods!.where((e) => e.selected)) {
-          selectedIngredients.add(e);
+        for (var food in foodList.foods!.where((e) => e.selected == true)) {
+          selectedIngredients.add(food);
         }
 
         if (quantity > selectedIngredients.length ||
@@ -289,13 +291,13 @@ class FlistFoodVariation extends ChangeNotifier {
 
         // Selezionati uguali della quantità
         else if (selectedIngredients.length == quantity) {
-          for (FFFoodDetail food in foodList.foods ?? []) {
-            food.isFree = false;
-            if (food.selected) {
-              food.isFree == true;
-              food.hiddenPrice = true;
+          for (FFFoodDetail foodDetail in foodList.foods ?? []) {
+            foodDetail.isFree = false;
+            if (foodDetail.selected) {
+              foodDetail.isFree == true;
+              foodDetail.hiddenPrice = true;
             } else {
-              food.hiddenPrice = false;
+              foodDetail.hiddenPrice = false;
             }
           }
           if (selectedfood.selected == false) {
