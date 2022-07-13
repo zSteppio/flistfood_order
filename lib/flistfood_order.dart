@@ -714,9 +714,11 @@ class FlistFoodOrder extends ChangeNotifier {
         await Dio().post('https://flistfood-webapi-menu.azurewebsites.net/api/v3/orders',
             data: (jsonEncode(order)),
             queryParameters: {'confirm': true},
-            options: Options(headers: {
-              'Authorization': token,
-            }));
+            options: token != null
+                ? Options(headers: {
+                    'Authorization': token,
+                  })
+                : null);
         notifyListeners();
       } else {
         log('userId == null quindi faccio la chimata come anonimo');
