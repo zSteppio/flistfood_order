@@ -22,7 +22,7 @@ class FoodListModeEnum {
 
 class FlistFoodVariation extends ChangeNotifier {
   late FFProduct _product;
-  List<FFFoodDetail> foodListHistory = [];
+  //List<FFFoodDetail> foodListHistory = [];
 
   FFProduct get product => _product;
 
@@ -257,10 +257,10 @@ class FlistFoodVariation extends ChangeNotifier {
         FFFoodDetail selectedfood = foodList.foods!.firstWhere((e) => e.id == foodId);
         selectedfood.selected = selected;
 
-        foodListHistory.add(selectedfood);
+        /*        foodListHistory.add(selectedfood);
         if (selectedfood.selected == false) {
           foodListHistory.removeWhere((e) => e.id == selectedfood.id);
-        }
+        } */
 
         for (FFFoodDetail food in foodList.foods!.where((e) => e.selected)) {
           selectedIngredients.add(food);
@@ -299,7 +299,7 @@ class FlistFoodVariation extends ChangeNotifier {
             }
           }
           if (selectedfood.selected == false) {
-            _product.newPrice -= foodListHistory.last.variationPrice ?? 0;
+            _product.newPrice -= selectedfood.variationPrice ?? 0;
           }
         }
         if (foodList.foods?.any((e) => e.selected) == false) {
