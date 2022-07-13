@@ -306,6 +306,7 @@ class FlistFoodVariation extends ChangeNotifier {
           if (selectedfood.selected == false) {
             _product.newPrice -= foodListHistory.first.variationPrice ?? 0;
           }
+          foodListHistory = [];
         }
         if (foodList.foods?.any((e) => e.selected) == false) {
           foodList.foods?.forEach((e) => e.hiddenPrice = true);
