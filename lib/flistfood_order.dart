@@ -681,6 +681,7 @@ class FlistFoodOrder extends ChangeNotifier {
     required String note,
     required int paymentMethod,
     required String userName,
+    required String? token,
   }) async {
     FFOrder? order = await getCurrentOrder(currentServicePoint: currentServicePoint);
 
@@ -711,7 +712,11 @@ class FlistFoodOrder extends ChangeNotifier {
       if (order.userId != null) {
         log('userId != null quindi faccio la chiamata come utente');
         await Dio().post('https://flistfood-webapi-menu.azurewebsites.net/api/v3/orders',
-            data: (jsonEncode(order)), queryParameters: {'confirm': true});
+            data: (jsonEncode(order)),
+            queryParameters: {'confirm': true},
+            options: Options(headers: {
+              'Authorization': token,
+            }));
         notifyListeners();
       } else {
         log('userId == null quindi faccio la chimata come anonimo');
