@@ -380,7 +380,7 @@ class FlistFoodOrder extends ChangeNotifier {
 
     List<FFVariation> variations = [];
 
-    if (detailProduct == null || detailProduct.variations.isEmpty) {
+    if (detailProduct == null) {
       //* Recupero del cookingName selezionato
       for (FFCookingType cookingType in product?.cookingTypes
               ?.where((e) => e.isSelected && product?.preferredCookingTypeId != e.id) ??
