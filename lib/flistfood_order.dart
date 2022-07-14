@@ -380,7 +380,7 @@ class FlistFoodOrder extends ChangeNotifier {
 
     List<FFVariation> variations = [];
 
-    if (detailProduct == null) {
+    if (detailProduct == null && detailProduct?.variations == []) {
       log(detailProduct?.variations.toList().toString() ?? 'detail nullo', name: 'DetailProduct');
       //* Recupero del cookingName selezionato
       for (FFCookingType cookingType in product?.cookingTypes
@@ -441,8 +441,8 @@ class FlistFoodOrder extends ChangeNotifier {
         }
       }
     } else {
-      variations = detailProduct.variations;
-      log(variations.toList().toString(), name: 'DetailProduct');
+      variations = detailProduct!.variations;
+      log(variations.toList().toString(), name: 'Variation');
     }
 
     if (_order != null) {
