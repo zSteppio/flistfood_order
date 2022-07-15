@@ -78,7 +78,7 @@ class FlistFoodVariation extends ChangeNotifier {
     FFFormat? format;
 
     if (formatJson != null) {
-      format = jsonDecode(formatJson);
+      format = FFFormat.fromJson(jsonDecode(formatJson));
     }
 
     List<FFIngredient> selectedIngridients = [];
