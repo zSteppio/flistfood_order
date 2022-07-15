@@ -349,13 +349,14 @@ class FlistFoodOrder extends ChangeNotifier {
     required String currentServicePoint,
     String? productJson,
     String? detailProductJson,
-    FFFormat? formatProduct,
+    String? formatProductJson,
     required String ownerId,
     required String ownerName,
     required String? userId,
   }) async {
     FFProduct? product;
     FFDetail? detailProduct;
+    FFFormat? formatProduct;
 
     if (productJson != null) {
       product = FFProduct.fromJson(jsonDecode(productJson));
@@ -435,6 +436,9 @@ class FlistFoodOrder extends ChangeNotifier {
     }
 
     if (_order != null) {
+      if (formatProductJson != null) {
+        formatProduct = FFFormat.fromJson(jsonDecode(formatProductJson));
+      }
       var formatName = detailProduct?.format ?? formatProduct?.format;
 
       bool productExist = _order!.details.any((e) =>
