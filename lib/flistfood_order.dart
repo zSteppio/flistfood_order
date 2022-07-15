@@ -441,11 +441,8 @@ class FlistFoodOrder extends ChangeNotifier {
           ));
         }
       }
-      log(variations.map((e) => e.foodName).toList().toString(),
-          name: 'DetailProduct - Variations');
     } else {
       variations = detailProduct.variations;
-      log(variations.map((e) => e.foodName).toList().toString(), name: 'Variation');
     }
 
     if (_order != null) {
@@ -469,8 +466,8 @@ class FlistFoodOrder extends ChangeNotifier {
         FFDetail singleProduct = _order!.details.firstWhere((e) =>
             e.productId == productId &&
             listEquals(e.variations, variations) &&
-            e.cookingTypeId == detailProduct?.cookingTypeId &&
-            e.format == detailProduct?.format);
+            e.cookingTypeId == cookingTypeId &&
+            e.format == formatName);
 
         singleProduct.quantity += 1;
         singleProduct.totalPrice = singleProduct.unitPrice * singleProduct.quantity;
