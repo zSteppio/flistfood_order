@@ -1,7 +1,6 @@
 library flistfood_order;
 
 import 'dart:convert';
-import 'dart:developer';
 import 'package:copy_with_extension/copy_with_extension.dart';
 import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';
@@ -73,12 +72,9 @@ class FlistFoodVariation extends ChangeNotifier {
         }
       }
     }
-
-    log(jsonEncode(_product.foodlists), name: 'Set food list');
   }
 
   void getProductVariation({String? formatJson}) {
-    log('Dentro la get product variation');
     FFFormat? format;
 
     if (formatJson != null) {
@@ -206,7 +202,6 @@ class FlistFoodVariation extends ChangeNotifier {
 
     var mode = foodListsDefinitionSelected.mode;
     var quantity = foodListsDefinitionSelected.maxQty;
-    log(mode.toString(), name: 'Modalità della foodList');
 
     List<FFFoodDetail> selectedIngredients = [];
 
@@ -222,14 +217,10 @@ class FlistFoodVariation extends ChangeNotifier {
           FFFoodDetail selectedfood = foodList.foods!.firstWhere((e) => e.id == foodId);
           selectedfood.selected = selected;
 
-          log(selectedfood.selected.toString(), name: 'Cibo selezionato');
-
           if (selectedfood.selected) {
             _product.newPrice += selectedfood.variationPrice ?? 0;
-            log(_product.newPrice.toString(), name: 'Prezzo aggiunto');
           } else if (selectedfood.selected == false) {
             _product.newPrice -= selectedfood.variationPrice ?? 0;
-            log(_product.newPrice.toString(), name: 'Prezzo diminuito');
           }
         }
         notifyListeners();
@@ -379,8 +370,6 @@ class FlistFoodOrder extends ChangeNotifier {
     int? cookingTypeId;
 
     List<FFVariation> variations = [];
-
-    log(detailProductJson ?? 'null');
 
     if (detailProduct == null) {
       //* Recupero del cookingName selezionato
@@ -674,7 +663,7 @@ class FlistFoodOrder extends ChangeNotifier {
     // }
   }
 
-  void sendOrder({
+  Future<bool> sendOrder({
     required String currentServicePoint,
     required String phoneNumber,
     required String? seatNumber,
@@ -688,14 +677,12 @@ class FlistFoodOrder extends ChangeNotifier {
     FFOrder? order = await getCurrentOrder(currentServicePoint: currentServicePoint);
 
     if (order == null) {
-      log('ordine nullo');
-      return;
+      return false;
     }
 
     var currentTime = DateTime.now();
 
     try {
-      log('sono entrato nel try');
       order.note = note;
       order.seatNumber = seatNumber;
 
@@ -712,7 +699,6 @@ class FlistFoodOrder extends ChangeNotifier {
       order.mustBeReadyOn = mustBeReadyOn.toUtc();
 
       if (order.userId != null) {
-        log('userId != null quindi faccio la chiamata come utente');
         await Dio().post('https://flistfood-webapi-menu.azurewebsites.net/api/v3/orders',
             data: (jsonEncode(order)),
             queryParameters: {'confirm': true},
@@ -723,26 +709,19 @@ class FlistFoodOrder extends ChangeNotifier {
                 : null);
         notifyListeners();
       } else {
-        log('userId == null quindi faccio la chimata come anonimo');
         await Dio().post('https://flistfood-webapi-menu.azurewebsites.net/api/v3/orders/anonymous',
             data: (jsonEncode(order)), queryParameters: {'confirm': true});
         notifyListeners();
       }
-      // try {
-      //   await orderRepository.confirmOrder(orderId: order.id ?? '');
-      // } catch (e) {
-      //   emit(OrderErrorState(error: e));
-      // }
     } catch (e) {
       _apiError = true;
-      log('$e');
       notifyListeners();
+      return false;
     }
 
     deleteOrderByServicePointId(currentServicePoint);
-    log('Ordine cancellato');
 
     notifyListeners();
-    return;
+    return true;
   }
 }
