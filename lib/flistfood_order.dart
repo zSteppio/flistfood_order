@@ -500,6 +500,10 @@ class FlistFoodOrder extends ChangeNotifier {
         totalPrice: totalPrice,
       );
     } else {
+      if (formatProductJson != null) {
+        formatProduct = FFFormat.fromJson(jsonDecode(formatProductJson));
+      }
+
       List<FFDetail> orderProducts = [];
       {
         orderProducts.add(FFDetail(
