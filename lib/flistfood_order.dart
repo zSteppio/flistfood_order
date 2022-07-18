@@ -430,6 +430,8 @@ class FlistFoodOrder extends ChangeNotifier {
         singleProduct.totalPrice = singleProduct.unitPrice * singleProduct.quantity;
       } else if (productExist) {
         log('prodotto esistente');
+        log(cookingTypeId.toString(), name: 'cookingTypeId:');
+        log(cookingTypeName.toString(), name: 'coockingTypeName:');
         FFDetail singleProduct = _order!.details.firstWhere((e) =>
             e.productId == productId &&
             listEquals(e.variations, variations) &&
