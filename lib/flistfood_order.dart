@@ -336,6 +336,9 @@ class FlistFoodOrder extends ChangeNotifier {
     if (detailProductJson != null) {
       detailProduct = FFDetail.fromJson(jsonDecode(detailProductJson));
     }
+    if (formatProductJson != null) {
+      formatProduct = FFFormat.fromJson(jsonDecode(formatProductJson));
+    }
 
     _order = await getCurrentOrder(currentServicePoint: currentServicePoint);
     var productId = detailProduct?.productId ?? product!.id;
@@ -408,9 +411,6 @@ class FlistFoodOrder extends ChangeNotifier {
     }
 
     if (_order != null) {
-      if (formatProductJson != null) {
-        formatProduct = FFFormat.fromJson(jsonDecode(formatProductJson));
-      }
       var formatName = detailProduct?.format ?? formatProduct?.format;
 
       bool productExist = _order!.details.any((e) =>
@@ -476,10 +476,6 @@ class FlistFoodOrder extends ChangeNotifier {
         totalPrice: totalPrice,
       );
     } else {
-      if (formatProductJson != null) {
-        formatProduct = FFFormat.fromJson(jsonDecode(formatProductJson));
-      }
-
       List<FFDetail> orderProducts = [];
       {
         orderProducts.add(FFDetail(
