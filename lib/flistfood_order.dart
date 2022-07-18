@@ -1,6 +1,7 @@
 library flistfood_order;
 
 import 'dart:convert';
+import 'dart:developer';
 import 'package:copy_with_extension/copy_with_extension.dart';
 import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';
@@ -120,30 +121,6 @@ class FlistFoodVariation extends ChangeNotifier {
       selectedIngridients.add(ingredient);
     }
 
-    // Recupero della foodList di default
-    // for (FFFoodlist foodList in _product.foodlists ?? []) {
-    //   log('Dentro la foodList');
-    //   if (_product.foodListsDefinition != null &&
-    //       _product.foodListsDefinition!.any((e) => e.foodListId == foodList.id)) {
-    //     var mode = _product.foodListsDefinition!
-    //         .firstWhere((element) => element.foodListId == foodList.id)
-    //         .mode;
-
-    //     if (mode == 3 || mode == 2) {
-    //       foodList.foods?.forEach((element) => element.hiddenPrice = true);
-    //     }
-    //     if (mode == 1) {
-    //       foodList.foods?.forEach((element) => element.hiddenPrice = false);
-    //     }
-
-    //     log(foodList.foods?.length.toString() ?? 'Vuoto',
-    //         name: 'Conteggio dei food nella foodlIst');
-    //     for (FFFoodDetail food in foodList.foods ?? []) {
-    //       food.selected = false;
-    //     }
-    //   }
-    // }
-
     notifyListeners();
   }
 
@@ -247,11 +224,6 @@ class FlistFoodVariation extends ChangeNotifier {
       case FoodListModeEnum.maxFreeAndOtherWithCost:
         FFFoodDetail selectedfood = foodList.foods!.firstWhere((e) => e.id == foodId);
         selectedfood.selected = selected;
-
-        /*        foodListHistory.add(selectedfood);
-        if (selectedfood.selected == false) {
-          foodListHistory.removeWhere((e) => e.id == selectedfood.id);
-        } */
 
         for (FFFoodDetail food in foodList.foods!.where((e) => e.selected)) {
           selectedIngredients.add(food);
@@ -448,6 +420,7 @@ class FlistFoodOrder extends ChangeNotifier {
           e.format == formatName);
 
       if (detailProduct != null && !productExist) {
+        log('prodotto con dettaglio non esistente');
         FFDetail singleProduct = _order!.details.firstWhere((e) =>
             e.productId == productId &&
                 listEquals(e.variations, detailProduct?.variations) &&
@@ -456,6 +429,7 @@ class FlistFoodOrder extends ChangeNotifier {
         singleProduct.quantity += 1;
         singleProduct.totalPrice = singleProduct.unitPrice * singleProduct.quantity;
       } else if (productExist) {
+        log('prodotto esistente');
         FFDetail singleProduct = _order!.details.firstWhere((e) =>
             e.productId == productId &&
             listEquals(e.variations, variations) &&
@@ -465,6 +439,7 @@ class FlistFoodOrder extends ChangeNotifier {
         singleProduct.quantity += 1;
         singleProduct.totalPrice = singleProduct.unitPrice * singleProduct.quantity;
       } else {
+        log('Ultima scelta');
         _order!.details.add(FFDetail(
           format: formatProduct?.format,
           productId: productId,
@@ -664,11 +639,6 @@ class FlistFoodOrder extends ChangeNotifier {
   void getAllOrdersFromStorage() async {
     _orders = await getAllOrders();
     notifyListeners();
-    // if (_orders != null && _orders!.isNotEmpty) {
-    //   emit(OrdersForCartSuccessState(orders: _orders ?? []));
-    // } else {
-    //   emit(const OrderEmptyState());
-    // }
   }
 
   Future<bool> sendOrder({
