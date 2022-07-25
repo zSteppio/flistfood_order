@@ -423,8 +423,8 @@ class FlistFoodOrder extends ChangeNotifier {
         log('prodotto con dettaglio non esistente');
         FFDetail singleProduct = _order!.details.firstWhere((e) =>
             e.productId == productId &&
-                listEquals(e.variations, detailProduct?.variations) &&
-                e.cookingTypeId == detailProduct?.cookingTypeId ||
+            listEquals(e.variations, detailProduct?.variations) &&
+            e.cookingTypeId == detailProduct?.cookingTypeId &&
             e.format == formatName);
         singleProduct.quantity += 1;
         singleProduct.totalPrice = singleProduct.unitPrice * singleProduct.quantity;
