@@ -317,15 +317,15 @@ class FlistFoodOrder extends ChangeNotifier {
   //? Aggiunta all'ordine
   //?---------------------------------------------------------------------------
 
-  void addProductOrDetailToOrder(
-      {required String currentServicePoint,
-      String? productJson,
-      String? detailProductJson,
-      String? formatProductJson,
-      required String ownerId,
-      required String ownerName,
-      required String? userId,
-      String? ownerLocation}) async {
+  void addProductOrDetailToOrder({
+    required String currentServicePoint,
+    String? productJson,
+    String? detailProductJson,
+    String? formatProductJson,
+    required String ownerId,
+    required String ownerName,
+    required String? userId,
+  }) async {
     FFProduct? product;
     FFDetail? detailProduct;
     FFFormat? formatProduct;
@@ -474,7 +474,6 @@ class FlistFoodOrder extends ChangeNotifier {
         ownerId: ownerId,
         ownerName: ownerName,
         totalPrice: totalPrice,
-        ownerLocation: ownerLocation,
       );
     } else {
       List<FFDetail> orderProducts = [];
@@ -507,7 +506,6 @@ class FlistFoodOrder extends ChangeNotifier {
         ownerId: ownerId,
         ownerName: ownerName,
         totalPrice: orderProducts.first.totalPrice,
-        ownerLocation: ownerLocation,
       );
     }
 
@@ -529,14 +527,14 @@ class FlistFoodOrder extends ChangeNotifier {
     notifyListeners();
   }
 
-  void removeProductToOrder(
-      {required String currentServicePoint,
-      String? productJson,
-      String? detailProductJson,
-      required String ownerId,
-      required String? userId,
-      required String ownerName,
-      String? ownerLocation}) async {
+  void removeProductToOrder({
+    required String currentServicePoint,
+    String? productJson,
+    String? detailProductJson,
+    required String ownerId,
+    required String? userId,
+    required String ownerName,
+  }) async {
     FFProduct? product;
     FFDetail? detailProduct;
 
@@ -590,7 +588,6 @@ class FlistFoodOrder extends ChangeNotifier {
         ownerId: ownerId,
         ownerName: ownerName,
         totalPrice: totalPrice,
-        ownerLocation: ownerLocation,
       );
 
       await saveCurrentOrder(newOrder: _order!, currentServicePoint: currentServicePoint);

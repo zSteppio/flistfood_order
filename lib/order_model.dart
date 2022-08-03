@@ -7,7 +7,6 @@ class FFOrder {
     this.id,
     this.number = 0,
     this.source,
-    this.ownerLocation,
     this.totalPrice,
     required this.servicePointId,
     this.servicePointName,
@@ -30,7 +29,6 @@ class FFOrder {
   String? id;
   int number;
   String? source;
-  String? ownerLocation;
   double? totalPrice;
   String servicePointId;
   String? servicePointName;
