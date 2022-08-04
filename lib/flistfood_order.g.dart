@@ -1221,6 +1221,8 @@ abstract class _$FFOrderCWProxy {
 
   FFOrder number(int number);
 
+  FFOrder openDate(DateTime openDate);
+
   FFOrder ownerId(String ownerId);
 
   FFOrder ownerName(String? ownerName);
@@ -1261,6 +1263,7 @@ abstract class _$FFOrderCWProxy {
     DateTime? mustBeReadyOn,
     String? note,
     int? number,
+    DateTime? openDate,
     String? ownerId,
     String? ownerName,
     int? paymentStatus,
@@ -1305,6 +1308,9 @@ class _$FFOrderCWProxyImpl implements _$FFOrderCWProxy {
 
   @override
   FFOrder number(int number) => this(number: number);
+
+  @override
+  FFOrder openDate(DateTime openDate) => this(openDate: openDate);
 
   @override
   FFOrder ownerId(String ownerId) => this(ownerId: ownerId);
@@ -1364,6 +1370,7 @@ class _$FFOrderCWProxyImpl implements _$FFOrderCWProxy {
     Object? mustBeReadyOn = const $CopyWithPlaceholder(),
     Object? note = const $CopyWithPlaceholder(),
     Object? number = const $CopyWithPlaceholder(),
+    Object? openDate = const $CopyWithPlaceholder(),
     Object? ownerId = const $CopyWithPlaceholder(),
     Object? ownerName = const $CopyWithPlaceholder(),
     Object? paymentStatus = const $CopyWithPlaceholder(),
@@ -1407,6 +1414,10 @@ class _$FFOrderCWProxyImpl implements _$FFOrderCWProxy {
           ? _value.number
           // ignore: cast_nullable_to_non_nullable
           : number as int,
+      openDate: openDate == const $CopyWithPlaceholder() || openDate == null
+          ? _value.openDate
+          // ignore: cast_nullable_to_non_nullable
+          : openDate as DateTime,
       ownerId: ownerId == const $CopyWithPlaceholder() || ownerId == null
           ? _value.ownerId
           // ignore: cast_nullable_to_non_nullable
@@ -2416,6 +2427,7 @@ FFOrder _$FFOrderFromJson(Map<String, dynamic> json) => FFOrder(
       id: json['id'] as String?,
       number: json['number'] as int? ?? 0,
       source: json['source'] as String?,
+      openDate: DateTime.parse(json['openDate'] as String),
       totalPrice: (json['totalPrice'] as num?)?.toDouble(),
       servicePointId: json['servicePointId'] as String,
       servicePointName: json['servicePointName'] as String?,
@@ -2454,6 +2466,7 @@ Map<String, dynamic> _$FFOrderToJson(FFOrder instance) {
   writeNotNull('id', instance.id);
   val['number'] = instance.number;
   writeNotNull('source', instance.source);
+  val['openDate'] = instance.openDate.toIso8601String();
   writeNotNull('totalPrice', instance.totalPrice);
   val['servicePointId'] = instance.servicePointId;
   writeNotNull('servicePointName', instance.servicePointName);

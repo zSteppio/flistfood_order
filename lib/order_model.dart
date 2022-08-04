@@ -7,6 +7,7 @@ class FFOrder {
     this.id,
     this.number = 0,
     this.source,
+    required this.openDate,
     this.totalPrice,
     required this.servicePointId,
     this.servicePointName,
@@ -29,6 +30,7 @@ class FFOrder {
   String? id;
   int number;
   String? source;
+  DateTime openDate;
   double? totalPrice;
   String servicePointId;
   String? servicePointName;

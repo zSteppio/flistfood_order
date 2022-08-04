@@ -325,6 +325,7 @@ class FlistFoodOrder extends ChangeNotifier {
     required String ownerId,
     required String ownerName,
     required String? userId,
+    required DateTime opneDate,
   }) async {
     FFProduct? product;
     FFDetail? detailProduct;
@@ -474,6 +475,7 @@ class FlistFoodOrder extends ChangeNotifier {
         ownerId: ownerId,
         ownerName: ownerName,
         totalPrice: totalPrice,
+        openDate: opneDate,
       );
     } else {
       List<FFDetail> orderProducts = [];
@@ -506,6 +508,7 @@ class FlistFoodOrder extends ChangeNotifier {
         ownerId: ownerId,
         ownerName: ownerName,
         totalPrice: orderProducts.first.totalPrice,
+        openDate: opneDate,
       );
     }
 
@@ -534,6 +537,7 @@ class FlistFoodOrder extends ChangeNotifier {
     required String ownerId,
     required String? userId,
     required String ownerName,
+    required DateTime opneDate,
   }) async {
     FFProduct? product;
     FFDetail? detailProduct;
@@ -588,6 +592,7 @@ class FlistFoodOrder extends ChangeNotifier {
         ownerId: ownerId,
         ownerName: ownerName,
         totalPrice: totalPrice,
+        openDate: opneDate,
       );
 
       await saveCurrentOrder(newOrder: _order!, currentServicePoint: currentServicePoint);
