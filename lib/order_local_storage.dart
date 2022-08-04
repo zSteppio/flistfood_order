@@ -35,7 +35,6 @@ Future<FFOrder?> getCurrentOrder({required String currentServicePoint}) async {
   if (orderRaw != null) {
     var orderMap = jsonDecode(orderRaw);
     var orders = List<FFOrder>.from(orderMap.map((e) => FFOrder.fromJson(e))).toList();
-    log(orders.toString());
 
     //* Controllo se sono presenti ordini su quel servicePoint
     if (orders.any((e) => e.servicePointId == currentServicePoint)) {

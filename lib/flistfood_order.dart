@@ -632,7 +632,6 @@ class FlistFoodOrder extends ChangeNotifier {
 
   void getOrderByCurrentServicePoint({required String currentServicePoint}) async {
     _order = await getCurrentOrder(currentServicePoint: currentServicePoint);
-    log(order.toString(), name: 'Order');
     if (_order != null && currentServicePoint != '') {
       _totalQuantityCalc(order: _order!);
     }

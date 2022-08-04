@@ -30,7 +30,7 @@ class FFOrder {
   String? id;
   int number;
   String? source;
-  DateTime openDate;
+  DateTime? openDate;
   double? totalPrice;
   String servicePointId;
   String? servicePointName;
