@@ -718,7 +718,7 @@ class FlistFoodOrder extends ChangeNotifier {
 
       if (order.userId != null) {
         await Dio().post(
-            'https://flistfood-webapi-orders.azurewebsites.net/api/v4/orders',
+            'https://flistfood-webapi-menu.azurewebsites.net/api/v3/orders',
             data: (jsonEncode(order)),
             queryParameters: {'confirm': true},
             options: token != null
@@ -729,7 +729,7 @@ class FlistFoodOrder extends ChangeNotifier {
         notifyListeners();
       } else {
         await Dio().post(
-            'https://flistfood-webapi-orders.azurewebsites.net/api/v4/orders/anonymous',
+            'https://flistfood-webapi-menu.azurewebsites.net/api/v3/orders/anonymous',
             data: (jsonEncode(order)),
             queryParameters: {'confirm': true});
         notifyListeners();
