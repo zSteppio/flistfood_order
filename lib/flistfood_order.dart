@@ -697,6 +697,7 @@ class FlistFoodOrder extends ChangeNotifier {
       }
     } catch (e) {
       _apiError = true;
+      log(e.toString(), name: 'Invio ordine errore');
       notifyListeners();
       return false;
     }
