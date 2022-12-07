@@ -421,7 +421,6 @@ class FlistFoodOrder extends ChangeNotifier {
           e.format == formatName);
 
       if (detailProduct != null && !productExist) {
-        log('prodotto con dettaglio non esistente');
         FFDetail singleProduct = _order!.details.firstWhere((e) =>
             e.productId == productId &&
             listEquals(e.variations, detailProduct?.variations) &&
@@ -430,8 +429,6 @@ class FlistFoodOrder extends ChangeNotifier {
         singleProduct.quantity += 1;
         singleProduct.totalPrice = singleProduct.unitPrice * singleProduct.quantity;
       } else if (productExist) {
-        log('prodotto esistente');
-        log(detailProduct?.cookingTypeId.toString() ?? 'nullo', name: 'cookingTypeId:');
         FFDetail singleProduct = _order!.details.firstWhere((e) =>
             e.productId == productId &&
             listEquals(e.variations, variations) &&
@@ -441,7 +438,6 @@ class FlistFoodOrder extends ChangeNotifier {
         singleProduct.quantity += 1;
         singleProduct.totalPrice = singleProduct.unitPrice * singleProduct.quantity;
       } else {
-        log('Ultima scelta');
         _order!.details.add(FFDetail(
           format: formatProduct?.format,
           productId: productId,
@@ -698,6 +694,9 @@ class FlistFoodOrder extends ChangeNotifier {
     } catch (e) {
       _apiError = true;
       log(e.toString(), name: 'Invio ordine errore');
+      log((jsonEncode(order)), name: 'Body ordine');
+      log('https://flistfood-webapi-orders.azurewebsites.net/api/v4/orders?confirm=true',
+          name: 'Url ordine');
       notifyListeners();
       return false;
     }
