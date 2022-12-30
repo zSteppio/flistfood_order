@@ -45,10 +45,12 @@ class FlistFoodVariation extends ChangeNotifier {
     List<FFFoodlist> rawFoodList =
         List<FFFoodlist>.from(foodListMap.map((e) => FFFoodlist.fromJson(e)));
 
-    for (FFFoodListsDefinition foodListDefinition in _product.foodListsDefinition ?? []) {
+    for (FFFoodListsDefinition foodListDefinition
+        in _product.foodListsDefinition ?? []) {
       // Collegamento tra il prodotto e la food list
       if (rawFoodList.any((e) => e.id == foodListDefinition.foodListId)) {
-        var findedFoodList = rawFoodList.firstWhere((e) => e.id == foodListDefinition.foodListId);
+        var findedFoodList = rawFoodList
+            .firstWhere((e) => e.id == foodListDefinition.foodListId);
         foodLists.add(findedFoodList);
       }
     }
@@ -57,9 +59,11 @@ class FlistFoodVariation extends ChangeNotifier {
 
     for (FFFoodlist foodList in _product.foodlists ?? []) {
       if (_product.foodListsDefinition != null &&
-          _product.foodListsDefinition!.any((e) => e.foodListId == foodList.id)) {
-        var mode =
-            _product.foodListsDefinition!.firstWhere((e) => e.foodListId == foodList.id).mode;
+          _product.foodListsDefinition!
+              .any((e) => e.foodListId == foodList.id)) {
+        var mode = _product.foodListsDefinition!
+            .firstWhere((e) => e.foodListId == foodList.id)
+            .mode;
 
         if (mode == FoodListModeEnum.maxFreeAndOtherWithCost ||
             mode == FoodListModeEnum.maxIngredientFree) {
@@ -106,9 +110,11 @@ class FlistFoodVariation extends ChangeNotifier {
       cookingType.isSelected = false;
     }
     if (_product.cookingTypes != null &&
-        _product.cookingTypes!.any((e) => e.id == _product.preferredCookingTypeId)) {
-      _product.cookingTypes?.firstWhere((e) => e.id == _product.preferredCookingTypeId).isSelected =
-          true;
+        _product.cookingTypes!
+            .any((e) => e.id == _product.preferredCookingTypeId)) {
+      _product.cookingTypes
+          ?.firstWhere((e) => e.id == _product.preferredCookingTypeId)
+          .isSelected = true;
     }
 
     // Recupero degli ingredienti di default
@@ -133,7 +139,8 @@ class FlistFoodVariation extends ChangeNotifier {
     required int foodId,
     required FFAlternative alternative,
   }) {
-    var selectedFood = alternative.foods?.firstWhere((e) => e.isSelected == true);
+    var selectedFood =
+        alternative.foods?.firstWhere((e) => e.isSelected == true);
     selectedFood?.isSelected = false;
 
     var food = alternative.foods?.firstWhere((e) => e.foodId == foodId);
@@ -148,16 +155,19 @@ class FlistFoodVariation extends ChangeNotifier {
 
   // Settaggio tipi di cottura
   void selectCookingType({required int cookingTypeId}) {
-    _product.cookingTypes?.firstWhere((e) => e.isSelected == true).isSelected = false;
-    _product.cookingTypes?.firstWhere((e) => e.id == cookingTypeId).isSelected = true;
+    _product.cookingTypes?.firstWhere((e) => e.isSelected == true).isSelected =
+        false;
+    _product.cookingTypes?.firstWhere((e) => e.id == cookingTypeId).isSelected =
+        true;
     notifyListeners();
   }
 
   //* Settaggio ingredienti
-  void setIngredient({required FFIngredient ingredient, required bool selected}) {
+  void setIngredient(
+      {required FFIngredient ingredient, required bool selected}) {
     if (ingredient.canRemove) {
-      FFIngredient selectedIngridient =
-          _product.ingredients!.firstWhere((e) => e.foodId == ingredient.foodId);
+      FFIngredient selectedIngridient = _product.ingredients!
+          .firstWhere((e) => e.foodId == ingredient.foodId);
 
       selectedIngridient.selected = selected;
 
@@ -173,9 +183,13 @@ class FlistFoodVariation extends ChangeNotifier {
     }
   }
 
-  void setFoodList({required int foodId, required FFFoodlist foodList, required bool selected}) {
-    FFFoodListsDefinition foodListsDefinitionSelected =
-        _product.foodListsDefinition!.firstWhere((e) => e.foodListId == foodList.id);
+  void setFoodList(
+      {required int foodId,
+      required FFFoodlist foodList,
+      required bool selected}) {
+    FFFoodListsDefinition foodListsDefinitionSelected = _product
+        .foodListsDefinition!
+        .firstWhere((e) => e.foodListId == foodList.id);
 
     var mode = foodListsDefinitionSelected.mode;
     var quantity = foodListsDefinitionSelected.maxQty;
@@ -190,8 +204,10 @@ class FlistFoodVariation extends ChangeNotifier {
         }
 
         if (quantity > selectedIngredients.length ||
-            foodList.foods?.firstWhere((e) => e.id == foodId).selected == true) {
-          FFFoodDetail selectedfood = foodList.foods!.firstWhere((e) => e.id == foodId);
+            foodList.foods?.firstWhere((e) => e.id == foodId).selected ==
+                true) {
+          FFFoodDetail selectedfood =
+              foodList.foods!.firstWhere((e) => e.id == foodId);
           selectedfood.selected = selected;
 
           if (selectedfood.selected) {
@@ -210,19 +226,24 @@ class FlistFoodVariation extends ChangeNotifier {
         }
 
         if (quantity > selectedIngredients.length ||
-            foodList.foods?.firstWhere((e) => e.id == foodId).selected == true) {
-          FFFoodDetail selectedfood = foodList.foods!.firstWhere((e) => e.id == foodId);
+            foodList.foods?.firstWhere((e) => e.id == foodId).selected ==
+                true) {
+          FFFoodDetail selectedfood =
+              foodList.foods!.firstWhere((e) => e.id == foodId);
           selectedfood.selected = selected;
 
           foodList.foods?.forEach((e) => e.isFree = false);
-          foodList.foods?.where((e) => e.selected).forEach((e) => e.isFree = true);
+          foodList.foods
+              ?.where((e) => e.selected)
+              .forEach((e) => e.isFree = true);
         }
         notifyListeners();
         break;
 
       //* Massimi ingredienti gratuiti e i successivi con costo ----------------
       case FoodListModeEnum.maxFreeAndOtherWithCost:
-        FFFoodDetail selectedfood = foodList.foods!.firstWhere((e) => e.id == foodId);
+        FFFoodDetail selectedfood =
+            foodList.foods!.firstWhere((e) => e.id == foodId);
         selectedfood.selected = selected;
 
         for (FFFoodDetail food in foodList.foods!.where((e) => e.selected)) {
@@ -252,7 +273,9 @@ class FlistFoodVariation extends ChangeNotifier {
           foodList.foods?.forEach((e) => e.hiddenPrice = true);
 
           foodList.foods?.forEach((e) => e.isFree = false);
-          foodList.foods?.where((e) => e.selected).forEach((e) => e.isFree = true);
+          foodList.foods
+              ?.where((e) => e.selected)
+              .forEach((e) => e.isFree = true);
         }
 
         // Selezionati uguali della quantità
@@ -279,7 +302,8 @@ class FlistFoodVariation extends ChangeNotifier {
 
       //* Illimitati e gratuiti ------------------------------------------------
       case FoodListModeEnum.freeChoise:
-        FFFoodDetail selectedfood = foodList.foods!.firstWhere((e) => e.id == foodId);
+        FFFoodDetail selectedfood =
+            foodList.foods!.firstWhere((e) => e.id == foodId);
         selectedfood.selected = selected;
 
         if (selectedfood.selected == true) {
@@ -307,11 +331,13 @@ class FlistFoodOrder extends ChangeNotifier {
   FFOrder? _order;
   int _totalQuantity = 0;
   bool _apiError = false;
+  double? _deliveryPrice = 0;
 
   List<FFOrder>? get orders => _orders;
   FFOrder? get order => _order;
   int get totalQuantity => _totalQuantity;
   bool get apiError => _apiError;
+  double? get deliveryPrice => _deliveryPrice;
 
   //?---------------------------------------------------------------------------
   //? Aggiunta all'ordine
@@ -326,10 +352,13 @@ class FlistFoodOrder extends ChangeNotifier {
     required String ownerName,
     required String? userId,
     required DateTime opneDate,
+    required double? deliveryCost,
   }) async {
     FFProduct? product;
     FFDetail? detailProduct;
     FFFormat? formatProduct;
+
+    _deliveryPrice = deliveryCost;
 
     if (productJson != null) {
       product = FFProduct.fromJson(jsonDecode(productJson));
@@ -350,8 +379,8 @@ class FlistFoodOrder extends ChangeNotifier {
 
     if (detailProduct == null) {
       //* Recupero del cookingName selezionato
-      for (FFCookingType cookingType in product?.cookingTypes
-              ?.where((e) => e.isSelected && product?.preferredCookingTypeId != e.id) ??
+      for (FFCookingType cookingType in product?.cookingTypes?.where(
+              (e) => e.isSelected && product?.preferredCookingTypeId != e.id) ??
           []) {
         cookingTypeName = cookingType.name ?? '';
         cookingTypeId = cookingType.id;
@@ -359,8 +388,8 @@ class FlistFoodOrder extends ChangeNotifier {
 
       //* Recupero e settaggio delle alternative
       for (FFAlternative alternative in product?.alternatives ?? []) {
-        for (var food in alternative.foods!
-            .where((e) => e.isSelected == true && alternative.defaultFoodId != e.foodId)) {
+        for (var food in alternative.foods!.where((e) =>
+            e.isSelected == true && alternative.defaultFoodId != e.foodId)) {
           variations.add(FFVariation(
             foodId: food.foodId,
             price: food.price,
@@ -385,7 +414,10 @@ class FlistFoodOrder extends ChangeNotifier {
       for (FFIngredient ingredient in product?.ingredients ?? []) {
         if (ingredient.isMainIngredient && !ingredient.selected) {
           variations.add(FFVariation(
-              foodId: ingredient.foodId, price: 0, foodName: ingredient.food, variationType: -1));
+              foodId: ingredient.foodId,
+              price: 0,
+              foodName: ingredient.food,
+              variationType: -1));
         } else if (!ingredient.isMainIngredient && ingredient.selected) {
           variations.add(FFVariation(
             foodId: ingredient.foodId,
@@ -398,7 +430,8 @@ class FlistFoodOrder extends ChangeNotifier {
 
       //* Recupero e settaggio foodlist
       for (FFFoodlist foodList in product?.foodlists ?? []) {
-        for (FFFoodDetail food in foodList.foods?.where((e) => e.selected) ?? []) {
+        for (FFFoodDetail food
+            in foodList.foods?.where((e) => e.selected) ?? []) {
           variations.add(FFVariation(
             foodId: food.id ?? 0,
             price: food.isFree ? 0 : food.variationPrice ?? 0,
@@ -427,7 +460,8 @@ class FlistFoodOrder extends ChangeNotifier {
             e.cookingTypeId == detailProduct?.cookingTypeId &&
             e.format == formatName);
         singleProduct.quantity += 1;
-        singleProduct.totalPrice = singleProduct.unitPrice * singleProduct.quantity;
+        singleProduct.totalPrice =
+            singleProduct.unitPrice * singleProduct.quantity;
       } else if (productExist) {
         FFDetail singleProduct = _order!.details.firstWhere((e) =>
             e.productId == productId &&
@@ -436,7 +470,8 @@ class FlistFoodOrder extends ChangeNotifier {
             e.format == formatName);
 
         singleProduct.quantity += 1;
-        singleProduct.totalPrice = singleProduct.unitPrice * singleProduct.quantity;
+        singleProduct.totalPrice =
+            singleProduct.unitPrice * singleProduct.quantity;
       } else {
         _order!.details.add(FFDetail(
           format: formatProduct?.format,
@@ -508,18 +543,25 @@ class FlistFoodOrder extends ChangeNotifier {
       );
     }
 
-    _totalQuantityCalc(order: _order!);
+    _totalQuantityCalc(order: _order!, deliveryCost: deliveryCost);
 
-    await saveCurrentOrder(newOrder: _order!, currentServicePoint: currentServicePoint);
+    await saveCurrentOrder(
+        newOrder: _order!, currentServicePoint: currentServicePoint);
     //emit(OrderSuccessState(order: order, totalQuantity: totalQuantity));
     notifyListeners();
     return;
   }
 
-  void _totalQuantityCalc({required FFOrder order}) {
+  void _totalQuantityCalc({
+    required FFOrder order,
+    required double? deliveryCost,
+  }) {
     int rawQuantity = 0;
     for (var detail in order.details) {
       rawQuantity += detail.quantity;
+    }
+    if (deliveryCost != null) {
+      rawQuantity += deliveryCost.toInt();
     }
 
     _totalQuantity = rawQuantity;
@@ -534,9 +576,12 @@ class FlistFoodOrder extends ChangeNotifier {
     required String? userId,
     required String ownerName,
     required DateTime opneDate,
+    required double? deliveryCost,
   }) async {
     FFProduct? product;
     FFDetail? detailProduct;
+
+    _deliveryPrice = deliveryCost;
 
     if (productJson != null) {
       product = FFProduct.fromJson(jsonDecode(productJson));
@@ -576,7 +621,7 @@ class FlistFoodOrder extends ChangeNotifier {
         totalPrice += e;
       });
 
-      _totalQuantityCalc(order: _order!);
+      _totalQuantityCalc(order: _order!, deliveryCost: deliveryCost);
 
       _order = FFOrder(
         servicePointId: currentServicePoint,
@@ -591,7 +636,8 @@ class FlistFoodOrder extends ChangeNotifier {
         openDate: opneDate,
       );
 
-      await saveCurrentOrder(newOrder: _order!, currentServicePoint: currentServicePoint);
+      await saveCurrentOrder(
+          newOrder: _order!, currentServicePoint: currentServicePoint);
 
       _orders = await getAllOrders();
       if (_order!.details.isEmpty) {
@@ -626,10 +672,14 @@ class FlistFoodOrder extends ChangeNotifier {
     notifyListeners();
   }
 
-  void getOrderByCurrentServicePoint({required String currentServicePoint}) async {
+  void getOrderByCurrentServicePoint({
+    required String currentServicePoint,
+    required double deliveryCost,
+  }) async {
+    _deliveryPrice = deliveryCost;
     _order = await getCurrentOrder(currentServicePoint: currentServicePoint);
     if (_order != null && currentServicePoint != '') {
-      _totalQuantityCalc(order: _order!);
+      _totalQuantityCalc(order: _order!, deliveryCost: deliveryCost);
     }
     notifyListeners();
   }
@@ -649,8 +699,11 @@ class FlistFoodOrder extends ChangeNotifier {
     required int paymentMethod,
     required String userName,
     required String? token,
+    required double? deliveryCost,
   }) async {
-    FFOrder? order = await getCurrentOrder(currentServicePoint: currentServicePoint);
+    _deliveryPrice = deliveryCost;
+    FFOrder? order =
+        await getCurrentOrder(currentServicePoint: currentServicePoint);
 
     if (order == null) {
       return false;
@@ -665,17 +718,23 @@ class FlistFoodOrder extends ChangeNotifier {
       order.paymentType = paymentMethod;
       order.ownerName = null;
       FFDeliveryInfo deliveryInfo = FFDeliveryInfo(
-          paymentType: paymentMethod, phoneNumber: phoneNumber, customerName: userName);
+        paymentType: paymentMethod,
+        phoneNumber: phoneNumber,
+        customerName: userName,
+        supplementPrice: deliveryCost,
+      );
 
       order.deliveryInfo = deliveryInfo;
 
-      var mustBeReadyOn =
-          DateTime(currentTime.year, currentTime.month, currentTime.day, hour, minute).toLocal();
+      var mustBeReadyOn = DateTime(currentTime.year, currentTime.month,
+              currentTime.day, hour, minute)
+          .toLocal();
 
       order.mustBeReadyOn = mustBeReadyOn.toUtc();
 
       if (order.userId != null) {
-        await Dio().post('https://flistfood-webapi-orders.azurewebsites.net/api/v4/orders',
+        await Dio().post(
+            'https://flistfood-webapi-orders.azurewebsites.net/api/v4/orders',
             data: (jsonEncode(order)),
             queryParameters: {'confirm': true},
             options: token != null
