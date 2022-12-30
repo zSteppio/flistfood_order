@@ -352,6 +352,7 @@ class FlistFoodOrder extends ChangeNotifier {
     required DateTime opneDate,
     required double? deliveryCost,
   }) async {
+    log(deliveryCost.toString(), name: 'deliveryCost');
     FFProduct? product;
     FFDetail? detailProduct;
     FFFormat? formatProduct;
@@ -552,6 +553,7 @@ class FlistFoodOrder extends ChangeNotifier {
     required FFOrder order,
     required double? deliveryCost,
   }) {
+    log(deliveryCost.toString(), name: 'deliveryCostTotalQuantity');
     int rawQuantity = 0;
     for (var detail in order.details) {
       rawQuantity += detail.quantity;
@@ -574,6 +576,7 @@ class FlistFoodOrder extends ChangeNotifier {
     required DateTime opneDate,
     required double? deliveryCost,
   }) async {
+    log(deliveryCost.toString(), name: 'deliveryCost');
     FFProduct? product;
     FFDetail? detailProduct;
 
@@ -670,6 +673,7 @@ class FlistFoodOrder extends ChangeNotifier {
     required String currentServicePoint,
     required double? deliveryCost,
   }) async {
+    log(deliveryCost.toString(), name: 'deliveryCost');
     _order = await getCurrentOrder(currentServicePoint: currentServicePoint);
     if (_order != null && currentServicePoint != '') {
       _totalQuantityCalc(order: _order!, deliveryCost: deliveryCost);
@@ -694,6 +698,7 @@ class FlistFoodOrder extends ChangeNotifier {
     required String? token,
     required double? deliveryCost,
   }) async {
+    log(deliveryCost.toString(), name: 'deliveryCost');
     FFOrder? order =
         await getCurrentOrder(currentServicePoint: currentServicePoint);
 
