@@ -493,6 +493,10 @@ class FlistFoodOrder extends ChangeNotifier {
         totalPrice += e;
       });
 
+      if (deliveryCost != null) {
+        totalPrice += deliveryCost;
+      }
+
       _order = FFOrder(
         servicePointId: currentServicePoint,
         serviceType: 2,
@@ -526,6 +530,10 @@ class FlistFoodOrder extends ChangeNotifier {
         ));
       }
 
+      if (deliveryCost != null) {
+        orderProducts.first.totalPrice += deliveryCost;
+      }
+
       _order = FFOrder(
         servicePointId: currentServicePoint,
         serviceType: 2,
@@ -540,7 +548,7 @@ class FlistFoodOrder extends ChangeNotifier {
       );
     }
 
-    _totalQuantityCalc(order: _order!, deliveryCost: deliveryCost);
+    _totalQuantityCalc(order: _order!);
 
     await saveCurrentOrder(
         newOrder: _order!, currentServicePoint: currentServicePoint);
@@ -549,17 +557,10 @@ class FlistFoodOrder extends ChangeNotifier {
     return;
   }
 
-  void _totalQuantityCalc({
-    required FFOrder order,
-    required double? deliveryCost,
-  }) {
-    log(deliveryCost.toString(), name: 'deliveryCostTotalQuantity');
+  void _totalQuantityCalc({required FFOrder order}) {
     int rawQuantity = 0;
     for (var detail in order.details) {
       rawQuantity += detail.quantity;
-    }
-    if (deliveryCost != null) {
-      rawQuantity += deliveryCost.toInt();
     }
 
     _totalQuantity = rawQuantity;
@@ -618,7 +619,11 @@ class FlistFoodOrder extends ChangeNotifier {
         totalPrice += e;
       });
 
-      _totalQuantityCalc(order: _order!, deliveryCost: deliveryCost);
+      if (deliveryCost != null) {
+        totalPrice += deliveryCost;
+      }
+
+      _totalQuantityCalc(order: _order!);
 
       _order = FFOrder(
         servicePointId: currentServicePoint,
@@ -669,14 +674,11 @@ class FlistFoodOrder extends ChangeNotifier {
     notifyListeners();
   }
 
-  void getOrderByCurrentServicePoint({
-    required String currentServicePoint,
-    required double? deliveryCost,
-  }) async {
-    log(deliveryCost.toString(), name: 'deliveryCost');
+  void getOrderByCurrentServicePoint(
+      {required String currentServicePoint}) async {
     _order = await getCurrentOrder(currentServicePoint: currentServicePoint);
     if (_order != null && currentServicePoint != '') {
-      _totalQuantityCalc(order: _order!, deliveryCost: deliveryCost);
+      _totalQuantityCalc(order: _order!);
     }
     notifyListeners();
   }
