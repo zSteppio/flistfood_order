@@ -674,7 +674,7 @@ class FlistFoodOrder extends ChangeNotifier {
 
   void getOrderByCurrentServicePoint({
     required String currentServicePoint,
-    required double deliveryCost,
+    required double? deliveryCost,
   }) async {
     _deliveryPrice = deliveryCost;
     _order = await getCurrentOrder(currentServicePoint: currentServicePoint);
