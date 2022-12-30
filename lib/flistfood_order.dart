@@ -331,13 +331,11 @@ class FlistFoodOrder extends ChangeNotifier {
   FFOrder? _order;
   int _totalQuantity = 0;
   bool _apiError = false;
-  double? _deliveryPrice = 0;
 
   List<FFOrder>? get orders => _orders;
   FFOrder? get order => _order;
   int get totalQuantity => _totalQuantity;
   bool get apiError => _apiError;
-  double? get deliveryPrice => _deliveryPrice;
 
   //?---------------------------------------------------------------------------
   //? Aggiunta all'ordine
@@ -357,8 +355,6 @@ class FlistFoodOrder extends ChangeNotifier {
     FFProduct? product;
     FFDetail? detailProduct;
     FFFormat? formatProduct;
-
-    _deliveryPrice = deliveryCost;
 
     if (productJson != null) {
       product = FFProduct.fromJson(jsonDecode(productJson));
@@ -581,8 +577,6 @@ class FlistFoodOrder extends ChangeNotifier {
     FFProduct? product;
     FFDetail? detailProduct;
 
-    _deliveryPrice = deliveryCost;
-
     if (productJson != null) {
       product = FFProduct.fromJson(jsonDecode(productJson));
     }
@@ -676,7 +670,6 @@ class FlistFoodOrder extends ChangeNotifier {
     required String currentServicePoint,
     required double? deliveryCost,
   }) async {
-    _deliveryPrice = deliveryCost;
     _order = await getCurrentOrder(currentServicePoint: currentServicePoint);
     if (_order != null && currentServicePoint != '') {
       _totalQuantityCalc(order: _order!, deliveryCost: deliveryCost);
@@ -701,7 +694,6 @@ class FlistFoodOrder extends ChangeNotifier {
     required String? token,
     required double? deliveryCost,
   }) async {
-    _deliveryPrice = deliveryCost;
     FFOrder? order =
         await getCurrentOrder(currentServicePoint: currentServicePoint);
 
