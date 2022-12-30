@@ -356,6 +356,11 @@ class FlistFoodOrder extends ChangeNotifier {
     FFProduct? product;
     FFDetail? detailProduct;
     FFFormat? formatProduct;
+    int serviceType = 2;
+
+    if (deliveryCost != null) {
+      serviceType = 3;
+    }
 
     if (productJson != null) {
       product = FFProduct.fromJson(jsonDecode(productJson));
@@ -499,7 +504,7 @@ class FlistFoodOrder extends ChangeNotifier {
 
       _order = FFOrder(
         servicePointId: currentServicePoint,
-        serviceType: 2,
+        serviceType: serviceType,
         details: _order!.details,
         source: 'T',
         paymentStatus: 0,
@@ -536,7 +541,7 @@ class FlistFoodOrder extends ChangeNotifier {
 
       _order = FFOrder(
         servicePointId: currentServicePoint,
-        serviceType: 2,
+        serviceType: serviceType,
         source: 'T',
         paymentStatus: 0,
         details: orderProducts,
@@ -580,6 +585,11 @@ class FlistFoodOrder extends ChangeNotifier {
     log(deliveryCost.toString(), name: 'deliveryCost');
     FFProduct? product;
     FFDetail? detailProduct;
+    int serviceType = 2;
+
+    if (deliveryCost != null) {
+      serviceType = 3;
+    }
 
     if (productJson != null) {
       product = FFProduct.fromJson(jsonDecode(productJson));
@@ -627,7 +637,7 @@ class FlistFoodOrder extends ChangeNotifier {
 
       _order = FFOrder(
         servicePointId: currentServicePoint,
-        serviceType: 2,
+        serviceType: serviceType,
         source: 'T',
         paymentStatus: 0,
         details: _order!.details,
@@ -647,12 +657,6 @@ class FlistFoodOrder extends ChangeNotifier {
         await saveAllOrders(orders: _orders ?? []);
         notifyListeners();
       }
-      // if (orders == null || orders.isEmpty) {
-      //   emit(const OrderEmptyState());
-      // } else {
-      //   emit(OrderSuccessState(order: order, totalQuantity: totalQuantity));
-      // }
-
     }
     notifyListeners();
     return;
