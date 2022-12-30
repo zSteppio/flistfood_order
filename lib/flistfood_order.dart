@@ -504,7 +504,7 @@ class FlistFoodOrder extends ChangeNotifier {
 
       _order = FFOrder(
         servicePointId: currentServicePoint,
-        serviceType: serviceType,
+        serviceType: 2,
         details: _order!.details,
         source: 'T',
         paymentStatus: 0,
@@ -541,7 +541,7 @@ class FlistFoodOrder extends ChangeNotifier {
 
       _order = FFOrder(
         servicePointId: currentServicePoint,
-        serviceType: serviceType,
+        serviceType: 2,
         source: 'T',
         paymentStatus: 0,
         details: orderProducts,
@@ -637,7 +637,7 @@ class FlistFoodOrder extends ChangeNotifier {
 
       _order = FFOrder(
         servicePointId: currentServicePoint,
-        serviceType: serviceType,
+        serviceType: 2,
         source: 'T',
         paymentStatus: 0,
         details: _order!.details,
