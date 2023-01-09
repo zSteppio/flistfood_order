@@ -352,7 +352,6 @@ class FlistFoodOrder extends ChangeNotifier {
     required DateTime opneDate,
     required double? deliveryCost,
   }) async {
-    log(deliveryCost.toString(), name: 'deliveryCost');
     FFProduct? product;
     FFDetail? detailProduct;
     FFFormat? formatProduct;
@@ -582,7 +581,6 @@ class FlistFoodOrder extends ChangeNotifier {
     required DateTime opneDate,
     required double? deliveryCost,
   }) async {
-    log(deliveryCost.toString(), name: 'deliveryCost');
     FFProduct? product;
     FFDetail? detailProduct;
     int serviceType = 2;
@@ -703,8 +701,8 @@ class FlistFoodOrder extends ChangeNotifier {
     required String userName,
     required String? token,
     required double? deliveryCost,
+    required String? deliveryAddress,
   }) async {
-    log(deliveryCost.toString(), name: 'deliveryCost');
     FFOrder? order =
         await getCurrentOrder(currentServicePoint: currentServicePoint);
 
@@ -725,6 +723,7 @@ class FlistFoodOrder extends ChangeNotifier {
         phoneNumber: phoneNumber,
         customerName: userName,
         supplementPrice: deliveryCost,
+        deliveryAddress: deliveryAddress,
       );
 
       order.deliveryInfo = deliveryInfo;
