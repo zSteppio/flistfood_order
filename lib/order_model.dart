@@ -25,6 +25,7 @@ class FFOrder {
     this.seatNumber,
     this.note,
     this.paymentType = 1,
+    this.expDate,
   });
 
   String? id;
@@ -48,6 +49,7 @@ class FFOrder {
   String? seatNumber;
   String? note;
   int paymentType;
+  String? expDate;
 
   factory FFOrder.fromJson(Map<String, dynamic> json) => _$FFOrderFromJson(json);
   Map<String, dynamic> toJson() => _$FFOrderToJson(this);

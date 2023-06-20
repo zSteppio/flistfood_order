@@ -1,9 +1,9 @@
 # This is a generated file; do not edit or check into version control.
-path_provider_linux=/Users/alessio/.pub-cache/hosted/pub.dev/path_provider_linux-2.1.10/
-path_provider_windows=/Users/alessio/.pub-cache/hosted/pub.dev/path_provider_windows-2.1.6/
-shared_preferences=/Users/alessio/.pub-cache/hosted/pub.dev/shared_preferences-2.1.1/
-shared_preferences_android=/Users/alessio/.pub-cache/hosted/pub.dev/shared_preferences_android-2.1.4/
-shared_preferences_foundation=/Users/alessio/.pub-cache/hosted/pub.dev/shared_preferences_foundation-2.2.2/
-shared_preferences_linux=/Users/alessio/.pub-cache/hosted/pub.dev/shared_preferences_linux-2.2.0/
-shared_preferences_web=/Users/alessio/.pub-cache/hosted/pub.dev/shared_preferences_web-2.1.0/
-shared_preferences_windows=/Users/alessio/.pub-cache/hosted/pub.dev/shared_preferences_windows-2.2.0/
+path_provider_linux=/Users/steppio/.pub-cache/hosted/pub.dev/path_provider_linux-2.1.11/
+path_provider_windows=/Users/steppio/.pub-cache/hosted/pub.dev/path_provider_windows-2.1.7/
+shared_preferences=/Users/steppio/.pub-cache/hosted/pub.dev/shared_preferences-2.1.2/
+shared_preferences_android=/Users/steppio/.pub-cache/hosted/pub.dev/shared_preferences_android-2.1.4/
+shared_preferences_foundation=/Users/steppio/.pub-cache/hosted/pub.dev/shared_preferences_foundation-2.2.2/
+shared_preferences_linux=/Users/steppio/.pub-cache/hosted/pub.dev/shared_preferences_linux-2.2.0/
+shared_preferences_web=/Users/steppio/.pub-cache/hosted/pub.dev/shared_preferences_web-2.1.0/
+shared_preferences_windows=/Users/steppio/.pub-cache/hosted/pub.dev/shared_preferences_windows-2.2.0/

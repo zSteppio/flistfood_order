@@ -10,6 +10,28 @@ Future<void> deleteAllOrders() async {
   await prefs.remove('orders');
 }
 
+Future<void> checkAllOrders() async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+
+  String? orderRaw = prefs.getString('orders');
+
+  if (orderRaw != null) {
+    var orderMap = jsonDecode(orderRaw);
+    List<FFOrder> orders = List<FFOrder>.from(orderMap.map((e) => FFOrder.fromJson(e))).toList();
+
+    for (var element in orders) {
+      if (element.expDate != null) {
+        DateTime expDate = DateTime.parse(element.expDate!);
+        if (expDate.isBefore(DateTime.now())) {
+          orders.remove(element);
+        }
+      }
+    }
+
+    await prefs.setString('orders', jsonEncode(orders));
+  }
+}
+
 Future<List<FFOrder>?> getAllOrders() async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
 
@@ -54,6 +76,8 @@ Future<void> saveCurrentOrder(
   SharedPreferences prefs = await SharedPreferences.getInstance();
 
   List<FFOrder> orders = await getAllOrders() ?? [];
+
+  newOrder.expDate = DateTime.now().add(const Duration(days: 5)).toString();
 
   //* Controllo se ci sono ordini in corso
   if (orders.isNotEmpty) {

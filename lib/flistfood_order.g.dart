@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of flistfood_order;
+part of 'flistfood_order.dart';
 
 // **************************************************************************
 // CopyWithGenerator
@@ -195,6 +195,7 @@ class _$FFProductCWProxyImpl implements _$FFProductCWProxy {
 
 extension $FFProductCopyWith on FFProduct {
   /// Returns a callable class that can be used as follows: `instanceOfFFProduct.copyWith(...)` or like so:`instanceOfFFProduct.copyWith.fieldName(...)`.
+  // ignore: library_private_types_in_public_api
   _$FFProductCWProxy get copyWith => _$FFProductCWProxyImpl(this);
 }
 
@@ -254,6 +255,7 @@ class _$FFFormatCWProxyImpl implements _$FFFormatCWProxy {
 
 extension $FFFormatCopyWith on FFFormat {
   /// Returns a callable class that can be used as follows: `instanceOfFFFormat.copyWith(...)` or like so:`instanceOfFFFormat.copyWith.fieldName(...)`.
+  // ignore: library_private_types_in_public_api
   _$FFFormatCWProxy get copyWith => _$FFFormatCWProxyImpl(this);
 }
 
@@ -406,6 +408,7 @@ class _$FFIngredientCWProxyImpl implements _$FFIngredientCWProxy {
 
 extension $FFIngredientCopyWith on FFIngredient {
   /// Returns a callable class that can be used as follows: `instanceOfFFIngredient.copyWith(...)` or like so:`instanceOfFFIngredient.copyWith.fieldName(...)`.
+  // ignore: library_private_types_in_public_api
   _$FFIngredientCWProxy get copyWith => _$FFIngredientCWProxyImpl(this);
 }
 
@@ -491,6 +494,7 @@ class _$FFAlternativeCWProxyImpl implements _$FFAlternativeCWProxy {
 
 extension $FFAlternativeCopyWith on FFAlternative {
   /// Returns a callable class that can be used as follows: `instanceOfFFAlternative.copyWith(...)` or like so:`instanceOfFFAlternative.copyWith.fieldName(...)`.
+  // ignore: library_private_types_in_public_api
   _$FFAlternativeCWProxy get copyWith => _$FFAlternativeCWProxyImpl(this);
 }
 
@@ -573,6 +577,7 @@ class _$FFCookingTypeCWProxyImpl implements _$FFCookingTypeCWProxy {
 
 extension $FFCookingTypeCopyWith on FFCookingType {
   /// Returns a callable class that can be used as follows: `instanceOfFFCookingType.copyWith(...)` or like so:`instanceOfFFCookingType.copyWith.fieldName(...)`.
+  // ignore: library_private_types_in_public_api
   _$FFCookingTypeCWProxy get copyWith => _$FFCookingTypeCWProxyImpl(this);
 }
 
@@ -655,6 +660,7 @@ class _$FFFoodCWProxyImpl implements _$FFFoodCWProxy {
 
 extension $FFFoodCopyWith on FFFood {
   /// Returns a callable class that can be used as follows: `instanceOfFFFood.copyWith(...)` or like so:`instanceOfFFFood.copyWith.fieldName(...)`.
+  // ignore: library_private_types_in_public_api
   _$FFFoodCWProxy get copyWith => _$FFFoodCWProxyImpl(this);
 }
 
@@ -761,6 +767,7 @@ class _$FFFoodListsDefinitionCWProxyImpl
 
 extension $FFFoodListsDefinitionCopyWith on FFFoodListsDefinition {
   /// Returns a callable class that can be used as follows: `instanceOfFFFoodListsDefinition.copyWith(...)` or like so:`instanceOfFFFoodListsDefinition.copyWith.fieldName(...)`.
+  // ignore: library_private_types_in_public_api
   _$FFFoodListsDefinitionCWProxy get copyWith =>
       _$FFFoodListsDefinitionCWProxyImpl(this);
 }
@@ -877,6 +884,7 @@ class _$FFFoodlistCWProxyImpl implements _$FFFoodlistCWProxy {
 
 extension $FFFoodlistCopyWith on FFFoodlist {
   /// Returns a callable class that can be used as follows: `instanceOfFFFoodlist.copyWith(...)` or like so:`instanceOfFFFoodlist.copyWith.fieldName(...)`.
+  // ignore: library_private_types_in_public_api
   _$FFFoodlistCWProxy get copyWith => _$FFFoodlistCWProxyImpl(this);
 }
 
@@ -1132,6 +1140,7 @@ class _$FFFoodDetailCWProxyImpl implements _$FFFoodDetailCWProxy {
 
 extension $FFFoodDetailCopyWith on FFFoodDetail {
   /// Returns a callable class that can be used as follows: `instanceOfFFFoodDetail.copyWith(...)` or like so:`instanceOfFFFoodDetail.copyWith.fieldName(...)`.
+  // ignore: library_private_types_in_public_api
   _$FFFoodDetailCWProxy get copyWith => _$FFFoodDetailCWProxyImpl(this);
 }
 
@@ -1203,6 +1212,7 @@ class _$FFTranslationCWProxyImpl implements _$FFTranslationCWProxy {
 
 extension $FFTranslationCopyWith on FFTranslation {
   /// Returns a callable class that can be used as follows: `instanceOfFFTranslation.copyWith(...)` or like so:`instanceOfFFTranslation.copyWith.fieldName(...)`.
+  // ignore: library_private_types_in_public_api
   _$FFTranslationCWProxy get copyWith => _$FFTranslationCWProxyImpl(this);
 }
 
@@ -1212,6 +1222,8 @@ abstract class _$FFOrderCWProxy {
   FFOrder details(List<FFDetail> details);
 
   FFOrder exitValue(int? exitValue);
+
+  FFOrder expDate(String? expDate);
 
   FFOrder id(String? id);
 
@@ -1259,6 +1271,7 @@ abstract class _$FFOrderCWProxy {
     FFDeliveryInfo? deliveryInfo,
     List<FFDetail>? details,
     int? exitValue,
+    String? expDate,
     String? id,
     DateTime? mustBeReadyOn,
     String? note,
@@ -1295,6 +1308,9 @@ class _$FFOrderCWProxyImpl implements _$FFOrderCWProxy {
 
   @override
   FFOrder exitValue(int? exitValue) => this(exitValue: exitValue);
+
+  @override
+  FFOrder expDate(String? expDate) => this(expDate: expDate);
 
   @override
   FFOrder id(String? id) => this(id: id);
@@ -1366,6 +1382,7 @@ class _$FFOrderCWProxyImpl implements _$FFOrderCWProxy {
     Object? deliveryInfo = const $CopyWithPlaceholder(),
     Object? details = const $CopyWithPlaceholder(),
     Object? exitValue = const $CopyWithPlaceholder(),
+    Object? expDate = const $CopyWithPlaceholder(),
     Object? id = const $CopyWithPlaceholder(),
     Object? mustBeReadyOn = const $CopyWithPlaceholder(),
     Object? note = const $CopyWithPlaceholder(),
@@ -1398,6 +1415,10 @@ class _$FFOrderCWProxyImpl implements _$FFOrderCWProxy {
           ? _value.exitValue
           // ignore: cast_nullable_to_non_nullable
           : exitValue as int?,
+      expDate: expDate == const $CopyWithPlaceholder()
+          ? _value.expDate
+          // ignore: cast_nullable_to_non_nullable
+          : expDate as String?,
       id: id == const $CopyWithPlaceholder()
           ? _value.id
           // ignore: cast_nullable_to_non_nullable
@@ -1480,6 +1501,7 @@ class _$FFOrderCWProxyImpl implements _$FFOrderCWProxy {
 
 extension $FFOrderCopyWith on FFOrder {
   /// Returns a callable class that can be used as follows: `instanceOfFFOrder.copyWith(...)` or like so:`instanceOfFFOrder.copyWith.fieldName(...)`.
+  // ignore: library_private_types_in_public_api
   _$FFOrderCWProxy get copyWith => _$FFOrderCWProxyImpl(this);
 }
 
@@ -1697,6 +1719,7 @@ class _$FFDeliveryInfoCWProxyImpl implements _$FFDeliveryInfoCWProxy {
 
 extension $FFDeliveryInfoCopyWith on FFDeliveryInfo {
   /// Returns a callable class that can be used as follows: `instanceOfFFDeliveryInfo.copyWith(...)` or like so:`instanceOfFFDeliveryInfo.copyWith.fieldName(...)`.
+  // ignore: library_private_types_in_public_api
   _$FFDeliveryInfoCWProxy get copyWith => _$FFDeliveryInfoCWProxyImpl(this);
 }
 
@@ -1937,6 +1960,7 @@ class _$FFDetailCWProxyImpl implements _$FFDetailCWProxy {
 
 extension $FFDetailCopyWith on FFDetail {
   /// Returns a callable class that can be used as follows: `instanceOfFFDetail.copyWith(...)` or like so:`instanceOfFFDetail.copyWith.fieldName(...)`.
+  // ignore: library_private_types_in_public_api
   _$FFDetailCWProxy get copyWith => _$FFDetailCWProxyImpl(this);
 }
 
@@ -2030,6 +2054,7 @@ class _$FFVariationCWProxyImpl implements _$FFVariationCWProxy {
 
 extension $FFVariationCopyWith on FFVariation {
   /// Returns a callable class that can be used as follows: `instanceOfFFVariation.copyWith(...)` or like so:`instanceOfFFVariation.copyWith.fieldName(...)`.
+  // ignore: library_private_types_in_public_api
   _$FFVariationCWProxy get copyWith => _$FFVariationCWProxyImpl(this);
 }
 
@@ -2089,6 +2114,7 @@ class _$SingleFoodDetailCWProxyImpl implements _$SingleFoodDetailCWProxy {
 
 extension $SingleFoodDetailCopyWith on SingleFoodDetail {
   /// Returns a callable class that can be used as follows: `instanceOfSingleFoodDetail.copyWith(...)` or like so:`instanceOfSingleFoodDetail.copyWith.fieldName(...)`.
+  // ignore: library_private_types_in_public_api
   _$SingleFoodDetailCWProxy get copyWith => _$SingleFoodDetailCWProxyImpl(this);
 }
 
@@ -2454,6 +2480,7 @@ FFOrder _$FFOrderFromJson(Map<String, dynamic> json) => FFOrder(
       seatNumber: json['seatNumber'] as String?,
       note: json['note'] as String?,
       paymentType: json['paymentType'] as int? ?? 1,
+      expDate: json['expDate'] as String?,
     );
 
 Map<String, dynamic> _$FFOrderToJson(FFOrder instance) {
@@ -2486,6 +2513,7 @@ Map<String, dynamic> _$FFOrderToJson(FFOrder instance) {
   writeNotNull('seatNumber', instance.seatNumber);
   writeNotNull('note', instance.note);
   val['paymentType'] = instance.paymentType;
+  writeNotNull('expDate', instance.expDate);
   return val;
 }
 
