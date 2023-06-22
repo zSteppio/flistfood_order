@@ -671,6 +671,7 @@ class FlistFoodOrder extends ChangeNotifier {
     required String? token,
     required double? deliveryCost,
     required String? deliveryAddress,
+    required bool isAnonymous,
   }) async {
     FFOrder? order = await getCurrentOrder(currentServicePoint: currentServicePoint);
 
@@ -701,7 +702,7 @@ class FlistFoodOrder extends ChangeNotifier {
 
       order.mustBeReadyOn = mustBeReadyOn.toUtc();
 
-      if (order.userId != null) {
+      if (!isAnonymous) {
         await Dio().post('https://flistfood-webapi-orders.azurewebsites.net/api/v4/orders',
             data: (jsonEncode(order)),
             queryParameters: {'confirm': true},
