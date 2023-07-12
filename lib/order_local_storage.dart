@@ -17,16 +17,9 @@ Future<void> checkAllOrders() async {
 
   if (orderRaw != null) {
     var orderMap = jsonDecode(orderRaw);
-    List<FFOrder> orders = List<FFOrder>.from(orderMap.map((e) => FFOrder.fromJson(e))).toList();
+    var orders = List<FFOrder>.from(orderMap.map((e) => FFOrder.fromJson(e))).toList();
 
-    for (var element in orders) {
-      if (element.expDate != null) {
-        DateTime expDate = DateTime.parse(element.expDate!);
-        if (expDate.isBefore(DateTime.now())) {
-          orders.remove(element);
-        }
-      }
-    }
+    orders.removeWhere((e) => DateTime.parse(e.expDate!).isBefore(DateTime.now()));
 
     await prefs.setString('orders', jsonEncode(orders));
   }
