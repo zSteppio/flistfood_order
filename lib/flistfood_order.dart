@@ -660,6 +660,7 @@ class FlistFoodOrder extends ChangeNotifier {
   }
 
   Future<bool> sendOrder({
+    required String? orderId,
     required String currentServicePoint,
     required String phoneNumber,
     required String? seatNumber,
@@ -687,6 +688,7 @@ class FlistFoodOrder extends ChangeNotifier {
     try {
       order.note = note;
       order.seatNumber = seatNumber;
+      order.id = orderId;
 
       order.paymentType = paymentMethod + 1;
       order.ownerName = null;
