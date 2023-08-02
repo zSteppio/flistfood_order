@@ -681,11 +681,14 @@ class FlistFoodOrder extends ChangeNotifier {
 
     var currentTime = DateTime.now();
 
+    //TODO enum PaymentMethodsEnum { cash, pos, inApp }
+    final bool confirmed = paymentMethod == 2 ? false : true;
+
     try {
       order.note = note;
       order.seatNumber = seatNumber;
 
-      order.paymentType = paymentMethod;
+      order.paymentType = paymentMethod + 1;
       order.ownerName = null;
       FFDeliveryInfo deliveryInfo = FFDeliveryInfo(
         paymentType: paymentMethod,
@@ -705,7 +708,7 @@ class FlistFoodOrder extends ChangeNotifier {
       if (!isAnonymous) {
         await Dio().post('https://flistfood-webapi-orders.azurewebsites.net/api/v4/orders',
             data: (jsonEncode(order)),
-            queryParameters: {'confirm': true},
+            queryParameters: {'confirm': confirmed},
             options: token != null
                 ? Options(headers: {
                     'Authorization': token,
@@ -716,7 +719,7 @@ class FlistFoodOrder extends ChangeNotifier {
         await Dio().post(
             'https://flistfood-webapi-orders.azurewebsites.net/api/v4/orders/anonymous',
             data: (jsonEncode(order)),
-            queryParameters: {'confirm': true});
+            queryParameters: {'confirm': confirmed});
         notifyListeners();
       }
     } catch (e) {
@@ -729,7 +732,7 @@ class FlistFoodOrder extends ChangeNotifier {
         return false;
       }
       log((jsonEncode(order)), name: 'Body ordine');
-      log('https://flistfood-webapi-orders.azurewebsites.net/api/v4/orders?confirm=true',
+      log('https://flistfood-webapi-orders.azurewebsites.net/api/v4/orders?confirm=$confirmed',
           name: 'Url ordine');
       notifyListeners();
       return false;

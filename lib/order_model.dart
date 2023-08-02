@@ -179,3 +179,5 @@ class SingleFoodDetail {
   factory SingleFoodDetail.fromJson(Map<String, dynamic> json) => _$SingleFoodDetailFromJson(json);
   Map<String, dynamic> toJson() => _$SingleFoodDetailToJson(this);
 }
+
+enum FFPaymentMethodsEnum { cash, pos, inApp }
