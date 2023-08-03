@@ -740,9 +740,11 @@ class FlistFoodOrder extends ChangeNotifier {
       return false;
     }
 
-    deleteOrderByServicePointId(currentServicePoint);
+    if (paymentMethod != 2) {
+      deleteOrderByServicePointId(currentServicePoint);
 
-    notifyListeners();
+      notifyListeners();
+    }
     return true;
   }
 }
