@@ -682,6 +682,8 @@ class FlistFoodOrder extends ChangeNotifier {
 
     var currentTime = DateTime.now();
 
+    log(paymentMethod.toString(), name: 'Metodo di pagamamento');
+
     //TODO enum PaymentMethodsEnum { cash, pos, inApp }
     final bool confirmed = paymentMethod == 2 ? false : true;
 
@@ -708,6 +710,7 @@ class FlistFoodOrder extends ChangeNotifier {
       order.mustBeReadyOn = mustBeReadyOn.toUtc();
 
       if (!isAnonymous) {
+        log(confirmed.toString(), name: 'Invio ordine');
         await Dio().post('https://flistfood-webapi-orders.azurewebsites.net/api/v4/orders',
             data: (jsonEncode(order)),
             queryParameters: {'confirm': confirmed},
