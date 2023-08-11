@@ -741,6 +741,7 @@ class FlistFoodOrder extends ChangeNotifier {
     }
 
     if (paymentMethod != 2) {
+      log('Elimino ordine $paymentMethod', name: 'After order');
       deleteOrderByServicePointId(currentServicePoint);
 
       notifyListeners();
