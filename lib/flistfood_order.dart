@@ -684,15 +684,15 @@ class FlistFoodOrder extends ChangeNotifier {
 
     log(paymentMethod.toString(), name: 'Metodo di pagamamento');
 
-    //TODO enum PaymentMethodsEnum { cash, pos, inApp }
-    final bool confirmed = paymentMethod == 2 ? false : true;
+    //TODO enum PaymentMethodsEnum { null, cash, pos, inApp }
+    final bool confirmed = paymentMethod == 3 ? false : true;
 
     try {
       order.note = note;
       order.seatNumber = seatNumber;
       order.id = orderId;
 
-      order.paymentType = paymentMethod + 1;
+      order.paymentType = paymentMethod;
       order.ownerName = null;
       FFDeliveryInfo deliveryInfo = FFDeliveryInfo(
         paymentType: paymentMethod,
@@ -743,7 +743,7 @@ class FlistFoodOrder extends ChangeNotifier {
       return false;
     }
 
-    if (paymentMethod != 2) {
+    if (paymentMethod != 3) {
       log('Elimino ordine $paymentMethod', name: 'After order');
       deleteOrderByServicePointId(currentServicePoint);
 
