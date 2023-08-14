@@ -673,7 +673,12 @@ class FlistFoodOrder extends ChangeNotifier {
     required double? deliveryCost,
     required String? deliveryAddress,
     required bool isAnonymous,
+    bool useApiDev = false,
   }) async {
+    const String apiProd = 'https://flistfood-webapi-orders.azurewebsites.net/api/v4/';
+    const String apiDev = 'http://localhost:5004/api/v4/';
+    final String currentApi = useApiDev ? apiDev : apiProd;
+
     FFOrder? order = await getCurrentOrder(currentServicePoint: currentServicePoint);
 
     if (order == null) {
@@ -711,7 +716,7 @@ class FlistFoodOrder extends ChangeNotifier {
 
       if (!isAnonymous) {
         log(confirmed.toString(), name: 'Invio ordine');
-        await Dio().post('https://flistfood-webapi-orders.azurewebsites.net/api/v4/orders',
+        await Dio().post('${currentApi}orders',
             data: (jsonEncode(order)),
             queryParameters: {'confirm': confirmed},
             options: token != null
@@ -721,10 +726,8 @@ class FlistFoodOrder extends ChangeNotifier {
                 : null);
         notifyListeners();
       } else {
-        await Dio().post(
-            'https://flistfood-webapi-orders.azurewebsites.net/api/v4/orders/anonymous',
-            data: (jsonEncode(order)),
-            queryParameters: {'confirm': confirmed});
+        await Dio().post('${currentApi}orders/anonymous',
+            data: (jsonEncode(order)), queryParameters: {'confirm': confirmed});
         notifyListeners();
       }
     } catch (e) {
@@ -737,8 +740,7 @@ class FlistFoodOrder extends ChangeNotifier {
         return false;
       }
       log((jsonEncode(order)), name: 'Body ordine');
-      log('https://flistfood-webapi-orders.azurewebsites.net/api/v4/orders?confirm=$confirmed',
-          name: 'Url ordine');
+      log('${currentApi}orders?confirm=$confirmed', name: 'Url ordine');
       notifyListeners();
       return false;
     }
