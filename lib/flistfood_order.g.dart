@@ -1217,6 +1217,8 @@ extension $FFTranslationCopyWith on FFTranslation {
 }
 
 abstract class _$FFOrderCWProxy {
+  FFOrder code(String? code);
+
   FFOrder deliveryInfo(FFDeliveryInfo? deliveryInfo);
 
   FFOrder details(List<FFDetail> details);
@@ -1268,6 +1270,7 @@ abstract class _$FFOrderCWProxy {
   /// FFOrder(...).copyWith(id: 12, name: "My name")
   /// ````
   FFOrder call({
+    String? code,
     FFDeliveryInfo? deliveryInfo,
     List<FFDetail>? details,
     int? exitValue,
@@ -1298,6 +1301,9 @@ class _$FFOrderCWProxyImpl implements _$FFOrderCWProxy {
   final FFOrder _value;
 
   const _$FFOrderCWProxyImpl(this._value);
+
+  @override
+  FFOrder code(String? code) => this(code: code);
 
   @override
   FFOrder deliveryInfo(FFDeliveryInfo? deliveryInfo) =>
@@ -1379,6 +1385,7 @@ class _$FFOrderCWProxyImpl implements _$FFOrderCWProxy {
   /// FFOrder(...).copyWith(id: 12, name: "My name")
   /// ````
   FFOrder call({
+    Object? code = const $CopyWithPlaceholder(),
     Object? deliveryInfo = const $CopyWithPlaceholder(),
     Object? details = const $CopyWithPlaceholder(),
     Object? exitValue = const $CopyWithPlaceholder(),
@@ -1403,6 +1410,10 @@ class _$FFOrderCWProxyImpl implements _$FFOrderCWProxy {
     Object? userId = const $CopyWithPlaceholder(),
   }) {
     return FFOrder(
+      code: code == const $CopyWithPlaceholder()
+          ? _value.code
+          // ignore: cast_nullable_to_non_nullable
+          : code as String?,
       deliveryInfo: deliveryInfo == const $CopyWithPlaceholder()
           ? _value.deliveryInfo
           // ignore: cast_nullable_to_non_nullable
@@ -2481,6 +2492,7 @@ FFOrder _$FFOrderFromJson(Map<String, dynamic> json) => FFOrder(
       note: json['note'] as String?,
       paymentType: json['paymentType'] as int? ?? 1,
       expDate: json['expDate'] as String?,
+      code: json['code'] as String?,
     );
 
 Map<String, dynamic> _$FFOrderToJson(FFOrder instance) {
@@ -2514,6 +2526,7 @@ Map<String, dynamic> _$FFOrderToJson(FFOrder instance) {
   writeNotNull('note', instance.note);
   val['paymentType'] = instance.paymentType;
   writeNotNull('expDate', instance.expDate);
+  writeNotNull('code', instance.code);
   return val;
 }
 
