@@ -8,6 +8,7 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
 part 'product_model.dart';
 part 'order_model.dart';
 part 'flistfood_order.g.dart';
@@ -659,7 +660,7 @@ class FlistFoodOrder extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<bool> sendOrder({
+  Future<FFOrder?> sendOrder({
     required String? orderId,
     required String currentServicePoint,
     required String phoneNumber,
@@ -682,15 +683,14 @@ class FlistFoodOrder extends ChangeNotifier {
     FFOrder? order = await getCurrentOrder(currentServicePoint: currentServicePoint);
 
     if (order == null) {
-      return false;
+      return null;
     }
 
     var currentTime = DateTime.now();
 
-    log(paymentMethod.toString(), name: 'Metodo di pagamamento');
-
     //TODO enum PaymentMethodsEnum { null, cash, pos, inApp }
     final bool confirmed = paymentMethod == 3 ? false : true;
+    FFOrder? orderResponse;
 
     try {
       order.note = note;
@@ -715,8 +715,7 @@ class FlistFoodOrder extends ChangeNotifier {
       order.mustBeReadyOn = mustBeReadyOn.toUtc();
 
       if (!isAnonymous) {
-        log(confirmed.toString(), name: 'Invio ordine');
-        await Dio().post('${currentApi}orders',
+        final Response response = await Dio().post('${currentApi}orders',
             data: (jsonEncode(order)),
             queryParameters: {'confirm': confirmed},
             options: token != null
@@ -724,33 +723,55 @@ class FlistFoodOrder extends ChangeNotifier {
                     'Authorization': token,
                   })
                 : null);
+
+        orderResponse = FFOrder.fromJson(response.data);
+
+        _log('${currentApi}orders?confirm=$confirmed 200 OK', name: 'Create order');
+
         notifyListeners();
       } else {
-        await Dio().post('${currentApi}orders/anonymous',
+        final Response response = await Dio().post('${currentApi}orders/anonymous',
             data: (jsonEncode(order)), queryParameters: {'confirm': confirmed});
+
+        orderResponse = FFOrder.fromJson(response.data);
+
+        _log('${currentApi}orders/anonymous?confirm=$confirmed 200 OK',
+            name: 'Create order anonymous');
+
         notifyListeners();
       }
     } catch (e) {
       _apiError = true;
-      log(e.toString(), name: 'Invio ordine errore');
+      _logError(e.toString(), name: 'Invio ordine errore');
       if (e.toString().contains('401')) {
         _unauthenticated = true;
         _apiError = true;
         notifyListeners();
-        return false;
+        return null;
       }
-      log((jsonEncode(order)), name: 'Body ordine');
-      log('${currentApi}orders?confirm=$confirmed', name: 'Url ordine');
+      _logError((jsonEncode(order)), name: 'Body ordine');
       notifyListeners();
-      return false;
+      return null;
     }
 
     if (paymentMethod != 3) {
-      log('Elimino ordine $paymentMethod', name: 'After order');
+      _logInfo('Elimino ordine $paymentMethod', name: 'After order');
       deleteOrderByServicePointId(currentServicePoint);
 
       notifyListeners();
     }
-    return true;
+    return orderResponse;
+  }
+
+  void _log(String message, {String? name}) {
+    log('\x1B[32m$message\x1B[0m', name: name ?? 'Ordine');
+  }
+
+  void _logInfo(String message, {String? name}) {
+    log('\x1B[34m$message\x1B[0m', name: name ?? 'Ordine');
+  }
+
+  void _logError(String message, {String? name}) {
+    log('\x1B[31m$message\x1B[0m', name: name ?? 'Ordine');
   }
 }
