@@ -674,12 +674,8 @@ class FlistFoodOrder extends ChangeNotifier {
     required double? deliveryCost,
     required String? deliveryAddress,
     required bool isAnonymous,
-    bool useApiDev = false,
+    required String apiBaseUrl,
   }) async {
-    const String apiProd = 'https://flistfood-webapi-orders.azurewebsites.net/api/v4/';
-    const String apiDev = 'http://localhost:5004/api/v4/';
-    final String currentApi = useApiDev ? apiDev : apiProd;
-
     FFOrder? order = await getCurrentOrder(currentServicePoint: currentServicePoint);
 
     if (order == null) {
@@ -715,7 +711,7 @@ class FlistFoodOrder extends ChangeNotifier {
       order.mustBeReadyOn = mustBeReadyOn.toUtc();
 
       if (!isAnonymous) {
-        final Response response = await Dio().post('${currentApi}orders',
+        final Response response = await Dio().post('${apiBaseUrl}orders',
             data: (jsonEncode(order)),
             queryParameters: {'confirm': confirmed},
             options: token != null
@@ -726,16 +722,16 @@ class FlistFoodOrder extends ChangeNotifier {
 
         orderResponse = FFOrder.fromJson(response.data);
 
-        _log('${currentApi}orders?confirm=$confirmed 200 OK', name: 'Create order');
+        _log('${apiBaseUrl}orders?confirm=$confirmed 200 OK', name: 'Create order');
 
         notifyListeners();
       } else {
-        final Response response = await Dio().post('${currentApi}orders/anonymous',
+        final Response response = await Dio().post('${apiBaseUrl}orders/anonymous',
             data: (jsonEncode(order)), queryParameters: {'confirm': confirmed});
 
         orderResponse = FFOrder.fromJson(response.data);
 
-        _log('${currentApi}orders/anonymous?confirm=$confirmed 200 OK',
+        _log('${apiBaseUrl}orders/anonymous?confirm=$confirmed 200 OK',
             name: 'Create order anonymous');
 
         notifyListeners();
@@ -755,7 +751,7 @@ class FlistFoodOrder extends ChangeNotifier {
     }
 
     if (paymentMethod != 3) {
-      _logInfo('Elimino ordine $paymentMethod', name: 'After order');
+      _logInfo('Eliminazione ordine inviato', name: 'After order');
       deleteOrderByServicePointId(currentServicePoint);
 
       notifyListeners();
