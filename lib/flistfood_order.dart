@@ -711,7 +711,7 @@ class FlistFoodOrder extends ChangeNotifier {
       order.mustBeReadyOn = mustBeReadyOn.toUtc();
 
       if (!isAnonymous) {
-        final Response response = await Dio().post('${apiBaseUrl}orders',
+        final Response response = await Dio().post('${apiBaseUrl}v4/orders',
             data: (jsonEncode(order)),
             queryParameters: {'confirm': confirmed},
             options: token != null
@@ -722,16 +722,16 @@ class FlistFoodOrder extends ChangeNotifier {
 
         orderResponse = FFOrder.fromJson(response.data);
 
-        _log('${apiBaseUrl}orders?confirm=$confirmed 200 OK', name: 'Create order');
+        _log('${apiBaseUrl}v4/orders?confirm=$confirmed 200 OK', name: 'Create order');
 
         notifyListeners();
       } else {
-        final Response response = await Dio().post('${apiBaseUrl}orders/anonymous',
+        final Response response = await Dio().post('${apiBaseUrl}v4/orders/anonymous',
             data: (jsonEncode(order)), queryParameters: {'confirm': confirmed});
 
         orderResponse = FFOrder.fromJson(response.data);
 
-        _log('${apiBaseUrl}orders/anonymous?confirm=$confirmed 200 OK',
+        _log('${apiBaseUrl}v4/orders/anonymous?confirm=$confirmed 200 OK',
             name: 'Create order anonymous');
 
         notifyListeners();
