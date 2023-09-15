@@ -673,6 +673,8 @@ class FlistFoodOrder extends ChangeNotifier {
     required String? token,
     required double? deliveryCost,
     required String? deliveryAddress,
+    required double? deliveryLatitude,
+    required double? deliveryLongitude,
     required bool isAnonymous,
     required String apiBaseUrl,
   }) async {
@@ -701,6 +703,8 @@ class FlistFoodOrder extends ChangeNotifier {
         customerName: userName,
         supplementPrice: deliveryCost,
         deliveryAddress: deliveryAddress,
+        deliveryLatitude: deliveryLatitude,
+        deliveryLongitude: deliveryLongitude,
       );
 
       order.deliveryInfo = deliveryInfo;
