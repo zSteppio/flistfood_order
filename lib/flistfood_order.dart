@@ -715,6 +715,7 @@ class FlistFoodOrder extends ChangeNotifier {
       order.mustBeReadyOn = mustBeReadyOn.toUtc();
 
       if (!isAnonymous) {
+        log(jsonEncode(order), name: 'Body ordine');
         final Response response = await Dio().post('${apiBaseUrl}v4/orders',
             data: (jsonEncode(order)),
             queryParameters: {'confirm': confirmed},
@@ -730,6 +731,7 @@ class FlistFoodOrder extends ChangeNotifier {
 
         notifyListeners();
       } else {
+        log(jsonEncode(order), name: 'Body ordine');
         final Response response = await Dio().post('${apiBaseUrl}v4/orders/anonymous',
             data: (jsonEncode(order)), queryParameters: {'confirm': confirmed});
 
