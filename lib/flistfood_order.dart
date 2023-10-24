@@ -684,7 +684,7 @@ class FlistFoodOrder extends ChangeNotifier {
       return null;
     }
 
-    var currentTime = DateTime.now();
+    DateTime currentTime = DateTime.now();
 
     //TODO enum PaymentMethodsEnum { null, cash, pos, inApp }
     final bool confirmed = paymentMethod == 3 ? false : true;
@@ -709,10 +709,11 @@ class FlistFoodOrder extends ChangeNotifier {
 
       order.deliveryInfo = deliveryInfo;
 
-      var mustBeReadyOn =
-          DateTime(currentTime.year, currentTime.month, currentTime.day, hour, minute).toLocal();
+      DateTime mustBeReadyOn =
+          DateTime.utc(currentTime.year, currentTime.month, currentTime.day, hour, minute);
+      log(mustBeReadyOn.toString(), name: 'Must be ready on');
 
-      order.mustBeReadyOn = mustBeReadyOn.toUtc();
+      order.mustBeReadyOn = mustBeReadyOn;
 
       if (!isAnonymous) {
         log(jsonEncode(order), name: 'Body ordine');
