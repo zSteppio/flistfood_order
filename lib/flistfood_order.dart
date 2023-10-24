@@ -710,7 +710,9 @@ class FlistFoodOrder extends ChangeNotifier {
       order.deliveryInfo = deliveryInfo;
 
       DateTime mustBeReadyOn =
-          DateTime.utc(currentTime.year, currentTime.month, currentTime.day, hour, minute);
+          DateTime(currentTime.year, currentTime.month, currentTime.day, hour, minute)
+              .toLocal()
+              .toUtc();
       log(mustBeReadyOn.toString(), name: 'Must be ready on');
 
       order.mustBeReadyOn = mustBeReadyOn;
