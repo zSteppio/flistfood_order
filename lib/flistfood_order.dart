@@ -665,8 +665,8 @@ class FlistFoodOrder extends ChangeNotifier {
     required String currentServicePoint,
     required String phoneNumber,
     required String? seatNumber,
-    required int hour,
-    required int minute,
+    required int? hour,
+    required int? minute,
     required String note,
     required int paymentMethod,
     required String userName,
@@ -708,11 +708,13 @@ class FlistFoodOrder extends ChangeNotifier {
       );
 
       order.deliveryInfo = deliveryInfo;
+      DateTime? mustBeReadyOn;
 
-      DateTime mustBeReadyOn =
-          DateTime(currentTime.year, currentTime.month, currentTime.day, hour, minute)
-              .toLocal()
-              .toUtc();
+      if (hour != null && minute != null) {
+        mustBeReadyOn = DateTime(currentTime.year, currentTime.month, currentTime.day, hour, minute)
+            .toLocal()
+            .toUtc();
+      }
       log(mustBeReadyOn.toString(), name: 'Must be ready on');
 
       order.mustBeReadyOn = mustBeReadyOn;
