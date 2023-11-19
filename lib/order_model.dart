@@ -27,6 +27,7 @@ class FFOrder {
     this.paymentType = 1,
     this.expDate,
     this.code,
+    this.isLoading = false,
   });
 
   String? id;
@@ -52,6 +53,7 @@ class FFOrder {
   int paymentType;
   String? expDate;
   String? code;
+  bool isLoading;
 
   factory FFOrder.fromJson(Map<String, dynamic> json) => _$FFOrderFromJson(json);
   Map<String, dynamic> toJson() => _$FFOrderToJson(this);
