@@ -685,6 +685,7 @@ class FlistFoodOrder extends ChangeNotifier {
     }
 
     order.isLoading = true;
+    notifyListeners();
 
     DateTime currentTime = DateTime.now();
 
