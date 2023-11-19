@@ -684,9 +684,6 @@ class FlistFoodOrder extends ChangeNotifier {
       return null;
     }
 
-    order.isLoading = true;
-    notifyListeners();
-
     DateTime currentTime = DateTime.now();
 
     //TODO enum PaymentMethodsEnum { null, cash, pos, inApp }
@@ -736,7 +733,6 @@ class FlistFoodOrder extends ChangeNotifier {
         orderResponse = FFOrder.fromJson(response.data);
 
         _log('${apiBaseUrl}v4/orders?confirm=$confirmed 200 OK', name: 'Create order');
-        order.isLoading = false;
 
         notifyListeners();
       } else {
@@ -748,8 +744,6 @@ class FlistFoodOrder extends ChangeNotifier {
 
         _log('${apiBaseUrl}v4/orders/anonymous?confirm=$confirmed 200 OK',
             name: 'Create order anonymous');
-
-        order.isLoading = false;
 
         notifyListeners();
       }
@@ -763,7 +757,7 @@ class FlistFoodOrder extends ChangeNotifier {
         return null;
       }
       _logError((jsonEncode(order)), name: 'Body ordine');
-      order.isLoading = false;
+
       notifyListeners();
       return null;
     }
@@ -771,7 +765,6 @@ class FlistFoodOrder extends ChangeNotifier {
     if (paymentMethod != 3) {
       _logInfo('Eliminazione ordine inviato', name: 'After order');
       deleteOrderByServicePointId(currentServicePoint);
-      order.isLoading = false;
 
       notifyListeners();
     }

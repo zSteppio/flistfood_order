@@ -1229,8 +1229,6 @@ abstract class _$FFOrderCWProxy {
 
   FFOrder id(String? id);
 
-  FFOrder isLoading(bool isLoading);
-
   FFOrder mustBeReadyOn(DateTime? mustBeReadyOn);
 
   FFOrder note(String? note);
@@ -1278,7 +1276,6 @@ abstract class _$FFOrderCWProxy {
     int? exitValue,
     String? expDate,
     String? id,
-    bool? isLoading,
     DateTime? mustBeReadyOn,
     String? note,
     int? number,
@@ -1323,9 +1320,6 @@ class _$FFOrderCWProxyImpl implements _$FFOrderCWProxy {
 
   @override
   FFOrder id(String? id) => this(id: id);
-
-  @override
-  FFOrder isLoading(bool isLoading) => this(isLoading: isLoading);
 
   @override
   FFOrder mustBeReadyOn(DateTime? mustBeReadyOn) =>
@@ -1397,7 +1391,6 @@ class _$FFOrderCWProxyImpl implements _$FFOrderCWProxy {
     Object? exitValue = const $CopyWithPlaceholder(),
     Object? expDate = const $CopyWithPlaceholder(),
     Object? id = const $CopyWithPlaceholder(),
-    Object? isLoading = const $CopyWithPlaceholder(),
     Object? mustBeReadyOn = const $CopyWithPlaceholder(),
     Object? note = const $CopyWithPlaceholder(),
     Object? number = const $CopyWithPlaceholder(),
@@ -1441,10 +1434,6 @@ class _$FFOrderCWProxyImpl implements _$FFOrderCWProxy {
           ? _value.id
           // ignore: cast_nullable_to_non_nullable
           : id as String?,
-      isLoading: isLoading == const $CopyWithPlaceholder() || isLoading == null
-          ? _value.isLoading
-          // ignore: cast_nullable_to_non_nullable
-          : isLoading as bool,
       mustBeReadyOn: mustBeReadyOn == const $CopyWithPlaceholder()
           ? _value.mustBeReadyOn
           // ignore: cast_nullable_to_non_nullable
@@ -2504,7 +2493,6 @@ FFOrder _$FFOrderFromJson(Map<String, dynamic> json) => FFOrder(
       paymentType: json['paymentType'] as int? ?? 1,
       expDate: json['expDate'] as String?,
       code: json['code'] as String?,
-      isLoading: json['isLoading'] as bool? ?? false,
     );
 
 Map<String, dynamic> _$FFOrderToJson(FFOrder instance) {
@@ -2539,7 +2527,6 @@ Map<String, dynamic> _$FFOrderToJson(FFOrder instance) {
   val['paymentType'] = instance.paymentType;
   writeNotNull('expDate', instance.expDate);
   writeNotNull('code', instance.code);
-  val['isLoading'] = instance.isLoading;
   return val;
 }
 
