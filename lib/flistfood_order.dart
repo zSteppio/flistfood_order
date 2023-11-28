@@ -677,6 +677,7 @@ class FlistFoodOrder extends ChangeNotifier {
     required double? deliveryLongitude,
     required bool isAnonymous,
     required String apiBaseUrl,
+    required bool isDelivery,
   }) async {
     FFOrder? order = await getCurrentOrder(currentServicePoint: currentServicePoint);
 
@@ -697,15 +698,17 @@ class FlistFoodOrder extends ChangeNotifier {
 
       order.paymentType = paymentMethod;
       order.ownerName = null;
-      FFDeliveryInfo deliveryInfo = FFDeliveryInfo(
-        paymentType: paymentMethod,
-        phoneNumber: phoneNumber,
-        customerName: userName,
-        supplementPrice: deliveryCost,
-        deliveryAddress: deliveryAddress,
-        deliveryLatitude: deliveryLatitude,
-        deliveryLongitude: deliveryLongitude,
-      );
+      FFDeliveryInfo? deliveryInfo = isDelivery
+          ? FFDeliveryInfo(
+              paymentType: paymentMethod,
+              phoneNumber: phoneNumber,
+              customerName: userName,
+              supplementPrice: deliveryCost,
+              deliveryAddress: deliveryAddress,
+              deliveryLatitude: deliveryLatitude,
+              deliveryLongitude: deliveryLongitude,
+            )
+          : null;
 
       order.deliveryInfo = deliveryInfo;
       DateTime? mustBeReadyOn;
