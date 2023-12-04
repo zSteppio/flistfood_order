@@ -394,7 +394,11 @@ class FlistFoodOrder extends ChangeNotifier {
       for (FFIngredient ingredient in product?.ingredients ?? []) {
         if (ingredient.isMainIngredient && !ingredient.selected) {
           variations.add(FFVariation(
-              foodId: ingredient.foodId, price: 0, foodName: ingredient.food, variationType: -1));
+            foodId: ingredient.foodId,
+            price: 0,
+            foodName: ingredient.food,
+            variationType: -1,
+          ));
         } else if (!ingredient.isMainIngredient && ingredient.selected) {
           variations.add(FFVariation(
             foodId: ingredient.foodId,
