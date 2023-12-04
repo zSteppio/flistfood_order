@@ -58,7 +58,6 @@ class FFIngredient {
   bool selected;
   double variationPrice;
   String? variationGroup;
-  int? variationType;
   bool canRemove;
   bool canDouble;
   bool canTriple;
@@ -71,7 +70,6 @@ class FFIngredient {
     this.selected = false,
     required this.variationPrice,
     this.variationGroup,
-    this.variationType,
     required this.canRemove,
     required this.canDouble,
     required this.canTriple,
