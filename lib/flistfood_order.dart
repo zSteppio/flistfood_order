@@ -174,6 +174,40 @@ class FlistFoodVariation extends ChangeNotifier {
     }
   }
 
+  void addIngredient({required FFIngredient ingredient}) {
+    FFIngredient selectedIngridient =
+        _product.ingredients!.firstWhere((e) => e.foodId == ingredient.foodId);
+
+    if (selectedIngridient.selected) {
+      if (selectedIngridient.canDouble && selectedIngridient.variationType == null) {
+        selectedIngridient.variationType = 2;
+        _product.newPrice += selectedIngridient.variationPrice;
+      } else if (selectedIngridient.canTriple && selectedIngridient.variationType == 2) {
+        selectedIngridient.variationType = 3;
+        _product.newPrice += selectedIngridient.variationPrice;
+      }
+    }
+
+    notifyListeners();
+  }
+
+  void removeIngredient({required FFIngredient ingredient}) {
+    FFIngredient selectedIngridient =
+        _product.ingredients!.firstWhere((e) => e.foodId == ingredient.foodId);
+
+    if (selectedIngridient.selected) {
+      if (selectedIngridient.canTriple && selectedIngridient.variationType == 3) {
+        selectedIngridient.variationType = 2;
+        _product.newPrice -= selectedIngridient.variationPrice;
+      } else if (selectedIngridient.canDouble && selectedIngridient.variationType == 2) {
+        selectedIngridient.variationType = null;
+        _product.newPrice -= selectedIngridient.variationPrice;
+      }
+    }
+
+    notifyListeners();
+  }
+
   void setFoodList({required int foodId, required FFFoodlist foodList, required bool selected}) {
     FFFoodListsDefinition foodListsDefinitionSelected =
         _product.foodListsDefinition!.firstWhere((e) => e.foodListId == foodList.id);
