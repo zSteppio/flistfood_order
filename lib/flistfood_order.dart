@@ -679,21 +679,6 @@ class FlistFoodOrder extends ChangeNotifier {
 
       order.paymentType = paymentMethod;
       order.ownerName = null;
-      /* FFDeliveryInfo? deliveryInfo = isDelivery
-          ? FFDeliveryInfo(
-              paymentType: paymentMethod,
-              phoneNumber: phoneNumber,
-              customerName: userName,
-              supplementPrice: deliveryCost,
-              deliveryAddress: deliveryAddress,
-              deliveryLatitude: deliveryLatitude,
-              deliveryLongitude: deliveryLongitude,
-              zoneId: zoneID,
-            )
-          : null; */
-      if (deliveryInfo != null) {
-        deliveryInfo.paymentType = paymentMethod;
-      }
 
       order.deliveryInfo = deliveryInfo;
       DateTime? mustBeReadyOn;
