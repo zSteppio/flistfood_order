@@ -333,11 +333,6 @@ class FlistFoodOrder extends ChangeNotifier {
     FFProduct? product;
     FFDetail? detailProduct;
     FFFormat? formatProduct;
-    int serviceType = 2;
-
-    if (deliveryCost != null) {
-      serviceType = 3;
-    }
 
     if (productJson != null) {
       product = FFProduct.fromJson(jsonDecode(productJson));
@@ -479,10 +474,8 @@ class FlistFoodOrder extends ChangeNotifier {
 
       _order = FFOrder(
         servicePointId: currentServicePoint,
-        serviceType: serviceType,
         details: _order!.details,
         source: 'A',
-        paymentStatus: 0,
         userId: userId,
         ownerId: ownerId,
         ownerName: ownerName,
@@ -516,9 +509,7 @@ class FlistFoodOrder extends ChangeNotifier {
 
       _order = FFOrder(
         servicePointId: currentServicePoint,
-        serviceType: serviceType,
         source: 'A',
-        paymentStatus: 0,
         details: orderProducts,
         userId: userId,
         ownerId: ownerId,
@@ -558,11 +549,6 @@ class FlistFoodOrder extends ChangeNotifier {
   }) async {
     FFProduct? product;
     FFDetail? detailProduct;
-    int serviceType = 2;
-
-    if (deliveryCost != null) {
-      serviceType = 3;
-    }
 
     if (productJson != null) {
       product = FFProduct.fromJson(jsonDecode(productJson));
@@ -610,9 +596,7 @@ class FlistFoodOrder extends ChangeNotifier {
 
       _order = FFOrder(
         servicePointId: currentServicePoint,
-        serviceType: serviceType,
         source: 'A',
-        paymentStatus: 0,
         details: _order!.details,
         userId: userId,
         ownerId: ownerId,

@@ -21,21 +21,19 @@ abstract class _$FFOrderCWProxy {
 
   FFOrder note(String? note);
 
+  FFOrder number(int number);
+
   FFOrder openDate(DateTime? openDate);
 
   FFOrder ownerId(String ownerId);
 
   FFOrder ownerName(String? ownerName);
 
-  FFOrder paymentStatus(int paymentStatus);
-
   FFOrder paymentType(int paymentType);
 
   FFOrder seatNumber(String? seatNumber);
 
   FFOrder servicePointId(String servicePointId);
-
-  FFOrder serviceType(int serviceType);
 
   FFOrder source(String? source);
 
@@ -59,14 +57,13 @@ abstract class _$FFOrderCWProxy {
     String? id,
     DateTime? mustBeReadyOn,
     String? note,
+    int? number,
     DateTime? openDate,
     String? ownerId,
     String? ownerName,
-    int? paymentStatus,
     int? paymentType,
     String? seatNumber,
     String? servicePointId,
-    int? serviceType,
     String? source,
     String? ticketId,
     double? totalPrice,
@@ -104,6 +101,9 @@ class _$FFOrderCWProxyImpl implements _$FFOrderCWProxy {
   FFOrder note(String? note) => this(note: note);
 
   @override
+  FFOrder number(int number) => this(number: number);
+
+  @override
   FFOrder openDate(DateTime? openDate) => this(openDate: openDate);
 
   @override
@@ -111,10 +111,6 @@ class _$FFOrderCWProxyImpl implements _$FFOrderCWProxy {
 
   @override
   FFOrder ownerName(String? ownerName) => this(ownerName: ownerName);
-
-  @override
-  FFOrder paymentStatus(int paymentStatus) =>
-      this(paymentStatus: paymentStatus);
 
   @override
   FFOrder paymentType(int paymentType) => this(paymentType: paymentType);
@@ -125,9 +121,6 @@ class _$FFOrderCWProxyImpl implements _$FFOrderCWProxy {
   @override
   FFOrder servicePointId(String servicePointId) =>
       this(servicePointId: servicePointId);
-
-  @override
-  FFOrder serviceType(int serviceType) => this(serviceType: serviceType);
 
   @override
   FFOrder source(String? source) => this(source: source);
@@ -157,14 +150,13 @@ class _$FFOrderCWProxyImpl implements _$FFOrderCWProxy {
     Object? id = const $CopyWithPlaceholder(),
     Object? mustBeReadyOn = const $CopyWithPlaceholder(),
     Object? note = const $CopyWithPlaceholder(),
+    Object? number = const $CopyWithPlaceholder(),
     Object? openDate = const $CopyWithPlaceholder(),
     Object? ownerId = const $CopyWithPlaceholder(),
     Object? ownerName = const $CopyWithPlaceholder(),
-    Object? paymentStatus = const $CopyWithPlaceholder(),
     Object? paymentType = const $CopyWithPlaceholder(),
     Object? seatNumber = const $CopyWithPlaceholder(),
     Object? servicePointId = const $CopyWithPlaceholder(),
-    Object? serviceType = const $CopyWithPlaceholder(),
     Object? source = const $CopyWithPlaceholder(),
     Object? ticketId = const $CopyWithPlaceholder(),
     Object? totalPrice = const $CopyWithPlaceholder(),
@@ -199,6 +191,10 @@ class _$FFOrderCWProxyImpl implements _$FFOrderCWProxy {
           ? _value.note
           // ignore: cast_nullable_to_non_nullable
           : note as String?,
+      number: number == const $CopyWithPlaceholder() || number == null
+          ? _value.number
+          // ignore: cast_nullable_to_non_nullable
+          : number as int,
       openDate: openDate == const $CopyWithPlaceholder()
           ? _value.openDate
           // ignore: cast_nullable_to_non_nullable
@@ -211,11 +207,6 @@ class _$FFOrderCWProxyImpl implements _$FFOrderCWProxy {
           ? _value.ownerName
           // ignore: cast_nullable_to_non_nullable
           : ownerName as String?,
-      paymentStatus:
-          paymentStatus == const $CopyWithPlaceholder() || paymentStatus == null
-              ? _value.paymentStatus
-              // ignore: cast_nullable_to_non_nullable
-              : paymentStatus as int,
       paymentType:
           paymentType == const $CopyWithPlaceholder() || paymentType == null
               ? _value.paymentType
@@ -230,11 +221,6 @@ class _$FFOrderCWProxyImpl implements _$FFOrderCWProxy {
           ? _value.servicePointId
           // ignore: cast_nullable_to_non_nullable
           : servicePointId as String,
-      serviceType:
-          serviceType == const $CopyWithPlaceholder() || serviceType == null
-              ? _value.serviceType
-              // ignore: cast_nullable_to_non_nullable
-              : serviceType as int,
       source: source == const $CopyWithPlaceholder()
           ? _value.source
           // ignore: cast_nullable_to_non_nullable
@@ -272,6 +258,8 @@ abstract class _$FFDetailCWProxy {
 
   FFDetail format(String? format);
 
+  FFDetail id(String? id);
+
   FFDetail menuId(String? menuId);
 
   FFDetail productId(int productId);
@@ -300,6 +288,7 @@ abstract class _$FFDetailCWProxy {
     int? discount,
     int? exitValue,
     String? format,
+    String? id,
     String? menuId,
     int? productId,
     String? productName,
@@ -332,6 +321,9 @@ class _$FFDetailCWProxyImpl implements _$FFDetailCWProxy {
 
   @override
   FFDetail format(String? format) => this(format: format);
+
+  @override
+  FFDetail id(String? id) => this(id: id);
 
   @override
   FFDetail menuId(String? menuId) => this(menuId: menuId);
@@ -372,6 +364,7 @@ class _$FFDetailCWProxyImpl implements _$FFDetailCWProxy {
     Object? discount = const $CopyWithPlaceholder(),
     Object? exitValue = const $CopyWithPlaceholder(),
     Object? format = const $CopyWithPlaceholder(),
+    Object? id = const $CopyWithPlaceholder(),
     Object? menuId = const $CopyWithPlaceholder(),
     Object? productId = const $CopyWithPlaceholder(),
     Object? productName = const $CopyWithPlaceholder(),
@@ -402,6 +395,10 @@ class _$FFDetailCWProxyImpl implements _$FFDetailCWProxy {
           ? _value.format
           // ignore: cast_nullable_to_non_nullable
           : format as String?,
+      id: id == const $CopyWithPlaceholder()
+          ? _value.id
+          // ignore: cast_nullable_to_non_nullable
+          : id as String?,
       menuId: menuId == const $CopyWithPlaceholder()
           ? _value.menuId
           // ignore: cast_nullable_to_non_nullable
@@ -1981,13 +1978,12 @@ FFOrder _$FFOrderFromJson(Map<String, dynamic> json) => FFOrder(
       seatNumber: json['seatNumber'] as String?,
       note: json['note'] as String?,
       totalPrice: (json['totalPrice'] as num?)?.toDouble(),
-      serviceType: json['serviceType'] as int? ?? 0,
       openDate: json['openDate'] == null
           ? null
           : DateTime.parse(json['openDate'] as String),
       ownerName: json['ownerName'] as String?,
       expDate: json['expDate'] as String?,
-      paymentStatus: json['paymentStatus'] as int? ?? 0,
+      number: json['number'] as int? ?? 0,
     );
 
 Map<String, dynamic> _$FFOrderToJson(FFOrder instance) {
@@ -2013,11 +2009,10 @@ Map<String, dynamic> _$FFOrderToJson(FFOrder instance) {
   writeNotNull('seatNumber', instance.seatNumber);
   writeNotNull('note', instance.note);
   writeNotNull('totalPrice', instance.totalPrice);
-  val['serviceType'] = instance.serviceType;
+  val['number'] = instance.number;
   writeNotNull('openDate', instance.openDate?.toIso8601String());
   writeNotNull('ownerName', instance.ownerName);
   writeNotNull('expDate', instance.expDate);
-  val['paymentStatus'] = instance.paymentStatus;
   return val;
 }
 
@@ -2038,6 +2033,7 @@ FFDetail _$FFDetailFromJson(Map<String, dynamic> json) => FFDetail(
       productName: json['productName'] as String?,
       totalPrice: (json['totalPrice'] as num?)?.toDouble() ?? 0,
       cookingType: json['cookingType'] as String?,
+      id: json['id'] as String?,
     );
 
 Map<String, dynamic> _$FFDetailToJson(FFDetail instance) {
@@ -2063,6 +2059,7 @@ Map<String, dynamic> _$FFDetailToJson(FFDetail instance) {
   writeNotNull('productName', instance.productName);
   val['totalPrice'] = instance.totalPrice;
   writeNotNull('cookingType', instance.cookingType);
+  writeNotNull('id', instance.id);
   return val;
 }
 
