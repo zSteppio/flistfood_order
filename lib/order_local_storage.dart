@@ -64,8 +64,10 @@ Future<FFOrder?> getCurrentOrder({required String currentServicePoint}) async {
   return null;
 }
 
-Future<void> saveCurrentOrder(
-    {required FFOrder newOrder, required String currentServicePoint}) async {
+Future<void> saveCurrentOrder({
+  required FFOrder newOrder,
+  required String currentServicePoint,
+}) async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
 
   List<FFOrder> orders = await getAllOrders() ?? [];

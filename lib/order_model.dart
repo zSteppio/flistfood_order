@@ -3,183 +3,151 @@ part of 'flistfood_order.dart';
 @CopyWith()
 @JsonSerializable(includeIfNull: false, explicitToJson: true)
 class FFOrder {
-  FFOrder({
-    this.id,
-    this.number = 0,
-    this.source,
-    required this.openDate,
-    this.totalPrice,
-    required this.servicePointId,
-    this.servicePointName,
-    required this.serviceType,
-    this.ticketId,
-    this.mustBeReadyOn,
-    this.exitValue,
-    required this.details,
-    this.userId,
-    this.user,
-    required this.ownerId,
-    this.ownerName,
-    this.deliveryInfo,
-    this.paymentStatus = 0,
-    this.seatNumber,
-    this.note,
-    this.paymentType = 1,
-    this.expDate,
-    this.code,
-  });
-
   String? id;
-  int number;
   String? source;
-  DateTime? openDate;
-  double? totalPrice;
   String servicePointId;
-  String? servicePointName;
-  int serviceType;
   String? ticketId;
   DateTime? mustBeReadyOn;
   int? exitValue;
   List<FFDetail> details;
   String? userId;
-  String? user;
   String ownerId;
-  String? ownerName;
   FFDeliveryInfo? deliveryInfo;
-  int paymentStatus;
+  int paymentType;
   String? seatNumber;
   String? note;
-  int paymentType;
+  //* Dati vecchi
+  double? totalPrice;
+  int serviceType;
+  DateTime? openDate;
+  String? ownerName;
   String? expDate;
-  String? code;
+  int paymentStatus;
+
+  FFOrder({
+    this.id,
+    this.source,
+    required this.servicePointId,
+    this.ticketId,
+    this.mustBeReadyOn,
+    this.exitValue,
+    required this.details,
+    this.userId,
+    required this.ownerId,
+    this.deliveryInfo,
+    this.paymentType = 1,
+    this.seatNumber,
+    this.note,
+    this.totalPrice,
+    this.serviceType = 0,
+    required this.openDate,
+    this.ownerName,
+    this.expDate,
+    this.paymentStatus = 0,
+  });
 
   factory FFOrder.fromJson(Map<String, dynamic> json) => _$FFOrderFromJson(json);
   Map<String, dynamic> toJson() => _$FFOrderToJson(this);
 }
 
-@CopyWith()
 @JsonSerializable(includeIfNull: false, explicitToJson: true)
-class FFDeliveryInfo {
-  FFDeliveryInfo({
-    this.customerName,
-    this.phoneNumber,
-    required this.paymentType,
-    this.deliveryAddress,
-    this.deliveryLatitude,
-    this.deliveryLongitude,
-    this.deliveryIntercom,
-    this.notes,
-    this.referenceCode,
-    this.deliveryNotes,
-    this.deliveringTime,
-    this.canChangeServicePoint,
-    this.paymentStatus,
-    this.deliveryTime,
-    this.supplementPrice,
-  });
-
-  String? customerName;
-  String? phoneNumber;
-  int paymentType;
-  String? deliveryAddress;
-  double? deliveryLatitude;
-  double? deliveryLongitude;
-  String? deliveryIntercom;
-  String? notes;
-  String? referenceCode;
-  String? deliveryNotes;
-  int? deliveringTime;
-  bool? canChangeServicePoint;
-  int? paymentStatus;
-  DateTime? deliveryTime;
-  double? supplementPrice;
-
-  factory FFDeliveryInfo.fromJson(Map<String, dynamic> json) => _$FFDeliveryInfoFromJson(json);
-  Map<String, dynamic> toJson() => _$FFDeliveryInfoToJson(this);
-}
-
 @CopyWith()
-@JsonSerializable(includeIfNull: false, explicitToJson: true)
 class FFDetail {
+  int productId;
+  int sectionId;
+  int quantity;
+  int? exitValue;
+  double unitPrice;
+  int? discount;
+  int? cookingTypeId;
+  String? format;
+  List<FFVariation> variations;
+  String? menuId;
+  //* dati vecchi
+  String? productName;
+  double totalPrice;
+  String? cookingType;
+
   FFDetail({
-    this.id,
     required this.productId,
-    this.productName,
-    this.productShortName,
-    this.sectionName,
     this.sectionId = 0,
     this.quantity = 0,
     this.exitValue,
     this.unitPrice = 0,
     this.discount = 0,
-    this.totalPrice = 0,
     this.cookingTypeId,
-    this.cookingType,
     this.format,
     this.variations = const [],
-    this.state = 0,
     this.menuId,
-    this.menuName,
+    this.productName,
+    this.totalPrice = 0,
+    this.cookingType,
   });
-
-  String? id;
-  int productId;
-  String? productName;
-  String? productShortName;
-  String? sectionName;
-  int sectionId;
-  int quantity;
-  int? exitValue;
-  double unitPrice;
-  double discount;
-  double totalPrice;
-  int? cookingTypeId;
-  String? cookingType;
-  String? format;
-  List<FFVariation> variations;
-  int state;
-  String? menuId;
-  String? menuName;
 
   factory FFDetail.fromJson(Map<String, dynamic> json) => _$FFDetailFromJson(json);
   Map<String, dynamic> toJson() => _$FFDetailToJson(this);
 }
 
-@CopyWith()
 @JsonSerializable(includeIfNull: false, explicitToJson: true)
-// ignore: must_be_immutable
-class FFVariation extends Equatable {
-  FFVariation({
-    required this.foodId,
-    this.foodName,
-    required this.price,
-    this.alternative,
-    this.variationType,
-  });
-
+@CopyWith()
+class FFVariation {
   int foodId;
-  String? foodName;
-  double price;
   bool? alternative;
   int? variationType;
+  //* dati vecchi
+  String? foodName;
+  double price;
 
-  @override
-  List<Object?> get props => [foodId, variationType];
+  FFVariation({
+    required this.foodId,
+    this.alternative,
+    this.variationType,
+    this.foodName,
+    required this.price,
+  });
 
   factory FFVariation.fromJson(Map<String, dynamic> json) => _$FFVariationFromJson(json);
   Map<String, dynamic> toJson() => _$FFVariationToJson(this);
 }
 
-@CopyWith()
 @JsonSerializable(includeIfNull: false, explicitToJson: true)
-class SingleFoodDetail {
-  int id;
-  bool selected;
+@CopyWith()
+class FFDeliveryInfo {
+  String? referenceCode;
+  String? phoneNumber;
+  String? customerName;
+  String? deliveryAddress;
+  double? deliveryLatitude;
+  double? deliveryLongitude;
+  String? deliveryIntercom;
+  int? deliveringTime;
+  String? notes;
+  String? deliveryTime;
+  bool? canChangeServicePoint;
+  String zoneId;
+  //* dati vecchi
+  double? supplementPrice;
+  int paymentType;
 
-  SingleFoodDetail({required this.id, required this.selected});
+  FFDeliveryInfo({
+    this.referenceCode,
+    this.phoneNumber,
+    this.customerName,
+    this.deliveryAddress,
+    this.deliveryLatitude,
+    this.deliveryLongitude,
+    this.deliveryIntercom,
+    this.deliveringTime,
+    this.notes,
+    this.deliveryTime,
+    this.canChangeServicePoint,
+    required this.zoneId,
+    this.supplementPrice,
+    required this.paymentType,
+  });
 
-  factory SingleFoodDetail.fromJson(Map<String, dynamic> json) => _$SingleFoodDetailFromJson(json);
-  Map<String, dynamic> toJson() => _$SingleFoodDetailToJson(this);
+  factory FFDeliveryInfo.fromJson(Map<String, dynamic> json) => _$FFDeliveryInfoFromJson(json);
+  Map<String, dynamic> toJson() => _$FFDeliveryInfoToJson(this);
 }
 
 enum FFPaymentMethodsEnum { cash, pos, inApp }

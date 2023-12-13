@@ -4,13 +4,12 @@ import 'dart:convert';
 import 'dart:developer';
 import 'package:copy_with_extension/copy_with_extension.dart';
 import 'package:dio/dio.dart';
-import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-part 'product_model.dart';
 part 'order_model.dart';
+part 'product_model.dart';
 part 'flistfood_order.g.dart';
 part 'order_local_storage.dart';
 
@@ -394,7 +393,11 @@ class FlistFoodOrder extends ChangeNotifier {
       for (FFIngredient ingredient in product?.ingredients ?? []) {
         if (ingredient.isMainIngredient && !ingredient.selected) {
           variations.add(FFVariation(
-              foodId: ingredient.foodId, price: 0, foodName: ingredient.food, variationType: -1));
+            foodId: ingredient.foodId,
+            price: 0,
+            foodName: ingredient.food,
+            variationType: -1,
+          ));
         } else if (!ingredient.isMainIngredient && ingredient.selected) {
           variations.add(FFVariation(
             foodId: ingredient.foodId,
@@ -678,6 +681,7 @@ class FlistFoodOrder extends ChangeNotifier {
     required bool isAnonymous,
     required String apiBaseUrl,
     required bool isDelivery,
+    required String zoneID,
   }) async {
     FFOrder? order = await getCurrentOrder(currentServicePoint: currentServicePoint);
 
@@ -707,6 +711,7 @@ class FlistFoodOrder extends ChangeNotifier {
               deliveryAddress: deliveryAddress,
               deliveryLatitude: deliveryLatitude,
               deliveryLongitude: deliveryLongitude,
+              zoneId: zoneID,
             )
           : null;
 
