@@ -2,6 +2,17 @@ part of 'flistfood_order.dart';
 
 @CopyWith()
 @JsonSerializable(includeIfNull: false, explicitToJson: true)
+class FFOrderID {
+  String id;
+
+  FFOrderID({required this.id});
+
+  factory FFOrderID.fromJson(Map<String, dynamic> json) => _$FFOrderIDFromJson(json);
+  Map<String, dynamic> toJson() => _$FFOrderIDToJson(this);
+}
+
+@CopyWith()
+@JsonSerializable(includeIfNull: false, explicitToJson: true)
 class FFOrder {
   String? id;
   String? source;
@@ -342,5 +353,3 @@ class SingleFoodDetail {
 
 
  */
-
-//TODO mantenere parametri vecchi, chiamare nuova chiamata per la zona che contiene anche l'id da passare e cambiare valore di ritorno dell'ordine controllare Swagger, su deliveryZone se torna 404 non ci sono zone di consegna altri tipi di errore sono errori alla chiamata

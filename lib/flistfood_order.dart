@@ -647,7 +647,7 @@ class FlistFoodOrder extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<FFOrder?> sendOrder({
+  Future<FFOrderID?> sendOrder({
     required String? orderId,
     required String currentServicePoint,
     required String? seatNumber,
@@ -670,7 +670,7 @@ class FlistFoodOrder extends ChangeNotifier {
 
     //TODO enum PaymentMethodsEnum { null, cash, pos, inApp }
     final bool confirmed = paymentMethod == 3 ? false : true;
-    FFOrder? orderResponse;
+    FFOrderID? orderResponse;
 
     try {
       order.note = note;
@@ -703,7 +703,7 @@ class FlistFoodOrder extends ChangeNotifier {
                   })
                 : null);
 
-        orderResponse = FFOrder.fromJson(response.data);
+        orderResponse = FFOrderID.fromJson(response.data);
 
         _log('${apiBaseUrl}v4/orders?confirm=$confirmed 200 OK', name: 'Create order');
 
@@ -713,7 +713,7 @@ class FlistFoodOrder extends ChangeNotifier {
         final Response response = await Dio().post('${apiBaseUrl}v4/orders/anonymous',
             data: (jsonEncode(order)), queryParameters: {'confirm': confirmed});
 
-        orderResponse = FFOrder.fromJson(response.data);
+        orderResponse = FFOrderID.fromJson(response.data);
 
         _log('${apiBaseUrl}v4/orders/anonymous?confirm=$confirmed 200 OK',
             name: 'Create order anonymous');

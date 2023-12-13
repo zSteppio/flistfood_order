@@ -6,6 +6,55 @@ part of 'flistfood_order.dart';
 // CopyWithGenerator
 // **************************************************************************
 
+abstract class _$FFOrderIDCWProxy {
+  FFOrderID id(String id);
+
+  /// This function **does support** nullification of nullable fields. All `null` values passed to `non-nullable` fields will be ignored. You can also use `FFOrderID(...).copyWith.fieldName(...)` to override fields one at a time with nullification support.
+  ///
+  /// Usage
+  /// ```dart
+  /// FFOrderID(...).copyWith(id: 12, name: "My name")
+  /// ````
+  FFOrderID call({
+    String? id,
+  });
+}
+
+/// Proxy class for `copyWith` functionality. This is a callable class and can be used as follows: `instanceOfFFOrderID.copyWith(...)`. Additionally contains functions for specific fields e.g. `instanceOfFFOrderID.copyWith.fieldName(...)`
+class _$FFOrderIDCWProxyImpl implements _$FFOrderIDCWProxy {
+  final FFOrderID _value;
+
+  const _$FFOrderIDCWProxyImpl(this._value);
+
+  @override
+  FFOrderID id(String id) => this(id: id);
+
+  @override
+
+  /// This function **does support** nullification of nullable fields. All `null` values passed to `non-nullable` fields will be ignored. You can also use `FFOrderID(...).copyWith.fieldName(...)` to override fields one at a time with nullification support.
+  ///
+  /// Usage
+  /// ```dart
+  /// FFOrderID(...).copyWith(id: 12, name: "My name")
+  /// ````
+  FFOrderID call({
+    Object? id = const $CopyWithPlaceholder(),
+  }) {
+    return FFOrderID(
+      id: id == const $CopyWithPlaceholder() || id == null
+          ? _value.id
+          // ignore: cast_nullable_to_non_nullable
+          : id as String,
+    );
+  }
+}
+
+extension $FFOrderIDCopyWith on FFOrderID {
+  /// Returns a callable class that can be used as follows: `instanceOfFFOrderID.copyWith(...)` or like so:`instanceOfFFOrderID.copyWith.fieldName(...)`.
+  // ignore: library_private_types_in_public_api
+  _$FFOrderIDCWProxy get copyWith => _$FFOrderIDCWProxyImpl(this);
+}
+
 abstract class _$FFOrderCWProxy {
   FFOrder deliveryInfo(FFDeliveryInfo? deliveryInfo);
 
@@ -1955,6 +2004,14 @@ extension $FFTranslationCopyWith on FFTranslation {
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
+
+FFOrderID _$FFOrderIDFromJson(Map<String, dynamic> json) => FFOrderID(
+      id: json['id'] as String,
+    );
+
+Map<String, dynamic> _$FFOrderIDToJson(FFOrderID instance) => <String, dynamic>{
+      'id': instance.id,
+    };
 
 FFOrder _$FFOrderFromJson(Map<String, dynamic> json) => FFOrder(
       id: json['id'] as String?,
