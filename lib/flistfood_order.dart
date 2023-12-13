@@ -650,22 +650,15 @@ class FlistFoodOrder extends ChangeNotifier {
   Future<FFOrder?> sendOrder({
     required String? orderId,
     required String currentServicePoint,
-    required String phoneNumber,
     required String? seatNumber,
     required int? hour,
     required int? minute,
     required String note,
+    required FFDeliveryInfo? deliveryInfo,
     required int paymentMethod,
-    required String userName,
     required String? token,
-    required double? deliveryCost,
-    required String? deliveryAddress,
-    required double? deliveryLatitude,
-    required double? deliveryLongitude,
     required bool isAnonymous,
     required String apiBaseUrl,
-    required bool isDelivery,
-    required String zoneID,
   }) async {
     FFOrder? order = await getCurrentOrder(currentServicePoint: currentServicePoint);
 
@@ -686,7 +679,7 @@ class FlistFoodOrder extends ChangeNotifier {
 
       order.paymentType = paymentMethod;
       order.ownerName = null;
-      FFDeliveryInfo? deliveryInfo = isDelivery
+      /* FFDeliveryInfo? deliveryInfo = isDelivery
           ? FFDeliveryInfo(
               paymentType: paymentMethod,
               phoneNumber: phoneNumber,
@@ -697,7 +690,10 @@ class FlistFoodOrder extends ChangeNotifier {
               deliveryLongitude: deliveryLongitude,
               zoneId: zoneID,
             )
-          : null;
+          : null; */
+      if (deliveryInfo != null) {
+        deliveryInfo.paymentType = paymentMethod;
+      }
 
       order.deliveryInfo = deliveryInfo;
       DateTime? mustBeReadyOn;
