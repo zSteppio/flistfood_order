@@ -71,7 +71,7 @@ class FFDetail {
   int quantity;
   int? exitValue;
   double unitPrice;
-  int? discount;
+  double? discount;
   int? cookingTypeId;
   String? format;
   List<FFVariation> variations;

@@ -301,7 +301,7 @@ abstract class _$FFDetailCWProxy {
 
   FFDetail cookingTypeId(int? cookingTypeId);
 
-  FFDetail discount(int? discount);
+  FFDetail discount(double? discount);
 
   FFDetail exitValue(int? exitValue);
 
@@ -334,7 +334,7 @@ abstract class _$FFDetailCWProxy {
   FFDetail call({
     String? cookingType,
     int? cookingTypeId,
-    int? discount,
+    double? discount,
     int? exitValue,
     String? format,
     String? id,
@@ -363,7 +363,7 @@ class _$FFDetailCWProxyImpl implements _$FFDetailCWProxy {
       this(cookingTypeId: cookingTypeId);
 
   @override
-  FFDetail discount(int? discount) => this(discount: discount);
+  FFDetail discount(double? discount) => this(discount: discount);
 
   @override
   FFDetail exitValue(int? exitValue) => this(exitValue: exitValue);
@@ -435,7 +435,7 @@ class _$FFDetailCWProxyImpl implements _$FFDetailCWProxy {
       discount: discount == const $CopyWithPlaceholder()
           ? _value.discount
           // ignore: cast_nullable_to_non_nullable
-          : discount as int?,
+          : discount as double?,
       exitValue: exitValue == const $CopyWithPlaceholder()
           ? _value.exitValue
           // ignore: cast_nullable_to_non_nullable
@@ -2079,7 +2079,7 @@ FFDetail _$FFDetailFromJson(Map<String, dynamic> json) => FFDetail(
       quantity: json['quantity'] as int? ?? 0,
       exitValue: json['exitValue'] as int?,
       unitPrice: (json['unitPrice'] as num?)?.toDouble() ?? 0,
-      discount: json['discount'] as int? ?? 0,
+      discount: (json['discount'] as num?)?.toDouble() ?? 0,
       cookingTypeId: json['cookingTypeId'] as int?,
       format: json['format'] as String?,
       variations: (json['variations'] as List<dynamic>?)
