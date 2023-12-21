@@ -659,6 +659,7 @@ class FlistFoodOrder extends ChangeNotifier {
     required String? token,
     required bool isAnonymous,
     required String apiBaseUrl,
+    required String language,
   }) async {
     FFOrder? order = await getCurrentOrder(currentServicePoint: currentServicePoint);
 
@@ -692,16 +693,22 @@ class FlistFoodOrder extends ChangeNotifier {
 
       order.mustBeReadyOn = mustBeReadyOn;
 
+      //TODO verificare lingua
       if (!isAnonymous) {
         log(jsonEncode(order), name: 'Body ordine');
-        final Response response = await Dio().post('${apiBaseUrl}v4/orders',
-            data: (jsonEncode(order)),
-            queryParameters: {'confirm': confirmed},
-            options: token != null
-                ? Options(headers: {
-                    'Authorization': token,
-                  })
-                : null);
+        final Response response = await Dio().post(
+          '${apiBaseUrl}v4/orders',
+          data: (jsonEncode(order)),
+          queryParameters: {'confirm': confirmed},
+          options: token != null
+              ? Options(headers: {
+                  'Authorization': token,
+                  'Accept-Language': language,
+                })
+              : Options(headers: {
+                  'Accept-Language': language,
+                }),
+        );
 
         orderResponse = FFOrderID.fromJson(response.data);
 
