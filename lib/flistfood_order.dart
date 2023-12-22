@@ -474,11 +474,6 @@ class FlistFoodOrder extends ChangeNotifier {
 
       if (isDelivery) {
         totalPrice += servicePrice;
-        log('Ordine diverso da null');
-        log(
-          'Aggiunto prezzo consegna $deliveryCost e servizio $deliveryServicePrice con totale di $totalPrice,',
-          name: 'Totale',
-        );
       }
 
       _order = FFOrder(
@@ -492,7 +487,6 @@ class FlistFoodOrder extends ChangeNotifier {
         openDate: opneDate,
       );
     } else {
-      log('Ordine null');
       List<FFDetail> orderProducts = [];
       {
         orderProducts.add(FFDetail(
