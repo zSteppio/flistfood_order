@@ -696,7 +696,6 @@ class FlistFoodOrder extends ChangeNotifier {
 
       order.mustBeReadyOn = mustBeReadyOn;
 
-      //TODO verificare lingua
       if (!isAnonymous) {
         log(jsonEncode(order), name: 'Body ordine');
         final Response response = await Dio().post(

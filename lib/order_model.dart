@@ -158,7 +158,7 @@ class FFDeliveryInfo {
     this.canChangeServicePoint,
     required this.zoneId,
     this.supplementPrice,
-    required this.paymentType,
+    this.paymentType,
   });
 
   factory FFDeliveryInfo.fromJson(Map<String, dynamic> json) => _$FFDeliveryInfoFromJson(json);
