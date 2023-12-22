@@ -24,7 +24,7 @@ class FFOrder {
   String? userId;
   String ownerId;
   FFDeliveryInfo? deliveryInfo;
-  int paymentType;
+  int? paymentType;
   String? seatNumber;
   String? note;
   //* Dati vecchi
@@ -47,7 +47,7 @@ class FFOrder {
     this.userId,
     required this.ownerId,
     this.deliveryInfo,
-    this.paymentType = 1,
+    this.paymentType,
     this.seatNumber,
     this.note,
     this.totalPrice,

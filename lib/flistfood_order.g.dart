@@ -78,7 +78,7 @@ abstract class _$FFOrderCWProxy {
 
   FFOrder ownerName(String? ownerName);
 
-  FFOrder paymentType(int paymentType);
+  FFOrder paymentType(int? paymentType);
 
   FFOrder seatNumber(String? seatNumber);
 
@@ -162,7 +162,7 @@ class _$FFOrderCWProxyImpl implements _$FFOrderCWProxy {
   FFOrder ownerName(String? ownerName) => this(ownerName: ownerName);
 
   @override
-  FFOrder paymentType(int paymentType) => this(paymentType: paymentType);
+  FFOrder paymentType(int? paymentType) => this(paymentType: paymentType);
 
   @override
   FFOrder seatNumber(String? seatNumber) => this(seatNumber: seatNumber);
@@ -256,11 +256,10 @@ class _$FFOrderCWProxyImpl implements _$FFOrderCWProxy {
           ? _value.ownerName
           // ignore: cast_nullable_to_non_nullable
           : ownerName as String?,
-      paymentType:
-          paymentType == const $CopyWithPlaceholder() || paymentType == null
-              ? _value.paymentType
-              // ignore: cast_nullable_to_non_nullable
-              : paymentType as int,
+      paymentType: paymentType == const $CopyWithPlaceholder()
+          ? _value.paymentType
+          // ignore: cast_nullable_to_non_nullable
+          : paymentType as int?,
       seatNumber: seatNumber == const $CopyWithPlaceholder()
           ? _value.seatNumber
           // ignore: cast_nullable_to_non_nullable
@@ -2031,7 +2030,7 @@ FFOrder _$FFOrderFromJson(Map<String, dynamic> json) => FFOrder(
           ? null
           : FFDeliveryInfo.fromJson(
               json['deliveryInfo'] as Map<String, dynamic>),
-      paymentType: json['paymentType'] as int? ?? 1,
+      paymentType: json['paymentType'] as int?,
       seatNumber: json['seatNumber'] as String?,
       note: json['note'] as String?,
       totalPrice: (json['totalPrice'] as num?)?.toDouble(),
@@ -2062,7 +2061,7 @@ Map<String, dynamic> _$FFOrderToJson(FFOrder instance) {
   writeNotNull('userId', instance.userId);
   val['ownerId'] = instance.ownerId;
   writeNotNull('deliveryInfo', instance.deliveryInfo?.toJson());
-  val['paymentType'] = instance.paymentType;
+  writeNotNull('paymentType', instance.paymentType);
   writeNotNull('seatNumber', instance.seatNumber);
   writeNotNull('note', instance.note);
   writeNotNull('totalPrice', instance.totalPrice);

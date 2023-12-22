@@ -658,7 +658,6 @@ class FlistFoodOrder extends ChangeNotifier {
     required int? minute,
     required String note,
     required FFDeliveryInfo? deliveryInfo,
-    required int paymentMethod,
     required String? token,
     required bool isAnonymous,
     required String apiBaseUrl,
@@ -672,8 +671,6 @@ class FlistFoodOrder extends ChangeNotifier {
 
     DateTime currentTime = DateTime.now();
 
-    //TODO enum PaymentMethodsEnum { null, cash, pos, inApp }
-    final bool confirmed = paymentMethod == 3 ? false : true;
     FFOrderID? orderResponse;
 
     try {
@@ -681,7 +678,6 @@ class FlistFoodOrder extends ChangeNotifier {
       order.seatNumber = seatNumber;
       order.id = orderId;
 
-      order.paymentType = paymentMethod;
       order.ownerName = null;
 
       order.deliveryInfo = deliveryInfo;
@@ -701,7 +697,7 @@ class FlistFoodOrder extends ChangeNotifier {
         final Response response = await Dio().post(
           '${apiBaseUrl}v4/orders',
           data: (jsonEncode(order)),
-          queryParameters: {'confirm': confirmed},
+          queryParameters: {'confirm': true},
           options: token != null
               ? Options(headers: {
                   'Authorization': token,
@@ -714,18 +710,17 @@ class FlistFoodOrder extends ChangeNotifier {
 
         orderResponse = FFOrderID.fromJson(response.data);
 
-        _log('${apiBaseUrl}v4/orders?confirm=$confirmed 200 OK', name: 'Create order');
+        _log('${apiBaseUrl}v4/orders?confirm= 200 OK', name: 'Create order');
 
         notifyListeners();
       } else {
         log(jsonEncode(order), name: 'Body ordine');
         final Response response = await Dio().post('${apiBaseUrl}v4/orders/anonymous',
-            data: (jsonEncode(order)), queryParameters: {'confirm': confirmed});
+            data: (jsonEncode(order)), queryParameters: {'confirm': true});
 
         orderResponse = FFOrderID.fromJson(response.data);
 
-        _log('${apiBaseUrl}v4/orders/anonymous?confirm=$confirmed 200 OK',
-            name: 'Create order anonymous');
+        _log('${apiBaseUrl}v4/orders/anonymous?confirm= 200 OK', name: 'Create order anonymous');
 
         notifyListeners();
       }
@@ -744,12 +739,11 @@ class FlistFoodOrder extends ChangeNotifier {
       return null;
     }
 
-    if (paymentMethod != 3) {
-      _logInfo('Eliminazione ordine inviato', name: 'After order');
-      deleteOrderByServicePointId(currentServicePoint);
+    _logInfo('Eliminazione ordine inviato', name: 'After order');
+    deleteOrderByServicePointId(currentServicePoint);
 
-      notifyListeners();
-    }
+    notifyListeners();
+
     return orderResponse;
   }
 
