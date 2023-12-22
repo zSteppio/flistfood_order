@@ -330,6 +330,7 @@ class FlistFoodOrder extends ChangeNotifier {
     required DateTime opneDate,
     required double? deliveryCost,
     required double? deliveryServicePrice,
+    required bool isDelivery,
   }) async {
     FFProduct? product;
     FFDetail? detailProduct;
@@ -346,6 +347,7 @@ class FlistFoodOrder extends ChangeNotifier {
     }
 
     _order = await getCurrentOrder(currentServicePoint: currentServicePoint);
+
     var productId = detailProduct?.productId ?? product!.id;
     String? cookingTypeName;
     int? cookingTypeId;
@@ -469,11 +471,9 @@ class FlistFoodOrder extends ChangeNotifier {
         totalPrice += e;
       });
 
-      if (deliveryCost != null) {
-        totalPrice += deliveryCost;
-      }
-      if (deliveryServicePrice != null) {
-        totalPrice += deliveryServicePrice;
+      if (isDelivery) {
+        totalPrice += deliveryCost ?? 0.0;
+        totalPrice += deliveryServicePrice ?? 0.0;
       }
 
       _order = FFOrder(
@@ -507,12 +507,9 @@ class FlistFoodOrder extends ChangeNotifier {
         ));
       }
 
-      if (deliveryCost != null) {
-        orderProducts.first.totalPrice += deliveryCost;
-      }
-
-      if (deliveryServicePrice != null) {
-        orderProducts.first.totalPrice += deliveryServicePrice;
+      if (isDelivery) {
+        orderProducts.first.totalPrice += deliveryCost ?? 0.0;
+        orderProducts.first.totalPrice += deliveryServicePrice ?? 0.0;
       }
 
       _order = FFOrder(
@@ -555,6 +552,7 @@ class FlistFoodOrder extends ChangeNotifier {
     required DateTime opneDate,
     required double? deliveryCost,
     required double? deliveryServicePrice,
+    required bool isDelivery,
   }) async {
     FFProduct? product;
     FFDetail? detailProduct;
@@ -597,12 +595,9 @@ class FlistFoodOrder extends ChangeNotifier {
         totalPrice += e;
       });
 
-      if (deliveryCost != null) {
-        totalPrice += deliveryCost;
-      }
-
-      if (deliveryServicePrice != null) {
-        totalPrice += deliveryServicePrice;
+      if (isDelivery) {
+        totalPrice += deliveryCost ?? 0.0;
+        totalPrice += deliveryServicePrice ?? 0.0;
       }
 
       _totalQuantityCalc(order: _order!);
