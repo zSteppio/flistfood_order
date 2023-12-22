@@ -474,6 +474,11 @@ class FlistFoodOrder extends ChangeNotifier {
       if (isDelivery) {
         totalPrice += deliveryCost ?? 0.0;
         totalPrice += deliveryServicePrice ?? 0.0;
+        log('Ordine diverso da null');
+        log(
+          'Aggiunto prezzo consegna $deliveryCost e servizio $deliveryServicePrice con totale di $totalPrice,',
+          name: 'Totale',
+        );
       }
 
       _order = FFOrder(
@@ -487,6 +492,7 @@ class FlistFoodOrder extends ChangeNotifier {
         openDate: opneDate,
       );
     } else {
+      log('Ordine null');
       List<FFDetail> orderProducts = [];
       {
         orderProducts.add(FFDetail(
@@ -508,8 +514,10 @@ class FlistFoodOrder extends ChangeNotifier {
       }
 
       if (isDelivery) {
+        log('Sono dentro delivery e aggiungo il prezzo di servizio e consegna');
         orderProducts.first.totalPrice += deliveryCost ?? 0.0;
         orderProducts.first.totalPrice += deliveryServicePrice ?? 0.0;
+        log(jsonEncode(orderProducts.first), name: 'Prodotto');
       }
 
       _order = FFOrder(
