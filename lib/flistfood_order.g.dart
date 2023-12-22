@@ -605,7 +605,7 @@ abstract class _$FFDeliveryInfoCWProxy {
 
   FFDeliveryInfo notes(String? notes);
 
-  FFDeliveryInfo paymentType(int paymentType);
+  FFDeliveryInfo paymentType(int? paymentType);
 
   FFDeliveryInfo phoneNumber(String? phoneNumber);
 
@@ -681,7 +681,8 @@ class _$FFDeliveryInfoCWProxyImpl implements _$FFDeliveryInfoCWProxy {
   FFDeliveryInfo notes(String? notes) => this(notes: notes);
 
   @override
-  FFDeliveryInfo paymentType(int paymentType) => this(paymentType: paymentType);
+  FFDeliveryInfo paymentType(int? paymentType) =>
+      this(paymentType: paymentType);
 
   @override
   FFDeliveryInfo phoneNumber(String? phoneNumber) =>
@@ -760,11 +761,10 @@ class _$FFDeliveryInfoCWProxyImpl implements _$FFDeliveryInfoCWProxy {
           ? _value.notes
           // ignore: cast_nullable_to_non_nullable
           : notes as String?,
-      paymentType:
-          paymentType == const $CopyWithPlaceholder() || paymentType == null
-              ? _value.paymentType
-              // ignore: cast_nullable_to_non_nullable
-              : paymentType as int,
+      paymentType: paymentType == const $CopyWithPlaceholder()
+          ? _value.paymentType
+          // ignore: cast_nullable_to_non_nullable
+          : paymentType as int?,
       phoneNumber: phoneNumber == const $CopyWithPlaceholder()
           ? _value.phoneNumber
           // ignore: cast_nullable_to_non_nullable
@@ -2161,7 +2161,7 @@ FFDeliveryInfo _$FFDeliveryInfoFromJson(Map<String, dynamic> json) =>
       canChangeServicePoint: json['canChangeServicePoint'] as bool?,
       zoneId: json['zoneId'] as String,
       supplementPrice: (json['supplementPrice'] as num?)?.toDouble(),
-      paymentType: json['paymentType'] as int,
+      paymentType: json['paymentType'] as int?,
     );
 
 Map<String, dynamic> _$FFDeliveryInfoToJson(FFDeliveryInfo instance) {
@@ -2186,7 +2186,7 @@ Map<String, dynamic> _$FFDeliveryInfoToJson(FFDeliveryInfo instance) {
   writeNotNull('canChangeServicePoint', instance.canChangeServicePoint);
   val['zoneId'] = instance.zoneId;
   writeNotNull('supplementPrice', instance.supplementPrice);
-  val['paymentType'] = instance.paymentType;
+  writeNotNull('paymentType', instance.paymentType);
   return val;
 }
 

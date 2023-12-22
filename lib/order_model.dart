@@ -142,7 +142,7 @@ class FFDeliveryInfo {
   String zoneId;
   //* dati vecchi
   double? supplementPrice;
-  int paymentType;
+  int? paymentType;
 
   FFDeliveryInfo({
     this.referenceCode,
