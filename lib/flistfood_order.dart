@@ -329,6 +329,7 @@ class FlistFoodOrder extends ChangeNotifier {
     required String? userId,
     required DateTime opneDate,
     required double? deliveryCost,
+    required double? deliveryServicePrice,
   }) async {
     FFProduct? product;
     FFDetail? detailProduct;
@@ -471,6 +472,9 @@ class FlistFoodOrder extends ChangeNotifier {
       if (deliveryCost != null) {
         totalPrice += deliveryCost;
       }
+      if (deliveryServicePrice != null) {
+        totalPrice += deliveryServicePrice;
+      }
 
       _order = FFOrder(
         servicePointId: currentServicePoint,
@@ -505,6 +509,10 @@ class FlistFoodOrder extends ChangeNotifier {
 
       if (deliveryCost != null) {
         orderProducts.first.totalPrice += deliveryCost;
+      }
+
+      if (deliveryServicePrice != null) {
+        orderProducts.first.totalPrice += deliveryServicePrice;
       }
 
       _order = FFOrder(
@@ -546,6 +554,7 @@ class FlistFoodOrder extends ChangeNotifier {
     required String ownerName,
     required DateTime opneDate,
     required double? deliveryCost,
+    required double? deliveryServicePrice,
   }) async {
     FFProduct? product;
     FFDetail? detailProduct;
@@ -590,6 +599,10 @@ class FlistFoodOrder extends ChangeNotifier {
 
       if (deliveryCost != null) {
         totalPrice += deliveryCost;
+      }
+
+      if (deliveryServicePrice != null) {
+        totalPrice += deliveryServicePrice;
       }
 
       _totalQuantityCalc(order: _order!);
