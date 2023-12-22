@@ -335,6 +335,7 @@ class FlistFoodOrder extends ChangeNotifier {
     FFProduct? product;
     FFDetail? detailProduct;
     FFFormat? formatProduct;
+    final double servicePrice = (deliveryCost ?? 0.0) + (deliveryServicePrice ?? 0.0);
 
     if (productJson != null) {
       product = FFProduct.fromJson(jsonDecode(productJson));
@@ -472,8 +473,7 @@ class FlistFoodOrder extends ChangeNotifier {
       });
 
       if (isDelivery) {
-        totalPrice += deliveryCost ?? 0.0;
-        totalPrice += deliveryServicePrice ?? 0.0;
+        totalPrice += servicePrice;
         log('Ordine diverso da null');
         log(
           'Aggiunto prezzo consegna $deliveryCost e servizio $deliveryServicePrice con totale di $totalPrice,',
@@ -513,13 +513,6 @@ class FlistFoodOrder extends ChangeNotifier {
         ));
       }
 
-      if (isDelivery) {
-        log('Sono dentro delivery e aggiungo il prezzo di servizio e consegna');
-        orderProducts.first.totalPrice += deliveryCost ?? 0.0;
-        orderProducts.first.totalPrice += deliveryServicePrice ?? 0.0;
-        log(jsonEncode(orderProducts.first), name: 'Prodotto');
-      }
-
       _order = FFOrder(
         servicePointId: currentServicePoint,
         source: 'A',
@@ -527,7 +520,7 @@ class FlistFoodOrder extends ChangeNotifier {
         userId: userId,
         ownerId: ownerId,
         ownerName: ownerName,
-        totalPrice: orderProducts.first.totalPrice,
+        totalPrice: orderProducts.first.totalPrice += isDelivery ? servicePrice : 0.0,
         openDate: opneDate,
       );
     }
