@@ -108,9 +108,7 @@ class FFDetail {
     for (int i = 0; i < variations.length; i++) {
       if (variationToCompare[i].foodId != variations[i].foodId ||
           variationToCompare[i].alternative != variations[i].alternative ||
-          variationToCompare[i].variationType != variations[i].variationType ||
-          variationToCompare[i].foodName != variations[i].foodName ||
-          variationToCompare[i].price != variations[i].price) return false;
+          variationToCompare[i].variationType != variations[i].variationType) return false;
     }
 
     return true;
