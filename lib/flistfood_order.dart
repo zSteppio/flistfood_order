@@ -427,14 +427,14 @@ class FlistFoodOrder extends ChangeNotifier {
 
       bool productExist = _order!.details.any((e) =>
           e.productId == productId &&
-          listEquals(e.variations, variations) &&
+          e.isEqual(variations) &&
           e.cookingTypeId == cookingTypeId &&
           e.format == formatName);
 
       if (detailProduct != null && !productExist) {
         FFDetail singleProduct = _order!.details.firstWhere((e) =>
             e.productId == productId &&
-            listEquals(e.variations, detailProduct?.variations) &&
+            e.isEqual(detailProduct?.variations ?? []) &&
             e.cookingTypeId == detailProduct?.cookingTypeId &&
             e.format == formatName);
         singleProduct.quantity += 1;
@@ -442,7 +442,7 @@ class FlistFoodOrder extends ChangeNotifier {
       } else if (productExist) {
         FFDetail singleProduct = _order!.details.firstWhere((e) =>
             e.productId == productId &&
-            listEquals(e.variations, variations) &&
+            e.isEqual(variations) &&
             e.cookingTypeId == detailProduct?.cookingTypeId &&
             e.format == formatName);
 
@@ -567,7 +567,7 @@ class FlistFoodOrder extends ChangeNotifier {
       //* Seleziono un prodotto
       FFDetail selected = _order!.details.firstWhere((e) =>
           e.productId == id &&
-          listEquals(e.variations, variation) &&
+          e.isEqual(variation) &&
           e.cookingTypeId == detailProduct?.cookingTypeId &&
           e.format == detailProduct?.format);
 
@@ -579,7 +579,7 @@ class FlistFoodOrder extends ChangeNotifier {
       if (selected.quantity == 0) {
         _order!.details.removeWhere((e) =>
             e.productId == selected.productId &&
-            listEquals(e.variations, variation) &&
+            e.isEqual(variation) &&
             e.cookingTypeId == detailProduct?.cookingTypeId &&
             e.format == detailProduct?.format);
       }

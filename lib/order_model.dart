@@ -101,6 +101,20 @@ class FFDetail {
 
   factory FFDetail.fromJson(Map<String, dynamic> json) => _$FFDetailFromJson(json);
   Map<String, dynamic> toJson() => _$FFDetailToJson(this);
+
+  bool isEqual(List<FFVariation> variationToCompare) {
+    if (variationToCompare.length != variations.length) return false;
+
+    for (int i = 0; i < variations.length; i++) {
+      if (variationToCompare[i].foodId != variations[i].foodId ||
+          variationToCompare[i].alternative != variations[i].alternative ||
+          variationToCompare[i].variationType != variations[i].variationType ||
+          variationToCompare[i].foodName != variations[i].foodName ||
+          variationToCompare[i].price != variations[i].price) return false;
+    }
+
+    return true;
+  }
 }
 
 @JsonSerializable(includeIfNull: false, explicitToJson: true)
