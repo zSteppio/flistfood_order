@@ -349,7 +349,7 @@ class FlistFoodOrder extends ChangeNotifier {
 
     _order = await getCurrentOrder(currentServicePoint: currentServicePoint);
 
-    for (FFDetail d in _order!.details) {
+    for (FFDetail d in _order?.details ?? []) {
       log(jsonEncode(d), name: 'Dettaglio Prodotto dopo aver Recuperato ordine');
     }
 
@@ -469,7 +469,7 @@ class FlistFoodOrder extends ChangeNotifier {
           cookingTypeId: cookingTypeId,
           cookingType: cookingTypeName,
         ));
-        for (FFDetail d in _order!.details) {
+        for (FFDetail d in _order?.details ?? []) {
           log(jsonEncode(d), name: 'Dettaglio Prodotto dopo aver aggiunto il secondo');
         }
       }
@@ -527,7 +527,7 @@ class FlistFoodOrder extends ChangeNotifier {
 
     _totalQuantityCalc(order: _order!);
 
-    for (FFDetail d in _order!.details) {
+    for (FFDetail d in _order?.details ?? []) {
       log(jsonEncode(d), name: 'Dettaglio Prodotto al salvataggio ordine');
     }
 
