@@ -423,7 +423,6 @@ class FlistFoodOrder extends ChangeNotifier {
     }
 
     if (_order != null) {
-      log('Ordine diverso da nullo');
       var formatName = detailProduct?.format ?? formatProduct?.format;
 
       bool productExist = _order!.details.any((e) =>
@@ -434,7 +433,6 @@ class FlistFoodOrder extends ChangeNotifier {
       log(productExist.toString(), name: 'Prodotto esiste');
 
       if (detailProduct != null && !productExist) {
-        log('Dentro primo if', name: 'IF');
         FFDetail singleProduct = _order!.details.firstWhere((e) =>
             e.productId == productId &&
             e.isEqual(detailProduct?.variations ?? []) &&
@@ -443,7 +441,6 @@ class FlistFoodOrder extends ChangeNotifier {
         singleProduct.quantity += 1;
         singleProduct.totalPrice = singleProduct.unitPrice * singleProduct.quantity;
       } else if (productExist) {
-        log('Dentro secondo if', name: 'IF');
         FFDetail singleProduct = _order!.details.firstWhere((e) =>
             e.productId == productId &&
             e.isEqual(variations) &&
@@ -499,7 +496,6 @@ class FlistFoodOrder extends ChangeNotifier {
         openDate: opneDate,
       );
     } else {
-      log('Ordine non esistente');
       List<FFDetail> orderProducts = [];
       {
         orderProducts.add(FFDetail(
