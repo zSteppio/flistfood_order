@@ -492,6 +492,7 @@ class FlistFoodOrder extends ChangeNotifier {
         openDate: opneDate,
       );
     } else {
+      log('Ordine non esistente');
       List<FFDetail> orderProducts = [];
       {
         orderProducts.add(FFDetail(
