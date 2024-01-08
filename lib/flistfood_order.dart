@@ -501,11 +501,11 @@ class FlistFoodOrder extends ChangeNotifier {
         sectionId: product?.sectionId ?? 0,
         productId: productId,
         productName: product?.name ?? detailProduct!.productName,
-        unitPrice: product?.newPrice != 0
+        unitPrice: product?.newPrice != 0.0
             ? product?.newPrice ?? detailProduct!.unitPrice
             : formatProduct?.price ?? product!.price,
         quantity: 1,
-        totalPrice: product?.newPrice != 0
+        totalPrice: product?.newPrice != 0.0
             ? product?.newPrice ?? detailProduct!.totalPrice
             : formatProduct?.price ?? product!.price,
         variations: variations,
