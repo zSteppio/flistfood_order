@@ -470,12 +470,19 @@ class FlistFoodOrder extends ChangeNotifier {
           cookingTypeId: cookingTypeId,
           cookingType: cookingTypeName,
         ));
+        for (FFDetail d in _order!.details) {
+          log(jsonEncode(d), name: 'Dettaglio Prodotto');
+        }
       }
 
       double totalPrice = 0;
       _order!.details.map((e) => e.totalPrice).forEach((e) {
         totalPrice += e;
       });
+
+      for (FFDetail d in _order!.details) {
+        log(jsonEncode(d), name: 'Dettaglio Prodotto Dopo il map del totalPrice');
+      }
 
       if (isDelivery) {
         totalPrice += servicePrice;
