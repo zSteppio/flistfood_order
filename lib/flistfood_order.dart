@@ -497,24 +497,27 @@ class FlistFoodOrder extends ChangeNotifier {
       );
     } else {
       List<FFDetail> orderProducts = [];
-      {
-        orderProducts.add(FFDetail(
-          format: formatProduct?.format,
-          sectionId: product?.sectionId ?? 0,
-          productId: productId,
-          productName: product?.name ?? detailProduct!.productName,
-          unitPrice: product?.newPrice != 0
-              ? product?.newPrice ?? detailProduct!.unitPrice
-              : formatProduct?.price ?? product!.price,
-          quantity: 1,
-          totalPrice: product?.newPrice != 0
-              ? product?.newPrice ?? detailProduct!.totalPrice
-              : formatProduct?.price ?? product!.price,
-          variations: variations,
-          cookingTypeId: cookingTypeId,
-          cookingType: cookingTypeName,
-        ));
-      }
+      log(product?.newPrice.toString() ?? 'nullo', name: 'New Price');
+      log(formatProduct?.price.toString() ?? 'nullo', name: 'Format Price');
+      log(product?.price.toString() ?? 'nullo', name: 'Product Price');
+      log(detailProduct?.unitPrice.toString() ?? 'nullo', name: 'Format Name');
+
+      orderProducts.add(FFDetail(
+        format: formatProduct?.format,
+        sectionId: product?.sectionId ?? 0,
+        productId: productId,
+        productName: product?.name ?? detailProduct!.productName,
+        unitPrice: product?.newPrice != 0
+            ? product?.newPrice ?? detailProduct!.unitPrice
+            : formatProduct?.price ?? product!.price,
+        quantity: 1,
+        totalPrice: product?.newPrice != 0
+            ? product?.newPrice ?? detailProduct!.totalPrice
+            : formatProduct?.price ?? product!.price,
+        variations: variations,
+        cookingTypeId: cookingTypeId,
+        cookingType: cookingTypeName,
+      ));
 
       _order = FFOrder(
         servicePointId: currentServicePoint,
