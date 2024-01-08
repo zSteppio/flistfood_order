@@ -430,7 +430,6 @@ class FlistFoodOrder extends ChangeNotifier {
           e.isEqual(variations) &&
           e.cookingTypeId == cookingTypeId &&
           e.format == formatName);
-      log(productExist.toString(), name: 'Prodotto esiste');
 
       if (detailProduct != null && !productExist) {
         FFDetail singleProduct = _order!.details.firstWhere((e) =>
@@ -450,7 +449,6 @@ class FlistFoodOrder extends ChangeNotifier {
         singleProduct.quantity += 1;
         singleProduct.totalPrice = singleProduct.unitPrice * singleProduct.quantity;
       } else {
-        log('Dentro else', name: 'IF');
         _order!.details.add(FFDetail(
           format: formatProduct?.format,
           productId: productId,
@@ -477,10 +475,6 @@ class FlistFoodOrder extends ChangeNotifier {
         totalPrice += e;
       });
 
-      for (FFDetail d in _order!.details) {
-        log(jsonEncode(d), name: 'Dettaglio Prodotto Dopo il map del totalPrice');
-      }
-
       if (isDelivery) {
         totalPrice += servicePrice;
       }
@@ -500,7 +494,7 @@ class FlistFoodOrder extends ChangeNotifier {
       log(product?.newPrice.toString() ?? 'nullo', name: 'New Price');
       log(formatProduct?.price.toString() ?? 'nullo', name: 'Format Price');
       log(product?.price.toString() ?? 'nullo', name: 'Product Price');
-      log(detailProduct?.unitPrice.toString() ?? 'nullo', name: 'Format Name');
+      log(detailProduct?.totalPrice.toString() ?? 'nullo', name: 'detailProduct?.unitPrice');
 
       orderProducts.add(FFDetail(
         format: formatProduct?.format,
