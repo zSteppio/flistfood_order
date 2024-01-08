@@ -349,6 +349,10 @@ class FlistFoodOrder extends ChangeNotifier {
 
     _order = await getCurrentOrder(currentServicePoint: currentServicePoint);
 
+    for (FFDetail d in _order!.details) {
+      log(jsonEncode(d), name: 'Dettaglio Prodotto dopo aver Recuperato ordine');
+    }
+
     var productId = detailProduct?.productId ?? product!.id;
     String? cookingTypeName;
     int? cookingTypeId;
@@ -466,7 +470,7 @@ class FlistFoodOrder extends ChangeNotifier {
           cookingType: cookingTypeName,
         ));
         for (FFDetail d in _order!.details) {
-          log(jsonEncode(d), name: 'Dettaglio Prodotto');
+          log(jsonEncode(d), name: 'Dettaglio Prodotto dopo aver aggiunto il secondo');
         }
       }
 
@@ -491,10 +495,6 @@ class FlistFoodOrder extends ChangeNotifier {
       );
     } else {
       List<FFDetail> orderProducts = [];
-      log(product?.newPrice.toString() ?? 'nullo', name: 'New Price');
-      log(formatProduct?.price.toString() ?? 'nullo', name: 'Format Price');
-      log(product?.price.toString() ?? 'nullo', name: 'Product Price');
-      log(detailProduct?.totalPrice.toString() ?? 'nullo', name: 'detailProduct?.unitPrice');
 
       orderProducts.add(FFDetail(
         format: formatProduct?.format,
@@ -526,6 +526,10 @@ class FlistFoodOrder extends ChangeNotifier {
     }
 
     _totalQuantityCalc(order: _order!);
+
+    for (FFDetail d in _order!.details) {
+      log(jsonEncode(d), name: 'Dettaglio Prodotto al salvataggio ordine');
+    }
 
     await saveCurrentOrder(newOrder: _order!, currentServicePoint: currentServicePoint);
     //emit(OrderSuccessState(order: order, totalQuantity: totalQuantity));
