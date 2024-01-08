@@ -349,10 +349,6 @@ class FlistFoodOrder extends ChangeNotifier {
 
     _order = await getCurrentOrder(currentServicePoint: currentServicePoint);
 
-    for (FFDetail d in _order?.details ?? []) {
-      log(jsonEncode(d), name: 'Dettaglio Prodotto dopo aver Recuperato ordine');
-    }
-
     var productId = detailProduct?.productId ?? product!.id;
     String? cookingTypeName;
     int? cookingTypeId;
@@ -469,9 +465,6 @@ class FlistFoodOrder extends ChangeNotifier {
           cookingTypeId: cookingTypeId,
           cookingType: cookingTypeName,
         ));
-        for (FFDetail d in _order?.details ?? []) {
-          log(jsonEncode(d), name: 'Dettaglio Prodotto dopo aver aggiunto il secondo');
-        }
       }
 
       double totalPrice = 0;
@@ -495,6 +488,12 @@ class FlistFoodOrder extends ChangeNotifier {
       );
     } else {
       List<FFDetail> orderProducts = [];
+
+      log((product?.newPrice != 0.0).toString(), name: 'NewPrice diverso da 0.0');
+      log(product?.newPrice.toString() ?? 'null', name: 'NewPrice');
+      log(detailProduct?.totalPrice.toString() ?? 'null', name: 'TotalPrice');
+      log(formatProduct?.price.toString() ?? 'null', name: 'FormatPrice');
+      log(product?.price.toString() ?? 'null', name: 'ProductPrice');
 
       orderProducts.add(FFDetail(
         format: formatProduct?.format,
