@@ -512,6 +512,7 @@ class FlistFoodOrder extends ChangeNotifier {
         cookingType: cookingTypeName,
       ));
       log(jsonEncode(orderProducts), name: 'Ordine prodotti dopo assegnazione a detail');
+      double totalProduct = orderProducts.first.totalPrice;
 
       _order = FFOrder(
         servicePointId: currentServicePoint,
@@ -520,7 +521,7 @@ class FlistFoodOrder extends ChangeNotifier {
         userId: userId,
         ownerId: ownerId,
         ownerName: ownerName,
-        totalPrice: orderProducts.first.totalPrice += isDelivery ? servicePrice : 0.0,
+        totalPrice: totalProduct += isDelivery ? servicePrice : 0.0,
         openDate: opneDate,
       );
     }
