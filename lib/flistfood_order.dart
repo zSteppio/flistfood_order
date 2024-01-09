@@ -511,6 +511,7 @@ class FlistFoodOrder extends ChangeNotifier {
         cookingTypeId: cookingTypeId,
         cookingType: cookingTypeName,
       ));
+      log(jsonEncode(orderProducts), name: 'Ordine prodotti dopo assegnazione a detail');
 
       _order = FFOrder(
         servicePointId: currentServicePoint,
