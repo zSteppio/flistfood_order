@@ -337,6 +337,10 @@ class FlistFoodOrder extends ChangeNotifier {
     FFFormat? formatProduct;
     final double servicePrice = (deliveryCost ?? 0.0) + (deliveryServicePrice ?? 0.0);
 
+    log((productJson != null).toString(), name: 'ProductJson diverso da null');
+    log((detailProductJson != null).toString(), name: 'DetailProductJson diverso da null');
+    log((formatProductJson != null).toString(), name: 'FormatProductJson diverso da null');
+
     if (productJson != null) {
       product = FFProduct.fromJson(jsonDecode(productJson));
     }
@@ -349,7 +353,7 @@ class FlistFoodOrder extends ChangeNotifier {
 
     _order = await getCurrentOrder(currentServicePoint: currentServicePoint);
 
-    var productId = detailProduct?.productId ?? product!.id;
+    int productId = detailProduct?.productId ?? product!.id;
     String? cookingTypeName;
     int? cookingTypeId;
 
