@@ -380,6 +380,8 @@ class FlistFoodOrder extends ChangeNotifier {
             variationType: 1,
           ));
 
+          log(jsonEncode(variations), name: 'Variations dopo aggiunta alternative');
+
           if (alternative.defaultFoodId == food.foodId && !food.isSelected) {
             variations.add(FFVariation(
               foodId: food.foodId,
@@ -388,6 +390,7 @@ class FlistFoodOrder extends ChangeNotifier {
               alternative: true,
               variationType: -1,
             ));
+            log(jsonEncode(variations), name: 'Variations dopo aggiunta alternative con a false');
           }
         }
       }
@@ -401,6 +404,7 @@ class FlistFoodOrder extends ChangeNotifier {
             foodName: ingredient.food,
             variationType: -1,
           ));
+          log(jsonEncode(variations), name: 'Variations dopo aggiunta ingredienti non settati');
         } else if (!ingredient.isMainIngredient && ingredient.selected) {
           variations.add(FFVariation(
             foodId: ingredient.foodId,
@@ -408,6 +412,7 @@ class FlistFoodOrder extends ChangeNotifier {
             foodName: ingredient.food,
             variationType: 1,
           ));
+          log(jsonEncode(variations), name: 'Variations dopo aggiunta ingredienti settati');
         }
       }
 
@@ -421,12 +426,14 @@ class FlistFoodOrder extends ChangeNotifier {
             foodName: food.name,
           ));
         }
+        log(jsonEncode(variations), name: 'Variations dopo aggiunta foodlists');
       }
     } else {
       variations = detailProduct.variations;
     }
 
     if (_order != null) {
+      log('Ordine diverso da null');
       var formatName = detailProduct?.format ?? formatProduct?.format;
 
       bool productExist = _order!.details.any((e) =>
@@ -491,6 +498,7 @@ class FlistFoodOrder extends ChangeNotifier {
         openDate: opneDate,
       );
     } else {
+      log('Ordine nullo');
       List<FFDetail> orderProducts = [];
 
       orderProducts.add(FFDetail(
@@ -509,6 +517,8 @@ class FlistFoodOrder extends ChangeNotifier {
         cookingTypeId: cookingTypeId,
         cookingType: cookingTypeName,
       ));
+
+      log(jsonEncode(orderProducts), name: 'Dettaglio ordine finale');
 
       double totalProduct = orderProducts.first.totalPrice;
 
