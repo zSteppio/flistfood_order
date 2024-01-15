@@ -1,11 +1,12 @@
 import 'dart:convert';
-
+import 'package:equatable/equatable.dart';
 import 'package:flistfood_order/flistfood_order.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+part 'flistfood_variation_state.dart';
 
-class FlistfoodVariationCubit extends Cubit<FFProduct?> {
+class FlistfoodVariationCubit extends Cubit<FlistfoodVariationState> {
   List<FFFoodDetail> foodListHistory = [];
-  FlistfoodVariationCubit() : super(null);
+  FlistfoodVariationCubit() : super(FlistfoodVariationInitialState());
 
   void setAlternative({
     required int foodId,
@@ -21,7 +22,7 @@ class FlistfoodVariationCubit extends Cubit<FFProduct?> {
     product.newPrice -= selectedFood?.price ?? 0.0;
     product.newPrice += food?.price ?? 0.0;
 
-    emit(product);
+    emit(FlistfoodVariationSuccessState(product));
   }
 
   void setCookingType({
@@ -31,7 +32,7 @@ class FlistfoodVariationCubit extends Cubit<FFProduct?> {
     product.cookingTypes?.firstWhere((e) => e.isSelected == true).isSelected = false;
     product.cookingTypes?.firstWhere((e) => e.id == cookingTypeId).isSelected = true;
 
-    emit(product);
+    emit(FlistfoodVariationSuccessState(product));
     return;
   }
 
@@ -54,7 +55,7 @@ class FlistfoodVariationCubit extends Cubit<FFProduct?> {
         }
       }
 
-      emit(product);
+      emit(FlistfoodVariationSuccessState(product));
       return;
     }
   }
@@ -89,7 +90,7 @@ class FlistfoodVariationCubit extends Cubit<FFProduct?> {
             product.newPrice -= selectedfood.variationPrice ?? 0;
           }
         }
-        emit(product);
+        emit(FlistfoodVariationSuccessState(product));
         break;
 
       //* Massimi ingredienti gratuiti -----------------------------------------
@@ -106,7 +107,7 @@ class FlistfoodVariationCubit extends Cubit<FFProduct?> {
           foodList.foods?.forEach((e) => e.isFree = false);
           foodList.foods?.where((e) => e.selected).forEach((e) => e.isFree = true);
         }
-        emit(product);
+        emit(FlistfoodVariationSuccessState(product));
         break;
 
       //* Massimi ingredienti gratuiti e i successivi con costo ----------------
@@ -163,7 +164,7 @@ class FlistfoodVariationCubit extends Cubit<FFProduct?> {
         if (foodList.foods?.any((e) => e.selected) == false) {
           foodList.foods?.forEach((e) => e.hiddenPrice = true);
         }
-        emit(product);
+        emit(FlistfoodVariationSuccessState(product));
         break;
 
       //* Illimitati e gratuiti ------------------------------------------------
@@ -176,10 +177,10 @@ class FlistfoodVariationCubit extends Cubit<FFProduct?> {
         } else if (selectedfood.selected == false) {
           product.newPrice -= selectedfood.variationPrice ?? 0;
         }
-        emit(product);
+        emit(FlistfoodVariationSuccessState(product));
         break;
       default:
-        emit(product);
+        emit(FlistfoodVariationSuccessState(product));
         break;
     }
   }
@@ -267,7 +268,7 @@ class FlistfoodVariationCubit extends Cubit<FFProduct?> {
         }
       }
     }
-    emit(product);
+    emit(FlistfoodVariationSuccessState(product));
     return;
   }
 }
