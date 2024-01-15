@@ -335,7 +335,7 @@ class FlistfoodOrderBloc extends Bloc<FlistfoodOrderEvent, FlistfoodOrderState> 
       emit(FlistfoodOrderState.loading(order: order));
 
       if (order == null) {
-        const FlistfoodOrderState.send(orderId: null);
+        FlistfoodOrderState.send(orderId: null, totalPrice: order?.totalPrice ?? 0.0);
         return;
       }
 
@@ -405,7 +405,7 @@ class FlistfoodOrderBloc extends Bloc<FlistfoodOrderEvent, FlistfoodOrderState> 
       await saveAllOrders(orders: orders ?? []);
       orders = orders;
 
-      emit(FlistfoodOrderState.send(orderId: orderResponse));
+      emit(FlistfoodOrderState.send(orderId: orderResponse, totalPrice: order.totalPrice ?? 0.0));
       return;
     });
 
