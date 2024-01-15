@@ -1,26 +1,21 @@
 import 'dart:convert';
-import 'package:equatable/equatable.dart';
 import 'package:flistfood_order/product_model.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-part 'flistfood_variation_state.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 
-class FoodListModeEnum {
-  static const freeChoise = 0;
-  static const maxIngredientWithCost = 1;
-  static const maxIngredientFree = 2;
-  static const maxFreeAndOtherWithCost = 3;
-}
+part 'flistfood_variation_state.dart';
+part 'flistfood_variation_cubit.freezed.dart';
 
 class FlistfoodVariationCubit extends Cubit<FlistfoodVariationState> {
   List<FFFoodDetail> foodListHistory = [];
-  FlistfoodVariationCubit() : super(FlistfoodVariationInitialState());
+  FlistfoodVariationCubit() : super(const FlistfoodVariationState.initial());
 
   void setAlternative({
     required int foodId,
     required FFAlternative alternative,
     required FFProduct product,
   }) {
-    emit(FlistfoodVariationLoadingState(product));
+    emit(FlistfoodVariationState.loading(product: product));
     FFFood? selectedFood = alternative.foods?.firstWhere((e) => e.isSelected == true);
     FFFood? food = alternative.foods?.firstWhere((e) => e.foodId == foodId);
 
@@ -30,18 +25,18 @@ class FlistfoodVariationCubit extends Cubit<FlistfoodVariationState> {
     product.newPrice -= selectedFood?.price ?? 0.0;
     product.newPrice += food?.price ?? 0.0;
 
-    emit(FlistfoodVariationSuccessState(product));
+    emit(FlistfoodVariationState.success(product: product));
   }
 
   void setCookingType({
     required int cookingTypeId,
     required FFProduct product,
   }) {
-    emit(FlistfoodVariationLoadingState(product));
+    emit(FlistfoodVariationState.loading(product: product));
     product.cookingTypes?.firstWhere((e) => e.isSelected == true).isSelected = false;
     product.cookingTypes?.firstWhere((e) => e.id == cookingTypeId).isSelected = true;
 
-    emit(FlistfoodVariationSuccessState(product));
+    emit(FlistfoodVariationState.success(product: product));
     return;
   }
 
@@ -51,7 +46,7 @@ class FlistfoodVariationCubit extends Cubit<FlistfoodVariationState> {
     required FFProduct product,
   }) {
     if (ingredient.canRemove) {
-      emit(FlistfoodVariationLoadingState(product));
+      emit(FlistfoodVariationState.loading(product: product));
       FFIngredient selectedIngridient =
           product.ingredients!.firstWhere((e) => e.foodId == ingredient.foodId);
 
@@ -65,7 +60,7 @@ class FlistfoodVariationCubit extends Cubit<FlistfoodVariationState> {
         }
       }
 
-      emit(FlistfoodVariationSuccessState(product));
+      emit(FlistfoodVariationState.success(product: product));
       return;
     }
   }
@@ -76,7 +71,7 @@ class FlistfoodVariationCubit extends Cubit<FlistfoodVariationState> {
     required bool selected,
     required FFProduct product,
   }) {
-    emit(FlistfoodVariationLoadingState(product));
+    emit(FlistfoodVariationState.loading(product: product));
     FFFoodListsDefinition foodListsDefinitionSelected =
         product.foodListsDefinition!.firstWhere((e) => e.foodListId == foodList.id);
     int mode = foodListsDefinitionSelected.mode;
@@ -85,7 +80,7 @@ class FlistfoodVariationCubit extends Cubit<FlistfoodVariationState> {
 
     switch (mode) {
       //* Massimi ingredienti con costo ----------------------------------------
-      case FoodListModeEnum.maxIngredientWithCost:
+      case _FoodListModeEnum.maxIngredientWithCost:
         for (FFFoodDetail food in foodList.foods!.where((e) => e.selected)) {
           selectedIngredients.add(food);
         }
@@ -101,11 +96,11 @@ class FlistfoodVariationCubit extends Cubit<FlistfoodVariationState> {
             product.newPrice -= selectedfood.variationPrice ?? 0;
           }
         }
-        emit(FlistfoodVariationSuccessState(product));
+        emit(FlistfoodVariationState.success(product: product));
         break;
 
       //* Massimi ingredienti gratuiti -----------------------------------------
-      case FoodListModeEnum.maxIngredientFree:
+      case _FoodListModeEnum.maxIngredientFree:
         for (FFFoodDetail food in foodList.foods!.where((e) => e.selected)) {
           selectedIngredients.add(food);
         }
@@ -118,11 +113,11 @@ class FlistfoodVariationCubit extends Cubit<FlistfoodVariationState> {
           foodList.foods?.forEach((e) => e.isFree = false);
           foodList.foods?.where((e) => e.selected).forEach((e) => e.isFree = true);
         }
-        emit(FlistfoodVariationSuccessState(product));
+        emit(FlistfoodVariationState.success(product: product));
         break;
 
       //* Massimi ingredienti gratuiti e i successivi con costo ----------------
-      case FoodListModeEnum.maxFreeAndOtherWithCost:
+      case _FoodListModeEnum.maxFreeAndOtherWithCost:
         FFFoodDetail selectedfood = foodList.foods!.firstWhere((e) => e.id == foodId);
         selectedfood.selected = selected;
 
@@ -175,11 +170,11 @@ class FlistfoodVariationCubit extends Cubit<FlistfoodVariationState> {
         if (foodList.foods?.any((e) => e.selected) == false) {
           foodList.foods?.forEach((e) => e.hiddenPrice = true);
         }
-        emit(FlistfoodVariationSuccessState(product));
+        emit(FlistfoodVariationState.success(product: product));
         break;
 
       //* Illimitati e gratuiti ------------------------------------------------
-      case FoodListModeEnum.freeChoise:
+      case _FoodListModeEnum.freeChoise:
         FFFoodDetail selectedfood = foodList.foods!.firstWhere((e) => e.id == foodId);
         selectedfood.selected = selected;
 
@@ -188,10 +183,10 @@ class FlistfoodVariationCubit extends Cubit<FlistfoodVariationState> {
         } else if (selectedfood.selected == false) {
           product.newPrice -= selectedfood.variationPrice ?? 0;
         }
-        emit(FlistfoodVariationSuccessState(product));
+        emit(FlistfoodVariationState.success(product: product));
         break;
       default:
-        emit(FlistfoodVariationSuccessState(product));
+        emit(FlistfoodVariationState.success(product: product));
         break;
     }
   }
@@ -267,11 +262,11 @@ class FlistfoodVariationCubit extends Cubit<FlistfoodVariationState> {
           product.foodListsDefinition!.any((e) => e.foodListId == foodList.id)) {
         var mode = product.foodListsDefinition!.firstWhere((e) => e.foodListId == foodList.id).mode;
 
-        if (mode == FoodListModeEnum.maxFreeAndOtherWithCost ||
-            mode == FoodListModeEnum.maxIngredientFree) {
+        if (mode == _FoodListModeEnum.maxFreeAndOtherWithCost ||
+            mode == _FoodListModeEnum.maxIngredientFree) {
           foodList.foods?.forEach((e) => e.hiddenPrice = true);
         }
-        if (mode == FoodListModeEnum.maxIngredientWithCost) {
+        if (mode == _FoodListModeEnum.maxIngredientWithCost) {
           foodList.foods?.forEach((e) => e.hiddenPrice = false);
         }
         for (FFFoodDetail food in foodList.foods ?? []) {
@@ -279,7 +274,14 @@ class FlistfoodVariationCubit extends Cubit<FlistfoodVariationState> {
         }
       }
     }
-    emit(FlistfoodVariationSuccessState(product));
+    emit(FlistfoodVariationState.success(product: product));
     return;
   }
+}
+
+class _FoodListModeEnum {
+  static const freeChoise = 0;
+  static const maxIngredientWithCost = 1;
+  static const maxIngredientFree = 2;
+  static const maxFreeAndOtherWithCost = 3;
 }
