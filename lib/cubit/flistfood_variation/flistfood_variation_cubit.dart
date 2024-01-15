@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:developer';
 import 'package:equatable/equatable.dart';
 import 'package:flistfood_order/flistfood_order.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -14,7 +13,7 @@ class FlistfoodVariationCubit extends Cubit<FlistfoodVariationState> {
     required FFAlternative alternative,
     required FFProduct product,
   }) {
-    log(jsonEncode(product));
+    emit(FlistfoodVariationLoadingState(product));
     FFFood? selectedFood = alternative.foods?.firstWhere((e) => e.isSelected == true);
     FFFood? food = alternative.foods?.firstWhere((e) => e.foodId == foodId);
 
@@ -24,7 +23,6 @@ class FlistfoodVariationCubit extends Cubit<FlistfoodVariationState> {
     product.newPrice -= selectedFood?.price ?? 0.0;
     product.newPrice += food?.price ?? 0.0;
 
-    log(jsonEncode(product));
     emit(FlistfoodVariationSuccessState(product));
   }
 
@@ -32,6 +30,7 @@ class FlistfoodVariationCubit extends Cubit<FlistfoodVariationState> {
     required int cookingTypeId,
     required FFProduct product,
   }) {
+    emit(FlistfoodVariationLoadingState(product));
     product.cookingTypes?.firstWhere((e) => e.isSelected == true).isSelected = false;
     product.cookingTypes?.firstWhere((e) => e.id == cookingTypeId).isSelected = true;
 
@@ -45,6 +44,7 @@ class FlistfoodVariationCubit extends Cubit<FlistfoodVariationState> {
     required FFProduct product,
   }) {
     if (ingredient.canRemove) {
+      emit(FlistfoodVariationLoadingState(product));
       FFIngredient selectedIngridient =
           product.ingredients!.firstWhere((e) => e.foodId == ingredient.foodId);
 
@@ -69,6 +69,7 @@ class FlistfoodVariationCubit extends Cubit<FlistfoodVariationState> {
     required bool selected,
     required FFProduct product,
   }) {
+    emit(FlistfoodVariationLoadingState(product));
     FFFoodListsDefinition foodListsDefinitionSelected =
         product.foodListsDefinition!.firstWhere((e) => e.foodListId == foodList.id);
     int mode = foodListsDefinitionSelected.mode;
