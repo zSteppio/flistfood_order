@@ -9,7 +9,13 @@ sealed class FlistfoodOrderState extends Equatable {
 
 final class FlistfoodOrderInitial extends FlistfoodOrderState {}
 
-final class FlistfoodOrderLoadingState extends FlistfoodOrderState {}
+final class FlistfoodOrderLoadingState extends FlistfoodOrderState {
+  final FFOrder? order;
+  const FlistfoodOrderLoadingState({required this.order});
+
+  @override
+  List<Object?> get props => [order];
+}
 
 final class FlistfoodOrderErrorState extends FlistfoodOrderState {
   final bool isUnauthenticated;
