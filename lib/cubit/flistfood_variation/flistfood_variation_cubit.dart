@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 import 'package:equatable/equatable.dart';
 import 'package:flistfood_order/flistfood_order.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -13,6 +14,7 @@ class FlistfoodVariationCubit extends Cubit<FlistfoodVariationState> {
     required FFAlternative alternative,
     required FFProduct product,
   }) {
+    log(jsonEncode(product));
     FFFood? selectedFood = alternative.foods?.firstWhere((e) => e.isSelected == true);
     FFFood? food = alternative.foods?.firstWhere((e) => e.foodId == foodId);
 
@@ -22,6 +24,7 @@ class FlistfoodVariationCubit extends Cubit<FlistfoodVariationState> {
     product.newPrice -= selectedFood?.price ?? 0.0;
     product.newPrice += food?.price ?? 0.0;
 
+    log(jsonEncode(product));
     emit(FlistfoodVariationSuccessState(product));
   }
 
