@@ -1,8 +1,15 @@
 import 'dart:convert';
 import 'package:equatable/equatable.dart';
-import 'package:flistfood_order/flistfood_order.dart';
+import 'package:flistfood_order/product_model.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 part 'flistfood_variation_state.dart';
+
+class FoodListModeEnum {
+  static const freeChoise = 0;
+  static const maxIngredientWithCost = 1;
+  static const maxIngredientFree = 2;
+  static const maxFreeAndOtherWithCost = 3;
+}
 
 class FlistfoodVariationCubit extends Cubit<FlistfoodVariationState> {
   List<FFFoodDetail> foodListHistory = [];

@@ -1,4 +1,7 @@
-part of 'flistfood_order.dart';
+import 'package:copy_with_extension/copy_with_extension.dart';
+import 'package:json_annotation/json_annotation.dart';
+
+part 'product_model.g.dart';
 
 @CopyWith()
 @JsonSerializable(includeIfNull: false, explicitToJson: true)
