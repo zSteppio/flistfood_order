@@ -2,24 +2,28 @@ import 'dart:convert';
 import 'dart:developer';
 
 import 'package:dio/dio.dart';
-import 'package:equatable/equatable.dart';
 import 'package:flistfood_order/order_local_storage.dart';
 import 'package:flistfood_order/order_model.dart';
 import 'package:flistfood_order/product_model.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import 'package:freezed_annotation/freezed_annotation.dart';
+
 part 'flistfood_order_event.dart';
+
 part 'flistfood_order_state.dart';
 
+part 'flistfood_order_bloc.freezed.dart';
+
 class FlistfoodOrderBloc extends Bloc<FlistfoodOrderEvent, FlistfoodOrderState> {
-  FlistfoodOrderBloc() : super(FlistfoodOrderInitial()) {
-    on<GetOrderByServicePoint>((event, emit) async {
-      emit(const FlistfoodOrderLoadingState(order: null));
+  FlistfoodOrderBloc() : super(const FlistfoodOrderState.initial()) {
+    on<_GetOrderByServicePoint>((event, emit) async {
+      emit(const FlistfoodOrderState.loading(order: null));
       FFOrder? order = await getCurrentOrder(currentServicePoint: event.servicePointId);
-      emit(FlistfoodOrderSuccessState(order: order));
+      emit(FlistfoodOrderState.success(order: order));
     });
 
-    on<AddProductOrDetailToORder>((event, emit) async {
+    on<_AddProductOrDetailToORder>((event, emit) async {
       FFProduct? product;
       FFOrder? order;
       FFDetail? detailProduct;
@@ -37,7 +41,7 @@ class FlistfoodOrderBloc extends Bloc<FlistfoodOrderEvent, FlistfoodOrderState> 
       bool isDelivery = event.isDelivery;
 
       order = await getCurrentOrder(currentServicePoint: currentServicePoint);
-      emit(FlistfoodOrderLoadingState(order: order));
+      emit(FlistfoodOrderState.loading(order: order));
 
       final double servicePrice = (deliveryCost ?? 0.0) + (deliveryServicePrice ?? 0.0);
 
@@ -224,11 +228,11 @@ class FlistfoodOrderBloc extends Bloc<FlistfoodOrderEvent, FlistfoodOrderState> 
 
       await saveCurrentOrder(newOrder: order, currentServicePoint: currentServicePoint);
 
-      emit(FlistfoodOrderSuccessState(order: order));
+      emit(FlistfoodOrderState.success(order: order));
       return;
     });
 
-    on<RemoveProductToOrder>((event, emit) async {
+    on<_RemoveProductToOrder>((event, emit) async {
       FFProduct? product;
       FFOrder? order;
       List<FFOrder>? orders;
@@ -245,7 +249,7 @@ class FlistfoodOrderBloc extends Bloc<FlistfoodOrderEvent, FlistfoodOrderState> 
       bool isDelivery = event.isDelivery;
       order = await getCurrentOrder(currentServicePoint: currentServicePoint);
 
-      emit(FlistfoodOrderLoadingState(order: order));
+      emit(FlistfoodOrderState.loading(order: order));
 
       if (productJson != null) {
         product = FFProduct.fromJson(jsonDecode(productJson));
@@ -309,11 +313,11 @@ class FlistfoodOrderBloc extends Bloc<FlistfoodOrderEvent, FlistfoodOrderState> 
           await saveAllOrders(orders: orders ?? []);
         }
       }
-      emit(FlistfoodOrderSuccessState(order: order));
+      emit(FlistfoodOrderState.success(order: order));
       return;
     });
 
-    on<SendOrder>((event, emit) async {
+    on<_SendOrder>((event, emit) async {
       String? orderId = event.orderId;
       String currentServicePoint = event.currentServicePoint;
       String? seatNumber = event.seatNumber;
@@ -328,10 +332,10 @@ class FlistfoodOrderBloc extends Bloc<FlistfoodOrderEvent, FlistfoodOrderState> 
       FFOrderID? orderResponse;
 
       FFOrder? order = await getCurrentOrder(currentServicePoint: currentServicePoint);
-      emit(FlistfoodOrderLoadingState(order: order));
+      emit(FlistfoodOrderState.loading(order: order));
 
       if (order == null) {
-        const FlistfoodOrderSendState(orderId: null);
+        const FlistfoodOrderState.send(orderId: null);
         return;
       }
 
@@ -387,11 +391,11 @@ class FlistfoodOrderBloc extends Bloc<FlistfoodOrderEvent, FlistfoodOrderState> 
       } catch (e) {
         _logError(e.toString(), name: 'Invio ordine errore');
         if (e.toString().contains('401')) {
-          emit(const FlistfoodOrderErrorState(isUnauthenticated: true));
+          emit(const FlistfoodOrderState.error(isUnauthenticated: true));
           return;
         }
         _logError((jsonEncode(order)), name: 'Body ordine');
-        emit(const FlistfoodOrderErrorState(isUnauthenticated: false));
+        emit(const FlistfoodOrderState.error(isUnauthenticated: false));
         return;
       }
       _logInfo('Eliminazione ordine inviato', name: 'After order');
@@ -401,28 +405,28 @@ class FlistfoodOrderBloc extends Bloc<FlistfoodOrderEvent, FlistfoodOrderState> 
       await saveAllOrders(orders: orders ?? []);
       orders = orders;
 
-      emit(FlistfoodOrderSendState(orderId: orderResponse));
+      emit(FlistfoodOrderState.send(orderId: orderResponse));
       return;
     });
 
-    on<DeleteOrderByServicePointId>((event, emit) async {
-      emit(const FlistfoodOrderLoadingState(order: null));
+    on<_DeleteOrderByServicePoint>((event, emit) async {
+      emit(const FlistfoodOrderState.loading(order: null));
       List<FFOrder>? orders = await getAllOrders();
 
       orders?.removeWhere((e) => e.servicePointId == event.servicePointId);
       await saveAllOrders(orders: orders ?? []);
       orders = orders;
 
-      emit(const FlistfoodOrderDeletedState());
+      emit(const FlistfoodOrderState.deleted());
     });
 
-    on<RemoveAllOrder>((event, emit) async {
+    on<_RemoveAllOrder>((event, emit) async {
       await deleteAllOrders();
     });
   }
 
   void getOrderByServicePoint({required String servicePointId}) =>
-      add(GetOrderByServicePoint(servicePointId: servicePointId));
+      add(_GetOrderByServicePoint(servicePointId: servicePointId));
 
   void addProductOrDetailToORder({
     required String currentServicePoint,
@@ -437,7 +441,7 @@ class FlistfoodOrderBloc extends Bloc<FlistfoodOrderEvent, FlistfoodOrderState> 
     required double? deliveryServicePrice,
     required bool isDelivery,
   }) =>
-      add(AddProductOrDetailToORder(
+      add(_AddProductOrDetailToORder(
         currentServicePoint: currentServicePoint,
         productJson: productJson,
         detailProductJson: detailProductJson,
@@ -464,7 +468,7 @@ class FlistfoodOrderBloc extends Bloc<FlistfoodOrderEvent, FlistfoodOrderState> 
     required bool isDelivery,
   }) =>
       add(
-        RemoveProductToOrder(
+        _RemoveProductToOrder(
           currentServicePoint: currentServicePoint,
           productJson: productJson,
           detailProductJson: detailProductJson,
@@ -492,7 +496,7 @@ class FlistfoodOrderBloc extends Bloc<FlistfoodOrderEvent, FlistfoodOrderState> 
     required String language,
   }) =>
       add(
-        SendOrder(
+        _SendOrder(
           orderId: orderId,
           currentServicePoint: currentServicePoint,
           seatNumber: seatNumber,
@@ -507,11 +511,10 @@ class FlistfoodOrderBloc extends Bloc<FlistfoodOrderEvent, FlistfoodOrderState> 
         ),
       );
 
-  void deleteOrderByServicePoint({required String servicePointId}) => add(
-        DeleteOrderByServicePointId(servicePointId: servicePointId),
-      );
+  void deleteOrderByServicePoint({required String servicePointId}) =>
+      add(_DeleteOrderByServicePoint(servicePointId: servicePointId));
 
-  void removeAllOrder() => add(const RemoveAllOrder());
+  void removeAllOrder() => add(const _RemoveAllOrder());
 
   void _log(String message, {String? name}) {
     log('\x1B[32m$message\x1B[0m', name: name ?? 'Ordine');

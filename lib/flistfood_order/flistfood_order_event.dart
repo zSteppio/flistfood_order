@@ -1,154 +1,53 @@
 part of 'flistfood_order_bloc.dart';
 
-sealed class FlistfoodOrderEvent extends Equatable {
-  const FlistfoodOrderEvent();
+@freezed
+class FlistfoodOrderEvent with _$FlistfoodOrderEvent {
+  const factory FlistfoodOrderEvent.getOrderByServicePoint({required String servicePointId}) =
+      _GetOrderByServicePoint;
 
-  @override
-  List<Object?> get props => [];
-}
+  const factory FlistfoodOrderEvent.deleteOrderByServicePoint({required String servicePointId}) =
+      _DeleteOrderByServicePoint;
 
-class GetOrderByServicePoint extends FlistfoodOrderEvent {
-  final String servicePointId;
-  const GetOrderByServicePoint({required this.servicePointId});
+  const factory FlistfoodOrderEvent.addProductOrDetailToORder({
+    required String currentServicePoint,
+    String? productJson,
+    String? detailProductJson,
+    String? formatProductJson,
+    required String ownerId,
+    required String ownerName,
+    required String? userId,
+    required DateTime opneDate,
+    required double? deliveryCost,
+    required double? deliveryServicePrice,
+    required bool isDelivery,
+  }) = _AddProductOrDetailToORder;
 
-  @override
-  List<Object?> get props => [servicePointId];
-}
+  const factory FlistfoodOrderEvent.removeProductToOrder({
+    required String currentServicePoint,
+    String? productJson,
+    String? detailProductJson,
+    required String ownerId,
+    required String? userId,
+    required String ownerName,
+    required DateTime opneDate,
+    required double? deliveryCost,
+    required double? deliveryServicePrice,
+    required bool isDelivery,
+  }) = _RemoveProductToOrder;
 
-class AddProductOrDetailToORder extends FlistfoodOrderEvent {
-  final String currentServicePoint;
-  final String? productJson;
-  final String? detailProductJson;
-  final String? formatProductJson;
-  final String ownerId;
-  final String ownerName;
-  final String? userId;
-  final DateTime opneDate;
-  final double? deliveryCost;
-  final double? deliveryServicePrice;
-  final bool isDelivery;
-  const AddProductOrDetailToORder({
-    required this.currentServicePoint,
-    this.productJson,
-    this.detailProductJson,
-    this.formatProductJson,
-    required this.ownerId,
-    required this.ownerName,
-    required this.userId,
-    required this.opneDate,
-    required this.deliveryCost,
-    required this.deliveryServicePrice,
-    required this.isDelivery,
-  });
+  const factory FlistfoodOrderEvent.sendOrder({
+    required String? orderId,
+    required String currentServicePoint,
+    required String? seatNumber,
+    required int? hour,
+    required int? minute,
+    required String note,
+    required FFDeliveryInfo? deliveryInfo,
+    required String? token,
+    required bool isAnonymous,
+    required String apiBaseUrl,
+    required String language,
+  }) = _SendOrder;
 
-  @override
-  List<Object?> get props => [
-        currentServicePoint,
-        productJson,
-        detailProductJson,
-        formatProductJson,
-        ownerId,
-        ownerName,
-        userId,
-        opneDate,
-        deliveryCost,
-        deliveryServicePrice,
-        isDelivery,
-      ];
-}
-
-class RemoveProductToOrder extends FlistfoodOrderEvent {
-  final String currentServicePoint;
-  final String? productJson;
-  final String? detailProductJson;
-  final String ownerId;
-  final String? userId;
-  final String ownerName;
-  final DateTime opneDate;
-  final double? deliveryCost;
-  final double? deliveryServicePrice;
-  final bool isDelivery;
-  const RemoveProductToOrder({
-    required this.currentServicePoint,
-    this.productJson,
-    this.detailProductJson,
-    required this.ownerId,
-    required this.userId,
-    required this.ownerName,
-    required this.opneDate,
-    required this.deliveryCost,
-    required this.deliveryServicePrice,
-    required this.isDelivery,
-  });
-
-  @override
-  List<Object?> get props => [
-        currentServicePoint,
-        productJson,
-        detailProductJson,
-        ownerId,
-        ownerName,
-        userId,
-        opneDate,
-        deliveryCost,
-        deliveryServicePrice,
-        isDelivery,
-      ];
-}
-
-class DeleteOrderByServicePointId extends FlistfoodOrderEvent {
-  final String servicePointId;
-  const DeleteOrderByServicePointId({required this.servicePointId});
-
-  @override
-  List<Object?> get props => [servicePointId];
-}
-
-class SendOrder extends FlistfoodOrderEvent {
-  final String? orderId;
-  final String currentServicePoint;
-  final String? seatNumber;
-  final int? hour;
-  final int? minute;
-  final String note;
-  final FFDeliveryInfo? deliveryInfo;
-  final String? token;
-  final bool isAnonymous;
-  final String apiBaseUrl;
-  final String language;
-  const SendOrder({
-    required this.orderId,
-    required this.currentServicePoint,
-    required this.seatNumber,
-    required this.hour,
-    required this.minute,
-    required this.note,
-    required this.deliveryInfo,
-    required this.token,
-    required this.isAnonymous,
-    required this.apiBaseUrl,
-    required this.language,
-  });
-
-  @override
-  List<Object?> get props => [
-        orderId,
-        currentServicePoint,
-        seatNumber,
-        hour,
-        minute,
-        note,
-        deliveryInfo,
-        token,
-        isAnonymous,
-        apiBaseUrl,
-        language,
-      ];
-}
-
-class RemoveAllOrder extends FlistfoodOrderEvent {
-  const RemoveAllOrder();
-
-  @override
-  List<Object?> get props => [];
+  const factory FlistfoodOrderEvent.removeAllOrder() = _RemoveAllOrder;
 }
