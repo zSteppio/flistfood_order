@@ -182,9 +182,17 @@ class FlistfoodOrderBloc extends Bloc<FlistfoodOrderEvent, FlistfoodOrderState> 
           totalPrice += servicePrice;
         }
 
+        int quantityVariation = 0;
+        for (FFDetail q in order.details) {
+          quantityVariation = quantityVariation + q.quantity;
+        }
+
+        final int totalQuantity = quantityVariation;
+
         order = FFOrder(
           servicePointId: currentServicePoint,
           details: order.details,
+          totalQuantity: totalQuantity,
           source: 'A',
           userId: userId,
           ownerId: ownerId,
@@ -218,6 +226,7 @@ class FlistfoodOrderBloc extends Bloc<FlistfoodOrderEvent, FlistfoodOrderState> 
           servicePointId: currentServicePoint,
           source: 'A',
           details: orderProducts,
+          totalQuantity: 1,
           userId: userId,
           ownerId: ownerId,
           ownerName: ownerName,
@@ -225,9 +234,6 @@ class FlistfoodOrderBloc extends Bloc<FlistfoodOrderEvent, FlistfoodOrderState> 
           openDate: opneDate,
         );
       }
-
-      log(order.totalQuantity.toString(), name: 'totalQUantiti');
-      order.totalQuantity = order.totalQuantity + 1;
 
       await saveCurrentOrder(newOrder: order, currentServicePoint: currentServicePoint);
 
@@ -297,19 +303,24 @@ class FlistfoodOrderBloc extends Bloc<FlistfoodOrderEvent, FlistfoodOrderState> 
           totalPrice += deliveryServicePrice ?? 0.0;
         }
 
+        int quantityVariation = 0;
+        for (FFDetail q in order.details) {
+          quantityVariation = quantityVariation + q.quantity;
+        }
+
+        final int totalQuantity = quantityVariation;
+
         order = FFOrder(
           servicePointId: currentServicePoint,
           source: 'A',
           details: order.details,
+          totalQuantity: totalQuantity,
           userId: userId,
           ownerId: ownerId,
           ownerName: ownerName,
           totalPrice: totalPrice,
           openDate: opneDate,
         );
-
-        order.totalQuantity = order.totalQuantity - 1;
-        log(order.totalQuantity.toString(), name: 'totalQUantiti');
 
         await saveCurrentOrder(newOrder: order, currentServicePoint: currentServicePoint);
 
