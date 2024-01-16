@@ -226,6 +226,7 @@ class FlistfoodOrderBloc extends Bloc<FlistfoodOrderEvent, FlistfoodOrderState> 
         );
       }
 
+      log(order.totalQuantity.toString(), name: 'totalQUantiti');
       order.totalQuantity = order.totalQuantity + 1;
 
       await saveCurrentOrder(newOrder: order, currentServicePoint: currentServicePoint);
@@ -308,6 +309,7 @@ class FlistfoodOrderBloc extends Bloc<FlistfoodOrderEvent, FlistfoodOrderState> 
         );
 
         order.totalQuantity = order.totalQuantity - 1;
+        log(order.totalQuantity.toString(), name: 'totalQUantiti');
 
         await saveCurrentOrder(newOrder: order, currentServicePoint: currentServicePoint);
 
