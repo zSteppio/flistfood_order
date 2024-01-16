@@ -20,7 +20,12 @@ class FlistfoodOrderBloc extends Bloc<FlistfoodOrderEvent, FlistfoodOrderState> 
     on<_GetOrderByServicePoint>((event, emit) async {
       emit(const FlistfoodOrderState.loading(order: null));
       FFOrder? order = await getCurrentOrder(currentServicePoint: event.servicePointId);
-      emit(FlistfoodOrderState.success(order: order));
+      emit(FlistfoodOrderState.success(
+        order: order,
+        orderId: null,
+        totalPrice: null,
+        isSended: false,
+      ));
     });
 
     on<_AddProductOrDetailToORder>((event, emit) async {
@@ -237,7 +242,12 @@ class FlistfoodOrderBloc extends Bloc<FlistfoodOrderEvent, FlistfoodOrderState> 
 
       await saveCurrentOrder(newOrder: order, currentServicePoint: currentServicePoint);
 
-      emit(FlistfoodOrderState.success(order: order));
+      emit(FlistfoodOrderState.success(
+        order: order,
+        orderId: null,
+        totalPrice: null,
+        isSended: false,
+      ));
       return;
     });
 
@@ -330,7 +340,12 @@ class FlistfoodOrderBloc extends Bloc<FlistfoodOrderEvent, FlistfoodOrderState> 
           await saveAllOrders(orders: orders ?? []);
         }
       }
-      emit(FlistfoodOrderState.success(order: order));
+      emit(FlistfoodOrderState.success(
+        order: order,
+        orderId: null,
+        totalPrice: null,
+        isSended: false,
+      ));
       return;
     });
 
@@ -352,7 +367,12 @@ class FlistfoodOrderBloc extends Bloc<FlistfoodOrderEvent, FlistfoodOrderState> 
       emit(FlistfoodOrderState.loading(order: order));
 
       if (order == null) {
-        FlistfoodOrderState.send(orderId: null, totalPrice: order?.totalPrice ?? 0.0);
+        FlistfoodOrderState.success(
+          orderId: null,
+          totalPrice: order?.totalPrice ?? 0.0,
+          order: null,
+          isSended: true,
+        );
         return;
       }
 
@@ -422,7 +442,12 @@ class FlistfoodOrderBloc extends Bloc<FlistfoodOrderEvent, FlistfoodOrderState> 
       await saveAllOrders(orders: orders ?? []);
       orders = orders;
 
-      emit(FlistfoodOrderState.send(orderId: orderResponse, totalPrice: order.totalPrice ?? 0.0));
+      emit(FlistfoodOrderState.success(
+        orderId: orderResponse,
+        totalPrice: order.totalPrice ?? 0.0,
+        isSended: true,
+        order: null,
+      ));
       return;
     });
 
@@ -434,7 +459,12 @@ class FlistfoodOrderBloc extends Bloc<FlistfoodOrderEvent, FlistfoodOrderState> 
       await saveAllOrders(orders: orders ?? []);
       orders = orders;
 
-      emit(const FlistfoodOrderState.success(order: null));
+      emit(const FlistfoodOrderState.success(
+        order: null,
+        orderId: null,
+        totalPrice: null,
+        isSended: false,
+      ));
     });
 
     on<_RemoveAllOrder>((event, emit) async {
