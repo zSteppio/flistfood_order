@@ -13,8 +13,6 @@ class FlistfoodOrderState with _$FlistfoodOrderState {
   const factory FlistfoodOrderState.success({required FFOrder? order}) =
       _FlistfoodOrderSuccessState;
 
-  const factory FlistfoodOrderState.deleted() = _FlistfoodOrderDeletedState;
-
   const factory FlistfoodOrderState.send({
     required FFOrderID? orderId,
     required double totalPrice,

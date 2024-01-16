@@ -434,7 +434,7 @@ class FlistfoodOrderBloc extends Bloc<FlistfoodOrderEvent, FlistfoodOrderState> 
       await saveAllOrders(orders: orders ?? []);
       orders = orders;
 
-      emit(const FlistfoodOrderState.deleted());
+      emit(const FlistfoodOrderState.success(order: null));
     });
 
     on<_RemoveAllOrder>((event, emit) async {
