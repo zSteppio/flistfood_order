@@ -226,6 +226,8 @@ class FlistfoodOrderBloc extends Bloc<FlistfoodOrderEvent, FlistfoodOrderState> 
         );
       }
 
+      order.totalQuantity = order.totalQuantity + 1;
+
       await saveCurrentOrder(newOrder: order, currentServicePoint: currentServicePoint);
 
       emit(FlistfoodOrderState.success(order: order));
@@ -304,6 +306,8 @@ class FlistfoodOrderBloc extends Bloc<FlistfoodOrderEvent, FlistfoodOrderState> 
           totalPrice: totalPrice,
           openDate: opneDate,
         );
+
+        order.totalQuantity = order.totalQuantity - 1;
 
         await saveCurrentOrder(newOrder: order, currentServicePoint: currentServicePoint);
 

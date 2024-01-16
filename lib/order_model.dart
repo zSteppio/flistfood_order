@@ -37,6 +37,7 @@ class FFOrder {
   DateTime? openDate;
   String? ownerName;
   String? expDate;
+  int totalQuantity;
   //int paymentStatus;
 
   FFOrder({
@@ -59,6 +60,7 @@ class FFOrder {
     this.ownerName,
     this.expDate,
     this.number = 0,
+    this.totalQuantity = 0,
     //this.paymentStatus = 0,
   });
 

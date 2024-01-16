@@ -90,6 +90,8 @@ abstract class _$FFOrderCWProxy {
 
   FFOrder totalPrice(double? totalPrice);
 
+  FFOrder totalQuantity(int totalQuantity);
+
   FFOrder userId(String? userId);
 
   /// This function **does support** nullification of nullable fields. All `null` values passed to `non-nullable` fields will be ignored. You can also use `FFOrder(...).copyWith.fieldName(...)` to override fields one at a time with nullification support.
@@ -116,6 +118,7 @@ abstract class _$FFOrderCWProxy {
     String? source,
     String? ticketId,
     double? totalPrice,
+    int? totalQuantity,
     String? userId,
   });
 }
@@ -181,6 +184,10 @@ class _$FFOrderCWProxyImpl implements _$FFOrderCWProxy {
   FFOrder totalPrice(double? totalPrice) => this(totalPrice: totalPrice);
 
   @override
+  FFOrder totalQuantity(int totalQuantity) =>
+      this(totalQuantity: totalQuantity);
+
+  @override
   FFOrder userId(String? userId) => this(userId: userId);
 
   @override
@@ -209,6 +216,7 @@ class _$FFOrderCWProxyImpl implements _$FFOrderCWProxy {
     Object? source = const $CopyWithPlaceholder(),
     Object? ticketId = const $CopyWithPlaceholder(),
     Object? totalPrice = const $CopyWithPlaceholder(),
+    Object? totalQuantity = const $CopyWithPlaceholder(),
     Object? userId = const $CopyWithPlaceholder(),
   }) {
     return FFOrder(
@@ -281,6 +289,11 @@ class _$FFOrderCWProxyImpl implements _$FFOrderCWProxy {
           ? _value.totalPrice
           // ignore: cast_nullable_to_non_nullable
           : totalPrice as double?,
+      totalQuantity:
+          totalQuantity == const $CopyWithPlaceholder() || totalQuantity == null
+              ? _value.totalQuantity
+              // ignore: cast_nullable_to_non_nullable
+              : totalQuantity as int,
       userId: userId == const $CopyWithPlaceholder()
           ? _value.userId
           // ignore: cast_nullable_to_non_nullable
@@ -830,6 +843,7 @@ FFOrder _$FFOrderFromJson(Map<String, dynamic> json) => FFOrder(
       ownerName: json['ownerName'] as String?,
       expDate: json['expDate'] as String?,
       number: json['number'] as int? ?? 0,
+      totalQuantity: json['totalQuantity'] as int? ?? 0,
     );
 
 Map<String, dynamic> _$FFOrderToJson(FFOrder instance) {
@@ -859,6 +873,7 @@ Map<String, dynamic> _$FFOrderToJson(FFOrder instance) {
   writeNotNull('openDate', instance.openDate?.toIso8601String());
   writeNotNull('ownerName', instance.ownerName);
   writeNotNull('expDate', instance.expDate);
+  val['totalQuantity'] = instance.totalQuantity;
   return val;
 }
 
