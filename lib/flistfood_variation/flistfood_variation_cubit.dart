@@ -237,7 +237,7 @@ class FlistfoodVariationCubit extends Cubit<FlistfoodVariationState> {
 
     //* Recupero delle alternative di default
     for (FFAlternative alternative in product.alternatives) {
-      for (FFFood food in alternative.foods ?? []) {
+      for (FFFood food in alternative.foods) {
         food.isSelected = false;
         if (food.foodId == alternative.defaultFoodId) {
           food.isSelected = true;
