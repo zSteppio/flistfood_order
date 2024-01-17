@@ -66,6 +66,15 @@ Future<FFOrder?> getCurrentOrder({required String currentServicePoint}) async {
   return null;
 }
 
+Future<void> deleteCurrentOrder({required String currentServicePointId}) async {
+  List<FFOrder> orders = await getAllOrders() ?? [];
+  if (orders.any((e) => e.servicePointId == currentServicePointId)) {
+    orders.removeWhere((e) => e.servicePointId == currentServicePointId);
+    await saveAllOrders(orders: orders);
+    return;
+  }
+}
+
 Future<void> saveCurrentOrder({
   required FFOrder newOrder,
   required String currentServicePoint,

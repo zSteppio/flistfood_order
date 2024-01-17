@@ -435,12 +435,11 @@ class FlistfoodOrderBloc extends Bloc<FlistfoodOrderEvent, FlistfoodOrderState> 
         emit(const FlistfoodOrderState.error(isUnauthenticated: false));
         return;
       }
+
       _logInfo('Eliminazione ordine inviato', name: 'After order');
-      //* Eliminazione Ordini
-      List<FFOrder>? orders = await getAllOrders();
-      orders?.removeWhere((e) => e.servicePointId == currentServicePoint);
-      await saveAllOrders(orders: orders ?? []);
-      orders = orders;
+
+      //* Eliminazione Ordine
+      deleteCurrentOrder(currentServicePointId: currentServicePoint);
 
       emit(FlistfoodOrderState.success(
         orderId: orderResponse,
@@ -453,11 +452,8 @@ class FlistfoodOrderBloc extends Bloc<FlistfoodOrderEvent, FlistfoodOrderState> 
 
     on<_DeleteOrderByServicePoint>((event, emit) async {
       emit(const FlistfoodOrderState.loading(order: null));
-      List<FFOrder>? orders = await getAllOrders();
 
-      orders?.removeWhere((e) => e.servicePointId == event.servicePointId);
-      await saveAllOrders(orders: orders ?? []);
-      orders = orders;
+      deleteCurrentOrder(currentServicePointId: event.servicePointId);
 
       emit(const FlistfoodOrderState.success(
         order: null,
