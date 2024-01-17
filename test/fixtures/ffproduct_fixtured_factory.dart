@@ -21,6 +21,7 @@ class _FFProductFixtureFactory extends FixtureFactory<FFProduct> {
           preferredCookingTypeId: faker.randomGenerator.integer(9999),
           minOrdinableQuantity: faker.randomGenerator.integer(9999),
           newPrice: faker.randomGenerator.decimal(),
+          price: faker.randomGenerator.decimal(),
           sectionId: faker.randomGenerator.integer(9999),
           formats: FFFormatFixture.factory().makeMany(3),
           ingredients: FFIngredientFixture.factory().makeMany(3),
@@ -29,7 +30,6 @@ class _FFProductFixtureFactory extends FixtureFactory<FFProduct> {
           foodListsDefinition: FFFoodListsDefinitionFixture.factory().makeMany(3),
           foodlists: FFFoodlistFixture.factory().makeMany(3),
           name: faker.lorem.word(),
-          price: faker.randomGenerator.decimal(),
         ),
       );
 }

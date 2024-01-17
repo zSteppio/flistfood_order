@@ -21,7 +21,7 @@ class _FFFoodDetailFixtureFactory extends FixtureFactory<FFFoodDetail> {
           forList: faker.randomGenerator.boolean(),
           productId: faker.randomGenerator.integer(9999),
           fromPlatForm: faker.randomGenerator.boolean(),
-          translations: null,
+          translations: [],
           isFree: faker.randomGenerator.boolean(),
           selected: faker.randomGenerator.boolean(),
           hiddenPrice: faker.randomGenerator.boolean(),

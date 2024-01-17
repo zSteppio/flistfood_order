@@ -13,12 +13,12 @@ class FFProduct {
   double newPrice;
   double price;
   int sectionId;
-  List<FFFormat>? formats;
-  List<FFIngredient>? ingredients;
-  List<FFAlternative>? alternatives;
-  List<FFCookingType>? cookingTypes;
-  List<FFFoodlist>? foodlists;
-  List<FFFoodListsDefinition>? foodListsDefinition;
+  List<FFFormat> formats;
+  List<FFIngredient> ingredients;
+  List<FFAlternative> alternatives;
+  List<FFCookingType> cookingTypes;
+  List<FFFoodlist> foodlists;
+  List<FFFoodListsDefinition> foodListsDefinition;
 
   FFProduct({
     required this.id,
@@ -28,12 +28,12 @@ class FFProduct {
     this.newPrice = 0,
     required this.price,
     this.sectionId = 0,
-    this.formats,
-    this.ingredients,
-    this.alternatives,
-    this.cookingTypes,
-    this.foodListsDefinition,
-    this.foodlists,
+    this.formats = const [],
+    this.ingredients = const [],
+    this.alternatives = const [],
+    this.cookingTypes = const [],
+    this.foodListsDefinition = const [],
+    this.foodlists = const [],
   });
   factory FFProduct.fromJson(Map<String, dynamic> json) => _$FFProductFromJson(json);
   Map<String, dynamic> toJson() => _$FFProductToJson(this);
@@ -88,13 +88,13 @@ class FFAlternative {
   int foodListId;
   String? foodListName;
   int defaultFoodId;
-  List<FFFood>? foods;
+  List<FFFood> foods;
 
   FFAlternative({
     required this.foodListId,
     this.foodListName,
     required this.defaultFoodId,
-    this.foods,
+    this.foods = const [],
   });
 
   factory FFAlternative.fromJson(Map<String, dynamic> json) => _$FFAlternativeFromJson(json);
@@ -170,8 +170,8 @@ class FFFoodlist {
     this.foods,
     this.id,
     this.name,
-    this.priceListIds,
-    this.foodIds,
+    this.priceListIds = const [],
+    this.foodIds = const [],
     this.alternative,
     this.hidden,
   });
@@ -179,8 +179,8 @@ class FFFoodlist {
   List<FFFoodDetail>? foods;
   int? id;
   String? name;
-  List<int>? priceListIds;
-  List<int>? foodIds;
+  List<int> priceListIds;
+  List<int> foodIds;
   bool? alternative;
   bool? hidden;
 
@@ -193,13 +193,13 @@ class FFFoodlist {
 class FFFoodDetail {
   FFFoodDetail({
     this.categoryName,
-    this.allergenIds,
+    this.allergenIds = const [],
     this.productsCounts,
     this.canBeDeleted,
     this.forList,
     this.productId,
     this.fromPlatForm,
-    this.translations,
+    this.translations = const [],
     this.isFree = false,
     this.selected = false,
     this.hiddenPrice = false,
@@ -214,7 +214,7 @@ class FFFoodDetail {
   });
 
   String? categoryName;
-  List<int>? allergenIds;
+  List<int> allergenIds;
   int? productsCounts;
   bool? canBeDeleted;
   bool? forList;
@@ -223,7 +223,7 @@ class FFFoodDetail {
   bool hiddenPrice;
   int? productId;
   bool? fromPlatForm;
-  List<FFTranslation>? translations;
+  List<FFTranslation> translations;
   int? id;
   String? name;
   String? shortName;
