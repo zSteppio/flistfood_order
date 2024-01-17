@@ -16,8 +16,12 @@ class FlistfoodVariationCubit extends Cubit<FlistfoodVariationState> {
     required FFProduct product,
   }) {
     emit(FlistfoodVariationState.loading(product: product));
-    FFFood? selectedFood = alternative.foods?.firstWhere((e) => e.isSelected == true);
-    FFFood? food = alternative.foods?.firstWhere((e) => e.foodId == foodId);
+    FFFood? selectedFood = alternative.foods != null && alternative.foods!.any((e) => e.isSelected)
+        ? alternative.foods?.firstWhere((e) => e.isSelected)
+        : null;
+    FFFood? food = alternative.foods != null && alternative.foods!.any((e) => e.foodId == foodId)
+        ? alternative.foods?.firstWhere((e) => e.foodId == foodId)
+        : null;
 
     selectedFood?.isSelected = false;
     food?.isSelected = true;
