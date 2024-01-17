@@ -50,9 +50,9 @@ void main() {
       'Test FlistfoodVariationCubit con evento SET Alternative, e prodotto aggiornato con prezzo',
       build: () => flistfoodVariationCubit,
       setUp: () {
-        if (alternative.foods != null) {
-          alternative.foods!.first.isSelected = true;
-          alternative.foods![2].foodId = foodId;
+        if (alternative.foods.isNotEmpty) {
+          alternative.foods.first.isSelected = true;
+          alternative.foods[2].foodId = foodId;
         }
       },
       act: (bloc) => bloc.setAlternative(
@@ -63,7 +63,7 @@ void main() {
       verify: (bloc) {
         expect(
           product.newPrice,
-          product.price - alternative.foods!.first.price + alternative.foods![2].price,
+          product.price - alternative.foods.first.price + alternative.foods[2].price,
           reason: 'Prezzo aggiornato',
         );
       },

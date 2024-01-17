@@ -69,7 +69,7 @@ class FlistfoodOrderBloc extends Bloc<FlistfoodOrderEvent, FlistfoodOrderState> 
       if (detailProduct == null) {
         //* Recupero del cookingName selezionato
         for (FFCookingType cookingType in product?.cookingTypes
-                ?.where((e) => e.isSelected && product?.preferredCookingTypeId != e.id) ??
+                .where((e) => e.isSelected && product?.preferredCookingTypeId != e.id) ??
             []) {
           cookingTypeName = cookingType.name ?? '';
           cookingTypeId = cookingType.id;
@@ -77,7 +77,7 @@ class FlistfoodOrderBloc extends Bloc<FlistfoodOrderEvent, FlistfoodOrderState> 
 
         //* Recupero e settaggio delle alternative
         for (FFAlternative alternative in product?.alternatives ?? []) {
-          for (var food in alternative.foods!
+          for (var food in alternative.foods
               .where((e) => e.isSelected == true && alternative.defaultFoodId != e.foodId)) {
             variations.add(FFVariation(
               foodId: food.foodId,
