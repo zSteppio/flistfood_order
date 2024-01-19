@@ -25,7 +25,6 @@ class FlistfoodOrderBloc extends Bloc<FlistfoodOrderEvent, FlistfoodOrderState> 
         orderId: null,
         totalPrice: null,
         isSended: false,
-        isErorrApi: false,
         is401: false,
       ));
     });
@@ -249,7 +248,6 @@ class FlistfoodOrderBloc extends Bloc<FlistfoodOrderEvent, FlistfoodOrderState> 
         orderId: null,
         totalPrice: null,
         isSended: false,
-        isErorrApi: false,
         is401: false,
       ));
       return;
@@ -349,7 +347,6 @@ class FlistfoodOrderBloc extends Bloc<FlistfoodOrderEvent, FlistfoodOrderState> 
         orderId: null,
         totalPrice: null,
         isSended: false,
-        isErorrApi: false,
         is401: false,
       ));
       return;
@@ -378,7 +375,6 @@ class FlistfoodOrderBloc extends Bloc<FlistfoodOrderEvent, FlistfoodOrderState> 
           totalPrice: order?.totalPrice,
           order: order,
           isSended: true,
-          isErorrApi: false,
           is401: false,
         );
         return;
@@ -441,7 +437,6 @@ class FlistfoodOrderBloc extends Bloc<FlistfoodOrderEvent, FlistfoodOrderState> 
             totalPrice: order.totalPrice,
             order: order,
             isSended: true,
-            isErorrApi: true,
             is401: true,
           ));
           return;
@@ -452,7 +447,6 @@ class FlistfoodOrderBloc extends Bloc<FlistfoodOrderEvent, FlistfoodOrderState> 
           totalPrice: order.totalPrice,
           order: order,
           isSended: true,
-          isErorrApi: true,
           is401: false,
         ));
         return;
@@ -468,7 +462,6 @@ class FlistfoodOrderBloc extends Bloc<FlistfoodOrderEvent, FlistfoodOrderState> 
         totalPrice: order.totalPrice ?? 0.0,
         isSended: true,
         order: null,
-        isErorrApi: false,
         is401: false,
       ));
       return;
@@ -484,7 +477,6 @@ class FlistfoodOrderBloc extends Bloc<FlistfoodOrderEvent, FlistfoodOrderState> 
         orderId: null,
         totalPrice: null,
         isSended: false,
-        isErorrApi: false,
         is401: false,
       ));
     });
