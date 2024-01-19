@@ -25,6 +25,8 @@ class FlistfoodOrderBloc extends Bloc<FlistfoodOrderEvent, FlistfoodOrderState> 
         orderId: null,
         totalPrice: null,
         isSended: false,
+        isErorrApi: false,
+        is401: false,
       ));
     });
 
@@ -247,6 +249,8 @@ class FlistfoodOrderBloc extends Bloc<FlistfoodOrderEvent, FlistfoodOrderState> 
         orderId: null,
         totalPrice: null,
         isSended: false,
+        isErorrApi: false,
+        is401: false,
       ));
       return;
     });
@@ -345,6 +349,8 @@ class FlistfoodOrderBloc extends Bloc<FlistfoodOrderEvent, FlistfoodOrderState> 
         orderId: null,
         totalPrice: null,
         isSended: false,
+        isErorrApi: false,
+        is401: false,
       ));
       return;
     });
@@ -369,9 +375,11 @@ class FlistfoodOrderBloc extends Bloc<FlistfoodOrderEvent, FlistfoodOrderState> 
       if (order == null) {
         FlistfoodOrderState.success(
           orderId: null,
-          totalPrice: order?.totalPrice ?? 0.0,
-          order: null,
+          totalPrice: order?.totalPrice,
+          order: order,
           isSended: true,
+          isErorrApi: false,
+          is401: false,
         );
         return;
       }
@@ -428,11 +436,25 @@ class FlistfoodOrderBloc extends Bloc<FlistfoodOrderEvent, FlistfoodOrderState> 
       } catch (e) {
         _logError(e.toString(), name: 'Invio ordine errore');
         if (e.toString().contains('401')) {
-          emit(const FlistfoodOrderState.error(isUnauthenticated: true));
+          emit(FlistfoodOrderState.success(
+            orderId: null,
+            totalPrice: order.totalPrice,
+            order: order,
+            isSended: true,
+            isErorrApi: true,
+            is401: true,
+          ));
           return;
         }
         _logError((jsonEncode(order)), name: 'Body ordine');
-        emit(const FlistfoodOrderState.error(isUnauthenticated: false));
+        emit(FlistfoodOrderState.success(
+          orderId: null,
+          totalPrice: order.totalPrice,
+          order: order,
+          isSended: true,
+          isErorrApi: true,
+          is401: false,
+        ));
         return;
       }
 
@@ -446,6 +468,8 @@ class FlistfoodOrderBloc extends Bloc<FlistfoodOrderEvent, FlistfoodOrderState> 
         totalPrice: order.totalPrice ?? 0.0,
         isSended: true,
         order: null,
+        isErorrApi: false,
+        is401: false,
       ));
       return;
     });
@@ -460,6 +484,8 @@ class FlistfoodOrderBloc extends Bloc<FlistfoodOrderEvent, FlistfoodOrderState> 
         orderId: null,
         totalPrice: null,
         isSended: false,
+        isErorrApi: false,
+        is401: false,
       ));
     });
 

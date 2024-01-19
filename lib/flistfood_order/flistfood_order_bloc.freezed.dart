@@ -2298,9 +2298,8 @@ mixin _$FlistfoodOrderState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function(FFOrder? order) loading,
-    required TResult Function(bool isUnauthenticated) error,
     required TResult Function(FFOrder? order, FFOrderID? orderId,
-            double? totalPrice, bool isSended)
+            double? totalPrice, bool isSended, bool isErorrApi, bool is401)
         success,
   }) =>
       throw _privateConstructorUsedError;
@@ -2308,9 +2307,8 @@ mixin _$FlistfoodOrderState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function(FFOrder? order)? loading,
-    TResult? Function(bool isUnauthenticated)? error,
     TResult? Function(FFOrder? order, FFOrderID? orderId, double? totalPrice,
-            bool isSended)?
+            bool isSended, bool isErorrApi, bool is401)?
         success,
   }) =>
       throw _privateConstructorUsedError;
@@ -2318,9 +2316,8 @@ mixin _$FlistfoodOrderState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function(FFOrder? order)? loading,
-    TResult Function(bool isUnauthenticated)? error,
     TResult Function(FFOrder? order, FFOrderID? orderId, double? totalPrice,
-            bool isSended)?
+            bool isSended, bool isErorrApi, bool is401)?
         success,
     required TResult orElse(),
   }) =>
@@ -2329,7 +2326,6 @@ mixin _$FlistfoodOrderState {
   TResult map<TResult extends Object?>({
     required TResult Function(_FlistfoodOrderInitial value) initial,
     required TResult Function(_FlistfoodOrderLoadingState value) loading,
-    required TResult Function(_FlistfoodOrderErrorState value) error,
     required TResult Function(_FlistfoodOrderSuccessState value) success,
   }) =>
       throw _privateConstructorUsedError;
@@ -2337,7 +2333,6 @@ mixin _$FlistfoodOrderState {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_FlistfoodOrderInitial value)? initial,
     TResult? Function(_FlistfoodOrderLoadingState value)? loading,
-    TResult? Function(_FlistfoodOrderErrorState value)? error,
     TResult? Function(_FlistfoodOrderSuccessState value)? success,
   }) =>
       throw _privateConstructorUsedError;
@@ -2345,7 +2340,6 @@ mixin _$FlistfoodOrderState {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_FlistfoodOrderInitial value)? initial,
     TResult Function(_FlistfoodOrderLoadingState value)? loading,
-    TResult Function(_FlistfoodOrderErrorState value)? error,
     TResult Function(_FlistfoodOrderSuccessState value)? success,
     required TResult orElse(),
   }) =>
@@ -2412,9 +2406,8 @@ class _$FlistfoodOrderInitialImpl implements _FlistfoodOrderInitial {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function(FFOrder? order) loading,
-    required TResult Function(bool isUnauthenticated) error,
     required TResult Function(FFOrder? order, FFOrderID? orderId,
-            double? totalPrice, bool isSended)
+            double? totalPrice, bool isSended, bool isErorrApi, bool is401)
         success,
   }) {
     return initial();
@@ -2425,9 +2418,8 @@ class _$FlistfoodOrderInitialImpl implements _FlistfoodOrderInitial {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function(FFOrder? order)? loading,
-    TResult? Function(bool isUnauthenticated)? error,
     TResult? Function(FFOrder? order, FFOrderID? orderId, double? totalPrice,
-            bool isSended)?
+            bool isSended, bool isErorrApi, bool is401)?
         success,
   }) {
     return initial?.call();
@@ -2438,9 +2430,8 @@ class _$FlistfoodOrderInitialImpl implements _FlistfoodOrderInitial {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function(FFOrder? order)? loading,
-    TResult Function(bool isUnauthenticated)? error,
     TResult Function(FFOrder? order, FFOrderID? orderId, double? totalPrice,
-            bool isSended)?
+            bool isSended, bool isErorrApi, bool is401)?
         success,
     required TResult orElse(),
   }) {
@@ -2455,7 +2446,6 @@ class _$FlistfoodOrderInitialImpl implements _FlistfoodOrderInitial {
   TResult map<TResult extends Object?>({
     required TResult Function(_FlistfoodOrderInitial value) initial,
     required TResult Function(_FlistfoodOrderLoadingState value) loading,
-    required TResult Function(_FlistfoodOrderErrorState value) error,
     required TResult Function(_FlistfoodOrderSuccessState value) success,
   }) {
     return initial(this);
@@ -2466,7 +2456,6 @@ class _$FlistfoodOrderInitialImpl implements _FlistfoodOrderInitial {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_FlistfoodOrderInitial value)? initial,
     TResult? Function(_FlistfoodOrderLoadingState value)? loading,
-    TResult? Function(_FlistfoodOrderErrorState value)? error,
     TResult? Function(_FlistfoodOrderSuccessState value)? success,
   }) {
     return initial?.call(this);
@@ -2477,7 +2466,6 @@ class _$FlistfoodOrderInitialImpl implements _FlistfoodOrderInitial {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_FlistfoodOrderInitial value)? initial,
     TResult Function(_FlistfoodOrderLoadingState value)? loading,
-    TResult Function(_FlistfoodOrderErrorState value)? error,
     TResult Function(_FlistfoodOrderSuccessState value)? success,
     required TResult orElse(),
   }) {
@@ -2562,9 +2550,8 @@ class _$FlistfoodOrderLoadingStateImpl implements _FlistfoodOrderLoadingState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function(FFOrder? order) loading,
-    required TResult Function(bool isUnauthenticated) error,
     required TResult Function(FFOrder? order, FFOrderID? orderId,
-            double? totalPrice, bool isSended)
+            double? totalPrice, bool isSended, bool isErorrApi, bool is401)
         success,
   }) {
     return loading(order);
@@ -2575,9 +2562,8 @@ class _$FlistfoodOrderLoadingStateImpl implements _FlistfoodOrderLoadingState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function(FFOrder? order)? loading,
-    TResult? Function(bool isUnauthenticated)? error,
     TResult? Function(FFOrder? order, FFOrderID? orderId, double? totalPrice,
-            bool isSended)?
+            bool isSended, bool isErorrApi, bool is401)?
         success,
   }) {
     return loading?.call(order);
@@ -2588,9 +2574,8 @@ class _$FlistfoodOrderLoadingStateImpl implements _FlistfoodOrderLoadingState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function(FFOrder? order)? loading,
-    TResult Function(bool isUnauthenticated)? error,
     TResult Function(FFOrder? order, FFOrderID? orderId, double? totalPrice,
-            bool isSended)?
+            bool isSended, bool isErorrApi, bool is401)?
         success,
     required TResult orElse(),
   }) {
@@ -2605,7 +2590,6 @@ class _$FlistfoodOrderLoadingStateImpl implements _FlistfoodOrderLoadingState {
   TResult map<TResult extends Object?>({
     required TResult Function(_FlistfoodOrderInitial value) initial,
     required TResult Function(_FlistfoodOrderLoadingState value) loading,
-    required TResult Function(_FlistfoodOrderErrorState value) error,
     required TResult Function(_FlistfoodOrderSuccessState value) success,
   }) {
     return loading(this);
@@ -2616,7 +2600,6 @@ class _$FlistfoodOrderLoadingStateImpl implements _FlistfoodOrderLoadingState {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_FlistfoodOrderInitial value)? initial,
     TResult? Function(_FlistfoodOrderLoadingState value)? loading,
-    TResult? Function(_FlistfoodOrderErrorState value)? error,
     TResult? Function(_FlistfoodOrderSuccessState value)? success,
   }) {
     return loading?.call(this);
@@ -2627,7 +2610,6 @@ class _$FlistfoodOrderLoadingStateImpl implements _FlistfoodOrderLoadingState {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_FlistfoodOrderInitial value)? initial,
     TResult Function(_FlistfoodOrderLoadingState value)? loading,
-    TResult Function(_FlistfoodOrderErrorState value)? error,
     TResult Function(_FlistfoodOrderSuccessState value)? success,
     required TResult orElse(),
   }) {
@@ -2649,163 +2631,6 @@ abstract class _FlistfoodOrderLoadingState implements FlistfoodOrderState {
 }
 
 /// @nodoc
-abstract class _$$FlistfoodOrderErrorStateImplCopyWith<$Res> {
-  factory _$$FlistfoodOrderErrorStateImplCopyWith(
-          _$FlistfoodOrderErrorStateImpl value,
-          $Res Function(_$FlistfoodOrderErrorStateImpl) then) =
-      __$$FlistfoodOrderErrorStateImplCopyWithImpl<$Res>;
-  @useResult
-  $Res call({bool isUnauthenticated});
-}
-
-/// @nodoc
-class __$$FlistfoodOrderErrorStateImplCopyWithImpl<$Res>
-    extends _$FlistfoodOrderStateCopyWithImpl<$Res,
-        _$FlistfoodOrderErrorStateImpl>
-    implements _$$FlistfoodOrderErrorStateImplCopyWith<$Res> {
-  __$$FlistfoodOrderErrorStateImplCopyWithImpl(
-      _$FlistfoodOrderErrorStateImpl _value,
-      $Res Function(_$FlistfoodOrderErrorStateImpl) _then)
-      : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? isUnauthenticated = null,
-  }) {
-    return _then(_$FlistfoodOrderErrorStateImpl(
-      isUnauthenticated: null == isUnauthenticated
-          ? _value.isUnauthenticated
-          : isUnauthenticated // ignore: cast_nullable_to_non_nullable
-              as bool,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _$FlistfoodOrderErrorStateImpl implements _FlistfoodOrderErrorState {
-  const _$FlistfoodOrderErrorStateImpl({required this.isUnauthenticated});
-
-  @override
-  final bool isUnauthenticated;
-
-  @override
-  String toString() {
-    return 'FlistfoodOrderState.error(isUnauthenticated: $isUnauthenticated)';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$FlistfoodOrderErrorStateImpl &&
-            (identical(other.isUnauthenticated, isUnauthenticated) ||
-                other.isUnauthenticated == isUnauthenticated));
-  }
-
-  @override
-  int get hashCode => Object.hash(runtimeType, isUnauthenticated);
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$FlistfoodOrderErrorStateImplCopyWith<_$FlistfoodOrderErrorStateImpl>
-      get copyWith => __$$FlistfoodOrderErrorStateImplCopyWithImpl<
-          _$FlistfoodOrderErrorStateImpl>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function(FFOrder? order) loading,
-    required TResult Function(bool isUnauthenticated) error,
-    required TResult Function(FFOrder? order, FFOrderID? orderId,
-            double? totalPrice, bool isSended)
-        success,
-  }) {
-    return error(isUnauthenticated);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
-    TResult? Function(FFOrder? order)? loading,
-    TResult? Function(bool isUnauthenticated)? error,
-    TResult? Function(FFOrder? order, FFOrderID? orderId, double? totalPrice,
-            bool isSended)?
-        success,
-  }) {
-    return error?.call(isUnauthenticated);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function(FFOrder? order)? loading,
-    TResult Function(bool isUnauthenticated)? error,
-    TResult Function(FFOrder? order, FFOrderID? orderId, double? totalPrice,
-            bool isSended)?
-        success,
-    required TResult orElse(),
-  }) {
-    if (error != null) {
-      return error(isUnauthenticated);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_FlistfoodOrderInitial value) initial,
-    required TResult Function(_FlistfoodOrderLoadingState value) loading,
-    required TResult Function(_FlistfoodOrderErrorState value) error,
-    required TResult Function(_FlistfoodOrderSuccessState value) success,
-  }) {
-    return error(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_FlistfoodOrderInitial value)? initial,
-    TResult? Function(_FlistfoodOrderLoadingState value)? loading,
-    TResult? Function(_FlistfoodOrderErrorState value)? error,
-    TResult? Function(_FlistfoodOrderSuccessState value)? success,
-  }) {
-    return error?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_FlistfoodOrderInitial value)? initial,
-    TResult Function(_FlistfoodOrderLoadingState value)? loading,
-    TResult Function(_FlistfoodOrderErrorState value)? error,
-    TResult Function(_FlistfoodOrderSuccessState value)? success,
-    required TResult orElse(),
-  }) {
-    if (error != null) {
-      return error(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _FlistfoodOrderErrorState implements FlistfoodOrderState {
-  const factory _FlistfoodOrderErrorState(
-      {required final bool isUnauthenticated}) = _$FlistfoodOrderErrorStateImpl;
-
-  bool get isUnauthenticated;
-  @JsonKey(ignore: true)
-  _$$FlistfoodOrderErrorStateImplCopyWith<_$FlistfoodOrderErrorStateImpl>
-      get copyWith => throw _privateConstructorUsedError;
-}
-
-/// @nodoc
 abstract class _$$FlistfoodOrderSuccessStateImplCopyWith<$Res> {
   factory _$$FlistfoodOrderSuccessStateImplCopyWith(
           _$FlistfoodOrderSuccessStateImpl value,
@@ -2813,7 +2638,12 @@ abstract class _$$FlistfoodOrderSuccessStateImplCopyWith<$Res> {
       __$$FlistfoodOrderSuccessStateImplCopyWithImpl<$Res>;
   @useResult
   $Res call(
-      {FFOrder? order, FFOrderID? orderId, double? totalPrice, bool isSended});
+      {FFOrder? order,
+      FFOrderID? orderId,
+      double? totalPrice,
+      bool isSended,
+      bool isErorrApi,
+      bool is401});
 }
 
 /// @nodoc
@@ -2833,6 +2663,8 @@ class __$$FlistfoodOrderSuccessStateImplCopyWithImpl<$Res>
     Object? orderId = freezed,
     Object? totalPrice = freezed,
     Object? isSended = null,
+    Object? isErorrApi = null,
+    Object? is401 = null,
   }) {
     return _then(_$FlistfoodOrderSuccessStateImpl(
       order: freezed == order
@@ -2851,6 +2683,14 @@ class __$$FlistfoodOrderSuccessStateImplCopyWithImpl<$Res>
           ? _value.isSended
           : isSended // ignore: cast_nullable_to_non_nullable
               as bool,
+      isErorrApi: null == isErorrApi
+          ? _value.isErorrApi
+          : isErorrApi // ignore: cast_nullable_to_non_nullable
+              as bool,
+      is401: null == is401
+          ? _value.is401
+          : is401 // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -2862,7 +2702,9 @@ class _$FlistfoodOrderSuccessStateImpl implements _FlistfoodOrderSuccessState {
       {required this.order,
       required this.orderId,
       required this.totalPrice,
-      required this.isSended});
+      required this.isSended,
+      required this.isErorrApi,
+      required this.is401});
 
   @override
   final FFOrder? order;
@@ -2872,10 +2714,14 @@ class _$FlistfoodOrderSuccessStateImpl implements _FlistfoodOrderSuccessState {
   final double? totalPrice;
   @override
   final bool isSended;
+  @override
+  final bool isErorrApi;
+  @override
+  final bool is401;
 
   @override
   String toString() {
-    return 'FlistfoodOrderState.success(order: $order, orderId: $orderId, totalPrice: $totalPrice, isSended: $isSended)';
+    return 'FlistfoodOrderState.success(order: $order, orderId: $orderId, totalPrice: $totalPrice, isSended: $isSended, isErorrApi: $isErorrApi, is401: $is401)';
   }
 
   @override
@@ -2888,12 +2734,15 @@ class _$FlistfoodOrderSuccessStateImpl implements _FlistfoodOrderSuccessState {
             (identical(other.totalPrice, totalPrice) ||
                 other.totalPrice == totalPrice) &&
             (identical(other.isSended, isSended) ||
-                other.isSended == isSended));
+                other.isSended == isSended) &&
+            (identical(other.isErorrApi, isErorrApi) ||
+                other.isErorrApi == isErorrApi) &&
+            (identical(other.is401, is401) || other.is401 == is401));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, order, orderId, totalPrice, isSended);
+  int get hashCode => Object.hash(
+      runtimeType, order, orderId, totalPrice, isSended, isErorrApi, is401);
 
   @JsonKey(ignore: true)
   @override
@@ -2907,12 +2756,11 @@ class _$FlistfoodOrderSuccessStateImpl implements _FlistfoodOrderSuccessState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function(FFOrder? order) loading,
-    required TResult Function(bool isUnauthenticated) error,
     required TResult Function(FFOrder? order, FFOrderID? orderId,
-            double? totalPrice, bool isSended)
+            double? totalPrice, bool isSended, bool isErorrApi, bool is401)
         success,
   }) {
-    return success(order, orderId, totalPrice, isSended);
+    return success(order, orderId, totalPrice, isSended, isErorrApi, is401);
   }
 
   @override
@@ -2920,12 +2768,12 @@ class _$FlistfoodOrderSuccessStateImpl implements _FlistfoodOrderSuccessState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function(FFOrder? order)? loading,
-    TResult? Function(bool isUnauthenticated)? error,
     TResult? Function(FFOrder? order, FFOrderID? orderId, double? totalPrice,
-            bool isSended)?
+            bool isSended, bool isErorrApi, bool is401)?
         success,
   }) {
-    return success?.call(order, orderId, totalPrice, isSended);
+    return success?.call(
+        order, orderId, totalPrice, isSended, isErorrApi, is401);
   }
 
   @override
@@ -2933,14 +2781,13 @@ class _$FlistfoodOrderSuccessStateImpl implements _FlistfoodOrderSuccessState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function(FFOrder? order)? loading,
-    TResult Function(bool isUnauthenticated)? error,
     TResult Function(FFOrder? order, FFOrderID? orderId, double? totalPrice,
-            bool isSended)?
+            bool isSended, bool isErorrApi, bool is401)?
         success,
     required TResult orElse(),
   }) {
     if (success != null) {
-      return success(order, orderId, totalPrice, isSended);
+      return success(order, orderId, totalPrice, isSended, isErorrApi, is401);
     }
     return orElse();
   }
@@ -2950,7 +2797,6 @@ class _$FlistfoodOrderSuccessStateImpl implements _FlistfoodOrderSuccessState {
   TResult map<TResult extends Object?>({
     required TResult Function(_FlistfoodOrderInitial value) initial,
     required TResult Function(_FlistfoodOrderLoadingState value) loading,
-    required TResult Function(_FlistfoodOrderErrorState value) error,
     required TResult Function(_FlistfoodOrderSuccessState value) success,
   }) {
     return success(this);
@@ -2961,7 +2807,6 @@ class _$FlistfoodOrderSuccessStateImpl implements _FlistfoodOrderSuccessState {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_FlistfoodOrderInitial value)? initial,
     TResult? Function(_FlistfoodOrderLoadingState value)? loading,
-    TResult? Function(_FlistfoodOrderErrorState value)? error,
     TResult? Function(_FlistfoodOrderSuccessState value)? success,
   }) {
     return success?.call(this);
@@ -2972,7 +2817,6 @@ class _$FlistfoodOrderSuccessStateImpl implements _FlistfoodOrderSuccessState {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_FlistfoodOrderInitial value)? initial,
     TResult Function(_FlistfoodOrderLoadingState value)? loading,
-    TResult Function(_FlistfoodOrderErrorState value)? error,
     TResult Function(_FlistfoodOrderSuccessState value)? success,
     required TResult orElse(),
   }) {
@@ -2988,12 +2832,16 @@ abstract class _FlistfoodOrderSuccessState implements FlistfoodOrderState {
       {required final FFOrder? order,
       required final FFOrderID? orderId,
       required final double? totalPrice,
-      required final bool isSended}) = _$FlistfoodOrderSuccessStateImpl;
+      required final bool isSended,
+      required final bool isErorrApi,
+      required final bool is401}) = _$FlistfoodOrderSuccessStateImpl;
 
   FFOrder? get order;
   FFOrderID? get orderId;
   double? get totalPrice;
   bool get isSended;
+  bool get isErorrApi;
+  bool get is401;
   @JsonKey(ignore: true)
   _$$FlistfoodOrderSuccessStateImplCopyWith<_$FlistfoodOrderSuccessStateImpl>
       get copyWith => throw _privateConstructorUsedError;
