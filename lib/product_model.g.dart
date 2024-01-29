@@ -284,6 +284,8 @@ abstract class _$FFIngredientCWProxy {
 
   FFIngredient variationPrice(double variationPrice);
 
+  FFIngredient variationType(int? variationType);
+
   /// This function **does support** nullification of nullable fields. All `null` values passed to `non-nullable` fields will be ignored. You can also use `FFIngredient(...).copyWith.fieldName(...)` to override fields one at a time with nullification support.
   ///
   /// Usage
@@ -301,6 +303,7 @@ abstract class _$FFIngredientCWProxy {
     bool? selected,
     String? variationGroup,
     double? variationPrice,
+    int? variationType,
   });
 }
 
@@ -344,6 +347,10 @@ class _$FFIngredientCWProxyImpl implements _$FFIngredientCWProxy {
       this(variationPrice: variationPrice);
 
   @override
+  FFIngredient variationType(int? variationType) =>
+      this(variationType: variationType);
+
+  @override
 
   /// This function **does support** nullification of nullable fields. All `null` values passed to `non-nullable` fields will be ignored. You can also use `FFIngredient(...).copyWith.fieldName(...)` to override fields one at a time with nullification support.
   ///
@@ -362,6 +369,7 @@ class _$FFIngredientCWProxyImpl implements _$FFIngredientCWProxy {
     Object? selected = const $CopyWithPlaceholder(),
     Object? variationGroup = const $CopyWithPlaceholder(),
     Object? variationPrice = const $CopyWithPlaceholder(),
+    Object? variationType = const $CopyWithPlaceholder(),
   }) {
     return FFIngredient(
       canDouble: canDouble == const $CopyWithPlaceholder() || canDouble == null
@@ -406,6 +414,10 @@ class _$FFIngredientCWProxyImpl implements _$FFIngredientCWProxy {
           ? _value.variationPrice
           // ignore: cast_nullable_to_non_nullable
           : variationPrice as double,
+      variationType: variationType == const $CopyWithPlaceholder()
+          ? _value.variationType
+          // ignore: cast_nullable_to_non_nullable
+          : variationType as int?,
     );
   }
 }
@@ -1319,6 +1331,7 @@ FFIngredient _$FFIngredientFromJson(Map<String, dynamic> json) => FFIngredient(
       canRemove: json['canRemove'] as bool,
       canDouble: json['canDouble'] as bool,
       canTriple: json['canTriple'] as bool,
+      variationType: json['variationType'] as int?,
     );
 
 Map<String, dynamic> _$FFIngredientToJson(FFIngredient instance) {
@@ -1341,6 +1354,7 @@ Map<String, dynamic> _$FFIngredientToJson(FFIngredient instance) {
   val['canRemove'] = instance.canRemove;
   val['canDouble'] = instance.canDouble;
   val['canTriple'] = instance.canTriple;
+  writeNotNull('variationType', instance.variationType);
   return val;
 }
 

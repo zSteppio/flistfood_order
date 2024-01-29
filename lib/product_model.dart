@@ -64,6 +64,7 @@ class FFIngredient {
   bool canRemove;
   bool canDouble;
   bool canTriple;
+  int? variationType;
 
   FFIngredient({
     required this.foodId,
@@ -76,6 +77,7 @@ class FFIngredient {
     required this.canRemove,
     required this.canDouble,
     required this.canTriple,
+    this.variationType,
   });
 
   factory FFIngredient.fromJson(Map<String, dynamic> json) => _$FFIngredientFromJson(json);

@@ -114,7 +114,7 @@ class FlistfoodOrderBloc extends Bloc<FlistfoodOrderEvent, FlistfoodOrderState> 
               foodId: ingredient.foodId,
               price: ingredient.variationPrice,
               foodName: ingredient.food,
-              variationType: 1,
+              variationType: ingredient.variationType ?? 1,
             ));
           }
         }
