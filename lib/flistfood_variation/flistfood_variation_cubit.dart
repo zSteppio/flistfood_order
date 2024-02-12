@@ -87,31 +87,6 @@ class FlistfoodVariationCubit extends Cubit<FlistfoodVariationState> {
     return;
   }
 
-  void setVariationIngredient({
-    required FFIngredient ingredient,
-    required FFProduct product,
-  }) {
-    emit(FlistfoodVariationState.loading(product: product));
-
-    if (product.ingredients.any((e) => e.foodId == ingredient.foodId)) {
-      FFIngredient selectedIngridient =
-          product.ingredients.firstWhere((e) => e.foodId == ingredient.foodId);
-
-      ingredient.localVariationPrice ??= ingredient.variationPrice;
-
-      if (ingredient.isMainIngredient == false) {
-        if (selectedIngridient.selected == true) {
-          product.newPrice += ingredient.localVariationPrice!;
-        } else if (selectedIngridient.selected == false) {
-          product.newPrice -= ingredient.localVariationPrice!;
-        }
-      }
-    }
-
-    emit(FlistfoodVariationState.success(product: product));
-    return;
-  }
-
   void setVariationType({
     required FFIngredient ingredient,
     required FFProduct product,
@@ -121,7 +96,7 @@ class FlistfoodVariationCubit extends Cubit<FlistfoodVariationState> {
   }) {
     emit(FlistfoodVariationState.loading(product: product));
 
-    if (ingredient.canRemove && product.ingredients.any((e) => e.foodId == ingredient.foodId)) {
+    if (product.ingredients.any((e) => e.foodId == ingredient.foodId)) {
       FFIngredient selectedIngridient =
           product.ingredients.firstWhere((e) => e.foodId == ingredient.foodId);
 
