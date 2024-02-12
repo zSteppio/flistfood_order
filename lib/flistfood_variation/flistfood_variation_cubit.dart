@@ -93,7 +93,7 @@ class FlistfoodVariationCubit extends Cubit<FlistfoodVariationState> {
   }) {
     emit(FlistfoodVariationState.loading(product: product));
 
-    if (ingredient.canRemove && product.ingredients.any((e) => e.foodId == ingredient.foodId)) {
+    if (product.ingredients.any((e) => e.foodId == ingredient.foodId)) {
       FFIngredient selectedIngridient =
           product.ingredients.firstWhere((e) => e.foodId == ingredient.foodId);
 
