@@ -91,6 +91,31 @@ class FlistfoodVariationCubit extends Cubit<FlistfoodVariationState> {
   void setVariationIngredient({
     required FFIngredient ingredient,
     required FFProduct product,
+  }) {
+    emit(FlistfoodVariationState.loading(product: product));
+
+    if (ingredient.canRemove && product.ingredients.any((e) => e.foodId == ingredient.foodId)) {
+      FFIngredient selectedIngridient =
+          product.ingredients.firstWhere((e) => e.foodId == ingredient.foodId);
+
+      ingredient.localVariationPrice ??= ingredient.variationPrice;
+
+      if (ingredient.isMainIngredient == false) {
+        if (selectedIngridient.selected == true) {
+          product.newPrice += ingredient.localVariationPrice!;
+        } else if (selectedIngridient.selected == false) {
+          product.newPrice -= ingredient.localVariationPrice!;
+        }
+      }
+    }
+
+    emit(FlistfoodVariationState.success(product: product));
+    return;
+  }
+
+  void setVariationType({
+    required FFIngredient ingredient,
+    required FFProduct product,
     bool isDouble = false,
     bool isTriple = false,
     bool isUnselectedVariation = false,
@@ -124,14 +149,6 @@ class FlistfoodVariationCubit extends Cubit<FlistfoodVariationState> {
         selectedIngridient.variationType = 3;
       } else {
         selectedIngridient.variationType = null;
-      }
-
-      if (ingredient.isMainIngredient == false && !isDouble && !isTriple) {
-        if (selectedIngridient.selected == true) {
-          product.newPrice += ingredient.localVariationPrice!;
-        } else if (selectedIngridient.selected == false) {
-          product.newPrice -= ingredient.localVariationPrice!;
-        }
       }
     }
 
