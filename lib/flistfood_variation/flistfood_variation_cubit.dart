@@ -128,7 +128,7 @@ class FlistfoodVariationCubit extends Cubit<FlistfoodVariationState> {
         selectedIngridient.variationType = null;
       }
 
-      if (ingredient.isMainIngredient == false) {
+      if (ingredient.isMainIngredient == false && !isUnselectedVariation) {
         if (selectedIngridient.selected == true) {
           product.newPrice += priceVariation;
         } else if (selectedIngridient.selected == false) {
