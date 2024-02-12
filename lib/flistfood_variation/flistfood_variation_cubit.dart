@@ -116,10 +116,6 @@ class FlistfoodVariationCubit extends Cubit<FlistfoodVariationState> {
         priceVariation = ingredient.variationPrice;
       }
 
-      if (isUnselectedVariation) {
-        product.newPrice -= priceVariation;
-      }
-
       if (isDouble && !isUnselectedVariation) {
         selectedIngridient.variationType = 2;
       } else if (isTriple && !isUnselectedVariation) {
@@ -128,7 +124,9 @@ class FlistfoodVariationCubit extends Cubit<FlistfoodVariationState> {
         selectedIngridient.variationType = null;
       }
 
-      if (ingredient.isMainIngredient == false && !isUnselectedVariation) {
+      if (isUnselectedVariation) {
+        product.newPrice -= priceVariation;
+      } else if (ingredient.isMainIngredient == false) {
         if (selectedIngridient.selected == true) {
           product.newPrice += priceVariation;
         } else if (selectedIngridient.selected == false) {
