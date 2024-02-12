@@ -116,7 +116,7 @@ class FlistfoodVariationCubit extends Cubit<FlistfoodVariationState> {
         priceVariation = ingredient.variationPrice;
       }
 
-      if (isUnselectedVariation && (isDouble || isTriple)) {
+      if (isUnselectedVariation) {
         product.newPrice -= priceVariation;
       }
 
