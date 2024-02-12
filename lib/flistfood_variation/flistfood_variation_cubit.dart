@@ -128,11 +128,6 @@ class FlistfoodVariationCubit extends Cubit<FlistfoodVariationState> {
 
       ingredient.localVariationPrice ??= ingredient.variationPrice;
 
-      log(jsonEncode(ingredient), name: 'Ingredient');
-      log(isDouble.toString(), name: 'isDouble');
-      log(isTriple.toString(), name: 'isTriple');
-      log(isUnselectedVariation.toString(), name: 'isUnselectedVariation');
-
       if (isUnselectedVariation) {
         product.newPrice -= ingredient.localVariationPrice!;
         product.newPrice += ingredient.variationPrice;

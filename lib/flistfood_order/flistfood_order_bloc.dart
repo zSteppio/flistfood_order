@@ -134,6 +134,8 @@ class FlistfoodOrderBloc extends Bloc<FlistfoodOrderEvent, FlistfoodOrderState> 
         variations = detailProduct.variations;
       }
 
+      log(jsonEncode(variations), name: 'Variations');
+
       if (order != null) {
         var formatName = detailProduct?.format ?? formatProduct?.format;
 
