@@ -108,9 +108,9 @@ class FlistfoodVariationCubit extends Cubit<FlistfoodVariationState> {
       log(isTriple.toString(), name: 'isTriple');
       log(isUnselectedVariation.toString(), name: 'isUnselectedVariation');
 
-      if (ingredient.variationType == 2) {
+      if (isDouble) {
         priceVariation = ingredient.variationPrice * 2;
-      } else if (ingredient.variationType == 3) {
+      } else if (isTriple) {
         priceVariation = ingredient.variationPrice * 3;
       } else {
         priceVariation = ingredient.variationPrice;
