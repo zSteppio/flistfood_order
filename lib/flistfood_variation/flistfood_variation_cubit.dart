@@ -135,6 +135,7 @@ class FlistfoodVariationCubit extends Cubit<FlistfoodVariationState> {
 
       if (isUnselectedVariation) {
         product.newPrice -= ingredient.localVariationPrice!;
+        product.newPrice += ingredient.variationPrice;
       } else if (isDouble) {
         ingredient.localVariationPrice = ingredient.variationPrice * 2;
         product.newPrice = product.price + ingredient.localVariationPrice!;
