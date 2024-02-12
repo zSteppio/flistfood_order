@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 import 'package:flistfood_order/product_model.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -101,6 +102,11 @@ class FlistfoodVariationCubit extends Cubit<FlistfoodVariationState> {
           product.ingredients.firstWhere((e) => e.foodId == ingredient.foodId);
 
       double priceVariation = 0.0;
+
+      log(jsonEncode(ingredient), name: 'Ingredient');
+      log(isDouble.toString(), name: 'isDouble');
+      log(isTriple.toString(), name: 'isTriple');
+      log(isUnselectedVariation.toString(), name: 'isUnselectedVariation');
 
       if (ingredient.variationType == 2) {
         priceVariation = ingredient.variationPrice * 2;
