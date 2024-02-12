@@ -101,7 +101,7 @@ class FlistfoodVariationCubit extends Cubit<FlistfoodVariationState> {
       FFIngredient selectedIngridient =
           product.ingredients.firstWhere((e) => e.foodId == ingredient.foodId);
 
-      double priceVariation = 0.0;
+      ingredient.localVariationPrice ??= ingredient.variationPrice;
 
       log(jsonEncode(ingredient), name: 'Ingredient');
       log(isDouble.toString(), name: 'isDouble');
@@ -109,11 +109,11 @@ class FlistfoodVariationCubit extends Cubit<FlistfoodVariationState> {
       log(isUnselectedVariation.toString(), name: 'isUnselectedVariation');
 
       if (isDouble) {
-        priceVariation = ingredient.variationPrice * 2;
+        ingredient.localVariationPrice = ingredient.variationPrice * 2;
       } else if (isTriple) {
-        priceVariation = ingredient.variationPrice * 3;
+        ingredient.localVariationPrice = ingredient.variationPrice * 3;
       } else {
-        priceVariation = ingredient.variationPrice;
+        ingredient.localVariationPrice = ingredient.variationPrice;
       }
 
       if (isDouble && !isUnselectedVariation) {
@@ -125,12 +125,12 @@ class FlistfoodVariationCubit extends Cubit<FlistfoodVariationState> {
       }
 
       if (isUnselectedVariation) {
-        product.newPrice -= priceVariation;
+        product.newPrice -= ingredient.localVariationPrice!;
       } else if (ingredient.isMainIngredient == false) {
         if (selectedIngridient.selected == true) {
-          product.newPrice += priceVariation;
+          product.newPrice += ingredient.localVariationPrice!;
         } else if (selectedIngridient.selected == false) {
-          product.newPrice -= priceVariation;
+          product.newPrice -= ingredient.localVariationPrice!;
         }
       }
     }

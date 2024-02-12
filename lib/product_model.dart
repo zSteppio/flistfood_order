@@ -65,6 +65,7 @@ class FFIngredient {
   bool canDouble;
   bool canTriple;
   int? variationType;
+  double? localVariationPrice;
 
   FFIngredient({
     required this.foodId,
@@ -78,6 +79,7 @@ class FFIngredient {
     required this.canDouble,
     required this.canTriple,
     this.variationType,
+    this.localVariationPrice,
   });
 
   factory FFIngredient.fromJson(Map<String, dynamic> json) => _$FFIngredientFromJson(json);

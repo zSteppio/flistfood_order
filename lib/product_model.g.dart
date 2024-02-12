@@ -278,6 +278,8 @@ abstract class _$FFIngredientCWProxy {
 
   FFIngredient isMainIngredient(bool isMainIngredient);
 
+  FFIngredient localVariationPrice(double localVariationPrice);
+
   FFIngredient selected(bool selected);
 
   FFIngredient variationGroup(String? variationGroup);
@@ -300,6 +302,7 @@ abstract class _$FFIngredientCWProxy {
     int? foodId,
     bool? hidden,
     bool? isMainIngredient,
+    double? localVariationPrice,
     bool? selected,
     String? variationGroup,
     double? variationPrice,
@@ -336,6 +339,10 @@ class _$FFIngredientCWProxyImpl implements _$FFIngredientCWProxy {
       this(isMainIngredient: isMainIngredient);
 
   @override
+  FFIngredient localVariationPrice(double localVariationPrice) =>
+      this(localVariationPrice: localVariationPrice);
+
+  @override
   FFIngredient selected(bool selected) => this(selected: selected);
 
   @override
@@ -366,6 +373,7 @@ class _$FFIngredientCWProxyImpl implements _$FFIngredientCWProxy {
     Object? foodId = const $CopyWithPlaceholder(),
     Object? hidden = const $CopyWithPlaceholder(),
     Object? isMainIngredient = const $CopyWithPlaceholder(),
+    Object? localVariationPrice = const $CopyWithPlaceholder(),
     Object? selected = const $CopyWithPlaceholder(),
     Object? variationGroup = const $CopyWithPlaceholder(),
     Object? variationPrice = const $CopyWithPlaceholder(),
@@ -401,6 +409,12 @@ class _$FFIngredientCWProxyImpl implements _$FFIngredientCWProxy {
           ? _value.isMainIngredient
           // ignore: cast_nullable_to_non_nullable
           : isMainIngredient as bool,
+      localVariationPrice:
+          localVariationPrice == const $CopyWithPlaceholder() ||
+                  localVariationPrice == null
+              ? _value.localVariationPrice
+              // ignore: cast_nullable_to_non_nullable
+              : localVariationPrice as double,
       selected: selected == const $CopyWithPlaceholder() || selected == null
           ? _value.selected
           // ignore: cast_nullable_to_non_nullable
@@ -1332,6 +1346,8 @@ FFIngredient _$FFIngredientFromJson(Map<String, dynamic> json) => FFIngredient(
       canDouble: json['canDouble'] as bool,
       canTriple: json['canTriple'] as bool,
       variationType: json['variationType'] as int?,
+      localVariationPrice:
+          (json['localVariationPrice'] as num?)?.toDouble() ?? 0.0,
     );
 
 Map<String, dynamic> _$FFIngredientToJson(FFIngredient instance) {
@@ -1355,6 +1371,7 @@ Map<String, dynamic> _$FFIngredientToJson(FFIngredient instance) {
   val['canDouble'] = instance.canDouble;
   val['canTriple'] = instance.canTriple;
   writeNotNull('variationType', instance.variationType);
+  val['localVariationPrice'] = instance.localVariationPrice;
   return val;
 }
 
