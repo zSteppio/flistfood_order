@@ -92,6 +92,7 @@ class FlistfoodVariationCubit extends Cubit<FlistfoodVariationState> {
     required FFProduct product,
     bool isDouble = false,
     bool isTriple = false,
+    bool isUnselectedVariation = false,
   }) {
     emit(FlistfoodVariationState.loading(product: product));
 
@@ -109,9 +110,13 @@ class FlistfoodVariationCubit extends Cubit<FlistfoodVariationState> {
         priceVariation = ingredient.variationPrice;
       }
 
-      if (isDouble) {
+      if (isUnselectedVariation && (isDouble || isTriple)) {
+        product.newPrice -= priceVariation;
+      }
+
+      if (isDouble && !isUnselectedVariation) {
         selectedIngridient.variationType = 2;
-      } else if (isTriple) {
+      } else if (isTriple && !isUnselectedVariation) {
         selectedIngridient.variationType = 3;
       } else {
         selectedIngridient.variationType = null;
