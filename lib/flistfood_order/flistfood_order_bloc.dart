@@ -117,6 +117,19 @@ class FlistfoodOrderBloc extends Bloc<FlistfoodOrderEvent, FlistfoodOrderState> 
               variationType: ingredient.variationType ?? 1,
             ));
           }
+          //* Recupero e settaggio delle variazioni su ingredienti base con x2 o x3
+          else if (ingredient.isMainIngredient &&
+              ingredient.selected &&
+              (ingredient.variationType == 2 || ingredient.variationType == 3)) {
+            variations.add(
+              FFVariation(
+                foodId: ingredient.foodId,
+                price: ingredient.variationPrice,
+                foodName: ingredient.food,
+                variationType: ingredient.variationType!,
+              ),
+            );
+          }
         }
 
         //* Recupero e settaggio foodlist
