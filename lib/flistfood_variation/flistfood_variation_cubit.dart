@@ -59,6 +59,8 @@ class FlistfoodVariationCubit extends Cubit<FlistfoodVariationState> {
     required FFProduct product,
   }) {
     emit(FlistfoodVariationState.loading(product: product));
+    final bool isDouble = ingredient.variationType == 2;
+    final bool isTriple = ingredient.variationType == 3;
     log(
       'Prezzo ${product.price}, Nuovo Prezzo ${product.newPrice}',
       name: 'Product prima della modifica dell\'ingrediente',
@@ -73,9 +75,9 @@ class FlistfoodVariationCubit extends Cubit<FlistfoodVariationState> {
 
       log(jsonEncode(ingredient), name: 'Ingrediente');
 
-      if (ingredient.variationType == 2) {
+      if (isDouble) {
         priceVariation = ingredient.variationPrice * 2;
-      } else if (ingredient.variationType == 3) {
+      } else if (isTriple) {
         priceVariation = ingredient.variationPrice * 3;
       } else {
         priceVariation = ingredient.variationPrice;
@@ -84,6 +86,17 @@ class FlistfoodVariationCubit extends Cubit<FlistfoodVariationState> {
       log(priceVariation.toString(), name: 'Prezzo della variazione');
 
       if (ingredient.isMainIngredient == false) {
+        if (selectedIngridient.selected == true) {
+          product.newPrice += priceVariation;
+        } else if (selectedIngridient.selected == false) {
+          product.newPrice -= priceVariation;
+        }
+      } else if (isDouble || isTriple) {
+        if (isDouble) {
+          priceVariation = ingredient.variationPrice;
+        } else {
+          priceVariation = ingredient.variationPrice * 2;
+        }
         if (selectedIngridient.selected == true) {
           product.newPrice += priceVariation;
         } else if (selectedIngridient.selected == false) {
