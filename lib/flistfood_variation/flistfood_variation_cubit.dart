@@ -144,9 +144,10 @@ class FlistfoodVariationCubit extends Cubit<FlistfoodVariationState> {
         ingredient.localVariationPrice = ingredient.variationPrice * 2;
       }
 
-      if ((selectedIngridient.variationType == 2 || selectedIngridient.variationType == 3) &&
-          !isUnselectedVariation) {
-        product.newPrice -= ingredient.localVariationPrice!;
+      if (selectedIngridient.variationType == 2 && !isUnselectedVariation && isTriple) {
+        product.newPrice -= ingredient.variationPrice;
+      } else if (selectedIngridient.variationType == 3 && !isUnselectedVariation && isDouble) {
+        product.newPrice -= ingredient.variationPrice * 2;
       }
 
       if (isUnselectedVariation) {
