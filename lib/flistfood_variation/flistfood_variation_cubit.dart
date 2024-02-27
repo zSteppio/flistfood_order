@@ -287,8 +287,10 @@ class FlistfoodVariationCubit extends Cubit<FlistfoodVariationState> {
     //* Settaggio del prezzo nel caso ci siano formati
     if (format != null) {
       product.newPrice = format.price;
+      product.price = format.price;
     } else {
       product.newPrice = product.price;
+      product.price = product.price;
     }
 
     //* Recupero delle alternative di default
