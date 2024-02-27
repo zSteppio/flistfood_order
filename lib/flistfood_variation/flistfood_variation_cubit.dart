@@ -97,9 +97,9 @@ class FlistfoodVariationCubit extends Cubit<FlistfoodVariationState> {
         } else {
           priceVariation = ingredient.variationPrice * 2;
         }
-        if (selectedIngridient.selected == true) {
+        if (ingredient.selected == true) {
           product.newPrice += priceVariation;
-        } else if (selectedIngridient.selected == false) {
+        } else if (ingredient.selected == false) {
           product.newPrice -= priceVariation;
         }
       }
@@ -140,10 +140,19 @@ class FlistfoodVariationCubit extends Cubit<FlistfoodVariationState> {
         product.newPrice -= ingredient.localVariationPrice!;
         product.newPrice += ingredient.variationPrice;
       } else if (isDouble) {
-        ingredient.localVariationPrice = ingredient.variationPrice * 2;
+        if (ingredient.isMainIngredient) {
+          ingredient.localVariationPrice = ingredient.variationPrice;
+        } else {
+          ingredient.localVariationPrice = ingredient.variationPrice * 2;
+        }
+
         product.newPrice = product.price + ingredient.localVariationPrice!;
       } else if (isTriple) {
-        ingredient.localVariationPrice = ingredient.variationPrice * 3;
+        if (ingredient.isMainIngredient) {
+          ingredient.localVariationPrice = ingredient.variationPrice * 2;
+        } else {
+          ingredient.localVariationPrice = ingredient.variationPrice * 3;
+        }
         product.newPrice = product.price + ingredient.localVariationPrice!;
       }
 
