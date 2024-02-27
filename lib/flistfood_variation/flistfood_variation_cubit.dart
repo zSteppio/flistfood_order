@@ -71,6 +71,8 @@ class FlistfoodVariationCubit extends Cubit<FlistfoodVariationState> {
       selectedIngridient.selected = selected;
       double priceVariation = 0.0;
 
+      log(jsonEncode(ingredient), name: 'Ingrediente');
+
       if (ingredient.variationType == 2) {
         priceVariation = ingredient.variationPrice * 2;
       } else if (ingredient.variationType == 3) {
@@ -79,6 +81,8 @@ class FlistfoodVariationCubit extends Cubit<FlistfoodVariationState> {
         priceVariation = ingredient.variationPrice;
       }
 
+      log(priceVariation.toString(), name: 'Prezzo della variazione');
+
       if (ingredient.isMainIngredient == false) {
         if (selectedIngridient.selected == true) {
           product.newPrice += priceVariation;
@@ -86,6 +90,8 @@ class FlistfoodVariationCubit extends Cubit<FlistfoodVariationState> {
           product.newPrice -= priceVariation;
         }
       }
+
+      log(product.newPrice.toString(), name: 'Nuovo Prezzo del prodotto');
     }
 
     log(
