@@ -146,14 +146,14 @@ class FlistfoodVariationCubit extends Cubit<FlistfoodVariationState> {
           ingredient.localVariationPrice = ingredient.variationPrice * 2;
         }
 
-        product.newPrice = product.price + ingredient.localVariationPrice!;
+        product.newPrice += ingredient.localVariationPrice!;
       } else if (isTriple) {
         if (ingredient.isMainIngredient) {
           ingredient.localVariationPrice = ingredient.variationPrice * 2;
         } else {
           ingredient.localVariationPrice = ingredient.variationPrice * 3;
         }
-        product.newPrice = product.price + ingredient.localVariationPrice!;
+        product.newPrice += ingredient.localVariationPrice!;
       }
 
       if (isDouble && !isUnselectedVariation) {
