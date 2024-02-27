@@ -130,6 +130,8 @@ class FlistfoodVariationCubit extends Cubit<FlistfoodVariationState> {
       name: 'Product prima della modifica della variazione',
     );
 
+    log(isUnselectedVariation.toString(), name: 'isUnselectedVariation');
+
     if (product.ingredients.any((e) => e.foodId == ingredient.foodId)) {
       FFIngredient selectedIngridient =
           product.ingredients.firstWhere((e) => e.foodId == ingredient.foodId);
