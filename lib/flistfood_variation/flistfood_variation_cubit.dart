@@ -59,7 +59,10 @@ class FlistfoodVariationCubit extends Cubit<FlistfoodVariationState> {
     required FFProduct product,
   }) {
     emit(FlistfoodVariationState.loading(product: product));
-    log(jsonEncode(product), name: 'Product prima della modifica dell\'ingrediente');
+    log(
+      'Prezzo ${product.price}, Nuovo Prezzo ${product.newPrice}',
+      name: 'Product prima della modifica dell\'ingrediente',
+    );
 
     if (ingredient.canRemove && product.ingredients.any((e) => e.foodId == ingredient.foodId)) {
       FFIngredient selectedIngridient =
@@ -85,7 +88,10 @@ class FlistfoodVariationCubit extends Cubit<FlistfoodVariationState> {
       }
     }
 
-    log(jsonEncode(product), name: 'Product dopo della modifica dell\'ingrediente');
+    log(
+      'Prezzo ${product.price}, Nuovo Prezzo ${product.newPrice}',
+      name: 'Product dopo della modifica dell\'ingrediente',
+    );
 
     emit(FlistfoodVariationState.success(product: product));
     return;
@@ -100,7 +106,10 @@ class FlistfoodVariationCubit extends Cubit<FlistfoodVariationState> {
   }) {
     emit(FlistfoodVariationState.loading(product: product));
 
-    log(jsonEncode(product), name: 'Product prima della modifica della variazione');
+    log(
+      'Prezzo ${product.price}, Nuovo Prezzo ${product.newPrice}',
+      name: 'Product prima della modifica della variazione',
+    );
 
     if (product.ingredients.any((e) => e.foodId == ingredient.foodId)) {
       FFIngredient selectedIngridient =
@@ -128,7 +137,10 @@ class FlistfoodVariationCubit extends Cubit<FlistfoodVariationState> {
       }
     }
 
-    log(jsonEncode(product), name: 'Product dopo della modifica della variazione');
+    log(
+      'Prezzo ${product.price}, Nuovo Prezzo ${product.newPrice}',
+      name: 'Product dopo della modifica della variazione',
+    );
 
     emit(FlistfoodVariationState.success(product: product));
     return;
@@ -349,7 +361,6 @@ class FlistfoodVariationCubit extends Cubit<FlistfoodVariationState> {
         }
       }
     }
-    log(jsonEncode(product), name: 'Product nella configurazione iniziale');
     emit(FlistfoodVariationState.success(product: product));
     return;
   }
