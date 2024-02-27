@@ -150,15 +150,15 @@ class FlistfoodVariationCubit extends Cubit<FlistfoodVariationState> {
         }
       }
 
-      if (ingredient.selected) {
-        product.newPrice += ingredient.localVariationPrice!;
-      } else {
+      if (isUnselectedVariation) {
         product.newPrice -= ingredient.localVariationPrice!;
+      } else {
+        product.newPrice += ingredient.localVariationPrice!;
       }
 
-      if (isDouble) {
+      if (isDouble && !isUnselectedVariation) {
         selectedIngridient.variationType = 2;
-      } else if (isTriple) {
+      } else if (isTriple && !isUnselectedVariation) {
         selectedIngridient.variationType = 3;
       } else {
         selectedIngridient.variationType = null;
