@@ -206,6 +206,8 @@ extension $FFProductCopyWith on FFProduct {
 abstract class _$FFFormatCWProxy {
   FFFormat format(String? format);
 
+  FFFormat formatId(int? formatId);
+
   FFFormat price(double price);
 
   /// This function **does support** nullification of nullable fields. All `null` values passed to `non-nullable` fields will be ignored. You can also use `FFFormat(...).copyWith.fieldName(...)` to override fields one at a time with nullification support.
@@ -216,6 +218,7 @@ abstract class _$FFFormatCWProxy {
   /// ````
   FFFormat call({
     String? format,
+    int? formatId,
     double? price,
   });
 }
@@ -230,6 +233,9 @@ class _$FFFormatCWProxyImpl implements _$FFFormatCWProxy {
   FFFormat format(String? format) => this(format: format);
 
   @override
+  FFFormat formatId(int? formatId) => this(formatId: formatId);
+
+  @override
   FFFormat price(double price) => this(price: price);
 
   @override
@@ -242,6 +248,7 @@ class _$FFFormatCWProxyImpl implements _$FFFormatCWProxy {
   /// ````
   FFFormat call({
     Object? format = const $CopyWithPlaceholder(),
+    Object? formatId = const $CopyWithPlaceholder(),
     Object? price = const $CopyWithPlaceholder(),
   }) {
     return FFFormat(
@@ -249,6 +256,10 @@ class _$FFFormatCWProxyImpl implements _$FFFormatCWProxy {
           ? _value.format
           // ignore: cast_nullable_to_non_nullable
           : format as String?,
+      formatId: formatId == const $CopyWithPlaceholder()
+          ? _value.formatId
+          // ignore: cast_nullable_to_non_nullable
+          : formatId as int?,
       price: price == const $CopyWithPlaceholder() || price == null
           ? _value.price
           // ignore: cast_nullable_to_non_nullable
@@ -278,7 +289,7 @@ abstract class _$FFIngredientCWProxy {
 
   FFIngredient isMainIngredient(bool isMainIngredient);
 
-  FFIngredient localVariationPrice(double localVariationPrice);
+  FFIngredient localVariationPrice(double? localVariationPrice);
 
   FFIngredient selected(bool selected);
 
@@ -339,7 +350,7 @@ class _$FFIngredientCWProxyImpl implements _$FFIngredientCWProxy {
       this(isMainIngredient: isMainIngredient);
 
   @override
-  FFIngredient localVariationPrice(double localVariationPrice) =>
+  FFIngredient localVariationPrice(double? localVariationPrice) =>
       this(localVariationPrice: localVariationPrice);
 
   @override
@@ -409,12 +420,10 @@ class _$FFIngredientCWProxyImpl implements _$FFIngredientCWProxy {
           ? _value.isMainIngredient
           // ignore: cast_nullable_to_non_nullable
           : isMainIngredient as bool,
-      localVariationPrice:
-          localVariationPrice == const $CopyWithPlaceholder() ||
-                  localVariationPrice == null
-              ? _value.localVariationPrice
-              // ignore: cast_nullable_to_non_nullable
-              : localVariationPrice as double,
+      localVariationPrice: localVariationPrice == const $CopyWithPlaceholder()
+          ? _value.localVariationPrice
+          // ignore: cast_nullable_to_non_nullable
+          : localVariationPrice as double?,
       selected: selected == const $CopyWithPlaceholder() || selected == null
           ? _value.selected
           // ignore: cast_nullable_to_non_nullable
@@ -1318,6 +1327,7 @@ Map<String, dynamic> _$FFProductToJson(FFProduct instance) {
 FFFormat _$FFFormatFromJson(Map<String, dynamic> json) => FFFormat(
       format: json['format'] as String?,
       price: (json['price'] as num).toDouble(),
+      formatId: json['formatId'] as int?,
     );
 
 Map<String, dynamic> _$FFFormatToJson(FFFormat instance) {
@@ -1330,6 +1340,7 @@ Map<String, dynamic> _$FFFormatToJson(FFFormat instance) {
   }
 
   writeNotNull('format', instance.format);
+  writeNotNull('formatId', instance.formatId);
   val['price'] = instance.price;
   return val;
 }
@@ -1346,8 +1357,7 @@ FFIngredient _$FFIngredientFromJson(Map<String, dynamic> json) => FFIngredient(
       canDouble: json['canDouble'] as bool,
       canTriple: json['canTriple'] as bool,
       variationType: json['variationType'] as int?,
-      localVariationPrice:
-          (json['localVariationPrice'] as num?)?.toDouble() ?? 0.0,
+      localVariationPrice: (json['localVariationPrice'] as num?)?.toDouble(),
     );
 
 Map<String, dynamic> _$FFIngredientToJson(FFIngredient instance) {
@@ -1371,7 +1381,7 @@ Map<String, dynamic> _$FFIngredientToJson(FFIngredient instance) {
   val['canDouble'] = instance.canDouble;
   val['canTriple'] = instance.canTriple;
   writeNotNull('variationType', instance.variationType);
-  val['localVariationPrice'] = instance.localVariationPrice;
+  writeNotNull('localVariationPrice', instance.localVariationPrice);
   return val;
 }
 

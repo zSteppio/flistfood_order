@@ -176,22 +176,25 @@ class FlistfoodOrderBloc extends Bloc<FlistfoodOrderEvent, FlistfoodOrderState> 
           singleProduct.quantity += 1;
           singleProduct.totalPrice = singleProduct.unitPrice * singleProduct.quantity;
         } else {
-          order.details.add(FFDetail(
-            format: formatProduct?.format,
-            productId: productId,
-            productName: product?.name ?? detailProduct!.productName,
-            sectionId: product?.sectionId ?? 0,
-            unitPrice: product?.newPrice != 0
-                ? product?.newPrice ?? detailProduct!.unitPrice
-                : formatProduct?.price ?? product!.price,
-            quantity: 1,
-            totalPrice: product?.newPrice != 0
-                ? product?.newPrice ?? detailProduct!.totalPrice
-                : formatProduct?.price ?? product!.price,
-            variations: variations,
-            cookingTypeId: cookingTypeId,
-            cookingType: cookingTypeName,
-          ));
+          order.details.add(
+            FFDetail(
+              formatId: formatProduct?.formatId,
+              format: formatProduct?.format,
+              productId: productId,
+              productName: product?.name ?? detailProduct!.productName,
+              sectionId: product?.sectionId ?? 0,
+              unitPrice: product?.newPrice != 0
+                  ? product?.newPrice ?? detailProduct!.unitPrice
+                  : formatProduct?.price ?? product!.price,
+              quantity: 1,
+              totalPrice: product?.newPrice != 0
+                  ? product?.newPrice ?? detailProduct!.totalPrice
+                  : formatProduct?.price ?? product!.price,
+              variations: variations,
+              cookingTypeId: cookingTypeId,
+              cookingType: cookingTypeName,
+            ),
+          );
         }
 
         double totalPrice = 0;
@@ -225,6 +228,7 @@ class FlistfoodOrderBloc extends Bloc<FlistfoodOrderEvent, FlistfoodOrderState> 
         List<FFDetail> orderProducts = [];
 
         orderProducts.add(FFDetail(
+          formatId: formatProduct?.formatId,
           format: formatProduct?.format,
           sectionId: product?.sectionId ?? 0,
           productId: productId,
