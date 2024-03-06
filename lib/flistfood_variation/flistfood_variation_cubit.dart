@@ -179,6 +179,7 @@ class FlistfoodVariationCubit extends Cubit<FlistfoodVariationState> {
     required FFFoodlist foodList,
     required bool selected,
     required FFProduct product,
+    required int? selectionPriority,
   }) {
     emit(FlistfoodVariationState.loading(product: product));
 
@@ -208,7 +209,7 @@ class FlistfoodVariationCubit extends Cubit<FlistfoodVariationState> {
             }
 
             if (selected) {
-              selectedfood.selectionPriority = selectedIngredients.length + 1;
+              selectedfood.selectionPriority = selectionPriority;
             } else {
               selectedfood.selectionPriority = null;
             }
@@ -231,7 +232,7 @@ class FlistfoodVariationCubit extends Cubit<FlistfoodVariationState> {
             foodList.foods?.where((e) => e.selected).forEach((e) => e.isFree = true);
 
             if (selected) {
-              selectedfood.selectionPriority = selectedIngredients.length + 1;
+              selectedfood.selectionPriority = selectionPriority;
             } else {
               selectedfood.selectionPriority = null;
             }
@@ -295,7 +296,7 @@ class FlistfoodVariationCubit extends Cubit<FlistfoodVariationState> {
           }
 
           if (selected) {
-            selectedfood.selectionPriority = selectedIngredients.length;
+            selectedfood.selectionPriority = selectionPriority;
           } else {
             selectedfood.selectionPriority = null;
           }
