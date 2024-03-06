@@ -295,7 +295,7 @@ class FlistfoodVariationCubit extends Cubit<FlistfoodVariationState> {
           }
 
           if (selected) {
-            selectedfood.selectionPriority = selectedIngredients.length + 1;
+            selectedfood.selectionPriority = selectedIngredients.length;
           } else {
             selectedfood.selectionPriority = null;
           }
@@ -313,11 +313,8 @@ class FlistfoodVariationCubit extends Cubit<FlistfoodVariationState> {
             product.newPrice -= selectedfood.variationPrice ?? 0;
           }
 
-          if (selected) {
-            selectedfood.selectionPriority = selectedIngredients.length + 1;
-          } else {
-            selectedfood.selectionPriority = null;
-          }
+          selectedfood.selectionPriority = null;
+
           emit(FlistfoodVariationState.success(product: product));
           break;
         default:
