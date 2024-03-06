@@ -188,17 +188,28 @@ class FlistfoodVariationCubit extends Cubit<FlistfoodVariationState> {
       int mode = foodListsDefinitionSelected.mode;
       int quantity = foodListsDefinitionSelected.maxQty;
       List<FFFoodDetail> selectedIngredients = [];
+      //* Controllo se l'ingrediente è già selezionato
+      bool haveFoodSelected = foodList.foods?.firstWhere((e) => e.id == foodId).selected == true;
+      //* Recupero dell'ingrediente
+      FFFoodDetail selectedfood = foodList.foods!.firstWhere((e) => e.id == foodId);
+
+      //* Recupero degli ingredienti selezionati
+      if (mode != _FoodListModeEnum.freeChoise) {
+        for (FFFoodDetail food in foodList.foods!.where((e) => e.selected)) {
+          selectedIngredients.add(food);
+        }
+      }
+      //* Setto il numero di priority per l'ingrediente, ovvero l'ordine di selezione
+      if (selected) {
+        selectedfood.selectionPriority = selectedIngredients.length + 1;
+      } else {
+        selectedfood.selectionPriority = null;
+      }
 
       switch (mode) {
         //* Massimi ingredienti con costo ----------------------------------------
         case _FoodListModeEnum.maxIngredientWithCost:
-          for (FFFoodDetail food in foodList.foods!.where((e) => e.selected)) {
-            selectedIngredients.add(food);
-          }
-
-          if (quantity > selectedIngredients.length ||
-              foodList.foods?.firstWhere((e) => e.id == foodId).selected == true) {
-            FFFoodDetail selectedfood = foodList.foods!.firstWhere((e) => e.id == foodId);
+          if (quantity > selectedIngredients.length || haveFoodSelected) {
             selectedfood.selected = selected;
 
             if (selectedfood.selected) {
@@ -206,9 +217,6 @@ class FlistfoodVariationCubit extends Cubit<FlistfoodVariationState> {
             } else if (selectedfood.selected == false) {
               product.newPrice -= selectedfood.variationPrice ?? 0;
             }
-
-            //* Imposto la priorità
-            selectedfood.selectionPriority = selectedIngredients.length;
           }
 
           emit(FlistfoodVariationState.success(product: product));
@@ -216,31 +224,18 @@ class FlistfoodVariationCubit extends Cubit<FlistfoodVariationState> {
 
         //* Massimi ingredienti gratuiti -----------------------------------------
         case _FoodListModeEnum.maxIngredientFree:
-          for (FFFoodDetail food in foodList.foods!.where((e) => e.selected)) {
-            selectedIngredients.add(food);
-          }
-
-          if (quantity > selectedIngredients.length ||
-              foodList.foods?.firstWhere((e) => e.id == foodId).selected == true) {
-            FFFoodDetail selectedfood = foodList.foods!.firstWhere((e) => e.id == foodId);
+          if (quantity > selectedIngredients.length || haveFoodSelected) {
             selectedfood.selected = selected;
 
             foodList.foods?.forEach((e) => e.isFree = false);
             foodList.foods?.where((e) => e.selected).forEach((e) => e.isFree = true);
-
-            selectedfood.selectionPriority = selectedIngredients.length;
           }
           emit(FlistfoodVariationState.success(product: product));
           break;
 
         //* Massimi ingredienti gratuiti e i successivi con costo ----------------
         case _FoodListModeEnum.maxFreeAndOtherWithCost:
-          FFFoodDetail selectedfood = foodList.foods!.firstWhere((e) => e.id == foodId);
           selectedfood.selected = selected;
-
-          for (FFFoodDetail food in foodList.foods!.where((e) => e.selected)) {
-            selectedIngredients.add(food);
-          }
 
           //* Selezionati maggiori della quantità
           if (selectedIngredients.length > quantity) {
@@ -292,7 +287,6 @@ class FlistfoodVariationCubit extends Cubit<FlistfoodVariationState> {
 
         //* Illimitati e gratuiti ------------------------------------------------
         case _FoodListModeEnum.freeChoise:
-          FFFoodDetail selectedfood = foodList.foods!.firstWhere((e) => e.id == foodId);
           selectedfood.selected = selected;
 
           if (selectedfood.selected == true) {
