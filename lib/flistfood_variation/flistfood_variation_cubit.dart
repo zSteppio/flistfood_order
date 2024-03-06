@@ -188,18 +188,9 @@ class FlistfoodVariationCubit extends Cubit<FlistfoodVariationState> {
       int mode = foodListsDefinitionSelected.mode;
       int quantity = foodListsDefinitionSelected.maxQty;
       List<FFFoodDetail> selectedIngredients = [];
-      //* Controllo se l'ingrediente è già selezionato
-      bool haveFoodSelected = foodList.foods?.firstWhere((e) => e.id == foodId).selected == true;
-      //* Recupero dell'ingrediente
-      FFFoodDetail selectedfood = foodList.foods!.firstWhere((e) => e.id == foodId);
 
-      //* Recupero degli ingredienti selezionati
-      if (mode != _FoodListModeEnum.freeChoise) {
-        for (FFFoodDetail food in foodList.foods!.where((e) => e.selected)) {
-          selectedIngredients.add(food);
-        }
-      }
       //* Setto il numero di priority per l'ingrediente, ovvero l'ordine di selezione
+      FFFoodDetail selectedfood = foodList.foods!.firstWhere((e) => e.id == foodId);
       if (selected) {
         selectedfood.selectionPriority = selectedIngredients.length + 1;
       } else {
@@ -209,7 +200,12 @@ class FlistfoodVariationCubit extends Cubit<FlistfoodVariationState> {
       switch (mode) {
         //* Massimi ingredienti con costo ----------------------------------------
         case _FoodListModeEnum.maxIngredientWithCost:
-          if (quantity > selectedIngredients.length || haveFoodSelected) {
+          for (FFFoodDetail food in foodList.foods!.where((e) => e.selected)) {
+            selectedIngredients.add(food);
+          }
+
+          if (quantity > selectedIngredients.length ||
+              foodList.foods?.firstWhere((e) => e.id == foodId).selected == true) {
             selectedfood.selected = selected;
 
             if (selectedfood.selected) {
@@ -218,13 +214,17 @@ class FlistfoodVariationCubit extends Cubit<FlistfoodVariationState> {
               product.newPrice -= selectedfood.variationPrice ?? 0;
             }
           }
-
           emit(FlistfoodVariationState.success(product: product));
           break;
 
         //* Massimi ingredienti gratuiti -----------------------------------------
         case _FoodListModeEnum.maxIngredientFree:
-          if (quantity > selectedIngredients.length || haveFoodSelected) {
+          for (FFFoodDetail food in foodList.foods!.where((e) => e.selected)) {
+            selectedIngredients.add(food);
+          }
+
+          if (quantity > selectedIngredients.length ||
+              foodList.foods?.firstWhere((e) => e.id == foodId).selected == true) {
             selectedfood.selected = selected;
 
             foodList.foods?.forEach((e) => e.isFree = false);
@@ -236,6 +236,10 @@ class FlistfoodVariationCubit extends Cubit<FlistfoodVariationState> {
         //* Massimi ingredienti gratuiti e i successivi con costo ----------------
         case _FoodListModeEnum.maxFreeAndOtherWithCost:
           selectedfood.selected = selected;
+
+          for (FFFoodDetail food in foodList.foods!.where((e) => e.selected)) {
+            selectedIngredients.add(food);
+          }
 
           //* Selezionati maggiori della quantità
           if (selectedIngredients.length > quantity) {
