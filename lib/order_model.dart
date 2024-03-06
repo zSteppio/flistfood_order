@@ -128,6 +128,7 @@ class FFVariation {
   int foodId;
   bool? alternative;
   int? variationType;
+  int? selectionPriority;
   //* dati vecchi
   String? foodName;
   double price;
@@ -135,6 +136,7 @@ class FFVariation {
   FFVariation({
     required this.foodId,
     this.alternative,
+    this.selectionPriority,
     this.variationType,
     this.foodName,
     required this.price,

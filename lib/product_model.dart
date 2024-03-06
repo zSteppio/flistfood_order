@@ -216,8 +216,10 @@ class FFFoodDetail {
     this.foodCategoryId,
     this.tags,
     this.hidden,
+    this.selectionPriority,
   });
 
+  int? selectionPriority;
   String? categoryName;
   List<int> allergenIds;
   int? productsCounts;

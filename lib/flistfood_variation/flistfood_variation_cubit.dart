@@ -206,7 +206,11 @@ class FlistfoodVariationCubit extends Cubit<FlistfoodVariationState> {
             } else if (selectedfood.selected == false) {
               product.newPrice -= selectedfood.variationPrice ?? 0;
             }
+
+            //* Imposto la priorità
+            selectedfood.selectionPriority = selectedIngredients.length;
           }
+
           emit(FlistfoodVariationState.success(product: product));
           break;
 
@@ -223,6 +227,8 @@ class FlistfoodVariationCubit extends Cubit<FlistfoodVariationState> {
 
             foodList.foods?.forEach((e) => e.isFree = false);
             foodList.foods?.where((e) => e.selected).forEach((e) => e.isFree = true);
+
+            selectedfood.selectionPriority = selectedIngredients.length;
           }
           emit(FlistfoodVariationState.success(product: product));
           break;

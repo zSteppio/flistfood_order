@@ -524,6 +524,8 @@ abstract class _$FFVariationCWProxy {
 
   FFVariation price(double price);
 
+  FFVariation selectionPriority(int? selectionPriority);
+
   FFVariation variationType(int? variationType);
 
   /// This function **does support** nullification of nullable fields. All `null` values passed to `non-nullable` fields will be ignored. You can also use `FFVariation(...).copyWith.fieldName(...)` to override fields one at a time with nullification support.
@@ -537,6 +539,7 @@ abstract class _$FFVariationCWProxy {
     int? foodId,
     String? foodName,
     double? price,
+    int? selectionPriority,
     int? variationType,
   });
 }
@@ -560,6 +563,10 @@ class _$FFVariationCWProxyImpl implements _$FFVariationCWProxy {
   FFVariation price(double price) => this(price: price);
 
   @override
+  FFVariation selectionPriority(int? selectionPriority) =>
+      this(selectionPriority: selectionPriority);
+
+  @override
   FFVariation variationType(int? variationType) =>
       this(variationType: variationType);
 
@@ -576,6 +583,7 @@ class _$FFVariationCWProxyImpl implements _$FFVariationCWProxy {
     Object? foodId = const $CopyWithPlaceholder(),
     Object? foodName = const $CopyWithPlaceholder(),
     Object? price = const $CopyWithPlaceholder(),
+    Object? selectionPriority = const $CopyWithPlaceholder(),
     Object? variationType = const $CopyWithPlaceholder(),
   }) {
     return FFVariation(
@@ -595,6 +603,10 @@ class _$FFVariationCWProxyImpl implements _$FFVariationCWProxy {
           ? _value.price
           // ignore: cast_nullable_to_non_nullable
           : price as double,
+      selectionPriority: selectionPriority == const $CopyWithPlaceholder()
+          ? _value.selectionPriority
+          // ignore: cast_nullable_to_non_nullable
+          : selectionPriority as int?,
       variationType: variationType == const $CopyWithPlaceholder()
           ? _value.variationType
           // ignore: cast_nullable_to_non_nullable
@@ -940,6 +952,7 @@ Map<String, dynamic> _$FFDetailToJson(FFDetail instance) {
 FFVariation _$FFVariationFromJson(Map<String, dynamic> json) => FFVariation(
       foodId: json['foodId'] as int,
       alternative: json['alternative'] as bool?,
+      selectionPriority: json['selectionPriority'] as int?,
       variationType: json['variationType'] as int?,
       foodName: json['foodName'] as String?,
       price: (json['price'] as num).toDouble(),
@@ -958,6 +971,7 @@ Map<String, dynamic> _$FFVariationToJson(FFVariation instance) {
 
   writeNotNull('alternative', instance.alternative);
   writeNotNull('variationType', instance.variationType);
+  writeNotNull('selectionPriority', instance.selectionPriority);
   writeNotNull('foodName', instance.foodName);
   val['price'] = instance.price;
   return val;

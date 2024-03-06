@@ -959,6 +959,8 @@ abstract class _$FFFoodDetailCWProxy {
 
   FFFoodDetail selected(bool selected);
 
+  FFFoodDetail selectionPriority(int? selectionPriority);
+
   FFFoodDetail shortName(String? shortName);
 
   FFFoodDetail tags(String? tags);
@@ -989,6 +991,7 @@ abstract class _$FFFoodDetailCWProxy {
     int? productId,
     int? productsCounts,
     bool? selected,
+    int? selectionPriority,
     String? shortName,
     String? tags,
     List<FFTranslation>? translations,
@@ -1054,6 +1057,10 @@ class _$FFFoodDetailCWProxyImpl implements _$FFFoodDetailCWProxy {
   FFFoodDetail selected(bool selected) => this(selected: selected);
 
   @override
+  FFFoodDetail selectionPriority(int? selectionPriority) =>
+      this(selectionPriority: selectionPriority);
+
+  @override
   FFFoodDetail shortName(String? shortName) => this(shortName: shortName);
 
   @override
@@ -1091,6 +1098,7 @@ class _$FFFoodDetailCWProxyImpl implements _$FFFoodDetailCWProxy {
     Object? productId = const $CopyWithPlaceholder(),
     Object? productsCounts = const $CopyWithPlaceholder(),
     Object? selected = const $CopyWithPlaceholder(),
+    Object? selectionPriority = const $CopyWithPlaceholder(),
     Object? shortName = const $CopyWithPlaceholder(),
     Object? tags = const $CopyWithPlaceholder(),
     Object? translations = const $CopyWithPlaceholder(),
@@ -1159,6 +1167,10 @@ class _$FFFoodDetailCWProxyImpl implements _$FFFoodDetailCWProxy {
           ? _value.selected
           // ignore: cast_nullable_to_non_nullable
           : selected as bool,
+      selectionPriority: selectionPriority == const $CopyWithPlaceholder()
+          ? _value.selectionPriority
+          // ignore: cast_nullable_to_non_nullable
+          : selectionPriority as int?,
       shortName: shortName == const $CopyWithPlaceholder()
           ? _value.shortName
           // ignore: cast_nullable_to_non_nullable
@@ -1546,6 +1558,7 @@ FFFoodDetail _$FFFoodDetailFromJson(Map<String, dynamic> json) => FFFoodDetail(
       foodCategoryId: json['foodCategoryId'] as int?,
       tags: json['tags'] as String?,
       hidden: json['hidden'] as bool?,
+      selectionPriority: json['selectionPriority'] as int?,
     );
 
 Map<String, dynamic> _$FFFoodDetailToJson(FFFoodDetail instance) {
@@ -1557,6 +1570,7 @@ Map<String, dynamic> _$FFFoodDetailToJson(FFFoodDetail instance) {
     }
   }
 
+  writeNotNull('selectionPriority', instance.selectionPriority);
   writeNotNull('categoryName', instance.categoryName);
   val['allergenIds'] = instance.allergenIds;
   writeNotNull('productsCounts', instance.productsCounts);

@@ -78,7 +78,7 @@ class FlistfoodOrderBloc extends Bloc<FlistfoodOrderEvent, FlistfoodOrderState> 
 
         //* Recupero e settaggio delle alternative
         for (FFAlternative alternative in product?.alternatives ?? []) {
-          for (var food in alternative.foods
+          for (FFFood food in alternative.foods
               .where((e) => e.isSelected == true && alternative.defaultFoodId != e.foodId)) {
             variations.add(FFVariation(
               foodId: food.foodId,
@@ -136,6 +136,7 @@ class FlistfoodOrderBloc extends Bloc<FlistfoodOrderEvent, FlistfoodOrderState> 
         for (FFFoodlist foodList in product?.foodlists ?? []) {
           for (FFFoodDetail food in foodList.foods?.where((e) => e.selected) ?? []) {
             variations.add(FFVariation(
+              selectionPriority: food.selectionPriority,
               foodId: food.id ?? 0,
               price: food.isFree ? 0 : food.variationPrice ?? 0,
               variationType: 1,
@@ -227,23 +228,25 @@ class FlistfoodOrderBloc extends Bloc<FlistfoodOrderEvent, FlistfoodOrderState> 
       } else {
         List<FFDetail> orderProducts = [];
 
-        orderProducts.add(FFDetail(
-          formatId: formatProduct?.id,
-          format: formatProduct?.format,
-          sectionId: product?.sectionId ?? 0,
-          productId: productId,
-          productName: product?.name ?? detailProduct!.productName,
-          unitPrice: product?.newPrice != 0.0
-              ? product?.newPrice ?? detailProduct!.unitPrice
-              : formatProduct?.price ?? product!.price,
-          quantity: 1,
-          totalPrice: product?.newPrice != 0.0
-              ? product?.newPrice ?? detailProduct!.totalPrice
-              : formatProduct?.price ?? product!.price,
-          variations: variations,
-          cookingTypeId: cookingTypeId,
-          cookingType: cookingTypeName,
-        ));
+        orderProducts.add(
+          FFDetail(
+            formatId: formatProduct?.id,
+            format: formatProduct?.format,
+            sectionId: product?.sectionId ?? 0,
+            productId: productId,
+            productName: product?.name ?? detailProduct!.productName,
+            unitPrice: product?.newPrice != 0.0
+                ? product?.newPrice ?? detailProduct!.unitPrice
+                : formatProduct?.price ?? product!.price,
+            quantity: 1,
+            totalPrice: product?.newPrice != 0.0
+                ? product?.newPrice ?? detailProduct!.totalPrice
+                : formatProduct?.price ?? product!.price,
+            variations: variations,
+            cookingTypeId: cookingTypeId,
+            cookingType: cookingTypeName,
+          ),
+        );
 
         double totalProduct = orderProducts.first.totalPrice;
 
