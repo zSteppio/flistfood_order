@@ -189,14 +189,6 @@ class FlistfoodVariationCubit extends Cubit<FlistfoodVariationState> {
       int quantity = foodListsDefinitionSelected.maxQty;
       List<FFFoodDetail> selectedIngredients = [];
 
-      //* Setto il numero di priority per l'ingrediente, ovvero l'ordine di selezione
-      FFFoodDetail selectedfood = foodList.foods!.firstWhere((e) => e.id == foodId);
-      if (selected) {
-        selectedfood.selectionPriority = selectedIngredients.length + 1;
-      } else {
-        selectedfood.selectionPriority = null;
-      }
-
       switch (mode) {
         //* Massimi ingredienti con costo ----------------------------------------
         case _FoodListModeEnum.maxIngredientWithCost:
@@ -206,12 +198,19 @@ class FlistfoodVariationCubit extends Cubit<FlistfoodVariationState> {
 
           if (quantity > selectedIngredients.length ||
               foodList.foods?.firstWhere((e) => e.id == foodId).selected == true) {
+            FFFoodDetail selectedfood = foodList.foods!.firstWhere((e) => e.id == foodId);
             selectedfood.selected = selected;
 
             if (selectedfood.selected) {
               product.newPrice += selectedfood.variationPrice ?? 0;
             } else if (selectedfood.selected == false) {
               product.newPrice -= selectedfood.variationPrice ?? 0;
+            }
+
+            if (selected) {
+              selectedfood.selectionPriority = selectedIngredients.length + 1;
+            } else {
+              selectedfood.selectionPriority = null;
             }
           }
           emit(FlistfoodVariationState.success(product: product));
@@ -225,16 +224,24 @@ class FlistfoodVariationCubit extends Cubit<FlistfoodVariationState> {
 
           if (quantity > selectedIngredients.length ||
               foodList.foods?.firstWhere((e) => e.id == foodId).selected == true) {
+            FFFoodDetail selectedfood = foodList.foods!.firstWhere((e) => e.id == foodId);
             selectedfood.selected = selected;
 
             foodList.foods?.forEach((e) => e.isFree = false);
             foodList.foods?.where((e) => e.selected).forEach((e) => e.isFree = true);
+
+            if (selected) {
+              selectedfood.selectionPriority = selectedIngredients.length + 1;
+            } else {
+              selectedfood.selectionPriority = null;
+            }
           }
           emit(FlistfoodVariationState.success(product: product));
           break;
 
         //* Massimi ingredienti gratuiti e i successivi con costo ----------------
         case _FoodListModeEnum.maxFreeAndOtherWithCost:
+          FFFoodDetail selectedfood = foodList.foods!.firstWhere((e) => e.id == foodId);
           selectedfood.selected = selected;
 
           for (FFFoodDetail food in foodList.foods!.where((e) => e.selected)) {
@@ -286,17 +293,30 @@ class FlistfoodVariationCubit extends Cubit<FlistfoodVariationState> {
           if (foodList.foods?.any((e) => e.selected) == false) {
             foodList.foods?.forEach((e) => e.hiddenPrice = true);
           }
+
+          if (selected) {
+            selectedfood.selectionPriority = selectedIngredients.length + 1;
+          } else {
+            selectedfood.selectionPriority = null;
+          }
           emit(FlistfoodVariationState.success(product: product));
           break;
 
         //* Illimitati e gratuiti ------------------------------------------------
         case _FoodListModeEnum.freeChoise:
+          FFFoodDetail selectedfood = foodList.foods!.firstWhere((e) => e.id == foodId);
           selectedfood.selected = selected;
 
           if (selectedfood.selected == true) {
             product.newPrice += selectedfood.variationPrice ?? 0;
           } else if (selectedfood.selected == false) {
             product.newPrice -= selectedfood.variationPrice ?? 0;
+          }
+
+          if (selected) {
+            selectedfood.selectionPriority = selectedIngredients.length + 1;
+          } else {
+            selectedfood.selectionPriority = null;
           }
           emit(FlistfoodVariationState.success(product: product));
           break;
