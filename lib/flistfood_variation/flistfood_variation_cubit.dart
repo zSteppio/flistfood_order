@@ -194,9 +194,11 @@ class FlistfoodVariationCubit extends Cubit<FlistfoodVariationState> {
             foodList.foods?.toList().length ?? 0 + 1;
       } else {
         foodList.foods!.firstWhere((e) => e.id == foodId).selectionPriority = null;
-        for (FFFoodDetail foodDetail
-            in foodList.foods?.where((e) => e.selectionPriority != null) ?? []) {
-          foodDetail.selectionPriority = foodList.foods?.toList().indexOf(foodDetail) ?? 0 + 1;
+        final List<FFFoodDetail> foodsDetail =
+            foodList.foods?.where((e) => e.selectionPriority != null).toList() ?? [];
+        for (int i = 0; i < foodsDetail.length; i++) {
+          //* Riordina la SelectionPriority.
+          foodsDetail[i].selectionPriority = i + 1;
         }
       }
 
