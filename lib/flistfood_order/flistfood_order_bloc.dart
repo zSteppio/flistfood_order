@@ -134,9 +134,13 @@ class FlistfoodOrderBloc extends Bloc<FlistfoodOrderEvent, FlistfoodOrderState> 
 
         //* Recupero e settaggio foodlist
         for (FFFoodlist foodList in product?.foodlists ?? []) {
-          for (FFFoodDetail food in foodList.foods?.where((e) => e.selected) ?? []) {
+          final List<FFFoodDetail> foodListSort =
+              foodList.foods?.where((e) => e.selected).toList() ?? [];
+          foodListSort.sort((a, b) => a.timeSelected!.compareTo(b.timeSelected!));
+
+          for (FFFoodDetail food in foodListSort) {
             variations.add(FFVariation(
-              selectionPriority: food.selectionPriority,
+              selectionPriority: foodListSort.indexOf(food) + 1,
               foodId: food.id ?? 0,
               price: food.isFree ? 0 : food.variationPrice ?? 0,
               variationType: 1,

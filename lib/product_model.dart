@@ -217,6 +217,7 @@ class FFFoodDetail {
     this.tags,
     this.hidden,
     this.selectionPriority,
+    this.timeSelected,
   });
 
   int? selectionPriority;
@@ -239,6 +240,7 @@ class FFFoodDetail {
   int? foodCategoryId;
   String? tags;
   bool? hidden;
+  DateTime? timeSelected;
 
   factory FFFoodDetail.fromJson(Map<String, dynamic> json) => _$FFFoodDetailFromJson(json);
   Map<String, dynamic> toJson() => _$FFFoodDetailToJson(this);

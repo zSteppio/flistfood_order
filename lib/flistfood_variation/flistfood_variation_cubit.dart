@@ -189,17 +189,11 @@ class FlistfoodVariationCubit extends Cubit<FlistfoodVariationState> {
       int quantity = foodListsDefinitionSelected.maxQty;
       List<FFFoodDetail> selectedIngredients = [];
 
+      //* Setto il tempo in cui ho assegnato la variazione
       if (selected) {
-        foodList.foods!.firstWhere((e) => e.id == foodId).selectionPriority =
-            foodList.foods?.toList().length ?? 0 + 1;
+        foodList.foods!.firstWhere((e) => e.id == foodId).timeSelected = DateTime.now();
       } else {
-        foodList.foods!.firstWhere((e) => e.id == foodId).selectionPriority = null;
-        final List<FFFoodDetail> foodsDetail =
-            foodList.foods?.where((e) => e.selectionPriority != null).toList() ?? [];
-        for (int i = 0; i < foodsDetail.length; i++) {
-          //* Riordina la SelectionPriority.
-          foodsDetail[i].selectionPriority = i + 1;
-        }
+        foodList.foods!.firstWhere((e) => e.id == foodId).timeSelected = null;
       }
 
       switch (mode) {
@@ -308,8 +302,6 @@ class FlistfoodVariationCubit extends Cubit<FlistfoodVariationState> {
           } else if (selectedfood.selected == false) {
             product.newPrice -= selectedfood.variationPrice ?? 0;
           }
-
-          selectedfood.selectionPriority = null;
 
           emit(FlistfoodVariationState.success(product: product));
           break;

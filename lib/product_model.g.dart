@@ -965,6 +965,8 @@ abstract class _$FFFoodDetailCWProxy {
 
   FFFoodDetail tags(String? tags);
 
+  FFFoodDetail timeSelected(DateTime? timeSelected);
+
   FFFoodDetail translations(List<FFTranslation> translations);
 
   FFFoodDetail variationPrice(double? variationPrice);
@@ -994,6 +996,7 @@ abstract class _$FFFoodDetailCWProxy {
     int? selectionPriority,
     String? shortName,
     String? tags,
+    DateTime? timeSelected,
     List<FFTranslation>? translations,
     double? variationPrice,
   });
@@ -1067,6 +1070,10 @@ class _$FFFoodDetailCWProxyImpl implements _$FFFoodDetailCWProxy {
   FFFoodDetail tags(String? tags) => this(tags: tags);
 
   @override
+  FFFoodDetail timeSelected(DateTime? timeSelected) =>
+      this(timeSelected: timeSelected);
+
+  @override
   FFFoodDetail translations(List<FFTranslation> translations) =>
       this(translations: translations);
 
@@ -1101,6 +1108,7 @@ class _$FFFoodDetailCWProxyImpl implements _$FFFoodDetailCWProxy {
     Object? selectionPriority = const $CopyWithPlaceholder(),
     Object? shortName = const $CopyWithPlaceholder(),
     Object? tags = const $CopyWithPlaceholder(),
+    Object? timeSelected = const $CopyWithPlaceholder(),
     Object? translations = const $CopyWithPlaceholder(),
     Object? variationPrice = const $CopyWithPlaceholder(),
   }) {
@@ -1179,6 +1187,10 @@ class _$FFFoodDetailCWProxyImpl implements _$FFFoodDetailCWProxy {
           ? _value.tags
           // ignore: cast_nullable_to_non_nullable
           : tags as String?,
+      timeSelected: timeSelected == const $CopyWithPlaceholder()
+          ? _value.timeSelected
+          // ignore: cast_nullable_to_non_nullable
+          : timeSelected as DateTime?,
       translations:
           translations == const $CopyWithPlaceholder() || translations == null
               ? _value.translations
@@ -1559,6 +1571,9 @@ FFFoodDetail _$FFFoodDetailFromJson(Map<String, dynamic> json) => FFFoodDetail(
       tags: json['tags'] as String?,
       hidden: json['hidden'] as bool?,
       selectionPriority: json['selectionPriority'] as int?,
+      timeSelected: json['timeSelected'] == null
+          ? null
+          : DateTime.parse(json['timeSelected'] as String),
     );
 
 Map<String, dynamic> _$FFFoodDetailToJson(FFFoodDetail instance) {
@@ -1590,6 +1605,7 @@ Map<String, dynamic> _$FFFoodDetailToJson(FFFoodDetail instance) {
   writeNotNull('foodCategoryId', instance.foodCategoryId);
   writeNotNull('tags', instance.tags);
   writeNotNull('hidden', instance.hidden);
+  writeNotNull('timeSelected', instance.timeSelected?.toIso8601String());
   return val;
 }
 
