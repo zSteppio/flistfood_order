@@ -178,7 +178,7 @@ class FlistfoodOrderBloc extends Bloc<FlistfoodOrderEvent, FlistfoodOrderState> 
         } else {
           order.details.add(
             FFDetail(
-              formatId: formatProduct?.formatId,
+              formatId: formatProduct?.id,
               format: formatProduct?.format,
               productId: productId,
               productName: product?.name ?? detailProduct!.productName,
@@ -228,7 +228,7 @@ class FlistfoodOrderBloc extends Bloc<FlistfoodOrderEvent, FlistfoodOrderState> 
         List<FFDetail> orderProducts = [];
 
         orderProducts.add(FFDetail(
-          formatId: formatProduct?.formatId,
+          formatId: formatProduct?.id,
           format: formatProduct?.format,
           sectionId: product?.sectionId ?? 0,
           productId: productId,

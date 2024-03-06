@@ -206,7 +206,7 @@ extension $FFProductCopyWith on FFProduct {
 abstract class _$FFFormatCWProxy {
   FFFormat format(String? format);
 
-  FFFormat formatId(int? formatId);
+  FFFormat id(int? id);
 
   FFFormat price(double price);
 
@@ -218,7 +218,7 @@ abstract class _$FFFormatCWProxy {
   /// ````
   FFFormat call({
     String? format,
-    int? formatId,
+    int? id,
     double? price,
   });
 }
@@ -233,7 +233,7 @@ class _$FFFormatCWProxyImpl implements _$FFFormatCWProxy {
   FFFormat format(String? format) => this(format: format);
 
   @override
-  FFFormat formatId(int? formatId) => this(formatId: formatId);
+  FFFormat id(int? id) => this(id: id);
 
   @override
   FFFormat price(double price) => this(price: price);
@@ -248,7 +248,7 @@ class _$FFFormatCWProxyImpl implements _$FFFormatCWProxy {
   /// ````
   FFFormat call({
     Object? format = const $CopyWithPlaceholder(),
-    Object? formatId = const $CopyWithPlaceholder(),
+    Object? id = const $CopyWithPlaceholder(),
     Object? price = const $CopyWithPlaceholder(),
   }) {
     return FFFormat(
@@ -256,10 +256,10 @@ class _$FFFormatCWProxyImpl implements _$FFFormatCWProxy {
           ? _value.format
           // ignore: cast_nullable_to_non_nullable
           : format as String?,
-      formatId: formatId == const $CopyWithPlaceholder()
-          ? _value.formatId
+      id: id == const $CopyWithPlaceholder()
+          ? _value.id
           // ignore: cast_nullable_to_non_nullable
-          : formatId as int?,
+          : id as int?,
       price: price == const $CopyWithPlaceholder() || price == null
           ? _value.price
           // ignore: cast_nullable_to_non_nullable
@@ -1327,7 +1327,7 @@ Map<String, dynamic> _$FFProductToJson(FFProduct instance) {
 FFFormat _$FFFormatFromJson(Map<String, dynamic> json) => FFFormat(
       format: json['format'] as String?,
       price: (json['price'] as num).toDouble(),
-      formatId: json['formatId'] as int?,
+      id: json['id'] as int?,
     );
 
 Map<String, dynamic> _$FFFormatToJson(FFFormat instance) {
@@ -1340,7 +1340,7 @@ Map<String, dynamic> _$FFFormatToJson(FFFormat instance) {
   }
 
   writeNotNull('format', instance.format);
-  writeNotNull('formatId', instance.formatId);
+  writeNotNull('id', instance.id);
   val['price'] = instance.price;
   return val;
 }

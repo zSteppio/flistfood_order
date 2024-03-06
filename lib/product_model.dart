@@ -43,10 +43,10 @@ class FFProduct {
 @JsonSerializable(includeIfNull: false, explicitToJson: true)
 class FFFormat {
   String? format;
-  int? formatId;
+  int? id;
   final double price;
 
-  FFFormat({this.format, required this.price, this.formatId});
+  FFFormat({this.format, required this.price, this.id});
 
   factory FFFormat.fromJson(Map<String, dynamic> json) => _$FFFormatFromJson(json);
   Map<String, dynamic> toJson() => _$FFFormatToJson(this);
