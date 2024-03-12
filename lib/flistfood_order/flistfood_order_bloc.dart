@@ -1,25 +1,23 @@
 import 'dart:convert';
 import 'dart:developer';
-
 import 'package:dio/dio.dart';
 import 'package:flistfood_order/order_local_storage.dart';
 import 'package:flistfood_order/order_model.dart';
 import 'package:flistfood_order/product_model.dart';
+import 'package:flistfood_order/service_point_model.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'flistfood_order_event.dart';
-
+part 'enum.dart';
 part 'flistfood_order_state.dart';
-
 part 'flistfood_order_bloc.freezed.dart';
 
 class FlistfoodOrderBloc extends Bloc<FlistfoodOrderEvent, FlistfoodOrderState> {
   FlistfoodOrderBloc() : super(const FlistfoodOrderState.initial()) {
     on<_GetOrderByServicePoint>((event, emit) async {
       emit(const FlistfoodOrderState.loading(order: null));
-      FFOrder? order = await getCurrentOrder(currentServicePoint: event.servicePointId);
+      FFOrder? order = await getCurrentOrder(currentServicePointId: event.servicePointId);
       emit(FlistfoodOrderState.success(
         order: order,
         orderId: null,
@@ -30,60 +28,43 @@ class FlistfoodOrderBloc extends Bloc<FlistfoodOrderEvent, FlistfoodOrderState> 
     });
 
     on<_AddProductOrDetailToORder>((event, emit) async {
-      FFProduct? product;
+      FFProduct? product = event.product;
+      FFDetail? detailProduct = event.detailProduct;
+      FFCurrentServicePoint currentServicePoint = event.currentServicePoint;
       FFOrder? order;
-      FFDetail? detailProduct;
-      FFFormat? formatProduct;
       double? deliveryCost = event.deliveryCost;
-      double? deliveryServicePrice = event.deliveryServicePrice;
-      String? productJson = event.productJson;
-      String? detailProductJson = event.detailProductJson;
-      String? formatProductJson = event.formatProductJson;
       String ownerId = event.ownerId;
       String ownerName = event.ownerName;
       String? userId = event.userId;
       DateTime opneDate = event.opneDate;
-      String currentServicePoint = event.currentServicePoint;
-      bool isDelivery = event.isDelivery;
-
-      order = await getCurrentOrder(currentServicePoint: currentServicePoint);
-      emit(FlistfoodOrderState.loading(order: order));
-
-      final double servicePrice = (deliveryCost ?? 0.0) + (deliveryServicePrice ?? 0.0);
-
-      if (productJson != null) {
-        product = FFProduct.fromJson(jsonDecode(productJson));
-      }
-      if (detailProductJson != null) {
-        detailProduct = FFDetail.fromJson(jsonDecode(detailProductJson));
-      }
-      if (formatProductJson != null) {
-        formatProduct = FFFormat.fromJson(jsonDecode(formatProductJson));
-      }
-
+      final double servicePrice =
+          (deliveryCost ?? 0.0) + (currentServicePoint.supplementPrice ?? 0.0);
       int productId = detailProduct?.productId ?? product!.id;
       String? cookingTypeName;
       int? cookingTypeId;
-
       List<FFVariation> variations = [];
 
+      //* Recupero l'ordine corrente al quale aggiungerò il prodotto
+      order = await getCurrentOrder(currentServicePointId: currentServicePoint.id);
+
+      emit(FlistfoodOrderState.loading(order: order));
+
+      //* Se NON ho un dettaglio ne creo uno nuovo, per ogni variazione del prodotto popolo i dati e creo una nuova variazione nella lista variazioni
       if (detailProduct == null) {
-        //* Recupero del cookingName selezionato
         for (FFCookingType cookingType in product?.cookingTypes
-                .where((e) => e.isSelected && product?.preferredCookingTypeId != e.id) ??
+                .where((e) => e.isSelected && product.preferredCookingTypeId != e.id) ??
             []) {
           cookingTypeName = cookingType.name ?? '';
           cookingTypeId = cookingType.id;
         }
 
-        //* Recupero e settaggio delle alternative
         for (FFAlternative alternative in product?.alternatives ?? []) {
           for (FFFood food in alternative.foods
               .where((e) => e.isSelected == true && alternative.defaultFoodId != e.foodId)) {
             variations.add(FFVariation(
               foodId: food.foodId,
               price: food.price,
-              foodName: food.foodName,
+              foodName: food.name,
               alternative: true,
               variationType: 1,
             ));
@@ -92,7 +73,7 @@ class FlistfoodOrderBloc extends Bloc<FlistfoodOrderEvent, FlistfoodOrderState> 
               variations.add(FFVariation(
                 foodId: food.foodId,
                 price: food.price,
-                foodName: food.foodName,
+                foodName: food.name,
                 alternative: true,
                 variationType: -1,
               ));
@@ -100,39 +81,33 @@ class FlistfoodOrderBloc extends Bloc<FlistfoodOrderEvent, FlistfoodOrderState> 
           }
         }
 
-        //* Recupero e settaggio degli ingredienti
         for (FFIngredient ingredient in product?.ingredients ?? []) {
-          if (ingredient.isMainIngredient && !ingredient.selected) {
+          if (ingredient.isMain && !ingredient.selected) {
             variations.add(FFVariation(
               foodId: ingredient.foodId,
               price: 0,
-              foodName: ingredient.food,
+              foodName: ingredient.name,
               variationType: -1,
             ));
-          } else if (!ingredient.isMainIngredient && ingredient.selected) {
+          } else if (!ingredient.isMain && ingredient.selected) {
             variations.add(FFVariation(
               foodId: ingredient.foodId,
-              price: ingredient.variationPrice,
-              foodName: ingredient.food,
+              price: ingredient.price,
+              foodName: ingredient.name,
               variationType: ingredient.variationType ?? 1,
             ));
-          }
-          //* Recupero e settaggio delle variazioni su ingredienti base con x2 o x3
-          else if (ingredient.isMainIngredient &&
+          } else if (ingredient.isMain &&
               ingredient.selected &&
               (ingredient.variationType == 2 || ingredient.variationType == 3)) {
-            variations.add(
-              FFVariation(
-                foodId: ingredient.foodId,
-                price: ingredient.variationPrice,
-                foodName: ingredient.food,
-                variationType: ingredient.variationType!,
-              ),
-            );
+            variations.add(FFVariation(
+              foodId: ingredient.foodId,
+              price: ingredient.price,
+              foodName: ingredient.name,
+              variationType: ingredient.variationType!,
+            ));
           }
         }
 
-        //* Recupero e settaggio foodlist
         for (FFFoodlist foodList in product?.foodlists ?? []) {
           final List<FFFoodDetail> foodListSort =
               foodList.foods?.where((e) => e.selected).toList() ?? [];
@@ -148,26 +123,29 @@ class FlistfoodOrderBloc extends Bloc<FlistfoodOrderEvent, FlistfoodOrderState> 
             ));
           }
         }
-      } else {
+      }
+      //* Altrimenti se ho un dettaglio popolo le variazioni con le variazioni del mio dettaglio
+      else {
         variations = detailProduct.variations;
       }
 
       log(jsonEncode(variations), name: 'Variations');
 
+      //* Se ho già un ordine in corso aggiungo il prodotto
       if (order != null) {
-        var formatName = detailProduct?.format ?? formatProduct?.format;
-
+        String? formatName = detailProduct?.format ?? product?.formatName;
         bool productExist = order.details.any((e) =>
             e.productId == productId &&
             e.isEqual(variations) &&
             e.cookingTypeId == cookingTypeId &&
             e.format == formatName);
 
+        //* Controllo se devo aggiornare un prodotto esistente o se è un nuovo prodotto
         if (detailProduct != null && !productExist) {
           FFDetail singleProduct = order.details.firstWhere((e) =>
               e.productId == productId &&
-              e.isEqual(detailProduct?.variations ?? []) &&
-              e.cookingTypeId == detailProduct?.cookingTypeId &&
+              e.isEqual(detailProduct.variations) &&
+              e.cookingTypeId == detailProduct.cookingTypeId &&
               e.format == formatName);
           singleProduct.quantity += 1;
           singleProduct.totalPrice = singleProduct.unitPrice * singleProduct.quantity;
@@ -183,18 +161,18 @@ class FlistfoodOrderBloc extends Bloc<FlistfoodOrderEvent, FlistfoodOrderState> 
         } else {
           order.details.add(
             FFDetail(
-              formatId: formatProduct?.id,
-              format: formatProduct?.format,
+              formatId: product?.id,
+              format: product?.name,
               productId: productId,
               productName: product?.name ?? detailProduct!.productName,
               sectionId: product?.sectionId ?? 0,
               unitPrice: product?.newPrice != 0
                   ? product?.newPrice ?? detailProduct!.unitPrice
-                  : formatProduct?.price ?? product!.price,
+                  : product?.price ?? 0.0,
               quantity: 1,
               totalPrice: product?.newPrice != 0
                   ? product?.newPrice ?? detailProduct!.totalPrice
-                  : formatProduct?.price ?? product!.price,
+                  : product?.price ?? 0.0,
               variations: variations,
               cookingTypeId: cookingTypeId,
               cookingType: cookingTypeName,
@@ -202,12 +180,13 @@ class FlistfoodOrderBloc extends Bloc<FlistfoodOrderEvent, FlistfoodOrderState> 
           );
         }
 
+        //* Aggiorno il totalPrice
         double totalPrice = 0;
         order.details.map((e) => e.totalPrice).forEach((e) {
           totalPrice += e;
         });
 
-        if (isDelivery) {
+        if (currentServicePoint.type == _MenuServiceType.delivery) {
           totalPrice += servicePrice;
         }
 
@@ -219,7 +198,7 @@ class FlistfoodOrderBloc extends Bloc<FlistfoodOrderEvent, FlistfoodOrderState> 
         final int totalQuantity = quantityVariation;
 
         order = FFOrder(
-          servicePointId: currentServicePoint,
+          servicePointId: currentServicePoint.id,
           details: order.details,
           totalQuantity: totalQuantity,
           source: 'A',
@@ -229,23 +208,25 @@ class FlistfoodOrderBloc extends Bloc<FlistfoodOrderEvent, FlistfoodOrderState> 
           totalPrice: totalPrice,
           openDate: opneDate,
         );
-      } else {
+      }
+      //* Altrimenti creo un nuvo ordine e aggiungo il prodotto
+      else {
         List<FFDetail> orderProducts = [];
 
         orderProducts.add(
           FFDetail(
-            formatId: formatProduct?.id,
-            format: formatProduct?.format,
+            formatId: product?.id,
+            format: product?.name,
             sectionId: product?.sectionId ?? 0,
             productId: productId,
             productName: product?.name ?? detailProduct!.productName,
             unitPrice: product?.newPrice != 0.0
                 ? product?.newPrice ?? detailProduct!.unitPrice
-                : formatProduct?.price ?? product!.price,
+                : product?.price ?? 0.0,
             quantity: 1,
             totalPrice: product?.newPrice != 0.0
                 ? product?.newPrice ?? detailProduct!.totalPrice
-                : formatProduct?.price ?? product!.price,
+                : product?.price ?? 0.0,
             variations: variations,
             cookingTypeId: cookingTypeId,
             cookingType: cookingTypeName,
@@ -253,22 +234,22 @@ class FlistfoodOrderBloc extends Bloc<FlistfoodOrderEvent, FlistfoodOrderState> 
         );
 
         double totalProduct = orderProducts.first.totalPrice;
-
         order = FFOrder(
-          servicePointId: currentServicePoint,
+          servicePointId: currentServicePoint.id,
           source: 'A',
           details: orderProducts,
           totalQuantity: 1,
           userId: userId,
           ownerId: ownerId,
           ownerName: ownerName,
-          totalPrice: totalProduct += isDelivery ? servicePrice : 0.0,
+          totalPrice: totalProduct +=
+              currentServicePoint.type == _MenuServiceType.delivery ? servicePrice : 0.0,
           openDate: opneDate,
         );
       }
 
-      await saveCurrentOrder(newOrder: order, currentServicePoint: currentServicePoint);
-
+      //* Salvo l'ordine ed emetto success
+      await saveCurrentOrder(newOrder: order, currentServicePointId: currentServicePoint.id);
       emit(FlistfoodOrderState.success(
         order: order,
         orderId: null,
@@ -280,33 +261,22 @@ class FlistfoodOrderBloc extends Bloc<FlistfoodOrderEvent, FlistfoodOrderState> 
     });
 
     on<_RemoveProductToOrder>((event, emit) async {
-      FFProduct? product;
+      FFProduct? product = event.product;
+      FFDetail? detailProduct = event.detailProduct;
+      FFCurrentServicePoint currentServicePoint = event.currentServicePoint;
       FFOrder? order;
       List<FFOrder>? orders;
-      FFDetail? detailProduct;
-      String? productJson = event.productJson;
-      String? detailProductJson = event.detailProductJson;
       String ownerId = event.ownerId;
       String ownerName = event.ownerName;
       String? userId = event.userId;
       DateTime opneDate = event.opneDate;
-      String currentServicePoint = event.currentServicePoint;
       double? deliveryCost = event.deliveryCost;
-      double? deliveryServicePrice = event.deliveryServicePrice;
-      bool isDelivery = event.isDelivery;
-      order = await getCurrentOrder(currentServicePoint: currentServicePoint);
 
+      //* Recupero l'ordine corrente al quale toglierò il prodotto o se ultimo prodotto, cancello l'ordine
+      order = await getCurrentOrder(currentServicePointId: currentServicePoint.id);
       emit(FlistfoodOrderState.loading(order: order));
 
-      if (productJson != null) {
-        product = FFProduct.fromJson(jsonDecode(productJson));
-      }
-      if (detailProductJson != null) {
-        detailProduct = FFDetail.fromJson(jsonDecode(detailProductJson));
-      }
-
       if (order != null) {
-        //* Imposto un id per i prodotti o dettaglio
         int? id = detailProduct?.productId ?? product?.id;
         List<FFVariation> variation = detailProduct?.variations ?? [];
 
@@ -330,15 +300,15 @@ class FlistfoodOrderBloc extends Bloc<FlistfoodOrderEvent, FlistfoodOrderState> 
               e.format == detailProduct?.format);
         }
 
-        //*
+        //* Aggiorno il totale
         double totalPrice = 0;
         order.details.map((e) => e.totalPrice).forEach((e) {
           totalPrice += e;
         });
 
-        if (isDelivery) {
+        if (currentServicePoint.type == _MenuServiceType.delivery) {
           totalPrice += deliveryCost ?? 0.0;
-          totalPrice += deliveryServicePrice ?? 0.0;
+          totalPrice += currentServicePoint.supplementPrice ?? 0.0;
         }
 
         int quantityVariation = 0;
@@ -349,7 +319,7 @@ class FlistfoodOrderBloc extends Bloc<FlistfoodOrderEvent, FlistfoodOrderState> 
         final int totalQuantity = quantityVariation;
 
         order = FFOrder(
-          servicePointId: currentServicePoint,
+          servicePointId: currentServicePoint.id,
           source: 'A',
           details: order.details,
           totalQuantity: totalQuantity,
@@ -360,11 +330,13 @@ class FlistfoodOrderBloc extends Bloc<FlistfoodOrderEvent, FlistfoodOrderState> 
           openDate: opneDate,
         );
 
-        await saveCurrentOrder(newOrder: order, currentServicePoint: currentServicePoint);
+        //* Salvo l'ordine
+        await saveCurrentOrder(newOrder: order, currentServicePointId: currentServicePoint.id);
 
+        //* Recupero tutti gli ordini, se il dettaglio è vuoto e quindi non ci sono prodotti, elimino l'ordine in corso
         orders = await getAllOrders();
         if (order.details.isEmpty) {
-          orders?.removeWhere((e) => e.servicePointId == currentServicePoint);
+          orders?.removeWhere((e) => e.servicePointId == currentServicePoint.id);
           await saveAllOrders(orders: orders ?? []);
         }
       }
@@ -391,8 +363,9 @@ class FlistfoodOrderBloc extends Bloc<FlistfoodOrderEvent, FlistfoodOrderState> 
       String apiBaseUrl = event.apiBaseUrl;
       String language = event.language;
       FFOrderID? orderResponse;
+      DateTime currentTime = DateTime.now();
 
-      FFOrder? order = await getCurrentOrder(currentServicePoint: currentServicePoint);
+      FFOrder? order = await getCurrentOrder(currentServicePointId: currentServicePoint);
       emit(FlistfoodOrderState.loading(order: order));
 
       if (order == null) {
@@ -406,15 +379,12 @@ class FlistfoodOrderBloc extends Bloc<FlistfoodOrderEvent, FlistfoodOrderState> 
         return;
       }
 
-      DateTime currentTime = DateTime.now();
-
       try {
+        //* Popolo i campi mancanti dell'ordine
         order.note = note;
         order.seatNumber = seatNumber;
         order.id = orderId;
-
         order.ownerName = null;
-
         order.deliveryInfo = deliveryInfo;
         DateTime? mustBeReadyOn;
 
@@ -424,37 +394,18 @@ class FlistfoodOrderBloc extends Bloc<FlistfoodOrderEvent, FlistfoodOrderState> 
                   .toLocal()
                   .toUtc();
         }
-
         order.mustBeReadyOn = mustBeReadyOn;
+        log(jsonEncode(order), name: 'Body ordine');
 
-        if (!isAnonymous) {
-          log(jsonEncode(order), name: 'Body ordine');
-          final Response response = await Dio().post(
-            '${apiBaseUrl}v4/orders',
-            data: (jsonEncode(order)),
-            queryParameters: {'confirm': true},
-            options: token != null
-                ? Options(headers: {
-                    'Authorization': token,
-                    'Accept-Language': language,
-                  })
-                : Options(headers: {
-                    'Accept-Language': language,
-                  }),
-          );
-
-          orderResponse = FFOrderID.fromJson(response.data);
-
-          _log('${apiBaseUrl}v4/orders?confirm= 200 OK', name: 'Create order');
-        } else {
-          log(jsonEncode(order), name: 'Body ordine');
-          final Response response = await Dio().post('${apiBaseUrl}v4/orders/anonymous',
-              data: (jsonEncode(order)), queryParameters: {'confirm': true});
-
-          orderResponse = FFOrderID.fromJson(response.data);
-
-          _log('${apiBaseUrl}v4/orders/anonymous?confirm= 200 OK', name: 'Create order anonymous');
-        }
+        //* Faccio la chiamata alle api, dove se sono loggato chiamo le api per l'utente loggato, altrimenti quella per l'anonimo
+        final Response response = await _sendOrderApi(
+          apiBaseUrl: apiBaseUrl,
+          isAnonimus: isAnonymous,
+          order: order,
+          token: token,
+          language: language,
+        );
+        orderResponse = FFOrderID.fromJson(response.data);
       } catch (e) {
         _logError(e.toString(), name: 'Invio ordine errore');
         if (e.toString().contains('401')) {
@@ -467,7 +418,6 @@ class FlistfoodOrderBloc extends Bloc<FlistfoodOrderEvent, FlistfoodOrderState> 
           ));
           return;
         }
-        _logError((jsonEncode(order)), name: 'Body ordine');
         emit(FlistfoodOrderState.success(
           orderId: null,
           totalPrice: order.totalPrice,
@@ -477,11 +427,11 @@ class FlistfoodOrderBloc extends Bloc<FlistfoodOrderEvent, FlistfoodOrderState> 
         ));
         return;
       }
+      _log('${apiBaseUrl}v4/orders/anonymous?confirm= 200 OK', name: 'Create order anonymous');
 
-      _logInfo('Eliminazione ordine inviato', name: 'After order');
-
-      //* Eliminazione Ordine
+      //* Eliminazione Ordine corrente dopo invio
       deleteCurrentOrder(currentServicePointId: currentServicePoint);
+      _logInfo('Eliminazione ordine inviato', name: 'After order');
 
       emit(FlistfoodOrderState.success(
         orderId: orderResponse,
@@ -516,56 +466,48 @@ class FlistfoodOrderBloc extends Bloc<FlistfoodOrderEvent, FlistfoodOrderState> 
       add(_GetOrderByServicePoint(servicePointId: servicePointId));
 
   void addProductOrDetailToORder({
-    required String currentServicePoint,
-    String? productJson,
-    String? detailProductJson,
-    String? formatProductJson,
+    required FFCurrentServicePoint currentServicePoint,
+    FFProduct? product,
+    FFDetail? detailProduct,
     required String ownerId,
     required String ownerName,
     required String? userId,
     required DateTime opneDate,
     required double? deliveryCost,
-    required double? deliveryServicePrice,
-    required bool isDelivery,
-  }) =>
-      add(_AddProductOrDetailToORder(
-        currentServicePoint: currentServicePoint,
-        productJson: productJson,
-        detailProductJson: detailProductJson,
-        formatProductJson: formatProductJson,
-        ownerId: ownerId,
-        ownerName: ownerName,
-        userId: userId,
-        opneDate: opneDate,
-        deliveryCost: deliveryCost,
-        deliveryServicePrice: deliveryServicePrice,
-        isDelivery: isDelivery,
-      ));
-
-  void removeProductToOrder({
-    required String currentServicePoint,
-    String? productJson,
-    String? detailProductJson,
-    required String ownerId,
-    required String ownerName,
-    required String? userId,
-    required DateTime opneDate,
-    required double? deliveryCost,
-    required double? deliveryServicePrice,
-    required bool isDelivery,
   }) =>
       add(
-        _RemoveProductToOrder(
+        _AddProductOrDetailToORder(
           currentServicePoint: currentServicePoint,
-          productJson: productJson,
-          detailProductJson: detailProductJson,
+          product: product,
+          detailProduct: detailProduct,
           ownerId: ownerId,
           ownerName: ownerName,
           userId: userId,
           opneDate: opneDate,
           deliveryCost: deliveryCost,
-          deliveryServicePrice: deliveryServicePrice,
-          isDelivery: isDelivery,
+        ),
+      );
+
+  void removeProductToOrder({
+    required FFCurrentServicePoint currentServicePoint,
+    FFProduct? product,
+    FFDetail? detailProduct,
+    required String ownerId,
+    required String ownerName,
+    required String? userId,
+    required DateTime opneDate,
+    required double? deliveryCost,
+  }) =>
+      add(
+        _RemoveProductToOrder(
+          currentServicePoint: currentServicePoint,
+          product: product,
+          detailProduct: detailProduct,
+          ownerId: ownerId,
+          ownerName: ownerName,
+          userId: userId,
+          opneDate: opneDate,
+          deliveryCost: deliveryCost,
         ),
       );
 
@@ -613,5 +555,39 @@ class FlistfoodOrderBloc extends Bloc<FlistfoodOrderEvent, FlistfoodOrderState> 
 
   void _logError(String message, {String? name}) {
     log('\x1B[31m$message\x1B[0m', name: name ?? 'Ordine');
+  }
+
+  Future<Response> _sendOrderApi({
+    required String apiBaseUrl,
+    required bool isAnonimus,
+    required FFOrder order,
+    String? token,
+    required String language,
+  }) {
+    if (!isAnonimus) {
+      return Dio().post(
+        '${apiBaseUrl}v4/orders',
+        data: (jsonEncode(order)),
+        queryParameters: {'confirm': true},
+        options: token != null
+            ? Options(
+                headers: {
+                  'Authorization': token,
+                  'Accept-Language': language,
+                },
+              )
+            : Options(
+                headers: {
+                  'Accept-Language': language,
+                },
+              ),
+      );
+    } else {
+      return Dio().post(
+        '${apiBaseUrl}v4/orders/anonymous',
+        data: (jsonEncode(order)),
+        queryParameters: {'confirm': true},
+      );
+    }
   }
 }

@@ -43,7 +43,7 @@ Future<List<FFOrder>?> getAllOrders() async {
   return null;
 }
 
-Future<FFOrder?> getCurrentOrder({required String currentServicePoint}) async {
+Future<FFOrder?> getCurrentOrder({required String currentServicePointId}) async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
 
   var orderRaw = prefs.getString('orders');
@@ -54,8 +54,8 @@ Future<FFOrder?> getCurrentOrder({required String currentServicePoint}) async {
     var orders = List<FFOrder>.from(orderMap.map((e) => FFOrder.fromJson(e))).toList();
 
     //* Controllo se sono presenti ordini su quel servicePoint
-    if (orders.any((e) => e.servicePointId == currentServicePoint)) {
-      FFOrder order = orders.firstWhere((e) => e.servicePointId == currentServicePoint);
+    if (orders.any((e) => e.servicePointId == currentServicePointId)) {
+      FFOrder order = orders.firstWhere((e) => e.servicePointId == currentServicePointId);
       return order;
     }
 
@@ -77,7 +77,7 @@ Future<void> deleteCurrentOrder({required String currentServicePointId}) async {
 
 Future<void> saveCurrentOrder({
   required FFOrder newOrder,
-  required String currentServicePoint,
+  required String currentServicePointId,
 }) async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
 
@@ -88,9 +88,9 @@ Future<void> saveCurrentOrder({
   //* Controllo se ci sono ordini in corso
   if (orders.isNotEmpty) {
     //* Controllo se sono presenti ordini su quel servicePoint
-    if (orders.any((e) => e.servicePointId == currentServicePoint)) {
+    if (orders.any((e) => e.servicePointId == currentServicePointId)) {
       //* Se c'è lo rimuovo e aggiungo quello nuovo
-      FFOrder order = orders.firstWhere((e) => e.servicePointId == currentServicePoint);
+      FFOrder order = orders.firstWhere((e) => e.servicePointId == currentServicePointId);
       orders.remove(order);
       orders.add(newOrder);
       await prefs.setString('orders', jsonEncode(orders));

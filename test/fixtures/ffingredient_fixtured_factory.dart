@@ -12,15 +12,12 @@ class _FFIngredientFixtureFactory extends FixtureFactory<FFIngredient> {
   FixtureDefinition<FFIngredient> definition() => define(
         (faker) => FFIngredient(
           foodId: faker.randomGenerator.integer(9999),
-          food: faker.lorem.word(),
-          hidden: faker.randomGenerator.boolean(),
-          isMainIngredient: faker.randomGenerator.boolean(),
+          name: faker.lorem.word(),
+          isMain: faker.randomGenerator.boolean(),
           selected: faker.randomGenerator.boolean(),
-          variationPrice: faker.randomGenerator.decimal(),
-          variationGroup: faker.lorem.word(),
+          price: faker.randomGenerator.decimal(),
           canRemove: faker.randomGenerator.boolean(),
-          canDouble: faker.randomGenerator.boolean(),
-          canTriple: faker.randomGenerator.boolean(),
+          canAddQuantity: faker.randomGenerator.integer(9999),
         ),
       );
 }

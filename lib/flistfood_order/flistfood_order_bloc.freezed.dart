@@ -21,29 +21,24 @@ mixin _$FlistfoodOrderEvent {
     required TResult Function(String servicePointId) getOrderByServicePoint,
     required TResult Function(String servicePointId) deleteOrderByServicePoint,
     required TResult Function(
-            String currentServicePoint,
-            String? productJson,
-            String? detailProductJson,
-            String? formatProductJson,
+            FFCurrentServicePoint currentServicePoint,
+            FFProduct? product,
+            FFDetail? detailProduct,
             String ownerId,
             String ownerName,
             String? userId,
             DateTime opneDate,
-            double? deliveryCost,
-            double? deliveryServicePrice,
-            bool isDelivery)
+            double? deliveryCost)
         addProductOrDetailToORder,
     required TResult Function(
-            String currentServicePoint,
-            String? productJson,
-            String? detailProductJson,
+            FFCurrentServicePoint currentServicePoint,
+            FFProduct? product,
+            FFDetail? detailProduct,
             String ownerId,
             String? userId,
             String ownerName,
             DateTime opneDate,
-            double? deliveryCost,
-            double? deliveryServicePrice,
-            bool isDelivery)
+            double? deliveryCost)
         removeProductToOrder,
     required TResult Function(
             String? orderId,
@@ -66,29 +61,24 @@ mixin _$FlistfoodOrderEvent {
     TResult? Function(String servicePointId)? getOrderByServicePoint,
     TResult? Function(String servicePointId)? deleteOrderByServicePoint,
     TResult? Function(
-            String currentServicePoint,
-            String? productJson,
-            String? detailProductJson,
-            String? formatProductJson,
+            FFCurrentServicePoint currentServicePoint,
+            FFProduct? product,
+            FFDetail? detailProduct,
             String ownerId,
             String ownerName,
             String? userId,
             DateTime opneDate,
-            double? deliveryCost,
-            double? deliveryServicePrice,
-            bool isDelivery)?
+            double? deliveryCost)?
         addProductOrDetailToORder,
     TResult? Function(
-            String currentServicePoint,
-            String? productJson,
-            String? detailProductJson,
+            FFCurrentServicePoint currentServicePoint,
+            FFProduct? product,
+            FFDetail? detailProduct,
             String ownerId,
             String? userId,
             String ownerName,
             DateTime opneDate,
-            double? deliveryCost,
-            double? deliveryServicePrice,
-            bool isDelivery)?
+            double? deliveryCost)?
         removeProductToOrder,
     TResult? Function(
             String? orderId,
@@ -111,29 +101,24 @@ mixin _$FlistfoodOrderEvent {
     TResult Function(String servicePointId)? getOrderByServicePoint,
     TResult Function(String servicePointId)? deleteOrderByServicePoint,
     TResult Function(
-            String currentServicePoint,
-            String? productJson,
-            String? detailProductJson,
-            String? formatProductJson,
+            FFCurrentServicePoint currentServicePoint,
+            FFProduct? product,
+            FFDetail? detailProduct,
             String ownerId,
             String ownerName,
             String? userId,
             DateTime opneDate,
-            double? deliveryCost,
-            double? deliveryServicePrice,
-            bool isDelivery)?
+            double? deliveryCost)?
         addProductOrDetailToORder,
     TResult Function(
-            String currentServicePoint,
-            String? productJson,
-            String? detailProductJson,
+            FFCurrentServicePoint currentServicePoint,
+            FFProduct? product,
+            FFDetail? detailProduct,
             String ownerId,
             String? userId,
             String ownerName,
             DateTime opneDate,
-            double? deliveryCost,
-            double? deliveryServicePrice,
-            bool isDelivery)?
+            double? deliveryCost)?
         removeProductToOrder,
     TResult Function(
             String? orderId,
@@ -282,29 +267,24 @@ class _$GetOrderByServicePointImpl implements _GetOrderByServicePoint {
     required TResult Function(String servicePointId) getOrderByServicePoint,
     required TResult Function(String servicePointId) deleteOrderByServicePoint,
     required TResult Function(
-            String currentServicePoint,
-            String? productJson,
-            String? detailProductJson,
-            String? formatProductJson,
+            FFCurrentServicePoint currentServicePoint,
+            FFProduct? product,
+            FFDetail? detailProduct,
             String ownerId,
             String ownerName,
             String? userId,
             DateTime opneDate,
-            double? deliveryCost,
-            double? deliveryServicePrice,
-            bool isDelivery)
+            double? deliveryCost)
         addProductOrDetailToORder,
     required TResult Function(
-            String currentServicePoint,
-            String? productJson,
-            String? detailProductJson,
+            FFCurrentServicePoint currentServicePoint,
+            FFProduct? product,
+            FFDetail? detailProduct,
             String ownerId,
             String? userId,
             String ownerName,
             DateTime opneDate,
-            double? deliveryCost,
-            double? deliveryServicePrice,
-            bool isDelivery)
+            double? deliveryCost)
         removeProductToOrder,
     required TResult Function(
             String? orderId,
@@ -330,29 +310,24 @@ class _$GetOrderByServicePointImpl implements _GetOrderByServicePoint {
     TResult? Function(String servicePointId)? getOrderByServicePoint,
     TResult? Function(String servicePointId)? deleteOrderByServicePoint,
     TResult? Function(
-            String currentServicePoint,
-            String? productJson,
-            String? detailProductJson,
-            String? formatProductJson,
+            FFCurrentServicePoint currentServicePoint,
+            FFProduct? product,
+            FFDetail? detailProduct,
             String ownerId,
             String ownerName,
             String? userId,
             DateTime opneDate,
-            double? deliveryCost,
-            double? deliveryServicePrice,
-            bool isDelivery)?
+            double? deliveryCost)?
         addProductOrDetailToORder,
     TResult? Function(
-            String currentServicePoint,
-            String? productJson,
-            String? detailProductJson,
+            FFCurrentServicePoint currentServicePoint,
+            FFProduct? product,
+            FFDetail? detailProduct,
             String ownerId,
             String? userId,
             String ownerName,
             DateTime opneDate,
-            double? deliveryCost,
-            double? deliveryServicePrice,
-            bool isDelivery)?
+            double? deliveryCost)?
         removeProductToOrder,
     TResult? Function(
             String? orderId,
@@ -378,29 +353,24 @@ class _$GetOrderByServicePointImpl implements _GetOrderByServicePoint {
     TResult Function(String servicePointId)? getOrderByServicePoint,
     TResult Function(String servicePointId)? deleteOrderByServicePoint,
     TResult Function(
-            String currentServicePoint,
-            String? productJson,
-            String? detailProductJson,
-            String? formatProductJson,
+            FFCurrentServicePoint currentServicePoint,
+            FFProduct? product,
+            FFDetail? detailProduct,
             String ownerId,
             String ownerName,
             String? userId,
             DateTime opneDate,
-            double? deliveryCost,
-            double? deliveryServicePrice,
-            bool isDelivery)?
+            double? deliveryCost)?
         addProductOrDetailToORder,
     TResult Function(
-            String currentServicePoint,
-            String? productJson,
-            String? detailProductJson,
+            FFCurrentServicePoint currentServicePoint,
+            FFProduct? product,
+            FFDetail? detailProduct,
             String ownerId,
             String? userId,
             String ownerName,
             DateTime opneDate,
-            double? deliveryCost,
-            double? deliveryServicePrice,
-            bool isDelivery)?
+            double? deliveryCost)?
         removeProductToOrder,
     TResult Function(
             String? orderId,
@@ -557,29 +527,24 @@ class _$DeleteOrderByServicePointImpl implements _DeleteOrderByServicePoint {
     required TResult Function(String servicePointId) getOrderByServicePoint,
     required TResult Function(String servicePointId) deleteOrderByServicePoint,
     required TResult Function(
-            String currentServicePoint,
-            String? productJson,
-            String? detailProductJson,
-            String? formatProductJson,
+            FFCurrentServicePoint currentServicePoint,
+            FFProduct? product,
+            FFDetail? detailProduct,
             String ownerId,
             String ownerName,
             String? userId,
             DateTime opneDate,
-            double? deliveryCost,
-            double? deliveryServicePrice,
-            bool isDelivery)
+            double? deliveryCost)
         addProductOrDetailToORder,
     required TResult Function(
-            String currentServicePoint,
-            String? productJson,
-            String? detailProductJson,
+            FFCurrentServicePoint currentServicePoint,
+            FFProduct? product,
+            FFDetail? detailProduct,
             String ownerId,
             String? userId,
             String ownerName,
             DateTime opneDate,
-            double? deliveryCost,
-            double? deliveryServicePrice,
-            bool isDelivery)
+            double? deliveryCost)
         removeProductToOrder,
     required TResult Function(
             String? orderId,
@@ -605,29 +570,24 @@ class _$DeleteOrderByServicePointImpl implements _DeleteOrderByServicePoint {
     TResult? Function(String servicePointId)? getOrderByServicePoint,
     TResult? Function(String servicePointId)? deleteOrderByServicePoint,
     TResult? Function(
-            String currentServicePoint,
-            String? productJson,
-            String? detailProductJson,
-            String? formatProductJson,
+            FFCurrentServicePoint currentServicePoint,
+            FFProduct? product,
+            FFDetail? detailProduct,
             String ownerId,
             String ownerName,
             String? userId,
             DateTime opneDate,
-            double? deliveryCost,
-            double? deliveryServicePrice,
-            bool isDelivery)?
+            double? deliveryCost)?
         addProductOrDetailToORder,
     TResult? Function(
-            String currentServicePoint,
-            String? productJson,
-            String? detailProductJson,
+            FFCurrentServicePoint currentServicePoint,
+            FFProduct? product,
+            FFDetail? detailProduct,
             String ownerId,
             String? userId,
             String ownerName,
             DateTime opneDate,
-            double? deliveryCost,
-            double? deliveryServicePrice,
-            bool isDelivery)?
+            double? deliveryCost)?
         removeProductToOrder,
     TResult? Function(
             String? orderId,
@@ -653,29 +613,24 @@ class _$DeleteOrderByServicePointImpl implements _DeleteOrderByServicePoint {
     TResult Function(String servicePointId)? getOrderByServicePoint,
     TResult Function(String servicePointId)? deleteOrderByServicePoint,
     TResult Function(
-            String currentServicePoint,
-            String? productJson,
-            String? detailProductJson,
-            String? formatProductJson,
+            FFCurrentServicePoint currentServicePoint,
+            FFProduct? product,
+            FFDetail? detailProduct,
             String ownerId,
             String ownerName,
             String? userId,
             DateTime opneDate,
-            double? deliveryCost,
-            double? deliveryServicePrice,
-            bool isDelivery)?
+            double? deliveryCost)?
         addProductOrDetailToORder,
     TResult Function(
-            String currentServicePoint,
-            String? productJson,
-            String? detailProductJson,
+            FFCurrentServicePoint currentServicePoint,
+            FFProduct? product,
+            FFDetail? detailProduct,
             String ownerId,
             String? userId,
             String ownerName,
             DateTime opneDate,
-            double? deliveryCost,
-            double? deliveryServicePrice,
-            bool isDelivery)?
+            double? deliveryCost)?
         removeProductToOrder,
     TResult Function(
             String? orderId,
@@ -768,17 +723,14 @@ abstract class _$$AddProductOrDetailToORderImplCopyWith<$Res> {
       __$$AddProductOrDetailToORderImplCopyWithImpl<$Res>;
   @useResult
   $Res call(
-      {String currentServicePoint,
-      String? productJson,
-      String? detailProductJson,
-      String? formatProductJson,
+      {FFCurrentServicePoint currentServicePoint,
+      FFProduct? product,
+      FFDetail? detailProduct,
       String ownerId,
       String ownerName,
       String? userId,
       DateTime opneDate,
-      double? deliveryCost,
-      double? deliveryServicePrice,
-      bool isDelivery});
+      double? deliveryCost});
 }
 
 /// @nodoc
@@ -795,34 +747,27 @@ class __$$AddProductOrDetailToORderImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? currentServicePoint = null,
-    Object? productJson = freezed,
-    Object? detailProductJson = freezed,
-    Object? formatProductJson = freezed,
+    Object? product = freezed,
+    Object? detailProduct = freezed,
     Object? ownerId = null,
     Object? ownerName = null,
     Object? userId = freezed,
     Object? opneDate = null,
     Object? deliveryCost = freezed,
-    Object? deliveryServicePrice = freezed,
-    Object? isDelivery = null,
   }) {
     return _then(_$AddProductOrDetailToORderImpl(
       currentServicePoint: null == currentServicePoint
           ? _value.currentServicePoint
           : currentServicePoint // ignore: cast_nullable_to_non_nullable
-              as String,
-      productJson: freezed == productJson
-          ? _value.productJson
-          : productJson // ignore: cast_nullable_to_non_nullable
-              as String?,
-      detailProductJson: freezed == detailProductJson
-          ? _value.detailProductJson
-          : detailProductJson // ignore: cast_nullable_to_non_nullable
-              as String?,
-      formatProductJson: freezed == formatProductJson
-          ? _value.formatProductJson
-          : formatProductJson // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as FFCurrentServicePoint,
+      product: freezed == product
+          ? _value.product
+          : product // ignore: cast_nullable_to_non_nullable
+              as FFProduct?,
+      detailProduct: freezed == detailProduct
+          ? _value.detailProduct
+          : detailProduct // ignore: cast_nullable_to_non_nullable
+              as FFDetail?,
       ownerId: null == ownerId
           ? _value.ownerId
           : ownerId // ignore: cast_nullable_to_non_nullable
@@ -843,14 +788,6 @@ class __$$AddProductOrDetailToORderImplCopyWithImpl<$Res>
           ? _value.deliveryCost
           : deliveryCost // ignore: cast_nullable_to_non_nullable
               as double?,
-      deliveryServicePrice: freezed == deliveryServicePrice
-          ? _value.deliveryServicePrice
-          : deliveryServicePrice // ignore: cast_nullable_to_non_nullable
-              as double?,
-      isDelivery: null == isDelivery
-          ? _value.isDelivery
-          : isDelivery // ignore: cast_nullable_to_non_nullable
-              as bool,
     ));
   }
 }
@@ -860,25 +797,21 @@ class __$$AddProductOrDetailToORderImplCopyWithImpl<$Res>
 class _$AddProductOrDetailToORderImpl implements _AddProductOrDetailToORder {
   const _$AddProductOrDetailToORderImpl(
       {required this.currentServicePoint,
-      this.productJson,
-      this.detailProductJson,
-      this.formatProductJson,
+      this.product,
+      this.detailProduct,
       required this.ownerId,
       required this.ownerName,
       required this.userId,
       required this.opneDate,
-      required this.deliveryCost,
-      required this.deliveryServicePrice,
-      required this.isDelivery});
+      required this.deliveryCost});
 
   @override
-  final String currentServicePoint;
+  final FFCurrentServicePoint currentServicePoint;
   @override
-  final String? productJson;
+  final FFProduct? product;
   @override
-  final String? detailProductJson;
-  @override
-  final String? formatProductJson;
+  final FFDetail? detailProduct;
+// String? formatProductJson,
   @override
   final String ownerId;
   @override
@@ -889,14 +822,10 @@ class _$AddProductOrDetailToORderImpl implements _AddProductOrDetailToORder {
   final DateTime opneDate;
   @override
   final double? deliveryCost;
-  @override
-  final double? deliveryServicePrice;
-  @override
-  final bool isDelivery;
 
   @override
   String toString() {
-    return 'FlistfoodOrderEvent.addProductOrDetailToORder(currentServicePoint: $currentServicePoint, productJson: $productJson, detailProductJson: $detailProductJson, formatProductJson: $formatProductJson, ownerId: $ownerId, ownerName: $ownerName, userId: $userId, opneDate: $opneDate, deliveryCost: $deliveryCost, deliveryServicePrice: $deliveryServicePrice, isDelivery: $isDelivery)';
+    return 'FlistfoodOrderEvent.addProductOrDetailToORder(currentServicePoint: $currentServicePoint, product: $product, detailProduct: $detailProduct, ownerId: $ownerId, ownerName: $ownerName, userId: $userId, opneDate: $opneDate, deliveryCost: $deliveryCost)';
   }
 
   @override
@@ -906,12 +835,9 @@ class _$AddProductOrDetailToORderImpl implements _AddProductOrDetailToORder {
             other is _$AddProductOrDetailToORderImpl &&
             (identical(other.currentServicePoint, currentServicePoint) ||
                 other.currentServicePoint == currentServicePoint) &&
-            (identical(other.productJson, productJson) ||
-                other.productJson == productJson) &&
-            (identical(other.detailProductJson, detailProductJson) ||
-                other.detailProductJson == detailProductJson) &&
-            (identical(other.formatProductJson, formatProductJson) ||
-                other.formatProductJson == formatProductJson) &&
+            (identical(other.product, product) || other.product == product) &&
+            (identical(other.detailProduct, detailProduct) ||
+                other.detailProduct == detailProduct) &&
             (identical(other.ownerId, ownerId) || other.ownerId == ownerId) &&
             (identical(other.ownerName, ownerName) ||
                 other.ownerName == ownerName) &&
@@ -919,27 +845,12 @@ class _$AddProductOrDetailToORderImpl implements _AddProductOrDetailToORder {
             (identical(other.opneDate, opneDate) ||
                 other.opneDate == opneDate) &&
             (identical(other.deliveryCost, deliveryCost) ||
-                other.deliveryCost == deliveryCost) &&
-            (identical(other.deliveryServicePrice, deliveryServicePrice) ||
-                other.deliveryServicePrice == deliveryServicePrice) &&
-            (identical(other.isDelivery, isDelivery) ||
-                other.isDelivery == isDelivery));
+                other.deliveryCost == deliveryCost));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      currentServicePoint,
-      productJson,
-      detailProductJson,
-      formatProductJson,
-      ownerId,
-      ownerName,
-      userId,
-      opneDate,
-      deliveryCost,
-      deliveryServicePrice,
-      isDelivery);
+  int get hashCode => Object.hash(runtimeType, currentServicePoint, product,
+      detailProduct, ownerId, ownerName, userId, opneDate, deliveryCost);
 
   @JsonKey(ignore: true)
   @override
@@ -954,29 +865,24 @@ class _$AddProductOrDetailToORderImpl implements _AddProductOrDetailToORder {
     required TResult Function(String servicePointId) getOrderByServicePoint,
     required TResult Function(String servicePointId) deleteOrderByServicePoint,
     required TResult Function(
-            String currentServicePoint,
-            String? productJson,
-            String? detailProductJson,
-            String? formatProductJson,
+            FFCurrentServicePoint currentServicePoint,
+            FFProduct? product,
+            FFDetail? detailProduct,
             String ownerId,
             String ownerName,
             String? userId,
             DateTime opneDate,
-            double? deliveryCost,
-            double? deliveryServicePrice,
-            bool isDelivery)
+            double? deliveryCost)
         addProductOrDetailToORder,
     required TResult Function(
-            String currentServicePoint,
-            String? productJson,
-            String? detailProductJson,
+            FFCurrentServicePoint currentServicePoint,
+            FFProduct? product,
+            FFDetail? detailProduct,
             String ownerId,
             String? userId,
             String ownerName,
             DateTime opneDate,
-            double? deliveryCost,
-            double? deliveryServicePrice,
-            bool isDelivery)
+            double? deliveryCost)
         removeProductToOrder,
     required TResult Function(
             String? orderId,
@@ -993,18 +899,8 @@ class _$AddProductOrDetailToORderImpl implements _AddProductOrDetailToORder {
         sendOrder,
     required TResult Function() removeAllOrder,
   }) {
-    return addProductOrDetailToORder(
-        currentServicePoint,
-        productJson,
-        detailProductJson,
-        formatProductJson,
-        ownerId,
-        ownerName,
-        userId,
-        opneDate,
-        deliveryCost,
-        deliveryServicePrice,
-        isDelivery);
+    return addProductOrDetailToORder(currentServicePoint, product,
+        detailProduct, ownerId, ownerName, userId, opneDate, deliveryCost);
   }
 
   @override
@@ -1013,29 +909,24 @@ class _$AddProductOrDetailToORderImpl implements _AddProductOrDetailToORder {
     TResult? Function(String servicePointId)? getOrderByServicePoint,
     TResult? Function(String servicePointId)? deleteOrderByServicePoint,
     TResult? Function(
-            String currentServicePoint,
-            String? productJson,
-            String? detailProductJson,
-            String? formatProductJson,
+            FFCurrentServicePoint currentServicePoint,
+            FFProduct? product,
+            FFDetail? detailProduct,
             String ownerId,
             String ownerName,
             String? userId,
             DateTime opneDate,
-            double? deliveryCost,
-            double? deliveryServicePrice,
-            bool isDelivery)?
+            double? deliveryCost)?
         addProductOrDetailToORder,
     TResult? Function(
-            String currentServicePoint,
-            String? productJson,
-            String? detailProductJson,
+            FFCurrentServicePoint currentServicePoint,
+            FFProduct? product,
+            FFDetail? detailProduct,
             String ownerId,
             String? userId,
             String ownerName,
             DateTime opneDate,
-            double? deliveryCost,
-            double? deliveryServicePrice,
-            bool isDelivery)?
+            double? deliveryCost)?
         removeProductToOrder,
     TResult? Function(
             String? orderId,
@@ -1052,18 +943,8 @@ class _$AddProductOrDetailToORderImpl implements _AddProductOrDetailToORder {
         sendOrder,
     TResult? Function()? removeAllOrder,
   }) {
-    return addProductOrDetailToORder?.call(
-        currentServicePoint,
-        productJson,
-        detailProductJson,
-        formatProductJson,
-        ownerId,
-        ownerName,
-        userId,
-        opneDate,
-        deliveryCost,
-        deliveryServicePrice,
-        isDelivery);
+    return addProductOrDetailToORder?.call(currentServicePoint, product,
+        detailProduct, ownerId, ownerName, userId, opneDate, deliveryCost);
   }
 
   @override
@@ -1072,29 +953,24 @@ class _$AddProductOrDetailToORderImpl implements _AddProductOrDetailToORder {
     TResult Function(String servicePointId)? getOrderByServicePoint,
     TResult Function(String servicePointId)? deleteOrderByServicePoint,
     TResult Function(
-            String currentServicePoint,
-            String? productJson,
-            String? detailProductJson,
-            String? formatProductJson,
+            FFCurrentServicePoint currentServicePoint,
+            FFProduct? product,
+            FFDetail? detailProduct,
             String ownerId,
             String ownerName,
             String? userId,
             DateTime opneDate,
-            double? deliveryCost,
-            double? deliveryServicePrice,
-            bool isDelivery)?
+            double? deliveryCost)?
         addProductOrDetailToORder,
     TResult Function(
-            String currentServicePoint,
-            String? productJson,
-            String? detailProductJson,
+            FFCurrentServicePoint currentServicePoint,
+            FFProduct? product,
+            FFDetail? detailProduct,
             String ownerId,
             String? userId,
             String ownerName,
             DateTime opneDate,
-            double? deliveryCost,
-            double? deliveryServicePrice,
-            bool isDelivery)?
+            double? deliveryCost)?
         removeProductToOrder,
     TResult Function(
             String? orderId,
@@ -1113,18 +989,8 @@ class _$AddProductOrDetailToORderImpl implements _AddProductOrDetailToORder {
     required TResult orElse(),
   }) {
     if (addProductOrDetailToORder != null) {
-      return addProductOrDetailToORder(
-          currentServicePoint,
-          productJson,
-          detailProductJson,
-          formatProductJson,
-          ownerId,
-          ownerName,
-          userId,
-          opneDate,
-          deliveryCost,
-          deliveryServicePrice,
-          isDelivery);
+      return addProductOrDetailToORder(currentServicePoint, product,
+          detailProduct, ownerId, ownerName, userId, opneDate, deliveryCost);
     }
     return orElse();
   }
@@ -1182,29 +1048,23 @@ class _$AddProductOrDetailToORderImpl implements _AddProductOrDetailToORder {
 
 abstract class _AddProductOrDetailToORder implements FlistfoodOrderEvent {
   const factory _AddProductOrDetailToORder(
-      {required final String currentServicePoint,
-      final String? productJson,
-      final String? detailProductJson,
-      final String? formatProductJson,
+      {required final FFCurrentServicePoint currentServicePoint,
+      final FFProduct? product,
+      final FFDetail? detailProduct,
       required final String ownerId,
       required final String ownerName,
       required final String? userId,
       required final DateTime opneDate,
-      required final double? deliveryCost,
-      required final double? deliveryServicePrice,
-      required final bool isDelivery}) = _$AddProductOrDetailToORderImpl;
+      required final double? deliveryCost}) = _$AddProductOrDetailToORderImpl;
 
-  String get currentServicePoint;
-  String? get productJson;
-  String? get detailProductJson;
-  String? get formatProductJson;
+  FFCurrentServicePoint get currentServicePoint;
+  FFProduct? get product;
+  FFDetail? get detailProduct; // String? formatProductJson,
   String get ownerId;
   String get ownerName;
   String? get userId;
   DateTime get opneDate;
   double? get deliveryCost;
-  double? get deliveryServicePrice;
-  bool get isDelivery;
   @JsonKey(ignore: true)
   _$$AddProductOrDetailToORderImplCopyWith<_$AddProductOrDetailToORderImpl>
       get copyWith => throw _privateConstructorUsedError;
@@ -1217,16 +1077,14 @@ abstract class _$$RemoveProductToOrderImplCopyWith<$Res> {
       __$$RemoveProductToOrderImplCopyWithImpl<$Res>;
   @useResult
   $Res call(
-      {String currentServicePoint,
-      String? productJson,
-      String? detailProductJson,
+      {FFCurrentServicePoint currentServicePoint,
+      FFProduct? product,
+      FFDetail? detailProduct,
       String ownerId,
       String? userId,
       String ownerName,
       DateTime opneDate,
-      double? deliveryCost,
-      double? deliveryServicePrice,
-      bool isDelivery});
+      double? deliveryCost});
 }
 
 /// @nodoc
@@ -1241,29 +1099,27 @@ class __$$RemoveProductToOrderImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? currentServicePoint = null,
-    Object? productJson = freezed,
-    Object? detailProductJson = freezed,
+    Object? product = freezed,
+    Object? detailProduct = freezed,
     Object? ownerId = null,
     Object? userId = freezed,
     Object? ownerName = null,
     Object? opneDate = null,
     Object? deliveryCost = freezed,
-    Object? deliveryServicePrice = freezed,
-    Object? isDelivery = null,
   }) {
     return _then(_$RemoveProductToOrderImpl(
       currentServicePoint: null == currentServicePoint
           ? _value.currentServicePoint
           : currentServicePoint // ignore: cast_nullable_to_non_nullable
-              as String,
-      productJson: freezed == productJson
-          ? _value.productJson
-          : productJson // ignore: cast_nullable_to_non_nullable
-              as String?,
-      detailProductJson: freezed == detailProductJson
-          ? _value.detailProductJson
-          : detailProductJson // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as FFCurrentServicePoint,
+      product: freezed == product
+          ? _value.product
+          : product // ignore: cast_nullable_to_non_nullable
+              as FFProduct?,
+      detailProduct: freezed == detailProduct
+          ? _value.detailProduct
+          : detailProduct // ignore: cast_nullable_to_non_nullable
+              as FFDetail?,
       ownerId: null == ownerId
           ? _value.ownerId
           : ownerId // ignore: cast_nullable_to_non_nullable
@@ -1284,14 +1140,6 @@ class __$$RemoveProductToOrderImplCopyWithImpl<$Res>
           ? _value.deliveryCost
           : deliveryCost // ignore: cast_nullable_to_non_nullable
               as double?,
-      deliveryServicePrice: freezed == deliveryServicePrice
-          ? _value.deliveryServicePrice
-          : deliveryServicePrice // ignore: cast_nullable_to_non_nullable
-              as double?,
-      isDelivery: null == isDelivery
-          ? _value.isDelivery
-          : isDelivery // ignore: cast_nullable_to_non_nullable
-              as bool,
     ));
   }
 }
@@ -1301,22 +1149,20 @@ class __$$RemoveProductToOrderImplCopyWithImpl<$Res>
 class _$RemoveProductToOrderImpl implements _RemoveProductToOrder {
   const _$RemoveProductToOrderImpl(
       {required this.currentServicePoint,
-      this.productJson,
-      this.detailProductJson,
+      this.product,
+      this.detailProduct,
       required this.ownerId,
       required this.userId,
       required this.ownerName,
       required this.opneDate,
-      required this.deliveryCost,
-      required this.deliveryServicePrice,
-      required this.isDelivery});
+      required this.deliveryCost});
 
   @override
-  final String currentServicePoint;
+  final FFCurrentServicePoint currentServicePoint;
   @override
-  final String? productJson;
+  final FFProduct? product;
   @override
-  final String? detailProductJson;
+  final FFDetail? detailProduct;
   @override
   final String ownerId;
   @override
@@ -1327,14 +1173,10 @@ class _$RemoveProductToOrderImpl implements _RemoveProductToOrder {
   final DateTime opneDate;
   @override
   final double? deliveryCost;
-  @override
-  final double? deliveryServicePrice;
-  @override
-  final bool isDelivery;
 
   @override
   String toString() {
-    return 'FlistfoodOrderEvent.removeProductToOrder(currentServicePoint: $currentServicePoint, productJson: $productJson, detailProductJson: $detailProductJson, ownerId: $ownerId, userId: $userId, ownerName: $ownerName, opneDate: $opneDate, deliveryCost: $deliveryCost, deliveryServicePrice: $deliveryServicePrice, isDelivery: $isDelivery)';
+    return 'FlistfoodOrderEvent.removeProductToOrder(currentServicePoint: $currentServicePoint, product: $product, detailProduct: $detailProduct, ownerId: $ownerId, userId: $userId, ownerName: $ownerName, opneDate: $opneDate, deliveryCost: $deliveryCost)';
   }
 
   @override
@@ -1344,10 +1186,9 @@ class _$RemoveProductToOrderImpl implements _RemoveProductToOrder {
             other is _$RemoveProductToOrderImpl &&
             (identical(other.currentServicePoint, currentServicePoint) ||
                 other.currentServicePoint == currentServicePoint) &&
-            (identical(other.productJson, productJson) ||
-                other.productJson == productJson) &&
-            (identical(other.detailProductJson, detailProductJson) ||
-                other.detailProductJson == detailProductJson) &&
+            (identical(other.product, product) || other.product == product) &&
+            (identical(other.detailProduct, detailProduct) ||
+                other.detailProduct == detailProduct) &&
             (identical(other.ownerId, ownerId) || other.ownerId == ownerId) &&
             (identical(other.userId, userId) || other.userId == userId) &&
             (identical(other.ownerName, ownerName) ||
@@ -1355,26 +1196,12 @@ class _$RemoveProductToOrderImpl implements _RemoveProductToOrder {
             (identical(other.opneDate, opneDate) ||
                 other.opneDate == opneDate) &&
             (identical(other.deliveryCost, deliveryCost) ||
-                other.deliveryCost == deliveryCost) &&
-            (identical(other.deliveryServicePrice, deliveryServicePrice) ||
-                other.deliveryServicePrice == deliveryServicePrice) &&
-            (identical(other.isDelivery, isDelivery) ||
-                other.isDelivery == isDelivery));
+                other.deliveryCost == deliveryCost));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      currentServicePoint,
-      productJson,
-      detailProductJson,
-      ownerId,
-      userId,
-      ownerName,
-      opneDate,
-      deliveryCost,
-      deliveryServicePrice,
-      isDelivery);
+  int get hashCode => Object.hash(runtimeType, currentServicePoint, product,
+      detailProduct, ownerId, userId, ownerName, opneDate, deliveryCost);
 
   @JsonKey(ignore: true)
   @override
@@ -1390,29 +1217,24 @@ class _$RemoveProductToOrderImpl implements _RemoveProductToOrder {
     required TResult Function(String servicePointId) getOrderByServicePoint,
     required TResult Function(String servicePointId) deleteOrderByServicePoint,
     required TResult Function(
-            String currentServicePoint,
-            String? productJson,
-            String? detailProductJson,
-            String? formatProductJson,
+            FFCurrentServicePoint currentServicePoint,
+            FFProduct? product,
+            FFDetail? detailProduct,
             String ownerId,
             String ownerName,
             String? userId,
             DateTime opneDate,
-            double? deliveryCost,
-            double? deliveryServicePrice,
-            bool isDelivery)
+            double? deliveryCost)
         addProductOrDetailToORder,
     required TResult Function(
-            String currentServicePoint,
-            String? productJson,
-            String? detailProductJson,
+            FFCurrentServicePoint currentServicePoint,
+            FFProduct? product,
+            FFDetail? detailProduct,
             String ownerId,
             String? userId,
             String ownerName,
             DateTime opneDate,
-            double? deliveryCost,
-            double? deliveryServicePrice,
-            bool isDelivery)
+            double? deliveryCost)
         removeProductToOrder,
     required TResult Function(
             String? orderId,
@@ -1429,17 +1251,8 @@ class _$RemoveProductToOrderImpl implements _RemoveProductToOrder {
         sendOrder,
     required TResult Function() removeAllOrder,
   }) {
-    return removeProductToOrder(
-        currentServicePoint,
-        productJson,
-        detailProductJson,
-        ownerId,
-        userId,
-        ownerName,
-        opneDate,
-        deliveryCost,
-        deliveryServicePrice,
-        isDelivery);
+    return removeProductToOrder(currentServicePoint, product, detailProduct,
+        ownerId, userId, ownerName, opneDate, deliveryCost);
   }
 
   @override
@@ -1448,29 +1261,24 @@ class _$RemoveProductToOrderImpl implements _RemoveProductToOrder {
     TResult? Function(String servicePointId)? getOrderByServicePoint,
     TResult? Function(String servicePointId)? deleteOrderByServicePoint,
     TResult? Function(
-            String currentServicePoint,
-            String? productJson,
-            String? detailProductJson,
-            String? formatProductJson,
+            FFCurrentServicePoint currentServicePoint,
+            FFProduct? product,
+            FFDetail? detailProduct,
             String ownerId,
             String ownerName,
             String? userId,
             DateTime opneDate,
-            double? deliveryCost,
-            double? deliveryServicePrice,
-            bool isDelivery)?
+            double? deliveryCost)?
         addProductOrDetailToORder,
     TResult? Function(
-            String currentServicePoint,
-            String? productJson,
-            String? detailProductJson,
+            FFCurrentServicePoint currentServicePoint,
+            FFProduct? product,
+            FFDetail? detailProduct,
             String ownerId,
             String? userId,
             String ownerName,
             DateTime opneDate,
-            double? deliveryCost,
-            double? deliveryServicePrice,
-            bool isDelivery)?
+            double? deliveryCost)?
         removeProductToOrder,
     TResult? Function(
             String? orderId,
@@ -1487,17 +1295,8 @@ class _$RemoveProductToOrderImpl implements _RemoveProductToOrder {
         sendOrder,
     TResult? Function()? removeAllOrder,
   }) {
-    return removeProductToOrder?.call(
-        currentServicePoint,
-        productJson,
-        detailProductJson,
-        ownerId,
-        userId,
-        ownerName,
-        opneDate,
-        deliveryCost,
-        deliveryServicePrice,
-        isDelivery);
+    return removeProductToOrder?.call(currentServicePoint, product,
+        detailProduct, ownerId, userId, ownerName, opneDate, deliveryCost);
   }
 
   @override
@@ -1506,29 +1305,24 @@ class _$RemoveProductToOrderImpl implements _RemoveProductToOrder {
     TResult Function(String servicePointId)? getOrderByServicePoint,
     TResult Function(String servicePointId)? deleteOrderByServicePoint,
     TResult Function(
-            String currentServicePoint,
-            String? productJson,
-            String? detailProductJson,
-            String? formatProductJson,
+            FFCurrentServicePoint currentServicePoint,
+            FFProduct? product,
+            FFDetail? detailProduct,
             String ownerId,
             String ownerName,
             String? userId,
             DateTime opneDate,
-            double? deliveryCost,
-            double? deliveryServicePrice,
-            bool isDelivery)?
+            double? deliveryCost)?
         addProductOrDetailToORder,
     TResult Function(
-            String currentServicePoint,
-            String? productJson,
-            String? detailProductJson,
+            FFCurrentServicePoint currentServicePoint,
+            FFProduct? product,
+            FFDetail? detailProduct,
             String ownerId,
             String? userId,
             String ownerName,
             DateTime opneDate,
-            double? deliveryCost,
-            double? deliveryServicePrice,
-            bool isDelivery)?
+            double? deliveryCost)?
         removeProductToOrder,
     TResult Function(
             String? orderId,
@@ -1547,17 +1341,8 @@ class _$RemoveProductToOrderImpl implements _RemoveProductToOrder {
     required TResult orElse(),
   }) {
     if (removeProductToOrder != null) {
-      return removeProductToOrder(
-          currentServicePoint,
-          productJson,
-          detailProductJson,
-          ownerId,
-          userId,
-          ownerName,
-          opneDate,
-          deliveryCost,
-          deliveryServicePrice,
-          isDelivery);
+      return removeProductToOrder(currentServicePoint, product, detailProduct,
+          ownerId, userId, ownerName, opneDate, deliveryCost);
     }
     return orElse();
   }
@@ -1615,27 +1400,23 @@ class _$RemoveProductToOrderImpl implements _RemoveProductToOrder {
 
 abstract class _RemoveProductToOrder implements FlistfoodOrderEvent {
   const factory _RemoveProductToOrder(
-      {required final String currentServicePoint,
-      final String? productJson,
-      final String? detailProductJson,
+      {required final FFCurrentServicePoint currentServicePoint,
+      final FFProduct? product,
+      final FFDetail? detailProduct,
       required final String ownerId,
       required final String? userId,
       required final String ownerName,
       required final DateTime opneDate,
-      required final double? deliveryCost,
-      required final double? deliveryServicePrice,
-      required final bool isDelivery}) = _$RemoveProductToOrderImpl;
+      required final double? deliveryCost}) = _$RemoveProductToOrderImpl;
 
-  String get currentServicePoint;
-  String? get productJson;
-  String? get detailProductJson;
+  FFCurrentServicePoint get currentServicePoint;
+  FFProduct? get product;
+  FFDetail? get detailProduct;
   String get ownerId;
   String? get userId;
   String get ownerName;
   DateTime get opneDate;
   double? get deliveryCost;
-  double? get deliveryServicePrice;
-  bool get isDelivery;
   @JsonKey(ignore: true)
   _$$RemoveProductToOrderImplCopyWith<_$RemoveProductToOrderImpl>
       get copyWith => throw _privateConstructorUsedError;
@@ -1828,29 +1609,24 @@ class _$SendOrderImpl implements _SendOrder {
     required TResult Function(String servicePointId) getOrderByServicePoint,
     required TResult Function(String servicePointId) deleteOrderByServicePoint,
     required TResult Function(
-            String currentServicePoint,
-            String? productJson,
-            String? detailProductJson,
-            String? formatProductJson,
+            FFCurrentServicePoint currentServicePoint,
+            FFProduct? product,
+            FFDetail? detailProduct,
             String ownerId,
             String ownerName,
             String? userId,
             DateTime opneDate,
-            double? deliveryCost,
-            double? deliveryServicePrice,
-            bool isDelivery)
+            double? deliveryCost)
         addProductOrDetailToORder,
     required TResult Function(
-            String currentServicePoint,
-            String? productJson,
-            String? detailProductJson,
+            FFCurrentServicePoint currentServicePoint,
+            FFProduct? product,
+            FFDetail? detailProduct,
             String ownerId,
             String? userId,
             String ownerName,
             DateTime opneDate,
-            double? deliveryCost,
-            double? deliveryServicePrice,
-            bool isDelivery)
+            double? deliveryCost)
         removeProductToOrder,
     required TResult Function(
             String? orderId,
@@ -1877,29 +1653,24 @@ class _$SendOrderImpl implements _SendOrder {
     TResult? Function(String servicePointId)? getOrderByServicePoint,
     TResult? Function(String servicePointId)? deleteOrderByServicePoint,
     TResult? Function(
-            String currentServicePoint,
-            String? productJson,
-            String? detailProductJson,
-            String? formatProductJson,
+            FFCurrentServicePoint currentServicePoint,
+            FFProduct? product,
+            FFDetail? detailProduct,
             String ownerId,
             String ownerName,
             String? userId,
             DateTime opneDate,
-            double? deliveryCost,
-            double? deliveryServicePrice,
-            bool isDelivery)?
+            double? deliveryCost)?
         addProductOrDetailToORder,
     TResult? Function(
-            String currentServicePoint,
-            String? productJson,
-            String? detailProductJson,
+            FFCurrentServicePoint currentServicePoint,
+            FFProduct? product,
+            FFDetail? detailProduct,
             String ownerId,
             String? userId,
             String ownerName,
             DateTime opneDate,
-            double? deliveryCost,
-            double? deliveryServicePrice,
-            bool isDelivery)?
+            double? deliveryCost)?
         removeProductToOrder,
     TResult? Function(
             String? orderId,
@@ -1926,29 +1697,24 @@ class _$SendOrderImpl implements _SendOrder {
     TResult Function(String servicePointId)? getOrderByServicePoint,
     TResult Function(String servicePointId)? deleteOrderByServicePoint,
     TResult Function(
-            String currentServicePoint,
-            String? productJson,
-            String? detailProductJson,
-            String? formatProductJson,
+            FFCurrentServicePoint currentServicePoint,
+            FFProduct? product,
+            FFDetail? detailProduct,
             String ownerId,
             String ownerName,
             String? userId,
             DateTime opneDate,
-            double? deliveryCost,
-            double? deliveryServicePrice,
-            bool isDelivery)?
+            double? deliveryCost)?
         addProductOrDetailToORder,
     TResult Function(
-            String currentServicePoint,
-            String? productJson,
-            String? detailProductJson,
+            FFCurrentServicePoint currentServicePoint,
+            FFProduct? product,
+            FFDetail? detailProduct,
             String ownerId,
             String? userId,
             String ownerName,
             DateTime opneDate,
-            double? deliveryCost,
-            double? deliveryServicePrice,
-            bool isDelivery)?
+            double? deliveryCost)?
         removeProductToOrder,
     TResult Function(
             String? orderId,
@@ -2095,29 +1861,24 @@ class _$RemoveAllOrderImpl implements _RemoveAllOrder {
     required TResult Function(String servicePointId) getOrderByServicePoint,
     required TResult Function(String servicePointId) deleteOrderByServicePoint,
     required TResult Function(
-            String currentServicePoint,
-            String? productJson,
-            String? detailProductJson,
-            String? formatProductJson,
+            FFCurrentServicePoint currentServicePoint,
+            FFProduct? product,
+            FFDetail? detailProduct,
             String ownerId,
             String ownerName,
             String? userId,
             DateTime opneDate,
-            double? deliveryCost,
-            double? deliveryServicePrice,
-            bool isDelivery)
+            double? deliveryCost)
         addProductOrDetailToORder,
     required TResult Function(
-            String currentServicePoint,
-            String? productJson,
-            String? detailProductJson,
+            FFCurrentServicePoint currentServicePoint,
+            FFProduct? product,
+            FFDetail? detailProduct,
             String ownerId,
             String? userId,
             String ownerName,
             DateTime opneDate,
-            double? deliveryCost,
-            double? deliveryServicePrice,
-            bool isDelivery)
+            double? deliveryCost)
         removeProductToOrder,
     required TResult Function(
             String? orderId,
@@ -2143,29 +1904,24 @@ class _$RemoveAllOrderImpl implements _RemoveAllOrder {
     TResult? Function(String servicePointId)? getOrderByServicePoint,
     TResult? Function(String servicePointId)? deleteOrderByServicePoint,
     TResult? Function(
-            String currentServicePoint,
-            String? productJson,
-            String? detailProductJson,
-            String? formatProductJson,
+            FFCurrentServicePoint currentServicePoint,
+            FFProduct? product,
+            FFDetail? detailProduct,
             String ownerId,
             String ownerName,
             String? userId,
             DateTime opneDate,
-            double? deliveryCost,
-            double? deliveryServicePrice,
-            bool isDelivery)?
+            double? deliveryCost)?
         addProductOrDetailToORder,
     TResult? Function(
-            String currentServicePoint,
-            String? productJson,
-            String? detailProductJson,
+            FFCurrentServicePoint currentServicePoint,
+            FFProduct? product,
+            FFDetail? detailProduct,
             String ownerId,
             String? userId,
             String ownerName,
             DateTime opneDate,
-            double? deliveryCost,
-            double? deliveryServicePrice,
-            bool isDelivery)?
+            double? deliveryCost)?
         removeProductToOrder,
     TResult? Function(
             String? orderId,
@@ -2191,29 +1947,24 @@ class _$RemoveAllOrderImpl implements _RemoveAllOrder {
     TResult Function(String servicePointId)? getOrderByServicePoint,
     TResult Function(String servicePointId)? deleteOrderByServicePoint,
     TResult Function(
-            String currentServicePoint,
-            String? productJson,
-            String? detailProductJson,
-            String? formatProductJson,
+            FFCurrentServicePoint currentServicePoint,
+            FFProduct? product,
+            FFDetail? detailProduct,
             String ownerId,
             String ownerName,
             String? userId,
             DateTime opneDate,
-            double? deliveryCost,
-            double? deliveryServicePrice,
-            bool isDelivery)?
+            double? deliveryCost)?
         addProductOrDetailToORder,
     TResult Function(
-            String currentServicePoint,
-            String? productJson,
-            String? detailProductJson,
+            FFCurrentServicePoint currentServicePoint,
+            FFProduct? product,
+            FFDetail? detailProduct,
             String ownerId,
             String? userId,
             String ownerName,
             DateTime opneDate,
-            double? deliveryCost,
-            double? deliveryServicePrice,
-            bool isDelivery)?
+            double? deliveryCost)?
         removeProductToOrder,
     TResult Function(
             String? orderId,

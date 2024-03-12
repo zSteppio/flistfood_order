@@ -1,4 +1,4 @@
-import 'package:data_fixture_dart/definitions/fixture_definition.dart';
+/* import 'package:data_fixture_dart/definitions/fixture_definition.dart';
 import 'package:data_fixture_dart/factories/fixture_factory.dart';
 import 'package:flistfood_order/product_model.dart';
 
@@ -15,4 +15,4 @@ class _FFFormatFixtureFactory extends FixtureFactory<FFFormat> {
           format: faker.lorem.word(),
         ),
       );
-}
+} */

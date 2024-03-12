@@ -14,9 +14,8 @@ class _FFFoodListsDefinitionFixtureFactory extends FixtureFactory<FFFoodListsDef
           foodListId: faker.randomGenerator.integer(9999),
           maxQty: faker.randomGenerator.integer(9999),
           minQty: faker.randomGenerator.integer(9999),
-          mode: faker.randomGenerator.integer(9999),
-          x2: faker.randomGenerator.boolean(),
-          x3: faker.randomGenerator.boolean(),
+          mode: Mode.values[faker.randomGenerator.integer(Mode.values.length)],
+          canAddQuantity: faker.randomGenerator.integer(9999),
         ),
       );
 }

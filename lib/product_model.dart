@@ -8,27 +8,32 @@ part 'product_model.g.dart';
 class FFProduct {
   int id;
   String? name;
+  String? formatName;
   int? preferredCookingTypeId;
   int minOrdinableQuantity;
   double newPrice;
   double price;
   int sectionId;
-  List<FFFormat> formats;
+  //List<FFFormat> formats;
   List<FFIngredient> ingredients;
   List<FFAlternative> alternatives;
   List<FFCookingType> cookingTypes;
   List<FFFoodlist> foodlists;
   List<FFFoodListsDefinition> foodListsDefinition;
 
+  List<FFProduct> productFormats;
+
   FFProduct({
     required this.id,
+    this.formatName,
+    this.productFormats = const [],
     this.name,
     this.preferredCookingTypeId,
     this.minOrdinableQuantity = 0,
     this.newPrice = 0,
     required this.price,
     this.sectionId = 0,
-    this.formats = const [],
+    //this.formats = const [],
     this.ingredients = const [],
     this.alternatives = const [],
     this.cookingTypes = const [],
@@ -39,7 +44,7 @@ class FFProduct {
   Map<String, dynamic> toJson() => _$FFProductToJson(this);
 }
 
-@CopyWith()
+/* @CopyWith()
 @JsonSerializable(includeIfNull: false, explicitToJson: true)
 class FFFormat {
   String? format;
@@ -50,35 +55,29 @@ class FFFormat {
 
   factory FFFormat.fromJson(Map<String, dynamic> json) => _$FFFormatFromJson(json);
   Map<String, dynamic> toJson() => _$FFFormatToJson(this);
-}
+} */
 
 @CopyWith()
 @JsonSerializable(includeIfNull: false, explicitToJson: true)
 class FFIngredient {
   int foodId;
-  String? food;
-  bool hidden;
-  bool isMainIngredient;
+  String? name;
+  bool isMain;
   bool selected;
-  double variationPrice;
-  String? variationGroup;
+  double price;
   bool canRemove;
-  bool canDouble;
-  bool canTriple;
+  int canAddQuantity;
   int? variationType;
   double? localVariationPrice;
 
   FFIngredient({
     required this.foodId,
-    this.food,
-    required this.hidden,
-    this.isMainIngredient = false,
+    this.name,
+    this.isMain = false,
     this.selected = false,
-    required this.variationPrice,
-    this.variationGroup,
+    required this.price,
     required this.canRemove,
-    required this.canDouble,
-    required this.canTriple,
+    required this.canAddQuantity,
     this.variationType,
     this.localVariationPrice,
   });
@@ -129,13 +128,13 @@ class FFCookingType {
 @JsonSerializable(includeIfNull: false, explicitToJson: true)
 class FFFood {
   int foodId;
-  String? foodName;
+  String? name;
   double price;
   bool isSelected;
 
   FFFood({
     required this.foodId,
-    this.foodName,
+    this.name,
     required this.price,
     this.isSelected = false,
   });
@@ -147,25 +146,34 @@ class FFFood {
 @CopyWith()
 @JsonSerializable(includeIfNull: false, explicitToJson: true)
 class FFFoodListsDefinition {
-  bool x2;
-  bool x3;
+  int canAddQuantity;
   int maxQty;
   int minQty;
   int foodListId;
-  int mode;
+  Mode mode;
 
   FFFoodListsDefinition({
     required this.foodListId,
     required this.maxQty,
     required this.minQty,
     required this.mode,
-    required this.x2,
-    required this.x3,
+    required this.canAddQuantity,
   });
 
   factory FFFoodListsDefinition.fromJson(Map<String, dynamic> json) =>
       _$FFFoodListsDefinitionFromJson(json);
   Map<String, dynamic> toJson() => _$FFFoodListsDefinitionToJson(this);
+}
+
+enum Mode {
+  @JsonValue(0)
+  freeChoise,
+  @JsonValue(1)
+  maxIngredientWithCost,
+  @JsonValue(2)
+  maxIngredientFree,
+  @JsonValue(3)
+  maxFreeAndOtherWithCost,
 }
 
 @CopyWith()

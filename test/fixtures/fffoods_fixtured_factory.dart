@@ -11,7 +11,7 @@ class _FFFoodFixtureFactory extends FixtureFactory<FFFood> {
   FixtureDefinition<FFFood> definition() => define(
         (faker) => FFFood(
           foodId: faker.randomGenerator.integer(9999),
-          foodName: faker.lorem.word(),
+          name: faker.lorem.word(),
           price: faker.randomGenerator.decimal(),
           isSelected: faker.randomGenerator.boolean(),
         ),

@@ -23,7 +23,7 @@ class _FFProductFixtureFactory extends FixtureFactory<FFProduct> {
           newPrice: faker.randomGenerator.decimal(),
           price: faker.randomGenerator.decimal(),
           sectionId: faker.randomGenerator.integer(9999),
-          formats: FFFormatFixture.factory().makeMany(3),
+          //formats: FFFormatFixture.factory().makeMany(3),
           ingredients: FFIngredientFixture.factory().makeMany(3),
           alternatives: FFAlternativeFixture.factory().makeMany(3),
           cookingTypes: FFCookingTypeFixture.factory().makeMany(3),

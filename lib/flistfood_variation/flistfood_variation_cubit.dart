@@ -61,6 +61,7 @@ class FlistfoodVariationCubit extends Cubit<FlistfoodVariationState> {
     emit(FlistfoodVariationState.loading(product: product));
     final bool isDouble = ingredient.variationType == 2;
     final bool isTriple = ingredient.variationType == 3;
+
     log(
       'Prezzo ${product.price}, Nuovo Prezzo ${product.newPrice}',
       name: 'Product prima della modifica dell\'ingrediente',
@@ -76,16 +77,16 @@ class FlistfoodVariationCubit extends Cubit<FlistfoodVariationState> {
       log(jsonEncode(ingredient), name: 'Ingrediente');
 
       if (isDouble) {
-        priceVariation = ingredient.variationPrice * 2;
+        priceVariation = ingredient.price * 2;
       } else if (isTriple) {
-        priceVariation = ingredient.variationPrice * 3;
+        priceVariation = ingredient.price * 3;
       } else {
-        priceVariation = ingredient.variationPrice;
+        priceVariation = ingredient.price;
       }
 
       log(priceVariation.toString(), name: 'Prezzo della variazione');
 
-      if (ingredient.isMainIngredient == false) {
+      if (ingredient.isMain == false) {
         if (selectedIngridient.selected == true) {
           product.newPrice += priceVariation;
         } else if (selectedIngridient.selected == false) {
@@ -93,9 +94,9 @@ class FlistfoodVariationCubit extends Cubit<FlistfoodVariationState> {
         }
       } else if (isDouble || isTriple) {
         if (isDouble) {
-          priceVariation = ingredient.variationPrice;
+          priceVariation = ingredient.price;
         } else {
-          priceVariation = ingredient.variationPrice * 2;
+          priceVariation = ingredient.price * 2;
         }
         if (ingredient.selected == true) {
           product.newPrice += priceVariation;
@@ -136,18 +137,18 @@ class FlistfoodVariationCubit extends Cubit<FlistfoodVariationState> {
       FFIngredient selectedIngridient =
           product.ingredients.firstWhere((e) => e.foodId == ingredient.foodId);
 
-      ingredient.localVariationPrice ??= ingredient.variationPrice;
+      ingredient.localVariationPrice ??= ingredient.price;
 
       if (isDouble) {
-        ingredient.localVariationPrice = ingredient.variationPrice;
+        ingredient.localVariationPrice = ingredient.price;
       } else if (isTriple) {
-        ingredient.localVariationPrice = ingredient.variationPrice * 2;
+        ingredient.localVariationPrice = ingredient.price * 2;
       }
 
       if (selectedIngridient.variationType == 2 && !isUnselectedVariation && isTriple) {
-        product.newPrice -= ingredient.variationPrice;
+        product.newPrice -= ingredient.price;
       } else if (selectedIngridient.variationType == 3 && !isUnselectedVariation && isDouble) {
-        product.newPrice -= ingredient.variationPrice * 2;
+        product.newPrice -= ingredient.price * 2;
       }
 
       if (isUnselectedVariation) {
@@ -185,7 +186,7 @@ class FlistfoodVariationCubit extends Cubit<FlistfoodVariationState> {
     if (product.foodListsDefinition.any((e) => e.foodListId == foodList.id)) {
       FFFoodListsDefinition foodListsDefinitionSelected =
           product.foodListsDefinition.firstWhere((e) => e.foodListId == foodList.id);
-      int mode = foodListsDefinitionSelected.mode;
+
       int quantity = foodListsDefinitionSelected.maxQty;
       List<FFFoodDetail> selectedIngredients = [];
 
@@ -196,9 +197,9 @@ class FlistfoodVariationCubit extends Cubit<FlistfoodVariationState> {
         foodList.foods!.firstWhere((e) => e.id == foodId).timeSelected = null;
       }
 
-      switch (mode) {
+      switch (foodListsDefinitionSelected.mode) {
         //* Massimi ingredienti con costo ----------------------------------------
-        case _FoodListModeEnum.maxIngredientWithCost:
+        case Mode.maxIngredientWithCost:
           for (FFFoodDetail food in foodList.foods!.where((e) => e.selected)) {
             selectedIngredients.add(food);
           }
@@ -218,7 +219,7 @@ class FlistfoodVariationCubit extends Cubit<FlistfoodVariationState> {
           break;
 
         //* Massimi ingredienti gratuiti -----------------------------------------
-        case _FoodListModeEnum.maxIngredientFree:
+        case Mode.maxIngredientFree:
           for (FFFoodDetail food in foodList.foods!.where((e) => e.selected)) {
             selectedIngredients.add(food);
           }
@@ -235,7 +236,7 @@ class FlistfoodVariationCubit extends Cubit<FlistfoodVariationState> {
           break;
 
         //* Massimi ingredienti gratuiti e i successivi con costo ----------------
-        case _FoodListModeEnum.maxFreeAndOtherWithCost:
+        case Mode.maxFreeAndOtherWithCost:
           FFFoodDetail selectedfood = foodList.foods!.firstWhere((e) => e.id == foodId);
           selectedfood.selected = selected;
 
@@ -293,7 +294,7 @@ class FlistfoodVariationCubit extends Cubit<FlistfoodVariationState> {
           break;
 
         //* Illimitati e gratuiti ------------------------------------------------
-        case _FoodListModeEnum.freeChoise:
+        case Mode.freeChoise:
           FFFoodDetail selectedfood = foodList.foods!.firstWhere((e) => e.id == foodId);
           selectedfood.selected = selected;
 
@@ -316,31 +317,14 @@ class FlistfoodVariationCubit extends Cubit<FlistfoodVariationState> {
   }
 
   void initialConfiguration({
-    required String productJson,
-    required String? formatJson,
-    required String foodListJson,
+    required FFProduct product,
+    required List<FFFoodlist> foodList,
   }) {
-    FFProduct product = FFProduct.fromJson(jsonDecode(productJson));
-    FFFormat? format;
-    List<FFFoodlist> foodLists = [];
-    Iterable foodListMap = jsonDecode(foodListJson);
-    List<FFFoodlist> rawFoodList =
-        List<FFFoodlist>.from(foodListMap.map((e) => FFFoodlist.fromJson(e)));
-
-    if (formatJson != null) {
-      format = FFFormat.fromJson(jsonDecode(formatJson));
-    }
-
     List<FFIngredient> selectedIngridients = [];
+    List<FFFoodlist> foodListConfigurated = [];
 
-    //* Settaggio del prezzo nel caso ci siano formati
-    if (format != null) {
-      product.newPrice = format.price;
-      product.price = format.price;
-    } else {
-      product.newPrice = product.price;
-      product.price = product.price;
-    }
+    product.newPrice = product.price;
+    product.price = product.price;
 
     //* Recupero delle alternative di default
     for (FFAlternative alternative in product.alternatives) {
@@ -363,7 +347,7 @@ class FlistfoodVariationCubit extends Cubit<FlistfoodVariationState> {
 
     //* Recupero degli ingredienti di default
     for (FFIngredient ingredient in product.ingredients) {
-      if (ingredient.isMainIngredient) {
+      if (ingredient.isMain) {
         ingredient.selected = true;
       } else {
         ingredient.selected = false;
@@ -374,23 +358,23 @@ class FlistfoodVariationCubit extends Cubit<FlistfoodVariationState> {
     //* Setto la foodList
     for (FFFoodListsDefinition foodListDefinition in product.foodListsDefinition) {
       //* Collegamento tra il prodotto e la food list
-      if (rawFoodList.any((e) => e.id == foodListDefinition.foodListId)) {
-        var findedFoodList = rawFoodList.firstWhere((e) => e.id == foodListDefinition.foodListId);
-        foodLists.add(findedFoodList);
+      if (foodList.any((e) => e.id == foodListDefinition.foodListId)) {
+        FFFoodlist findedFoodList =
+            foodList.firstWhere((e) => e.id == foodListDefinition.foodListId);
+        foodListConfigurated.add(findedFoodList);
       }
     }
 
-    product.foodlists = foodLists;
+    product.foodlists = foodListConfigurated;
 
     for (FFFoodlist foodList in product.foodlists) {
       if (product.foodListsDefinition.any((e) => e.foodListId == foodList.id)) {
         var mode = product.foodListsDefinition.firstWhere((e) => e.foodListId == foodList.id).mode;
 
-        if (mode == _FoodListModeEnum.maxFreeAndOtherWithCost ||
-            mode == _FoodListModeEnum.maxIngredientFree) {
+        if (mode == Mode.maxFreeAndOtherWithCost || mode == Mode.maxIngredientFree) {
           foodList.foods?.forEach((e) => e.hiddenPrice = true);
         }
-        if (mode == _FoodListModeEnum.maxIngredientWithCost) {
+        if (mode == Mode.maxIngredientWithCost) {
           foodList.foods?.forEach((e) => e.hiddenPrice = false);
         }
         for (FFFoodDetail food in foodList.foods ?? []) {
@@ -401,11 +385,4 @@ class FlistfoodVariationCubit extends Cubit<FlistfoodVariationState> {
     emit(FlistfoodVariationState.success(product: product));
     return;
   }
-}
-
-class _FoodListModeEnum {
-  static const freeChoise = 0;
-  static const maxIngredientWithCost = 1;
-  static const maxIngredientFree = 2;
-  static const maxFreeAndOtherWithCost = 3;
 }
