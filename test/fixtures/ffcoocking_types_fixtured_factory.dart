@@ -2,15 +2,15 @@ import 'package:data_fixture_dart/definitions/fixture_definition.dart';
 import 'package:data_fixture_dart/factories/fixture_factory.dart';
 import 'package:flistfood_order/product_model.dart';
 
-extension CookingTypeFixture on CookingType {
+extension FFCookingTypeFixture on FFCookingType {
   // ignore: library_private_types_in_public_api
-  static _CookingTypeFixtureFactory factory() => _CookingTypeFixtureFactory();
+  static _FFCookingTypeFixtureFactory factory() => _FFCookingTypeFixtureFactory();
 }
 
-class _CookingTypeFixtureFactory extends FixtureFactory<CookingType> {
+class _FFCookingTypeFixtureFactory extends FixtureFactory<FFCookingType> {
   @override
-  FixtureDefinition<CookingType> definition() => define(
-        (faker) => CookingType(
+  FixtureDefinition<FFCookingType> definition() => define(
+        (faker) => FFCookingType(
           id: faker.randomGenerator.integer(9999),
           name: faker.lorem.word(),
           priority: faker.randomGenerator.integer(9999),

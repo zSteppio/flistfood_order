@@ -10,7 +10,7 @@ class FlistfoodOrderEvent with _$FlistfoodOrderEvent {
 
   const factory FlistfoodOrderEvent.addProductOrDetailToORder({
     required FFCurrentServicePoint currentServicePoint,
-    Product? product,
+    FFProduct? product,
     FFDetail? detailProduct,
     // String? formatProductJson,
     required String ownerId,
@@ -22,7 +22,7 @@ class FlistfoodOrderEvent with _$FlistfoodOrderEvent {
 
   const factory FlistfoodOrderEvent.removeProductToOrder({
     required FFCurrentServicePoint currentServicePoint,
-    Product? product,
+    FFProduct? product,
     FFDetail? detailProduct,
     required String ownerId,
     required String? userId,

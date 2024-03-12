@@ -3,15 +3,15 @@ import 'package:flistfood_order/product_model.dart';
 
 import 'fffoods_fixtured_factory.dart';
 
-extension AlternativeFixture on Alternative {
+extension FFAlternativeFixture on FFAlternative {
   // ignore: library_private_types_in_public_api
-  static _AlternativeFixtureFactory factory() => _AlternativeFixtureFactory();
+  static _FFAlternativeFixtureFactory factory() => _FFAlternativeFixtureFactory();
 }
 
-class _AlternativeFixtureFactory extends FixtureFactory<Alternative> {
+class _FFAlternativeFixtureFactory extends FixtureFactory<FFAlternative> {
   @override
-  FixtureDefinition<Alternative> definition() => define(
-        (faker) => Alternative(
+  FixtureDefinition<FFAlternative> definition() => define(
+        (faker) => FFAlternative(
           foodListId: faker.randomGenerator.integer(9999),
           defaultFoodId: faker.randomGenerator.integer(9999),
           foodListName: faker.lorem.word(),

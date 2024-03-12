@@ -13,8 +13,8 @@ class FlistfoodVariationCubit extends Cubit<FlistfoodVariationState> {
 
   void setAlternative({
     required int foodId,
-    required Alternative alternative,
-    required Product product,
+    required FFAlternative alternative,
+    required FFProduct product,
   }) {
     emit(FlistfoodVariationState.loading(product: product));
     FFFood? selectedFood =
@@ -37,7 +37,7 @@ class FlistfoodVariationCubit extends Cubit<FlistfoodVariationState> {
 
   void setCookingType({
     required int cookingTypeId,
-    required Product product,
+    required FFProduct product,
   }) {
     emit(FlistfoodVariationState.loading(product: product));
 
@@ -54,9 +54,9 @@ class FlistfoodVariationCubit extends Cubit<FlistfoodVariationState> {
   }
 
   void setIngredient({
-    required Ingredient ingredient,
+    required FFIngredient ingredient,
     required bool selected,
-    required Product product,
+    required FFProduct product,
   }) {
     emit(FlistfoodVariationState.loading(product: product));
     final bool isDouble = ingredient.variationType == 2;
@@ -68,7 +68,7 @@ class FlistfoodVariationCubit extends Cubit<FlistfoodVariationState> {
     );
 
     if (ingredient.canRemove && product.ingredients.any((e) => e.foodId == ingredient.foodId)) {
-      Ingredient selectedIngridient =
+      FFIngredient selectedIngridient =
           product.ingredients.firstWhere((e) => e.foodId == ingredient.foodId);
 
       selectedIngridient.selected = selected;
@@ -118,8 +118,8 @@ class FlistfoodVariationCubit extends Cubit<FlistfoodVariationState> {
   }
 
   void setVariationType({
-    required Ingredient ingredient,
-    required Product product,
+    required FFIngredient ingredient,
+    required FFProduct product,
     bool isDouble = false,
     bool isTriple = false,
     bool isUnselectedVariation = false,
@@ -134,7 +134,7 @@ class FlistfoodVariationCubit extends Cubit<FlistfoodVariationState> {
     log(isUnselectedVariation.toString(), name: 'isUnselectedVariation');
 
     if (product.ingredients.any((e) => e.foodId == ingredient.foodId)) {
-      Ingredient selectedIngridient =
+      FFIngredient selectedIngridient =
           product.ingredients.firstWhere((e) => e.foodId == ingredient.foodId);
 
       ingredient.localVariationPrice ??= ingredient.price;
@@ -177,14 +177,14 @@ class FlistfoodVariationCubit extends Cubit<FlistfoodVariationState> {
 
   void setFoodList({
     required int foodId,
-    required Foodlist foodList,
+    required FFFoodlist foodList,
     required bool selected,
-    required Product product,
+    required FFProduct product,
   }) {
     emit(FlistfoodVariationState.loading(product: product));
 
     if (product.foodListsDefinition.any((e) => e.foodListId == foodList.id)) {
-      FoodlistsDefinition foodListsDefinitionSelected =
+      FFFoodListsDefinition foodListsDefinitionSelected =
           product.foodListsDefinition.firstWhere((e) => e.foodListId == foodList.id);
 
       int quantity = foodListsDefinitionSelected.maxQty;
@@ -317,17 +317,17 @@ class FlistfoodVariationCubit extends Cubit<FlistfoodVariationState> {
   }
 
   void initialConfiguration({
-    required Product product,
-    required List<Foodlist> foodList,
+    required FFProduct product,
+    required List<FFFoodlist> foodList,
   }) {
-    List<Ingredient> selectedIngridients = [];
-    List<Foodlist> foodListConfigurated = [];
+    List<FFIngredient> selectedIngridients = [];
+    List<FFFoodlist> foodListConfigurated = [];
 
     product.newPrice = product.price;
     product.price = product.price;
 
     //* Recupero delle alternative di default
-    for (Alternative alternative in product.alternatives) {
+    for (FFAlternative alternative in product.alternatives) {
       for (FFFood food in alternative.foods) {
         food.isSelected = false;
         if (food.foodId == alternative.defaultFoodId) {
@@ -337,7 +337,7 @@ class FlistfoodVariationCubit extends Cubit<FlistfoodVariationState> {
     }
 
     //* Recupero del tipo di cotture di default
-    for (CookingType cookingType in product.cookingTypes) {
+    for (FFCookingType cookingType in product.cookingTypes) {
       cookingType.isSelected = false;
     }
     if (product.cookingTypes.any((e) => e.id == product.preferredCookingTypeId)) {
@@ -346,7 +346,7 @@ class FlistfoodVariationCubit extends Cubit<FlistfoodVariationState> {
     }
 
     //* Recupero degli ingredienti di default
-    for (Ingredient ingredient in product.ingredients) {
+    for (FFIngredient ingredient in product.ingredients) {
       if (ingredient.isMain) {
         ingredient.selected = true;
       } else {
@@ -356,17 +356,18 @@ class FlistfoodVariationCubit extends Cubit<FlistfoodVariationState> {
     }
 
     //* Setto la foodList
-    for (FoodlistsDefinition foodListDefinition in product.foodListsDefinition) {
+    for (FFFoodListsDefinition foodListDefinition in product.foodListsDefinition) {
       //* Collegamento tra il prodotto e la food list
       if (foodList.any((e) => e.id == foodListDefinition.foodListId)) {
-        Foodlist findedFoodList = foodList.firstWhere((e) => e.id == foodListDefinition.foodListId);
+        FFFoodlist findedFoodList =
+            foodList.firstWhere((e) => e.id == foodListDefinition.foodListId);
         foodListConfigurated.add(findedFoodList);
       }
     }
 
     product.foodlists = foodListConfigurated;
 
-    for (Foodlist foodList in product.foodlists) {
+    for (FFFoodlist foodList in product.foodlists) {
       if (product.foodListsDefinition.any((e) => e.foodListId == foodList.id)) {
         var mode = product.foodListsDefinition.firstWhere((e) => e.foodListId == foodList.id).mode;
 

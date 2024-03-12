@@ -4,17 +4,17 @@ import 'package:flistfood_order/flistfood_variation/flistfood_variation_cubit.da
 import 'package:flistfood_order/product_model.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import 'fixtures/Alternative_fixtured_factory.dart';
+import 'fixtures/ffalternative_fixtured_factory.dart';
 import 'fixtures/fffood_list_fixtured_factory.dart';
-import 'fixtures/Ingredient_fixtured_factory.dart';
+import 'fixtures/ffingredient_fixtured_factory.dart';
 import 'fixtures/ffproduct_fixtured_factory.dart';
 
 void main() {
   late int foodId;
-  late Alternative alternative;
-  late Ingredient ingredient;
-  late Foodlist foodList;
-  late Product product;
+  late FFAlternative alternative;
+  late FFIngredient ingredient;
+  late FFFoodlist foodList;
+  late FFProduct product;
   late int cookingTypeID;
 
   late FlistfoodVariationCubit flistfoodVariationCubit;
@@ -22,10 +22,10 @@ void main() {
   setUp(() => {
         foodId = faker.randomGenerator.integer(9999),
         cookingTypeID = faker.randomGenerator.integer(9999),
-        alternative = AlternativeFixture.factory().makeSingle(),
-        ingredient = IngredientFixture.factory().makeSingle(),
-        foodList = FoodlistFixture.factory().makeSingle(),
-        product = ProductFixture.factory().makeSingle(),
+        alternative = FFAlternativeFixture.factory().makeSingle(),
+        ingredient = FFIngredientFixture.factory().makeSingle(),
+        foodList = FFFoodlistFixture.factory().makeSingle(),
+        product = FFProductFixture.factory().makeSingle(),
         flistfoodVariationCubit = FlistfoodVariationCubit(),
         product.price = product.newPrice,
       });

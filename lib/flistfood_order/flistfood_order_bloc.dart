@@ -28,7 +28,7 @@ class FlistfoodOrderBloc extends Bloc<FlistfoodOrderEvent, FlistfoodOrderState> 
     });
 
     on<_AddProductOrDetailToORder>((event, emit) async {
-      Product? product = event.product;
+      FFProduct? product = event.product;
       FFDetail? detailProduct = event.detailProduct;
       FFCurrentServicePoint currentServicePoint = event.currentServicePoint;
       FFOrder? order;
@@ -51,14 +51,14 @@ class FlistfoodOrderBloc extends Bloc<FlistfoodOrderEvent, FlistfoodOrderState> 
 
       //* Se NON ho un dettaglio ne creo uno nuovo, per ogni variazione del prodotto popolo i dati e creo una nuova variazione nella lista variazioni
       if (detailProduct == null) {
-        for (CookingType cookingType in product?.cookingTypes
+        for (FFCookingType cookingType in product?.cookingTypes
                 .where((e) => e.isSelected && product.preferredCookingTypeId != e.id) ??
             []) {
           cookingTypeName = cookingType.name ?? '';
           cookingTypeId = cookingType.id;
         }
 
-        for (Alternative alternative in product?.alternatives ?? []) {
+        for (FFAlternative alternative in product?.alternatives ?? []) {
           for (FFFood food in alternative.foods
               .where((e) => e.isSelected == true && alternative.defaultFoodId != e.foodId)) {
             variations.add(FFVariation(
@@ -81,7 +81,7 @@ class FlistfoodOrderBloc extends Bloc<FlistfoodOrderEvent, FlistfoodOrderState> 
           }
         }
 
-        for (Ingredient ingredient in product?.ingredients ?? []) {
+        for (FFIngredient ingredient in product?.ingredients ?? []) {
           if (ingredient.isMain && !ingredient.selected) {
             variations.add(FFVariation(
               foodId: ingredient.foodId,
@@ -108,7 +108,7 @@ class FlistfoodOrderBloc extends Bloc<FlistfoodOrderEvent, FlistfoodOrderState> 
           }
         }
 
-        for (Foodlist foodList in product?.foodlists ?? []) {
+        for (FFFoodlist foodList in product?.foodlists ?? []) {
           final List<FFFoodDetail> foodListSort =
               foodList.foods?.where((e) => e.selected).toList() ?? [];
           foodListSort.sort((a, b) => a.timeSelected!.compareTo(b.timeSelected!));
@@ -261,7 +261,7 @@ class FlistfoodOrderBloc extends Bloc<FlistfoodOrderEvent, FlistfoodOrderState> 
     });
 
     on<_RemoveProductToOrder>((event, emit) async {
-      Product? product = event.product;
+      FFProduct? product = event.product;
       FFDetail? detailProduct = event.detailProduct;
       FFCurrentServicePoint currentServicePoint = event.currentServicePoint;
       FFOrder? order;
@@ -467,7 +467,7 @@ class FlistfoodOrderBloc extends Bloc<FlistfoodOrderEvent, FlistfoodOrderState> 
 
   void addProductOrDetailToORder({
     required FFCurrentServicePoint currentServicePoint,
-    Product? product,
+    FFProduct? product,
     FFDetail? detailProduct,
     required String ownerId,
     required String ownerName,
@@ -490,7 +490,7 @@ class FlistfoodOrderBloc extends Bloc<FlistfoodOrderEvent, FlistfoodOrderState> 
 
   void removeProductToOrder({
     required FFCurrentServicePoint currentServicePoint,
-    Product? product,
+    FFProduct? product,
     FFDetail? detailProduct,
     required String ownerId,
     required String ownerName,
