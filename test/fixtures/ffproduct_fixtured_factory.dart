@@ -1,10 +1,12 @@
 import 'package:data_fixture_dart/data_fixture_dart.dart';
 import 'package:flistfood_order/product_model.dart';
-import 'ffalternative_fixtured_factory.dart';
+
+import 'Alternative_fixtured_factory.dart';
 import 'ffcoocking_types_fixtured_factory.dart';
 import 'fffood_list_fixtured_factory.dart';
 import 'fffood_lists_definition_fixtured_factory.dart';
-import 'ffingredient_fixtured_factory.dart';
+import 'ffformat_fixtured_factory.dart';
+import 'Ingredient_fixtured_factory.dart';
 
 extension ProductFixture on Product {
   // ignore: library_private_types_in_public_api
