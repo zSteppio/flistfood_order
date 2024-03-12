@@ -22,7 +22,7 @@ mixin _$FlistfoodOrderEvent {
     required TResult Function(String servicePointId) deleteOrderByServicePoint,
     required TResult Function(
             FFCurrentServicePoint currentServicePoint,
-            FFProduct? product,
+            Product? product,
             FFDetail? detailProduct,
             String ownerId,
             String ownerName,
@@ -32,7 +32,7 @@ mixin _$FlistfoodOrderEvent {
         addProductOrDetailToORder,
     required TResult Function(
             FFCurrentServicePoint currentServicePoint,
-            FFProduct? product,
+            Product? product,
             FFDetail? detailProduct,
             String ownerId,
             String? userId,
@@ -62,7 +62,7 @@ mixin _$FlistfoodOrderEvent {
     TResult? Function(String servicePointId)? deleteOrderByServicePoint,
     TResult? Function(
             FFCurrentServicePoint currentServicePoint,
-            FFProduct? product,
+            Product? product,
             FFDetail? detailProduct,
             String ownerId,
             String ownerName,
@@ -72,7 +72,7 @@ mixin _$FlistfoodOrderEvent {
         addProductOrDetailToORder,
     TResult? Function(
             FFCurrentServicePoint currentServicePoint,
-            FFProduct? product,
+            Product? product,
             FFDetail? detailProduct,
             String ownerId,
             String? userId,
@@ -102,7 +102,7 @@ mixin _$FlistfoodOrderEvent {
     TResult Function(String servicePointId)? deleteOrderByServicePoint,
     TResult Function(
             FFCurrentServicePoint currentServicePoint,
-            FFProduct? product,
+            Product? product,
             FFDetail? detailProduct,
             String ownerId,
             String ownerName,
@@ -112,7 +112,7 @@ mixin _$FlistfoodOrderEvent {
         addProductOrDetailToORder,
     TResult Function(
             FFCurrentServicePoint currentServicePoint,
-            FFProduct? product,
+            Product? product,
             FFDetail? detailProduct,
             String ownerId,
             String? userId,
@@ -139,12 +139,9 @@ mixin _$FlistfoodOrderEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_GetOrderByServicePoint value)
-        getOrderByServicePoint,
-    required TResult Function(_DeleteOrderByServicePoint value)
-        deleteOrderByServicePoint,
-    required TResult Function(_AddProductOrDetailToORder value)
-        addProductOrDetailToORder,
+    required TResult Function(_GetOrderByServicePoint value) getOrderByServicePoint,
+    required TResult Function(_DeleteOrderByServicePoint value) deleteOrderByServicePoint,
+    required TResult Function(_AddProductOrDetailToORder value) addProductOrDetailToORder,
     required TResult Function(_RemoveProductToOrder value) removeProductToOrder,
     required TResult Function(_SendOrder value) sendOrder,
     required TResult Function(_RemoveAllOrder value) removeAllOrder,
@@ -153,10 +150,8 @@ mixin _$FlistfoodOrderEvent {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_GetOrderByServicePoint value)? getOrderByServicePoint,
-    TResult? Function(_DeleteOrderByServicePoint value)?
-        deleteOrderByServicePoint,
-    TResult? Function(_AddProductOrDetailToORder value)?
-        addProductOrDetailToORder,
+    TResult? Function(_DeleteOrderByServicePoint value)? deleteOrderByServicePoint,
+    TResult? Function(_AddProductOrDetailToORder value)? addProductOrDetailToORder,
     TResult? Function(_RemoveProductToOrder value)? removeProductToOrder,
     TResult? Function(_SendOrder value)? sendOrder,
     TResult? Function(_RemoveAllOrder value)? removeAllOrder,
@@ -165,10 +160,8 @@ mixin _$FlistfoodOrderEvent {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_GetOrderByServicePoint value)? getOrderByServicePoint,
-    TResult Function(_DeleteOrderByServicePoint value)?
-        deleteOrderByServicePoint,
-    TResult Function(_AddProductOrDetailToORder value)?
-        addProductOrDetailToORder,
+    TResult Function(_DeleteOrderByServicePoint value)? deleteOrderByServicePoint,
+    TResult Function(_AddProductOrDetailToORder value)? addProductOrDetailToORder,
     TResult Function(_RemoveProductToOrder value)? removeProductToOrder,
     TResult Function(_SendOrder value)? sendOrder,
     TResult Function(_RemoveAllOrder value)? removeAllOrder,
@@ -198,8 +191,7 @@ class _$FlistfoodOrderEventCopyWithImpl<$Res, $Val extends FlistfoodOrderEvent>
 /// @nodoc
 abstract class _$$GetOrderByServicePointImplCopyWith<$Res> {
   factory _$$GetOrderByServicePointImplCopyWith(
-          _$GetOrderByServicePointImpl value,
-          $Res Function(_$GetOrderByServicePointImpl) then) =
+          _$GetOrderByServicePointImpl value, $Res Function(_$GetOrderByServicePointImpl) then) =
       __$$GetOrderByServicePointImplCopyWithImpl<$Res>;
   @useResult
   $Res call({String servicePointId});
@@ -207,12 +199,10 @@ abstract class _$$GetOrderByServicePointImplCopyWith<$Res> {
 
 /// @nodoc
 class __$$GetOrderByServicePointImplCopyWithImpl<$Res>
-    extends _$FlistfoodOrderEventCopyWithImpl<$Res,
-        _$GetOrderByServicePointImpl>
+    extends _$FlistfoodOrderEventCopyWithImpl<$Res, _$GetOrderByServicePointImpl>
     implements _$$GetOrderByServicePointImplCopyWith<$Res> {
   __$$GetOrderByServicePointImplCopyWithImpl(
-      _$GetOrderByServicePointImpl _value,
-      $Res Function(_$GetOrderByServicePointImpl) _then)
+      _$GetOrderByServicePointImpl _value, $Res Function(_$GetOrderByServicePointImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -257,9 +247,8 @@ class _$GetOrderByServicePointImpl implements _GetOrderByServicePoint {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$GetOrderByServicePointImplCopyWith<_$GetOrderByServicePointImpl>
-      get copyWith => __$$GetOrderByServicePointImplCopyWithImpl<
-          _$GetOrderByServicePointImpl>(this, _$identity);
+  _$$GetOrderByServicePointImplCopyWith<_$GetOrderByServicePointImpl> get copyWith =>
+      __$$GetOrderByServicePointImplCopyWithImpl<_$GetOrderByServicePointImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -268,7 +257,7 @@ class _$GetOrderByServicePointImpl implements _GetOrderByServicePoint {
     required TResult Function(String servicePointId) deleteOrderByServicePoint,
     required TResult Function(
             FFCurrentServicePoint currentServicePoint,
-            FFProduct? product,
+            Product? product,
             FFDetail? detailProduct,
             String ownerId,
             String ownerName,
@@ -278,7 +267,7 @@ class _$GetOrderByServicePointImpl implements _GetOrderByServicePoint {
         addProductOrDetailToORder,
     required TResult Function(
             FFCurrentServicePoint currentServicePoint,
-            FFProduct? product,
+            Product? product,
             FFDetail? detailProduct,
             String ownerId,
             String? userId,
@@ -311,7 +300,7 @@ class _$GetOrderByServicePointImpl implements _GetOrderByServicePoint {
     TResult? Function(String servicePointId)? deleteOrderByServicePoint,
     TResult? Function(
             FFCurrentServicePoint currentServicePoint,
-            FFProduct? product,
+            Product? product,
             FFDetail? detailProduct,
             String ownerId,
             String ownerName,
@@ -321,7 +310,7 @@ class _$GetOrderByServicePointImpl implements _GetOrderByServicePoint {
         addProductOrDetailToORder,
     TResult? Function(
             FFCurrentServicePoint currentServicePoint,
-            FFProduct? product,
+            Product? product,
             FFDetail? detailProduct,
             String ownerId,
             String? userId,
@@ -354,7 +343,7 @@ class _$GetOrderByServicePointImpl implements _GetOrderByServicePoint {
     TResult Function(String servicePointId)? deleteOrderByServicePoint,
     TResult Function(
             FFCurrentServicePoint currentServicePoint,
-            FFProduct? product,
+            Product? product,
             FFDetail? detailProduct,
             String ownerId,
             String ownerName,
@@ -364,7 +353,7 @@ class _$GetOrderByServicePointImpl implements _GetOrderByServicePoint {
         addProductOrDetailToORder,
     TResult Function(
             FFCurrentServicePoint currentServicePoint,
-            FFProduct? product,
+            Product? product,
             FFDetail? detailProduct,
             String ownerId,
             String? userId,
@@ -397,12 +386,9 @@ class _$GetOrderByServicePointImpl implements _GetOrderByServicePoint {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_GetOrderByServicePoint value)
-        getOrderByServicePoint,
-    required TResult Function(_DeleteOrderByServicePoint value)
-        deleteOrderByServicePoint,
-    required TResult Function(_AddProductOrDetailToORder value)
-        addProductOrDetailToORder,
+    required TResult Function(_GetOrderByServicePoint value) getOrderByServicePoint,
+    required TResult Function(_DeleteOrderByServicePoint value) deleteOrderByServicePoint,
+    required TResult Function(_AddProductOrDetailToORder value) addProductOrDetailToORder,
     required TResult Function(_RemoveProductToOrder value) removeProductToOrder,
     required TResult Function(_SendOrder value) sendOrder,
     required TResult Function(_RemoveAllOrder value) removeAllOrder,
@@ -414,10 +400,8 @@ class _$GetOrderByServicePointImpl implements _GetOrderByServicePoint {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_GetOrderByServicePoint value)? getOrderByServicePoint,
-    TResult? Function(_DeleteOrderByServicePoint value)?
-        deleteOrderByServicePoint,
-    TResult? Function(_AddProductOrDetailToORder value)?
-        addProductOrDetailToORder,
+    TResult? Function(_DeleteOrderByServicePoint value)? deleteOrderByServicePoint,
+    TResult? Function(_AddProductOrDetailToORder value)? addProductOrDetailToORder,
     TResult? Function(_RemoveProductToOrder value)? removeProductToOrder,
     TResult? Function(_SendOrder value)? sendOrder,
     TResult? Function(_RemoveAllOrder value)? removeAllOrder,
@@ -429,10 +413,8 @@ class _$GetOrderByServicePointImpl implements _GetOrderByServicePoint {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_GetOrderByServicePoint value)? getOrderByServicePoint,
-    TResult Function(_DeleteOrderByServicePoint value)?
-        deleteOrderByServicePoint,
-    TResult Function(_AddProductOrDetailToORder value)?
-        addProductOrDetailToORder,
+    TResult Function(_DeleteOrderByServicePoint value)? deleteOrderByServicePoint,
+    TResult Function(_AddProductOrDetailToORder value)? addProductOrDetailToORder,
     TResult Function(_RemoveProductToOrder value)? removeProductToOrder,
     TResult Function(_SendOrder value)? sendOrder,
     TResult Function(_RemoveAllOrder value)? removeAllOrder,
@@ -446,19 +428,18 @@ class _$GetOrderByServicePointImpl implements _GetOrderByServicePoint {
 }
 
 abstract class _GetOrderByServicePoint implements FlistfoodOrderEvent {
-  const factory _GetOrderByServicePoint(
-      {required final String servicePointId}) = _$GetOrderByServicePointImpl;
+  const factory _GetOrderByServicePoint({required final String servicePointId}) =
+      _$GetOrderByServicePointImpl;
 
   String get servicePointId;
   @JsonKey(ignore: true)
-  _$$GetOrderByServicePointImplCopyWith<_$GetOrderByServicePointImpl>
-      get copyWith => throw _privateConstructorUsedError;
+  _$$GetOrderByServicePointImplCopyWith<_$GetOrderByServicePointImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class _$$DeleteOrderByServicePointImplCopyWith<$Res> {
-  factory _$$DeleteOrderByServicePointImplCopyWith(
-          _$DeleteOrderByServicePointImpl value,
+  factory _$$DeleteOrderByServicePointImplCopyWith(_$DeleteOrderByServicePointImpl value,
           $Res Function(_$DeleteOrderByServicePointImpl) then) =
       __$$DeleteOrderByServicePointImplCopyWithImpl<$Res>;
   @useResult
@@ -467,12 +448,10 @@ abstract class _$$DeleteOrderByServicePointImplCopyWith<$Res> {
 
 /// @nodoc
 class __$$DeleteOrderByServicePointImplCopyWithImpl<$Res>
-    extends _$FlistfoodOrderEventCopyWithImpl<$Res,
-        _$DeleteOrderByServicePointImpl>
+    extends _$FlistfoodOrderEventCopyWithImpl<$Res, _$DeleteOrderByServicePointImpl>
     implements _$$DeleteOrderByServicePointImplCopyWith<$Res> {
   __$$DeleteOrderByServicePointImplCopyWithImpl(
-      _$DeleteOrderByServicePointImpl _value,
-      $Res Function(_$DeleteOrderByServicePointImpl) _then)
+      _$DeleteOrderByServicePointImpl _value, $Res Function(_$DeleteOrderByServicePointImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -517,9 +496,9 @@ class _$DeleteOrderByServicePointImpl implements _DeleteOrderByServicePoint {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$DeleteOrderByServicePointImplCopyWith<_$DeleteOrderByServicePointImpl>
-      get copyWith => __$$DeleteOrderByServicePointImplCopyWithImpl<
-          _$DeleteOrderByServicePointImpl>(this, _$identity);
+  _$$DeleteOrderByServicePointImplCopyWith<_$DeleteOrderByServicePointImpl> get copyWith =>
+      __$$DeleteOrderByServicePointImplCopyWithImpl<_$DeleteOrderByServicePointImpl>(
+          this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -528,7 +507,7 @@ class _$DeleteOrderByServicePointImpl implements _DeleteOrderByServicePoint {
     required TResult Function(String servicePointId) deleteOrderByServicePoint,
     required TResult Function(
             FFCurrentServicePoint currentServicePoint,
-            FFProduct? product,
+            Product? product,
             FFDetail? detailProduct,
             String ownerId,
             String ownerName,
@@ -538,7 +517,7 @@ class _$DeleteOrderByServicePointImpl implements _DeleteOrderByServicePoint {
         addProductOrDetailToORder,
     required TResult Function(
             FFCurrentServicePoint currentServicePoint,
-            FFProduct? product,
+            Product? product,
             FFDetail? detailProduct,
             String ownerId,
             String? userId,
@@ -571,7 +550,7 @@ class _$DeleteOrderByServicePointImpl implements _DeleteOrderByServicePoint {
     TResult? Function(String servicePointId)? deleteOrderByServicePoint,
     TResult? Function(
             FFCurrentServicePoint currentServicePoint,
-            FFProduct? product,
+            Product? product,
             FFDetail? detailProduct,
             String ownerId,
             String ownerName,
@@ -581,7 +560,7 @@ class _$DeleteOrderByServicePointImpl implements _DeleteOrderByServicePoint {
         addProductOrDetailToORder,
     TResult? Function(
             FFCurrentServicePoint currentServicePoint,
-            FFProduct? product,
+            Product? product,
             FFDetail? detailProduct,
             String ownerId,
             String? userId,
@@ -614,7 +593,7 @@ class _$DeleteOrderByServicePointImpl implements _DeleteOrderByServicePoint {
     TResult Function(String servicePointId)? deleteOrderByServicePoint,
     TResult Function(
             FFCurrentServicePoint currentServicePoint,
-            FFProduct? product,
+            Product? product,
             FFDetail? detailProduct,
             String ownerId,
             String ownerName,
@@ -624,7 +603,7 @@ class _$DeleteOrderByServicePointImpl implements _DeleteOrderByServicePoint {
         addProductOrDetailToORder,
     TResult Function(
             FFCurrentServicePoint currentServicePoint,
-            FFProduct? product,
+            Product? product,
             FFDetail? detailProduct,
             String ownerId,
             String? userId,
@@ -657,12 +636,9 @@ class _$DeleteOrderByServicePointImpl implements _DeleteOrderByServicePoint {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_GetOrderByServicePoint value)
-        getOrderByServicePoint,
-    required TResult Function(_DeleteOrderByServicePoint value)
-        deleteOrderByServicePoint,
-    required TResult Function(_AddProductOrDetailToORder value)
-        addProductOrDetailToORder,
+    required TResult Function(_GetOrderByServicePoint value) getOrderByServicePoint,
+    required TResult Function(_DeleteOrderByServicePoint value) deleteOrderByServicePoint,
+    required TResult Function(_AddProductOrDetailToORder value) addProductOrDetailToORder,
     required TResult Function(_RemoveProductToOrder value) removeProductToOrder,
     required TResult Function(_SendOrder value) sendOrder,
     required TResult Function(_RemoveAllOrder value) removeAllOrder,
@@ -674,10 +650,8 @@ class _$DeleteOrderByServicePointImpl implements _DeleteOrderByServicePoint {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_GetOrderByServicePoint value)? getOrderByServicePoint,
-    TResult? Function(_DeleteOrderByServicePoint value)?
-        deleteOrderByServicePoint,
-    TResult? Function(_AddProductOrDetailToORder value)?
-        addProductOrDetailToORder,
+    TResult? Function(_DeleteOrderByServicePoint value)? deleteOrderByServicePoint,
+    TResult? Function(_AddProductOrDetailToORder value)? addProductOrDetailToORder,
     TResult? Function(_RemoveProductToOrder value)? removeProductToOrder,
     TResult? Function(_SendOrder value)? sendOrder,
     TResult? Function(_RemoveAllOrder value)? removeAllOrder,
@@ -689,10 +663,8 @@ class _$DeleteOrderByServicePointImpl implements _DeleteOrderByServicePoint {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_GetOrderByServicePoint value)? getOrderByServicePoint,
-    TResult Function(_DeleteOrderByServicePoint value)?
-        deleteOrderByServicePoint,
-    TResult Function(_AddProductOrDetailToORder value)?
-        addProductOrDetailToORder,
+    TResult Function(_DeleteOrderByServicePoint value)? deleteOrderByServicePoint,
+    TResult Function(_AddProductOrDetailToORder value)? addProductOrDetailToORder,
     TResult Function(_RemoveProductToOrder value)? removeProductToOrder,
     TResult Function(_SendOrder value)? sendOrder,
     TResult Function(_RemoveAllOrder value)? removeAllOrder,
@@ -706,25 +678,24 @@ class _$DeleteOrderByServicePointImpl implements _DeleteOrderByServicePoint {
 }
 
 abstract class _DeleteOrderByServicePoint implements FlistfoodOrderEvent {
-  const factory _DeleteOrderByServicePoint(
-      {required final String servicePointId}) = _$DeleteOrderByServicePointImpl;
+  const factory _DeleteOrderByServicePoint({required final String servicePointId}) =
+      _$DeleteOrderByServicePointImpl;
 
   String get servicePointId;
   @JsonKey(ignore: true)
-  _$$DeleteOrderByServicePointImplCopyWith<_$DeleteOrderByServicePointImpl>
-      get copyWith => throw _privateConstructorUsedError;
+  _$$DeleteOrderByServicePointImplCopyWith<_$DeleteOrderByServicePointImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class _$$AddProductOrDetailToORderImplCopyWith<$Res> {
-  factory _$$AddProductOrDetailToORderImplCopyWith(
-          _$AddProductOrDetailToORderImpl value,
+  factory _$$AddProductOrDetailToORderImplCopyWith(_$AddProductOrDetailToORderImpl value,
           $Res Function(_$AddProductOrDetailToORderImpl) then) =
       __$$AddProductOrDetailToORderImplCopyWithImpl<$Res>;
   @useResult
   $Res call(
       {FFCurrentServicePoint currentServicePoint,
-      FFProduct? product,
+      Product? product,
       FFDetail? detailProduct,
       String ownerId,
       String ownerName,
@@ -735,12 +706,10 @@ abstract class _$$AddProductOrDetailToORderImplCopyWith<$Res> {
 
 /// @nodoc
 class __$$AddProductOrDetailToORderImplCopyWithImpl<$Res>
-    extends _$FlistfoodOrderEventCopyWithImpl<$Res,
-        _$AddProductOrDetailToORderImpl>
+    extends _$FlistfoodOrderEventCopyWithImpl<$Res, _$AddProductOrDetailToORderImpl>
     implements _$$AddProductOrDetailToORderImplCopyWith<$Res> {
   __$$AddProductOrDetailToORderImplCopyWithImpl(
-      _$AddProductOrDetailToORderImpl _value,
-      $Res Function(_$AddProductOrDetailToORderImpl) _then)
+      _$AddProductOrDetailToORderImpl _value, $Res Function(_$AddProductOrDetailToORderImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -763,7 +732,7 @@ class __$$AddProductOrDetailToORderImplCopyWithImpl<$Res>
       product: freezed == product
           ? _value.product
           : product // ignore: cast_nullable_to_non_nullable
-              as FFProduct?,
+              as Product?,
       detailProduct: freezed == detailProduct
           ? _value.detailProduct
           : detailProduct // ignore: cast_nullable_to_non_nullable
@@ -808,7 +777,7 @@ class _$AddProductOrDetailToORderImpl implements _AddProductOrDetailToORder {
   @override
   final FFCurrentServicePoint currentServicePoint;
   @override
-  final FFProduct? product;
+  final Product? product;
   @override
   final FFDetail? detailProduct;
 // String? formatProductJson,
@@ -839,25 +808,22 @@ class _$AddProductOrDetailToORderImpl implements _AddProductOrDetailToORder {
             (identical(other.detailProduct, detailProduct) ||
                 other.detailProduct == detailProduct) &&
             (identical(other.ownerId, ownerId) || other.ownerId == ownerId) &&
-            (identical(other.ownerName, ownerName) ||
-                other.ownerName == ownerName) &&
+            (identical(other.ownerName, ownerName) || other.ownerName == ownerName) &&
             (identical(other.userId, userId) || other.userId == userId) &&
-            (identical(other.opneDate, opneDate) ||
-                other.opneDate == opneDate) &&
-            (identical(other.deliveryCost, deliveryCost) ||
-                other.deliveryCost == deliveryCost));
+            (identical(other.opneDate, opneDate) || other.opneDate == opneDate) &&
+            (identical(other.deliveryCost, deliveryCost) || other.deliveryCost == deliveryCost));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, currentServicePoint, product,
-      detailProduct, ownerId, ownerName, userId, opneDate, deliveryCost);
+  int get hashCode => Object.hash(runtimeType, currentServicePoint, product, detailProduct, ownerId,
+      ownerName, userId, opneDate, deliveryCost);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$AddProductOrDetailToORderImplCopyWith<_$AddProductOrDetailToORderImpl>
-      get copyWith => __$$AddProductOrDetailToORderImplCopyWithImpl<
-          _$AddProductOrDetailToORderImpl>(this, _$identity);
+  _$$AddProductOrDetailToORderImplCopyWith<_$AddProductOrDetailToORderImpl> get copyWith =>
+      __$$AddProductOrDetailToORderImplCopyWithImpl<_$AddProductOrDetailToORderImpl>(
+          this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -866,7 +832,7 @@ class _$AddProductOrDetailToORderImpl implements _AddProductOrDetailToORder {
     required TResult Function(String servicePointId) deleteOrderByServicePoint,
     required TResult Function(
             FFCurrentServicePoint currentServicePoint,
-            FFProduct? product,
+            Product? product,
             FFDetail? detailProduct,
             String ownerId,
             String ownerName,
@@ -876,7 +842,7 @@ class _$AddProductOrDetailToORderImpl implements _AddProductOrDetailToORder {
         addProductOrDetailToORder,
     required TResult Function(
             FFCurrentServicePoint currentServicePoint,
-            FFProduct? product,
+            Product? product,
             FFDetail? detailProduct,
             String ownerId,
             String? userId,
@@ -899,8 +865,8 @@ class _$AddProductOrDetailToORderImpl implements _AddProductOrDetailToORder {
         sendOrder,
     required TResult Function() removeAllOrder,
   }) {
-    return addProductOrDetailToORder(currentServicePoint, product,
-        detailProduct, ownerId, ownerName, userId, opneDate, deliveryCost);
+    return addProductOrDetailToORder(currentServicePoint, product, detailProduct, ownerId,
+        ownerName, userId, opneDate, deliveryCost);
   }
 
   @override
@@ -910,7 +876,7 @@ class _$AddProductOrDetailToORderImpl implements _AddProductOrDetailToORder {
     TResult? Function(String servicePointId)? deleteOrderByServicePoint,
     TResult? Function(
             FFCurrentServicePoint currentServicePoint,
-            FFProduct? product,
+            Product? product,
             FFDetail? detailProduct,
             String ownerId,
             String ownerName,
@@ -920,7 +886,7 @@ class _$AddProductOrDetailToORderImpl implements _AddProductOrDetailToORder {
         addProductOrDetailToORder,
     TResult? Function(
             FFCurrentServicePoint currentServicePoint,
-            FFProduct? product,
+            Product? product,
             FFDetail? detailProduct,
             String ownerId,
             String? userId,
@@ -943,8 +909,8 @@ class _$AddProductOrDetailToORderImpl implements _AddProductOrDetailToORder {
         sendOrder,
     TResult? Function()? removeAllOrder,
   }) {
-    return addProductOrDetailToORder?.call(currentServicePoint, product,
-        detailProduct, ownerId, ownerName, userId, opneDate, deliveryCost);
+    return addProductOrDetailToORder?.call(currentServicePoint, product, detailProduct, ownerId,
+        ownerName, userId, opneDate, deliveryCost);
   }
 
   @override
@@ -954,7 +920,7 @@ class _$AddProductOrDetailToORderImpl implements _AddProductOrDetailToORder {
     TResult Function(String servicePointId)? deleteOrderByServicePoint,
     TResult Function(
             FFCurrentServicePoint currentServicePoint,
-            FFProduct? product,
+            Product? product,
             FFDetail? detailProduct,
             String ownerId,
             String ownerName,
@@ -964,7 +930,7 @@ class _$AddProductOrDetailToORderImpl implements _AddProductOrDetailToORder {
         addProductOrDetailToORder,
     TResult Function(
             FFCurrentServicePoint currentServicePoint,
-            FFProduct? product,
+            Product? product,
             FFDetail? detailProduct,
             String ownerId,
             String? userId,
@@ -989,8 +955,8 @@ class _$AddProductOrDetailToORderImpl implements _AddProductOrDetailToORder {
     required TResult orElse(),
   }) {
     if (addProductOrDetailToORder != null) {
-      return addProductOrDetailToORder(currentServicePoint, product,
-          detailProduct, ownerId, ownerName, userId, opneDate, deliveryCost);
+      return addProductOrDetailToORder(currentServicePoint, product, detailProduct, ownerId,
+          ownerName, userId, opneDate, deliveryCost);
     }
     return orElse();
   }
@@ -998,12 +964,9 @@ class _$AddProductOrDetailToORderImpl implements _AddProductOrDetailToORder {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_GetOrderByServicePoint value)
-        getOrderByServicePoint,
-    required TResult Function(_DeleteOrderByServicePoint value)
-        deleteOrderByServicePoint,
-    required TResult Function(_AddProductOrDetailToORder value)
-        addProductOrDetailToORder,
+    required TResult Function(_GetOrderByServicePoint value) getOrderByServicePoint,
+    required TResult Function(_DeleteOrderByServicePoint value) deleteOrderByServicePoint,
+    required TResult Function(_AddProductOrDetailToORder value) addProductOrDetailToORder,
     required TResult Function(_RemoveProductToOrder value) removeProductToOrder,
     required TResult Function(_SendOrder value) sendOrder,
     required TResult Function(_RemoveAllOrder value) removeAllOrder,
@@ -1015,10 +978,8 @@ class _$AddProductOrDetailToORderImpl implements _AddProductOrDetailToORder {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_GetOrderByServicePoint value)? getOrderByServicePoint,
-    TResult? Function(_DeleteOrderByServicePoint value)?
-        deleteOrderByServicePoint,
-    TResult? Function(_AddProductOrDetailToORder value)?
-        addProductOrDetailToORder,
+    TResult? Function(_DeleteOrderByServicePoint value)? deleteOrderByServicePoint,
+    TResult? Function(_AddProductOrDetailToORder value)? addProductOrDetailToORder,
     TResult? Function(_RemoveProductToOrder value)? removeProductToOrder,
     TResult? Function(_SendOrder value)? sendOrder,
     TResult? Function(_RemoveAllOrder value)? removeAllOrder,
@@ -1030,10 +991,8 @@ class _$AddProductOrDetailToORderImpl implements _AddProductOrDetailToORder {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_GetOrderByServicePoint value)? getOrderByServicePoint,
-    TResult Function(_DeleteOrderByServicePoint value)?
-        deleteOrderByServicePoint,
-    TResult Function(_AddProductOrDetailToORder value)?
-        addProductOrDetailToORder,
+    TResult Function(_DeleteOrderByServicePoint value)? deleteOrderByServicePoint,
+    TResult Function(_AddProductOrDetailToORder value)? addProductOrDetailToORder,
     TResult Function(_RemoveProductToOrder value)? removeProductToOrder,
     TResult Function(_SendOrder value)? sendOrder,
     TResult Function(_RemoveAllOrder value)? removeAllOrder,
@@ -1049,7 +1008,7 @@ class _$AddProductOrDetailToORderImpl implements _AddProductOrDetailToORder {
 abstract class _AddProductOrDetailToORder implements FlistfoodOrderEvent {
   const factory _AddProductOrDetailToORder(
       {required final FFCurrentServicePoint currentServicePoint,
-      final FFProduct? product,
+      final Product? product,
       final FFDetail? detailProduct,
       required final String ownerId,
       required final String ownerName,
@@ -1058,7 +1017,7 @@ abstract class _AddProductOrDetailToORder implements FlistfoodOrderEvent {
       required final double? deliveryCost}) = _$AddProductOrDetailToORderImpl;
 
   FFCurrentServicePoint get currentServicePoint;
-  FFProduct? get product;
+  Product? get product;
   FFDetail? get detailProduct; // String? formatProductJson,
   String get ownerId;
   String get ownerName;
@@ -1066,19 +1025,19 @@ abstract class _AddProductOrDetailToORder implements FlistfoodOrderEvent {
   DateTime get opneDate;
   double? get deliveryCost;
   @JsonKey(ignore: true)
-  _$$AddProductOrDetailToORderImplCopyWith<_$AddProductOrDetailToORderImpl>
-      get copyWith => throw _privateConstructorUsedError;
+  _$$AddProductOrDetailToORderImplCopyWith<_$AddProductOrDetailToORderImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class _$$RemoveProductToOrderImplCopyWith<$Res> {
-  factory _$$RemoveProductToOrderImplCopyWith(_$RemoveProductToOrderImpl value,
-          $Res Function(_$RemoveProductToOrderImpl) then) =
+  factory _$$RemoveProductToOrderImplCopyWith(
+          _$RemoveProductToOrderImpl value, $Res Function(_$RemoveProductToOrderImpl) then) =
       __$$RemoveProductToOrderImplCopyWithImpl<$Res>;
   @useResult
   $Res call(
       {FFCurrentServicePoint currentServicePoint,
-      FFProduct? product,
+      Product? product,
       FFDetail? detailProduct,
       String ownerId,
       String? userId,
@@ -1091,8 +1050,8 @@ abstract class _$$RemoveProductToOrderImplCopyWith<$Res> {
 class __$$RemoveProductToOrderImplCopyWithImpl<$Res>
     extends _$FlistfoodOrderEventCopyWithImpl<$Res, _$RemoveProductToOrderImpl>
     implements _$$RemoveProductToOrderImplCopyWith<$Res> {
-  __$$RemoveProductToOrderImplCopyWithImpl(_$RemoveProductToOrderImpl _value,
-      $Res Function(_$RemoveProductToOrderImpl) _then)
+  __$$RemoveProductToOrderImplCopyWithImpl(
+      _$RemoveProductToOrderImpl _value, $Res Function(_$RemoveProductToOrderImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -1115,7 +1074,7 @@ class __$$RemoveProductToOrderImplCopyWithImpl<$Res>
       product: freezed == product
           ? _value.product
           : product // ignore: cast_nullable_to_non_nullable
-              as FFProduct?,
+              as Product?,
       detailProduct: freezed == detailProduct
           ? _value.detailProduct
           : detailProduct // ignore: cast_nullable_to_non_nullable
@@ -1160,7 +1119,7 @@ class _$RemoveProductToOrderImpl implements _RemoveProductToOrder {
   @override
   final FFCurrentServicePoint currentServicePoint;
   @override
-  final FFProduct? product;
+  final Product? product;
   @override
   final FFDetail? detailProduct;
   @override
@@ -1191,25 +1150,20 @@ class _$RemoveProductToOrderImpl implements _RemoveProductToOrder {
                 other.detailProduct == detailProduct) &&
             (identical(other.ownerId, ownerId) || other.ownerId == ownerId) &&
             (identical(other.userId, userId) || other.userId == userId) &&
-            (identical(other.ownerName, ownerName) ||
-                other.ownerName == ownerName) &&
-            (identical(other.opneDate, opneDate) ||
-                other.opneDate == opneDate) &&
-            (identical(other.deliveryCost, deliveryCost) ||
-                other.deliveryCost == deliveryCost));
+            (identical(other.ownerName, ownerName) || other.ownerName == ownerName) &&
+            (identical(other.opneDate, opneDate) || other.opneDate == opneDate) &&
+            (identical(other.deliveryCost, deliveryCost) || other.deliveryCost == deliveryCost));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, currentServicePoint, product,
-      detailProduct, ownerId, userId, ownerName, opneDate, deliveryCost);
+  int get hashCode => Object.hash(runtimeType, currentServicePoint, product, detailProduct, ownerId,
+      userId, ownerName, opneDate, deliveryCost);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$RemoveProductToOrderImplCopyWith<_$RemoveProductToOrderImpl>
-      get copyWith =>
-          __$$RemoveProductToOrderImplCopyWithImpl<_$RemoveProductToOrderImpl>(
-              this, _$identity);
+  _$$RemoveProductToOrderImplCopyWith<_$RemoveProductToOrderImpl> get copyWith =>
+      __$$RemoveProductToOrderImplCopyWithImpl<_$RemoveProductToOrderImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -1218,7 +1172,7 @@ class _$RemoveProductToOrderImpl implements _RemoveProductToOrder {
     required TResult Function(String servicePointId) deleteOrderByServicePoint,
     required TResult Function(
             FFCurrentServicePoint currentServicePoint,
-            FFProduct? product,
+            Product? product,
             FFDetail? detailProduct,
             String ownerId,
             String ownerName,
@@ -1228,7 +1182,7 @@ class _$RemoveProductToOrderImpl implements _RemoveProductToOrder {
         addProductOrDetailToORder,
     required TResult Function(
             FFCurrentServicePoint currentServicePoint,
-            FFProduct? product,
+            Product? product,
             FFDetail? detailProduct,
             String ownerId,
             String? userId,
@@ -1251,8 +1205,8 @@ class _$RemoveProductToOrderImpl implements _RemoveProductToOrder {
         sendOrder,
     required TResult Function() removeAllOrder,
   }) {
-    return removeProductToOrder(currentServicePoint, product, detailProduct,
-        ownerId, userId, ownerName, opneDate, deliveryCost);
+    return removeProductToOrder(currentServicePoint, product, detailProduct, ownerId, userId,
+        ownerName, opneDate, deliveryCost);
   }
 
   @override
@@ -1262,7 +1216,7 @@ class _$RemoveProductToOrderImpl implements _RemoveProductToOrder {
     TResult? Function(String servicePointId)? deleteOrderByServicePoint,
     TResult? Function(
             FFCurrentServicePoint currentServicePoint,
-            FFProduct? product,
+            Product? product,
             FFDetail? detailProduct,
             String ownerId,
             String ownerName,
@@ -1272,7 +1226,7 @@ class _$RemoveProductToOrderImpl implements _RemoveProductToOrder {
         addProductOrDetailToORder,
     TResult? Function(
             FFCurrentServicePoint currentServicePoint,
-            FFProduct? product,
+            Product? product,
             FFDetail? detailProduct,
             String ownerId,
             String? userId,
@@ -1295,8 +1249,8 @@ class _$RemoveProductToOrderImpl implements _RemoveProductToOrder {
         sendOrder,
     TResult? Function()? removeAllOrder,
   }) {
-    return removeProductToOrder?.call(currentServicePoint, product,
-        detailProduct, ownerId, userId, ownerName, opneDate, deliveryCost);
+    return removeProductToOrder?.call(currentServicePoint, product, detailProduct, ownerId, userId,
+        ownerName, opneDate, deliveryCost);
   }
 
   @override
@@ -1306,7 +1260,7 @@ class _$RemoveProductToOrderImpl implements _RemoveProductToOrder {
     TResult Function(String servicePointId)? deleteOrderByServicePoint,
     TResult Function(
             FFCurrentServicePoint currentServicePoint,
-            FFProduct? product,
+            Product? product,
             FFDetail? detailProduct,
             String ownerId,
             String ownerName,
@@ -1316,7 +1270,7 @@ class _$RemoveProductToOrderImpl implements _RemoveProductToOrder {
         addProductOrDetailToORder,
     TResult Function(
             FFCurrentServicePoint currentServicePoint,
-            FFProduct? product,
+            Product? product,
             FFDetail? detailProduct,
             String ownerId,
             String? userId,
@@ -1341,8 +1295,8 @@ class _$RemoveProductToOrderImpl implements _RemoveProductToOrder {
     required TResult orElse(),
   }) {
     if (removeProductToOrder != null) {
-      return removeProductToOrder(currentServicePoint, product, detailProduct,
-          ownerId, userId, ownerName, opneDate, deliveryCost);
+      return removeProductToOrder(currentServicePoint, product, detailProduct, ownerId, userId,
+          ownerName, opneDate, deliveryCost);
     }
     return orElse();
   }
@@ -1350,12 +1304,9 @@ class _$RemoveProductToOrderImpl implements _RemoveProductToOrder {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_GetOrderByServicePoint value)
-        getOrderByServicePoint,
-    required TResult Function(_DeleteOrderByServicePoint value)
-        deleteOrderByServicePoint,
-    required TResult Function(_AddProductOrDetailToORder value)
-        addProductOrDetailToORder,
+    required TResult Function(_GetOrderByServicePoint value) getOrderByServicePoint,
+    required TResult Function(_DeleteOrderByServicePoint value) deleteOrderByServicePoint,
+    required TResult Function(_AddProductOrDetailToORder value) addProductOrDetailToORder,
     required TResult Function(_RemoveProductToOrder value) removeProductToOrder,
     required TResult Function(_SendOrder value) sendOrder,
     required TResult Function(_RemoveAllOrder value) removeAllOrder,
@@ -1367,10 +1318,8 @@ class _$RemoveProductToOrderImpl implements _RemoveProductToOrder {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_GetOrderByServicePoint value)? getOrderByServicePoint,
-    TResult? Function(_DeleteOrderByServicePoint value)?
-        deleteOrderByServicePoint,
-    TResult? Function(_AddProductOrDetailToORder value)?
-        addProductOrDetailToORder,
+    TResult? Function(_DeleteOrderByServicePoint value)? deleteOrderByServicePoint,
+    TResult? Function(_AddProductOrDetailToORder value)? addProductOrDetailToORder,
     TResult? Function(_RemoveProductToOrder value)? removeProductToOrder,
     TResult? Function(_SendOrder value)? sendOrder,
     TResult? Function(_RemoveAllOrder value)? removeAllOrder,
@@ -1382,10 +1331,8 @@ class _$RemoveProductToOrderImpl implements _RemoveProductToOrder {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_GetOrderByServicePoint value)? getOrderByServicePoint,
-    TResult Function(_DeleteOrderByServicePoint value)?
-        deleteOrderByServicePoint,
-    TResult Function(_AddProductOrDetailToORder value)?
-        addProductOrDetailToORder,
+    TResult Function(_DeleteOrderByServicePoint value)? deleteOrderByServicePoint,
+    TResult Function(_AddProductOrDetailToORder value)? addProductOrDetailToORder,
     TResult Function(_RemoveProductToOrder value)? removeProductToOrder,
     TResult Function(_SendOrder value)? sendOrder,
     TResult Function(_RemoveAllOrder value)? removeAllOrder,
@@ -1401,7 +1348,7 @@ class _$RemoveProductToOrderImpl implements _RemoveProductToOrder {
 abstract class _RemoveProductToOrder implements FlistfoodOrderEvent {
   const factory _RemoveProductToOrder(
       {required final FFCurrentServicePoint currentServicePoint,
-      final FFProduct? product,
+      final Product? product,
       final FFDetail? detailProduct,
       required final String ownerId,
       required final String? userId,
@@ -1410,7 +1357,7 @@ abstract class _RemoveProductToOrder implements FlistfoodOrderEvent {
       required final double? deliveryCost}) = _$RemoveProductToOrderImpl;
 
   FFCurrentServicePoint get currentServicePoint;
-  FFProduct? get product;
+  Product? get product;
   FFDetail? get detailProduct;
   String get ownerId;
   String? get userId;
@@ -1418,14 +1365,13 @@ abstract class _RemoveProductToOrder implements FlistfoodOrderEvent {
   DateTime get opneDate;
   double? get deliveryCost;
   @JsonKey(ignore: true)
-  _$$RemoveProductToOrderImplCopyWith<_$RemoveProductToOrderImpl>
-      get copyWith => throw _privateConstructorUsedError;
+  _$$RemoveProductToOrderImplCopyWith<_$RemoveProductToOrderImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class _$$SendOrderImplCopyWith<$Res> {
-  factory _$$SendOrderImplCopyWith(
-          _$SendOrderImpl value, $Res Function(_$SendOrderImpl) then) =
+  factory _$$SendOrderImplCopyWith(_$SendOrderImpl value, $Res Function(_$SendOrderImpl) then) =
       __$$SendOrderImplCopyWithImpl<$Res>;
   @useResult
   $Res call(
@@ -1446,8 +1392,7 @@ abstract class _$$SendOrderImplCopyWith<$Res> {
 class __$$SendOrderImplCopyWithImpl<$Res>
     extends _$FlistfoodOrderEventCopyWithImpl<$Res, _$SendOrderImpl>
     implements _$$SendOrderImplCopyWith<$Res> {
-  __$$SendOrderImplCopyWithImpl(
-      _$SendOrderImpl _value, $Res Function(_$SendOrderImpl) _then)
+  __$$SendOrderImplCopyWithImpl(_$SendOrderImpl _value, $Res Function(_$SendOrderImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -1566,36 +1511,20 @@ class _$SendOrderImpl implements _SendOrder {
             (identical(other.orderId, orderId) || other.orderId == orderId) &&
             (identical(other.currentServicePoint, currentServicePoint) ||
                 other.currentServicePoint == currentServicePoint) &&
-            (identical(other.seatNumber, seatNumber) ||
-                other.seatNumber == seatNumber) &&
+            (identical(other.seatNumber, seatNumber) || other.seatNumber == seatNumber) &&
             (identical(other.hour, hour) || other.hour == hour) &&
             (identical(other.minute, minute) || other.minute == minute) &&
             (identical(other.note, note) || other.note == note) &&
-            (identical(other.deliveryInfo, deliveryInfo) ||
-                other.deliveryInfo == deliveryInfo) &&
+            (identical(other.deliveryInfo, deliveryInfo) || other.deliveryInfo == deliveryInfo) &&
             (identical(other.token, token) || other.token == token) &&
-            (identical(other.isAnonymous, isAnonymous) ||
-                other.isAnonymous == isAnonymous) &&
-            (identical(other.apiBaseUrl, apiBaseUrl) ||
-                other.apiBaseUrl == apiBaseUrl) &&
-            (identical(other.language, language) ||
-                other.language == language));
+            (identical(other.isAnonymous, isAnonymous) || other.isAnonymous == isAnonymous) &&
+            (identical(other.apiBaseUrl, apiBaseUrl) || other.apiBaseUrl == apiBaseUrl) &&
+            (identical(other.language, language) || other.language == language));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      orderId,
-      currentServicePoint,
-      seatNumber,
-      hour,
-      minute,
-      note,
-      deliveryInfo,
-      token,
-      isAnonymous,
-      apiBaseUrl,
-      language);
+  int get hashCode => Object.hash(runtimeType, orderId, currentServicePoint, seatNumber, hour,
+      minute, note, deliveryInfo, token, isAnonymous, apiBaseUrl, language);
 
   @JsonKey(ignore: true)
   @override
@@ -1610,7 +1539,7 @@ class _$SendOrderImpl implements _SendOrder {
     required TResult Function(String servicePointId) deleteOrderByServicePoint,
     required TResult Function(
             FFCurrentServicePoint currentServicePoint,
-            FFProduct? product,
+            Product? product,
             FFDetail? detailProduct,
             String ownerId,
             String ownerName,
@@ -1620,7 +1549,7 @@ class _$SendOrderImpl implements _SendOrder {
         addProductOrDetailToORder,
     required TResult Function(
             FFCurrentServicePoint currentServicePoint,
-            FFProduct? product,
+            Product? product,
             FFDetail? detailProduct,
             String ownerId,
             String? userId,
@@ -1643,8 +1572,8 @@ class _$SendOrderImpl implements _SendOrder {
         sendOrder,
     required TResult Function() removeAllOrder,
   }) {
-    return sendOrder(orderId, currentServicePoint, seatNumber, hour, minute,
-        note, deliveryInfo, token, isAnonymous, apiBaseUrl, language);
+    return sendOrder(orderId, currentServicePoint, seatNumber, hour, minute, note, deliveryInfo,
+        token, isAnonymous, apiBaseUrl, language);
   }
 
   @override
@@ -1654,7 +1583,7 @@ class _$SendOrderImpl implements _SendOrder {
     TResult? Function(String servicePointId)? deleteOrderByServicePoint,
     TResult? Function(
             FFCurrentServicePoint currentServicePoint,
-            FFProduct? product,
+            Product? product,
             FFDetail? detailProduct,
             String ownerId,
             String ownerName,
@@ -1664,7 +1593,7 @@ class _$SendOrderImpl implements _SendOrder {
         addProductOrDetailToORder,
     TResult? Function(
             FFCurrentServicePoint currentServicePoint,
-            FFProduct? product,
+            Product? product,
             FFDetail? detailProduct,
             String ownerId,
             String? userId,
@@ -1687,8 +1616,8 @@ class _$SendOrderImpl implements _SendOrder {
         sendOrder,
     TResult? Function()? removeAllOrder,
   }) {
-    return sendOrder?.call(orderId, currentServicePoint, seatNumber, hour,
-        minute, note, deliveryInfo, token, isAnonymous, apiBaseUrl, language);
+    return sendOrder?.call(orderId, currentServicePoint, seatNumber, hour, minute, note,
+        deliveryInfo, token, isAnonymous, apiBaseUrl, language);
   }
 
   @override
@@ -1698,7 +1627,7 @@ class _$SendOrderImpl implements _SendOrder {
     TResult Function(String servicePointId)? deleteOrderByServicePoint,
     TResult Function(
             FFCurrentServicePoint currentServicePoint,
-            FFProduct? product,
+            Product? product,
             FFDetail? detailProduct,
             String ownerId,
             String ownerName,
@@ -1708,7 +1637,7 @@ class _$SendOrderImpl implements _SendOrder {
         addProductOrDetailToORder,
     TResult Function(
             FFCurrentServicePoint currentServicePoint,
-            FFProduct? product,
+            Product? product,
             FFDetail? detailProduct,
             String ownerId,
             String? userId,
@@ -1733,8 +1662,8 @@ class _$SendOrderImpl implements _SendOrder {
     required TResult orElse(),
   }) {
     if (sendOrder != null) {
-      return sendOrder(orderId, currentServicePoint, seatNumber, hour, minute,
-          note, deliveryInfo, token, isAnonymous, apiBaseUrl, language);
+      return sendOrder(orderId, currentServicePoint, seatNumber, hour, minute, note, deliveryInfo,
+          token, isAnonymous, apiBaseUrl, language);
     }
     return orElse();
   }
@@ -1742,12 +1671,9 @@ class _$SendOrderImpl implements _SendOrder {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_GetOrderByServicePoint value)
-        getOrderByServicePoint,
-    required TResult Function(_DeleteOrderByServicePoint value)
-        deleteOrderByServicePoint,
-    required TResult Function(_AddProductOrDetailToORder value)
-        addProductOrDetailToORder,
+    required TResult Function(_GetOrderByServicePoint value) getOrderByServicePoint,
+    required TResult Function(_DeleteOrderByServicePoint value) deleteOrderByServicePoint,
+    required TResult Function(_AddProductOrDetailToORder value) addProductOrDetailToORder,
     required TResult Function(_RemoveProductToOrder value) removeProductToOrder,
     required TResult Function(_SendOrder value) sendOrder,
     required TResult Function(_RemoveAllOrder value) removeAllOrder,
@@ -1759,10 +1685,8 @@ class _$SendOrderImpl implements _SendOrder {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_GetOrderByServicePoint value)? getOrderByServicePoint,
-    TResult? Function(_DeleteOrderByServicePoint value)?
-        deleteOrderByServicePoint,
-    TResult? Function(_AddProductOrDetailToORder value)?
-        addProductOrDetailToORder,
+    TResult? Function(_DeleteOrderByServicePoint value)? deleteOrderByServicePoint,
+    TResult? Function(_AddProductOrDetailToORder value)? addProductOrDetailToORder,
     TResult? Function(_RemoveProductToOrder value)? removeProductToOrder,
     TResult? Function(_SendOrder value)? sendOrder,
     TResult? Function(_RemoveAllOrder value)? removeAllOrder,
@@ -1774,10 +1698,8 @@ class _$SendOrderImpl implements _SendOrder {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_GetOrderByServicePoint value)? getOrderByServicePoint,
-    TResult Function(_DeleteOrderByServicePoint value)?
-        deleteOrderByServicePoint,
-    TResult Function(_AddProductOrDetailToORder value)?
-        addProductOrDetailToORder,
+    TResult Function(_DeleteOrderByServicePoint value)? deleteOrderByServicePoint,
+    TResult Function(_AddProductOrDetailToORder value)? addProductOrDetailToORder,
     TResult Function(_RemoveProductToOrder value)? removeProductToOrder,
     TResult Function(_SendOrder value)? sendOrder,
     TResult Function(_RemoveAllOrder value)? removeAllOrder,
@@ -1816,14 +1738,13 @@ abstract class _SendOrder implements FlistfoodOrderEvent {
   String get apiBaseUrl;
   String get language;
   @JsonKey(ignore: true)
-  _$$SendOrderImplCopyWith<_$SendOrderImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$SendOrderImplCopyWith<_$SendOrderImpl> get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class _$$RemoveAllOrderImplCopyWith<$Res> {
-  factory _$$RemoveAllOrderImplCopyWith(_$RemoveAllOrderImpl value,
-          $Res Function(_$RemoveAllOrderImpl) then) =
+  factory _$$RemoveAllOrderImplCopyWith(
+          _$RemoveAllOrderImpl value, $Res Function(_$RemoveAllOrderImpl) then) =
       __$$RemoveAllOrderImplCopyWithImpl<$Res>;
 }
 
@@ -1862,7 +1783,7 @@ class _$RemoveAllOrderImpl implements _RemoveAllOrder {
     required TResult Function(String servicePointId) deleteOrderByServicePoint,
     required TResult Function(
             FFCurrentServicePoint currentServicePoint,
-            FFProduct? product,
+            Product? product,
             FFDetail? detailProduct,
             String ownerId,
             String ownerName,
@@ -1872,7 +1793,7 @@ class _$RemoveAllOrderImpl implements _RemoveAllOrder {
         addProductOrDetailToORder,
     required TResult Function(
             FFCurrentServicePoint currentServicePoint,
-            FFProduct? product,
+            Product? product,
             FFDetail? detailProduct,
             String ownerId,
             String? userId,
@@ -1905,7 +1826,7 @@ class _$RemoveAllOrderImpl implements _RemoveAllOrder {
     TResult? Function(String servicePointId)? deleteOrderByServicePoint,
     TResult? Function(
             FFCurrentServicePoint currentServicePoint,
-            FFProduct? product,
+            Product? product,
             FFDetail? detailProduct,
             String ownerId,
             String ownerName,
@@ -1915,7 +1836,7 @@ class _$RemoveAllOrderImpl implements _RemoveAllOrder {
         addProductOrDetailToORder,
     TResult? Function(
             FFCurrentServicePoint currentServicePoint,
-            FFProduct? product,
+            Product? product,
             FFDetail? detailProduct,
             String ownerId,
             String? userId,
@@ -1948,7 +1869,7 @@ class _$RemoveAllOrderImpl implements _RemoveAllOrder {
     TResult Function(String servicePointId)? deleteOrderByServicePoint,
     TResult Function(
             FFCurrentServicePoint currentServicePoint,
-            FFProduct? product,
+            Product? product,
             FFDetail? detailProduct,
             String ownerId,
             String ownerName,
@@ -1958,7 +1879,7 @@ class _$RemoveAllOrderImpl implements _RemoveAllOrder {
         addProductOrDetailToORder,
     TResult Function(
             FFCurrentServicePoint currentServicePoint,
-            FFProduct? product,
+            Product? product,
             FFDetail? detailProduct,
             String ownerId,
             String? userId,
@@ -1991,12 +1912,9 @@ class _$RemoveAllOrderImpl implements _RemoveAllOrder {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_GetOrderByServicePoint value)
-        getOrderByServicePoint,
-    required TResult Function(_DeleteOrderByServicePoint value)
-        deleteOrderByServicePoint,
-    required TResult Function(_AddProductOrDetailToORder value)
-        addProductOrDetailToORder,
+    required TResult Function(_GetOrderByServicePoint value) getOrderByServicePoint,
+    required TResult Function(_DeleteOrderByServicePoint value) deleteOrderByServicePoint,
+    required TResult Function(_AddProductOrDetailToORder value) addProductOrDetailToORder,
     required TResult Function(_RemoveProductToOrder value) removeProductToOrder,
     required TResult Function(_SendOrder value) sendOrder,
     required TResult Function(_RemoveAllOrder value) removeAllOrder,
@@ -2008,10 +1926,8 @@ class _$RemoveAllOrderImpl implements _RemoveAllOrder {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_GetOrderByServicePoint value)? getOrderByServicePoint,
-    TResult? Function(_DeleteOrderByServicePoint value)?
-        deleteOrderByServicePoint,
-    TResult? Function(_AddProductOrDetailToORder value)?
-        addProductOrDetailToORder,
+    TResult? Function(_DeleteOrderByServicePoint value)? deleteOrderByServicePoint,
+    TResult? Function(_AddProductOrDetailToORder value)? addProductOrDetailToORder,
     TResult? Function(_RemoveProductToOrder value)? removeProductToOrder,
     TResult? Function(_SendOrder value)? sendOrder,
     TResult? Function(_RemoveAllOrder value)? removeAllOrder,
@@ -2023,10 +1939,8 @@ class _$RemoveAllOrderImpl implements _RemoveAllOrder {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_GetOrderByServicePoint value)? getOrderByServicePoint,
-    TResult Function(_DeleteOrderByServicePoint value)?
-        deleteOrderByServicePoint,
-    TResult Function(_AddProductOrDetailToORder value)?
-        addProductOrDetailToORder,
+    TResult Function(_DeleteOrderByServicePoint value)? deleteOrderByServicePoint,
+    TResult Function(_AddProductOrDetailToORder value)? addProductOrDetailToORder,
     TResult Function(_RemoveProductToOrder value)? removeProductToOrder,
     TResult Function(_SendOrder value)? sendOrder,
     TResult Function(_RemoveAllOrder value)? removeAllOrder,
@@ -2049,8 +1963,8 @@ mixin _$FlistfoodOrderState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function(FFOrder? order) loading,
-    required TResult Function(FFOrder? order, FFOrderID? orderId,
-            double? totalPrice, bool isSended, bool is401)
+    required TResult Function(
+            FFOrder? order, FFOrderID? orderId, double? totalPrice, bool isSended, bool is401)
         success,
   }) =>
       throw _privateConstructorUsedError;
@@ -2058,8 +1972,8 @@ mixin _$FlistfoodOrderState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function(FFOrder? order)? loading,
-    TResult? Function(FFOrder? order, FFOrderID? orderId, double? totalPrice,
-            bool isSended, bool is401)?
+    TResult? Function(
+            FFOrder? order, FFOrderID? orderId, double? totalPrice, bool isSended, bool is401)?
         success,
   }) =>
       throw _privateConstructorUsedError;
@@ -2067,8 +1981,8 @@ mixin _$FlistfoodOrderState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function(FFOrder? order)? loading,
-    TResult Function(FFOrder? order, FFOrderID? orderId, double? totalPrice,
-            bool isSended, bool is401)?
+    TResult Function(
+            FFOrder? order, FFOrderID? orderId, double? totalPrice, bool isSended, bool is401)?
         success,
     required TResult orElse(),
   }) =>
@@ -2118,8 +2032,7 @@ class _$FlistfoodOrderStateCopyWithImpl<$Res, $Val extends FlistfoodOrderState>
 /// @nodoc
 abstract class _$$FlistfoodOrderInitialImplCopyWith<$Res> {
   factory _$$FlistfoodOrderInitialImplCopyWith(
-          _$FlistfoodOrderInitialImpl value,
-          $Res Function(_$FlistfoodOrderInitialImpl) then) =
+          _$FlistfoodOrderInitialImpl value, $Res Function(_$FlistfoodOrderInitialImpl) then) =
       __$$FlistfoodOrderInitialImplCopyWithImpl<$Res>;
 }
 
@@ -2127,8 +2040,8 @@ abstract class _$$FlistfoodOrderInitialImplCopyWith<$Res> {
 class __$$FlistfoodOrderInitialImplCopyWithImpl<$Res>
     extends _$FlistfoodOrderStateCopyWithImpl<$Res, _$FlistfoodOrderInitialImpl>
     implements _$$FlistfoodOrderInitialImplCopyWith<$Res> {
-  __$$FlistfoodOrderInitialImplCopyWithImpl(_$FlistfoodOrderInitialImpl _value,
-      $Res Function(_$FlistfoodOrderInitialImpl) _then)
+  __$$FlistfoodOrderInitialImplCopyWithImpl(
+      _$FlistfoodOrderInitialImpl _value, $Res Function(_$FlistfoodOrderInitialImpl) _then)
       : super(_value, _then);
 }
 
@@ -2145,8 +2058,7 @@ class _$FlistfoodOrderInitialImpl implements _FlistfoodOrderInitial {
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$FlistfoodOrderInitialImpl);
+        (other.runtimeType == runtimeType && other is _$FlistfoodOrderInitialImpl);
   }
 
   @override
@@ -2157,8 +2069,8 @@ class _$FlistfoodOrderInitialImpl implements _FlistfoodOrderInitial {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function(FFOrder? order) loading,
-    required TResult Function(FFOrder? order, FFOrderID? orderId,
-            double? totalPrice, bool isSended, bool is401)
+    required TResult Function(
+            FFOrder? order, FFOrderID? orderId, double? totalPrice, bool isSended, bool is401)
         success,
   }) {
     return initial();
@@ -2169,8 +2081,8 @@ class _$FlistfoodOrderInitialImpl implements _FlistfoodOrderInitial {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function(FFOrder? order)? loading,
-    TResult? Function(FFOrder? order, FFOrderID? orderId, double? totalPrice,
-            bool isSended, bool is401)?
+    TResult? Function(
+            FFOrder? order, FFOrderID? orderId, double? totalPrice, bool isSended, bool is401)?
         success,
   }) {
     return initial?.call();
@@ -2181,8 +2093,8 @@ class _$FlistfoodOrderInitialImpl implements _FlistfoodOrderInitial {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function(FFOrder? order)? loading,
-    TResult Function(FFOrder? order, FFOrderID? orderId, double? totalPrice,
-            bool isSended, bool is401)?
+    TResult Function(
+            FFOrder? order, FFOrderID? orderId, double? totalPrice, bool isSended, bool is401)?
         success,
     required TResult orElse(),
   }) {
@@ -2233,8 +2145,7 @@ abstract class _FlistfoodOrderInitial implements FlistfoodOrderState {
 
 /// @nodoc
 abstract class _$$FlistfoodOrderLoadingStateImplCopyWith<$Res> {
-  factory _$$FlistfoodOrderLoadingStateImplCopyWith(
-          _$FlistfoodOrderLoadingStateImpl value,
+  factory _$$FlistfoodOrderLoadingStateImplCopyWith(_$FlistfoodOrderLoadingStateImpl value,
           $Res Function(_$FlistfoodOrderLoadingStateImpl) then) =
       __$$FlistfoodOrderLoadingStateImplCopyWithImpl<$Res>;
   @useResult
@@ -2243,11 +2154,9 @@ abstract class _$$FlistfoodOrderLoadingStateImplCopyWith<$Res> {
 
 /// @nodoc
 class __$$FlistfoodOrderLoadingStateImplCopyWithImpl<$Res>
-    extends _$FlistfoodOrderStateCopyWithImpl<$Res,
-        _$FlistfoodOrderLoadingStateImpl>
+    extends _$FlistfoodOrderStateCopyWithImpl<$Res, _$FlistfoodOrderLoadingStateImpl>
     implements _$$FlistfoodOrderLoadingStateImplCopyWith<$Res> {
-  __$$FlistfoodOrderLoadingStateImplCopyWithImpl(
-      _$FlistfoodOrderLoadingStateImpl _value,
+  __$$FlistfoodOrderLoadingStateImplCopyWithImpl(_$FlistfoodOrderLoadingStateImpl _value,
       $Res Function(_$FlistfoodOrderLoadingStateImpl) _then)
       : super(_value, _then);
 
@@ -2292,17 +2201,17 @@ class _$FlistfoodOrderLoadingStateImpl implements _FlistfoodOrderLoadingState {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$FlistfoodOrderLoadingStateImplCopyWith<_$FlistfoodOrderLoadingStateImpl>
-      get copyWith => __$$FlistfoodOrderLoadingStateImplCopyWithImpl<
-          _$FlistfoodOrderLoadingStateImpl>(this, _$identity);
+  _$$FlistfoodOrderLoadingStateImplCopyWith<_$FlistfoodOrderLoadingStateImpl> get copyWith =>
+      __$$FlistfoodOrderLoadingStateImplCopyWithImpl<_$FlistfoodOrderLoadingStateImpl>(
+          this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function(FFOrder? order) loading,
-    required TResult Function(FFOrder? order, FFOrderID? orderId,
-            double? totalPrice, bool isSended, bool is401)
+    required TResult Function(
+            FFOrder? order, FFOrderID? orderId, double? totalPrice, bool isSended, bool is401)
         success,
   }) {
     return loading(order);
@@ -2313,8 +2222,8 @@ class _$FlistfoodOrderLoadingStateImpl implements _FlistfoodOrderLoadingState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function(FFOrder? order)? loading,
-    TResult? Function(FFOrder? order, FFOrderID? orderId, double? totalPrice,
-            bool isSended, bool is401)?
+    TResult? Function(
+            FFOrder? order, FFOrderID? orderId, double? totalPrice, bool isSended, bool is401)?
         success,
   }) {
     return loading?.call(order);
@@ -2325,8 +2234,8 @@ class _$FlistfoodOrderLoadingStateImpl implements _FlistfoodOrderLoadingState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function(FFOrder? order)? loading,
-    TResult Function(FFOrder? order, FFOrderID? orderId, double? totalPrice,
-            bool isSended, bool is401)?
+    TResult Function(
+            FFOrder? order, FFOrderID? orderId, double? totalPrice, bool isSended, bool is401)?
         success,
     required TResult orElse(),
   }) {
@@ -2377,32 +2286,24 @@ abstract class _FlistfoodOrderLoadingState implements FlistfoodOrderState {
 
   FFOrder? get order;
   @JsonKey(ignore: true)
-  _$$FlistfoodOrderLoadingStateImplCopyWith<_$FlistfoodOrderLoadingStateImpl>
-      get copyWith => throw _privateConstructorUsedError;
+  _$$FlistfoodOrderLoadingStateImplCopyWith<_$FlistfoodOrderLoadingStateImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class _$$FlistfoodOrderSuccessStateImplCopyWith<$Res> {
-  factory _$$FlistfoodOrderSuccessStateImplCopyWith(
-          _$FlistfoodOrderSuccessStateImpl value,
+  factory _$$FlistfoodOrderSuccessStateImplCopyWith(_$FlistfoodOrderSuccessStateImpl value,
           $Res Function(_$FlistfoodOrderSuccessStateImpl) then) =
       __$$FlistfoodOrderSuccessStateImplCopyWithImpl<$Res>;
   @useResult
-  $Res call(
-      {FFOrder? order,
-      FFOrderID? orderId,
-      double? totalPrice,
-      bool isSended,
-      bool is401});
+  $Res call({FFOrder? order, FFOrderID? orderId, double? totalPrice, bool isSended, bool is401});
 }
 
 /// @nodoc
 class __$$FlistfoodOrderSuccessStateImplCopyWithImpl<$Res>
-    extends _$FlistfoodOrderStateCopyWithImpl<$Res,
-        _$FlistfoodOrderSuccessStateImpl>
+    extends _$FlistfoodOrderStateCopyWithImpl<$Res, _$FlistfoodOrderSuccessStateImpl>
     implements _$$FlistfoodOrderSuccessStateImplCopyWith<$Res> {
-  __$$FlistfoodOrderSuccessStateImplCopyWithImpl(
-      _$FlistfoodOrderSuccessStateImpl _value,
+  __$$FlistfoodOrderSuccessStateImplCopyWithImpl(_$FlistfoodOrderSuccessStateImpl _value,
       $Res Function(_$FlistfoodOrderSuccessStateImpl) _then)
       : super(_value, _then);
 
@@ -2473,31 +2374,28 @@ class _$FlistfoodOrderSuccessStateImpl implements _FlistfoodOrderSuccessState {
             other is _$FlistfoodOrderSuccessStateImpl &&
             (identical(other.order, order) || other.order == order) &&
             (identical(other.orderId, orderId) || other.orderId == orderId) &&
-            (identical(other.totalPrice, totalPrice) ||
-                other.totalPrice == totalPrice) &&
-            (identical(other.isSended, isSended) ||
-                other.isSended == isSended) &&
+            (identical(other.totalPrice, totalPrice) || other.totalPrice == totalPrice) &&
+            (identical(other.isSended, isSended) || other.isSended == isSended) &&
             (identical(other.is401, is401) || other.is401 == is401));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, order, orderId, totalPrice, isSended, is401);
+  int get hashCode => Object.hash(runtimeType, order, orderId, totalPrice, isSended, is401);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$FlistfoodOrderSuccessStateImplCopyWith<_$FlistfoodOrderSuccessStateImpl>
-      get copyWith => __$$FlistfoodOrderSuccessStateImplCopyWithImpl<
-          _$FlistfoodOrderSuccessStateImpl>(this, _$identity);
+  _$$FlistfoodOrderSuccessStateImplCopyWith<_$FlistfoodOrderSuccessStateImpl> get copyWith =>
+      __$$FlistfoodOrderSuccessStateImplCopyWithImpl<_$FlistfoodOrderSuccessStateImpl>(
+          this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function(FFOrder? order) loading,
-    required TResult Function(FFOrder? order, FFOrderID? orderId,
-            double? totalPrice, bool isSended, bool is401)
+    required TResult Function(
+            FFOrder? order, FFOrderID? orderId, double? totalPrice, bool isSended, bool is401)
         success,
   }) {
     return success(order, orderId, totalPrice, isSended, is401);
@@ -2508,8 +2406,8 @@ class _$FlistfoodOrderSuccessStateImpl implements _FlistfoodOrderSuccessState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function(FFOrder? order)? loading,
-    TResult? Function(FFOrder? order, FFOrderID? orderId, double? totalPrice,
-            bool isSended, bool is401)?
+    TResult? Function(
+            FFOrder? order, FFOrderID? orderId, double? totalPrice, bool isSended, bool is401)?
         success,
   }) {
     return success?.call(order, orderId, totalPrice, isSended, is401);
@@ -2520,8 +2418,8 @@ class _$FlistfoodOrderSuccessStateImpl implements _FlistfoodOrderSuccessState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function(FFOrder? order)? loading,
-    TResult Function(FFOrder? order, FFOrderID? orderId, double? totalPrice,
-            bool isSended, bool is401)?
+    TResult Function(
+            FFOrder? order, FFOrderID? orderId, double? totalPrice, bool isSended, bool is401)?
         success,
     required TResult orElse(),
   }) {
@@ -2580,6 +2478,6 @@ abstract class _FlistfoodOrderSuccessState implements FlistfoodOrderState {
   bool get isSended;
   bool get is401;
   @JsonKey(ignore: true)
-  _$$FlistfoodOrderSuccessStateImplCopyWith<_$FlistfoodOrderSuccessStateImpl>
-      get copyWith => throw _privateConstructorUsedError;
+  _$$FlistfoodOrderSuccessStateImplCopyWith<_$FlistfoodOrderSuccessStateImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }

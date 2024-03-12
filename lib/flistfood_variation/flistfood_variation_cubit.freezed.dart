@@ -18,23 +18,23 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$FlistfoodVariationState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(FFProduct product) loading,
+    required TResult Function(Product product) loading,
     required TResult Function() initial,
-    required TResult Function(FFProduct product) success,
+    required TResult Function(Product product) success,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(FFProduct product)? loading,
+    TResult? Function(Product product)? loading,
     TResult? Function()? initial,
-    TResult? Function(FFProduct product)? success,
+    TResult? Function(Product product)? success,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(FFProduct product)? loading,
+    TResult Function(Product product)? loading,
     TResult Function()? initial,
-    TResult Function(FFProduct product)? success,
+    TResult Function(Product product)? success,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -64,14 +64,13 @@ mixin _$FlistfoodVariationState {
 
 /// @nodoc
 abstract class $FlistfoodVariationStateCopyWith<$Res> {
-  factory $FlistfoodVariationStateCopyWith(FlistfoodVariationState value,
-          $Res Function(FlistfoodVariationState) then) =
+  factory $FlistfoodVariationStateCopyWith(
+          FlistfoodVariationState value, $Res Function(FlistfoodVariationState) then) =
       _$FlistfoodVariationStateCopyWithImpl<$Res, FlistfoodVariationState>;
 }
 
 /// @nodoc
-class _$FlistfoodVariationStateCopyWithImpl<$Res,
-        $Val extends FlistfoodVariationState>
+class _$FlistfoodVariationStateCopyWithImpl<$Res, $Val extends FlistfoodVariationState>
     implements $FlistfoodVariationStateCopyWith<$Res> {
   _$FlistfoodVariationStateCopyWithImpl(this._value, this._then);
 
@@ -83,21 +82,18 @@ class _$FlistfoodVariationStateCopyWithImpl<$Res,
 
 /// @nodoc
 abstract class _$$FlistfoodVariationLoadingStateImplCopyWith<$Res> {
-  factory _$$FlistfoodVariationLoadingStateImplCopyWith(
-          _$FlistfoodVariationLoadingStateImpl value,
+  factory _$$FlistfoodVariationLoadingStateImplCopyWith(_$FlistfoodVariationLoadingStateImpl value,
           $Res Function(_$FlistfoodVariationLoadingStateImpl) then) =
       __$$FlistfoodVariationLoadingStateImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({FFProduct product});
+  $Res call({Product product});
 }
 
 /// @nodoc
 class __$$FlistfoodVariationLoadingStateImplCopyWithImpl<$Res>
-    extends _$FlistfoodVariationStateCopyWithImpl<$Res,
-        _$FlistfoodVariationLoadingStateImpl>
+    extends _$FlistfoodVariationStateCopyWithImpl<$Res, _$FlistfoodVariationLoadingStateImpl>
     implements _$$FlistfoodVariationLoadingStateImplCopyWith<$Res> {
-  __$$FlistfoodVariationLoadingStateImplCopyWithImpl(
-      _$FlistfoodVariationLoadingStateImpl _value,
+  __$$FlistfoodVariationLoadingStateImplCopyWithImpl(_$FlistfoodVariationLoadingStateImpl _value,
       $Res Function(_$FlistfoodVariationLoadingStateImpl) _then)
       : super(_value, _then);
 
@@ -110,19 +106,18 @@ class __$$FlistfoodVariationLoadingStateImplCopyWithImpl<$Res>
       product: null == product
           ? _value.product
           : product // ignore: cast_nullable_to_non_nullable
-              as FFProduct,
+              as Product,
     ));
   }
 }
 
 /// @nodoc
 
-class _$FlistfoodVariationLoadingStateImpl
-    implements _FlistfoodVariationLoadingState {
+class _$FlistfoodVariationLoadingStateImpl implements _FlistfoodVariationLoadingState {
   const _$FlistfoodVariationLoadingStateImpl({required this.product});
 
   @override
-  final FFProduct product;
+  final Product product;
 
   @override
   String toString() {
@@ -143,17 +138,17 @@ class _$FlistfoodVariationLoadingStateImpl
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$FlistfoodVariationLoadingStateImplCopyWith<
-          _$FlistfoodVariationLoadingStateImpl>
-      get copyWith => __$$FlistfoodVariationLoadingStateImplCopyWithImpl<
-          _$FlistfoodVariationLoadingStateImpl>(this, _$identity);
+  _$$FlistfoodVariationLoadingStateImplCopyWith<_$FlistfoodVariationLoadingStateImpl>
+      get copyWith =>
+          __$$FlistfoodVariationLoadingStateImplCopyWithImpl<_$FlistfoodVariationLoadingStateImpl>(
+              this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(FFProduct product) loading,
+    required TResult Function(Product product) loading,
     required TResult Function() initial,
-    required TResult Function(FFProduct product) success,
+    required TResult Function(Product product) success,
   }) {
     return loading(product);
   }
@@ -161,9 +156,9 @@ class _$FlistfoodVariationLoadingStateImpl
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(FFProduct product)? loading,
+    TResult? Function(Product product)? loading,
     TResult? Function()? initial,
-    TResult? Function(FFProduct product)? success,
+    TResult? Function(Product product)? success,
   }) {
     return loading?.call(product);
   }
@@ -171,9 +166,9 @@ class _$FlistfoodVariationLoadingStateImpl
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(FFProduct product)? loading,
+    TResult Function(Product product)? loading,
     TResult Function()? initial,
-    TResult Function(FFProduct product)? success,
+    TResult Function(Product product)? success,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -217,42 +212,35 @@ class _$FlistfoodVariationLoadingStateImpl
   }
 }
 
-abstract class _FlistfoodVariationLoadingState
-    implements FlistfoodVariationState {
-  const factory _FlistfoodVariationLoadingState(
-          {required final FFProduct product}) =
+abstract class _FlistfoodVariationLoadingState implements FlistfoodVariationState {
+  const factory _FlistfoodVariationLoadingState({required final Product product}) =
       _$FlistfoodVariationLoadingStateImpl;
 
-  FFProduct get product;
+  Product get product;
   @JsonKey(ignore: true)
-  _$$FlistfoodVariationLoadingStateImplCopyWith<
-          _$FlistfoodVariationLoadingStateImpl>
+  _$$FlistfoodVariationLoadingStateImplCopyWith<_$FlistfoodVariationLoadingStateImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class _$$FlistfoodVariationInitialStateImplCopyWith<$Res> {
-  factory _$$FlistfoodVariationInitialStateImplCopyWith(
-          _$FlistfoodVariationInitialStateImpl value,
+  factory _$$FlistfoodVariationInitialStateImplCopyWith(_$FlistfoodVariationInitialStateImpl value,
           $Res Function(_$FlistfoodVariationInitialStateImpl) then) =
       __$$FlistfoodVariationInitialStateImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
 class __$$FlistfoodVariationInitialStateImplCopyWithImpl<$Res>
-    extends _$FlistfoodVariationStateCopyWithImpl<$Res,
-        _$FlistfoodVariationInitialStateImpl>
+    extends _$FlistfoodVariationStateCopyWithImpl<$Res, _$FlistfoodVariationInitialStateImpl>
     implements _$$FlistfoodVariationInitialStateImplCopyWith<$Res> {
-  __$$FlistfoodVariationInitialStateImplCopyWithImpl(
-      _$FlistfoodVariationInitialStateImpl _value,
+  __$$FlistfoodVariationInitialStateImplCopyWithImpl(_$FlistfoodVariationInitialStateImpl _value,
       $Res Function(_$FlistfoodVariationInitialStateImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$FlistfoodVariationInitialStateImpl
-    implements _FlistfoodVariationInitialState {
+class _$FlistfoodVariationInitialStateImpl implements _FlistfoodVariationInitialState {
   const _$FlistfoodVariationInitialStateImpl();
 
   @override
@@ -263,8 +251,7 @@ class _$FlistfoodVariationInitialStateImpl
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$FlistfoodVariationInitialStateImpl);
+        (other.runtimeType == runtimeType && other is _$FlistfoodVariationInitialStateImpl);
   }
 
   @override
@@ -273,9 +260,9 @@ class _$FlistfoodVariationInitialStateImpl
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(FFProduct product) loading,
+    required TResult Function(Product product) loading,
     required TResult Function() initial,
-    required TResult Function(FFProduct product) success,
+    required TResult Function(Product product) success,
   }) {
     return initial();
   }
@@ -283,9 +270,9 @@ class _$FlistfoodVariationInitialStateImpl
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(FFProduct product)? loading,
+    TResult? Function(Product product)? loading,
     TResult? Function()? initial,
-    TResult? Function(FFProduct product)? success,
+    TResult? Function(Product product)? success,
   }) {
     return initial?.call();
   }
@@ -293,9 +280,9 @@ class _$FlistfoodVariationInitialStateImpl
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(FFProduct product)? loading,
+    TResult Function(Product product)? loading,
     TResult Function()? initial,
-    TResult Function(FFProduct product)? success,
+    TResult Function(Product product)? success,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -339,29 +326,24 @@ class _$FlistfoodVariationInitialStateImpl
   }
 }
 
-abstract class _FlistfoodVariationInitialState
-    implements FlistfoodVariationState {
-  const factory _FlistfoodVariationInitialState() =
-      _$FlistfoodVariationInitialStateImpl;
+abstract class _FlistfoodVariationInitialState implements FlistfoodVariationState {
+  const factory _FlistfoodVariationInitialState() = _$FlistfoodVariationInitialStateImpl;
 }
 
 /// @nodoc
 abstract class _$$FlistfoodVariationSuccessStateImplCopyWith<$Res> {
-  factory _$$FlistfoodVariationSuccessStateImplCopyWith(
-          _$FlistfoodVariationSuccessStateImpl value,
+  factory _$$FlistfoodVariationSuccessStateImplCopyWith(_$FlistfoodVariationSuccessStateImpl value,
           $Res Function(_$FlistfoodVariationSuccessStateImpl) then) =
       __$$FlistfoodVariationSuccessStateImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({FFProduct product});
+  $Res call({Product product});
 }
 
 /// @nodoc
 class __$$FlistfoodVariationSuccessStateImplCopyWithImpl<$Res>
-    extends _$FlistfoodVariationStateCopyWithImpl<$Res,
-        _$FlistfoodVariationSuccessStateImpl>
+    extends _$FlistfoodVariationStateCopyWithImpl<$Res, _$FlistfoodVariationSuccessStateImpl>
     implements _$$FlistfoodVariationSuccessStateImplCopyWith<$Res> {
-  __$$FlistfoodVariationSuccessStateImplCopyWithImpl(
-      _$FlistfoodVariationSuccessStateImpl _value,
+  __$$FlistfoodVariationSuccessStateImplCopyWithImpl(_$FlistfoodVariationSuccessStateImpl _value,
       $Res Function(_$FlistfoodVariationSuccessStateImpl) _then)
       : super(_value, _then);
 
@@ -374,19 +356,18 @@ class __$$FlistfoodVariationSuccessStateImplCopyWithImpl<$Res>
       product: null == product
           ? _value.product
           : product // ignore: cast_nullable_to_non_nullable
-              as FFProduct,
+              as Product,
     ));
   }
 }
 
 /// @nodoc
 
-class _$FlistfoodVariationSuccessStateImpl
-    implements _FlistfoodVariationSuccessState {
+class _$FlistfoodVariationSuccessStateImpl implements _FlistfoodVariationSuccessState {
   const _$FlistfoodVariationSuccessStateImpl({required this.product});
 
   @override
-  final FFProduct product;
+  final Product product;
 
   @override
   String toString() {
@@ -407,17 +388,17 @@ class _$FlistfoodVariationSuccessStateImpl
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$FlistfoodVariationSuccessStateImplCopyWith<
-          _$FlistfoodVariationSuccessStateImpl>
-      get copyWith => __$$FlistfoodVariationSuccessStateImplCopyWithImpl<
-          _$FlistfoodVariationSuccessStateImpl>(this, _$identity);
+  _$$FlistfoodVariationSuccessStateImplCopyWith<_$FlistfoodVariationSuccessStateImpl>
+      get copyWith =>
+          __$$FlistfoodVariationSuccessStateImplCopyWithImpl<_$FlistfoodVariationSuccessStateImpl>(
+              this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(FFProduct product) loading,
+    required TResult Function(Product product) loading,
     required TResult Function() initial,
-    required TResult Function(FFProduct product) success,
+    required TResult Function(Product product) success,
   }) {
     return success(product);
   }
@@ -425,9 +406,9 @@ class _$FlistfoodVariationSuccessStateImpl
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(FFProduct product)? loading,
+    TResult? Function(Product product)? loading,
     TResult? Function()? initial,
-    TResult? Function(FFProduct product)? success,
+    TResult? Function(Product product)? success,
   }) {
     return success?.call(product);
   }
@@ -435,9 +416,9 @@ class _$FlistfoodVariationSuccessStateImpl
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(FFProduct product)? loading,
+    TResult Function(Product product)? loading,
     TResult Function()? initial,
-    TResult Function(FFProduct product)? success,
+    TResult Function(Product product)? success,
     required TResult orElse(),
   }) {
     if (success != null) {
@@ -481,15 +462,12 @@ class _$FlistfoodVariationSuccessStateImpl
   }
 }
 
-abstract class _FlistfoodVariationSuccessState
-    implements FlistfoodVariationState {
-  const factory _FlistfoodVariationSuccessState(
-          {required final FFProduct product}) =
+abstract class _FlistfoodVariationSuccessState implements FlistfoodVariationState {
+  const factory _FlistfoodVariationSuccessState({required final Product product}) =
       _$FlistfoodVariationSuccessStateImpl;
 
-  FFProduct get product;
+  Product get product;
   @JsonKey(ignore: true)
-  _$$FlistfoodVariationSuccessStateImplCopyWith<
-          _$FlistfoodVariationSuccessStateImpl>
+  _$$FlistfoodVariationSuccessStateImplCopyWith<_$FlistfoodVariationSuccessStateImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

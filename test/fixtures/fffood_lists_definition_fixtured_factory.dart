@@ -2,15 +2,15 @@ import 'package:data_fixture_dart/definitions/fixture_definition.dart';
 import 'package:data_fixture_dart/factories/fixture_factory.dart';
 import 'package:flistfood_order/product_model.dart';
 
-extension FFFoodListsDefinitionFixture on FFFoodListsDefinition {
+extension FoodlistsDefinitionFixture on FoodlistsDefinition {
   // ignore: library_private_types_in_public_api
-  static _FFFoodListsDefinitionFixtureFactory factory() => _FFFoodListsDefinitionFixtureFactory();
+  static _FoodlistsDefinitionFixtureFactory factory() => _FoodlistsDefinitionFixtureFactory();
 }
 
-class _FFFoodListsDefinitionFixtureFactory extends FixtureFactory<FFFoodListsDefinition> {
+class _FoodlistsDefinitionFixtureFactory extends FixtureFactory<FoodlistsDefinition> {
   @override
-  FixtureDefinition<FFFoodListsDefinition> definition() => define(
-        (faker) => FFFoodListsDefinition(
+  FixtureDefinition<FoodlistsDefinition> definition() => define(
+        (faker) => FoodlistsDefinition(
           foodListId: faker.randomGenerator.integer(9999),
           maxQty: faker.randomGenerator.integer(9999),
           minQty: faker.randomGenerator.integer(9999),
