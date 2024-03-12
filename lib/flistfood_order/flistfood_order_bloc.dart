@@ -28,9 +28,11 @@ class FlistfoodOrderBloc extends Bloc<FlistfoodOrderEvent, FlistfoodOrderState> 
     });
 
     on<_AddProductOrDetailToORder>((event, emit) async {
-      FFProduct? product = event.product;
+      FFProduct? product =
+          event.productJson != null ? FFProduct.fromJson(jsonDecode(event.productJson!)) : null;
       FFDetail? detailProduct = event.detailProduct;
-      FFCurrentServicePoint currentServicePoint = event.currentServicePoint;
+      FFCurrentServicePoint currentServicePoint =
+          FFCurrentServicePoint.fromJson(jsonDecode(event.currentServicePointJson));
       FFOrder? order;
       double? deliveryCost = event.deliveryCost;
       String ownerId = event.ownerId;
@@ -261,9 +263,11 @@ class FlistfoodOrderBloc extends Bloc<FlistfoodOrderEvent, FlistfoodOrderState> 
     });
 
     on<_RemoveProductToOrder>((event, emit) async {
-      FFProduct? product = event.product;
+      FFProduct? product =
+          event.productJson != null ? FFProduct.fromJson(jsonDecode(event.productJson!)) : null;
       FFDetail? detailProduct = event.detailProduct;
-      FFCurrentServicePoint currentServicePoint = event.currentServicePoint;
+      FFCurrentServicePoint currentServicePoint =
+          FFCurrentServicePoint.fromJson(jsonDecode(event.currentServicePointJson));
       FFOrder? order;
       List<FFOrder>? orders;
       String ownerId = event.ownerId;
@@ -466,8 +470,8 @@ class FlistfoodOrderBloc extends Bloc<FlistfoodOrderEvent, FlistfoodOrderState> 
       add(_GetOrderByServicePoint(servicePointId: servicePointId));
 
   void addProductOrDetailToORder({
-    required FFCurrentServicePoint currentServicePoint,
-    FFProduct? product,
+    required String currentServicePointJson,
+    String? productJson,
     FFDetail? detailProduct,
     required String ownerId,
     required String ownerName,
@@ -477,8 +481,8 @@ class FlistfoodOrderBloc extends Bloc<FlistfoodOrderEvent, FlistfoodOrderState> 
   }) =>
       add(
         _AddProductOrDetailToORder(
-          currentServicePoint: currentServicePoint,
-          product: product,
+          currentServicePointJson: currentServicePointJson,
+          productJson: productJson,
           detailProduct: detailProduct,
           ownerId: ownerId,
           ownerName: ownerName,
@@ -489,8 +493,8 @@ class FlistfoodOrderBloc extends Bloc<FlistfoodOrderEvent, FlistfoodOrderState> 
       );
 
   void removeProductToOrder({
-    required FFCurrentServicePoint currentServicePoint,
-    FFProduct? product,
+    required String currentServicePointJson,
+    String? productJson,
     FFDetail? detailProduct,
     required String ownerId,
     required String ownerName,
@@ -500,8 +504,8 @@ class FlistfoodOrderBloc extends Bloc<FlistfoodOrderEvent, FlistfoodOrderState> 
   }) =>
       add(
         _RemoveProductToOrder(
-          currentServicePoint: currentServicePoint,
-          product: product,
+          currentServicePointJson: currentServicePointJson,
+          productJson: productJson,
           detailProduct: detailProduct,
           ownerId: ownerId,
           ownerName: ownerName,

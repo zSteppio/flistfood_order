@@ -14,7 +14,6 @@ class FFProduct {
   double newPrice;
   double price;
   int sectionId;
-  //List<FFFormat> formats;
   List<FFIngredient> ingredients;
   List<FFAlternative> alternatives;
   List<FFCookingType> cookingTypes;
@@ -33,7 +32,6 @@ class FFProduct {
     this.newPrice = 0,
     required this.price,
     this.sectionId = 0,
-    //this.formats = const [],
     this.ingredients = const [],
     this.alternatives = const [],
     this.cookingTypes = const [],

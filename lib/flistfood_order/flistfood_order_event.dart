@@ -9,8 +9,8 @@ class FlistfoodOrderEvent with _$FlistfoodOrderEvent {
       _DeleteOrderByServicePoint;
 
   const factory FlistfoodOrderEvent.addProductOrDetailToORder({
-    required FFCurrentServicePoint currentServicePoint,
-    FFProduct? product,
+    required String currentServicePointJson,
+    String? productJson,
     FFDetail? detailProduct,
     // String? formatProductJson,
     required String ownerId,
@@ -21,8 +21,8 @@ class FlistfoodOrderEvent with _$FlistfoodOrderEvent {
   }) = _AddProductOrDetailToORder;
 
   const factory FlistfoodOrderEvent.removeProductToOrder({
-    required FFCurrentServicePoint currentServicePoint,
-    FFProduct? product,
+    required String currentServicePointJson,
+    String? productJson,
     FFDetail? detailProduct,
     required String ownerId,
     required String? userId,

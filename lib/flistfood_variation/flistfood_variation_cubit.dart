@@ -317,11 +317,15 @@ class FlistfoodVariationCubit extends Cubit<FlistfoodVariationState> {
   }
 
   void initialConfiguration({
-    required FFProduct product,
-    required List<FFFoodlist> foodList,
+    required String productJson,
+    required String foodListJson,
   }) {
     List<FFIngredient> selectedIngridients = [];
     List<FFFoodlist> foodListConfigurated = [];
+    FFProduct product = FFProduct.fromJson(jsonDecode(productJson));
+    Iterable foodListMap = jsonDecode(foodListJson);
+    List<FFFoodlist> foodLists =
+        List<FFFoodlist>.from(foodListMap.map((e) => FFFoodlist.fromJson(e)));
 
     product.newPrice = product.price;
     product.price = product.price;
@@ -358,9 +362,9 @@ class FlistfoodVariationCubit extends Cubit<FlistfoodVariationState> {
     //* Setto la foodList
     for (FFFoodListsDefinition foodListDefinition in product.foodListsDefinition) {
       //* Collegamento tra il prodotto e la food list
-      if (foodList.any((e) => e.id == foodListDefinition.foodListId)) {
+      if (foodLists.any((e) => e.id == foodListDefinition.foodListId)) {
         FFFoodlist findedFoodList =
-            foodList.firstWhere((e) => e.id == foodListDefinition.foodListId);
+            foodLists.firstWhere((e) => e.id == foodListDefinition.foodListId);
         foodListConfigurated.add(findedFoodList);
       }
     }
