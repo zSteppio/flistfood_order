@@ -1,4 +1,22 @@
 include: package:flutter_lints/flutter.yaml
 
-# Additional information about this file can be found at
-# https://dart.dev/guides/language/analysis-options
+linter:
+  rules:
+    - prefer_single_quotes
+    - cancel_subscriptions
+    - close_sinks
+    - prefer_final_in_for_each
+
+analyzer:
+  errors:
+    todo: warning
+    missing_return: error
+    dead_code: warning
+    invalid_annotation_target: ignore
+    prefer_single_quotes: warning
+    unrelated_type_equality_checks: error
+  exclude:
+    - "**/*.g.dart"
+    - "**/*.gr.dart"
+    - "**/*.freezed.dart"
+    - "**/*.mocks.dart"

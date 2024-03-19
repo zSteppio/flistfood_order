@@ -1,7 +1,7 @@
 name: flistfood_order
 description: Package per l'ordine di FlistFood.
 version: 0.0.1
-homepage:
+homepage: "home"
 
 environment:
   sdk: ">=3.0.0 <4.0.0"
@@ -26,7 +26,7 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-    
+
   build_runner:
   copy_with_extension_gen:
   json_serializable:

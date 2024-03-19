@@ -14,8 +14,6 @@ abstract class _$FFProductCWProxy {
   FFProduct foodListsDefinition(
       List<FFFoodListsDefinition> foodListsDefinition);
 
-  FFProduct foodlists(List<FFFoodlist> foodlists);
-
   FFProduct formatName(String? formatName);
 
   FFProduct id(int id);
@@ -34,8 +32,6 @@ abstract class _$FFProductCWProxy {
 
   FFProduct productFormats(List<FFProduct> productFormats);
 
-  FFProduct sectionId(int sectionId);
-
   /// This function **does support** nullification of nullable fields. All `null` values passed to `non-nullable` fields will be ignored. You can also use `FFProduct(...).copyWith.fieldName(...)` to override fields one at a time with nullification support.
   ///
   /// Usage
@@ -46,7 +42,6 @@ abstract class _$FFProductCWProxy {
     List<FFAlternative>? alternatives,
     List<FFCookingType>? cookingTypes,
     List<FFFoodListsDefinition>? foodListsDefinition,
-    List<FFFoodlist>? foodlists,
     String? formatName,
     int? id,
     List<FFIngredient>? ingredients,
@@ -56,7 +51,6 @@ abstract class _$FFProductCWProxy {
     int? preferredCookingTypeId,
     double? price,
     List<FFProduct>? productFormats,
-    int? sectionId,
   });
 }
 
@@ -78,9 +72,6 @@ class _$FFProductCWProxyImpl implements _$FFProductCWProxy {
   FFProduct foodListsDefinition(
           List<FFFoodListsDefinition> foodListsDefinition) =>
       this(foodListsDefinition: foodListsDefinition);
-
-  @override
-  FFProduct foodlists(List<FFFoodlist> foodlists) => this(foodlists: foodlists);
 
   @override
   FFProduct formatName(String? formatName) => this(formatName: formatName);
@@ -114,9 +105,6 @@ class _$FFProductCWProxyImpl implements _$FFProductCWProxy {
       this(productFormats: productFormats);
 
   @override
-  FFProduct sectionId(int sectionId) => this(sectionId: sectionId);
-
-  @override
 
   /// This function **does support** nullification of nullable fields. All `null` values passed to `non-nullable` fields will be ignored. You can also use `FFProduct(...).copyWith.fieldName(...)` to override fields one at a time with nullification support.
   ///
@@ -128,7 +116,6 @@ class _$FFProductCWProxyImpl implements _$FFProductCWProxy {
     Object? alternatives = const $CopyWithPlaceholder(),
     Object? cookingTypes = const $CopyWithPlaceholder(),
     Object? foodListsDefinition = const $CopyWithPlaceholder(),
-    Object? foodlists = const $CopyWithPlaceholder(),
     Object? formatName = const $CopyWithPlaceholder(),
     Object? id = const $CopyWithPlaceholder(),
     Object? ingredients = const $CopyWithPlaceholder(),
@@ -138,7 +125,6 @@ class _$FFProductCWProxyImpl implements _$FFProductCWProxy {
     Object? preferredCookingTypeId = const $CopyWithPlaceholder(),
     Object? price = const $CopyWithPlaceholder(),
     Object? productFormats = const $CopyWithPlaceholder(),
-    Object? sectionId = const $CopyWithPlaceholder(),
   }) {
     return FFProduct(
       alternatives:
@@ -157,10 +143,6 @@ class _$FFProductCWProxyImpl implements _$FFProductCWProxy {
               ? _value.foodListsDefinition
               // ignore: cast_nullable_to_non_nullable
               : foodListsDefinition as List<FFFoodListsDefinition>,
-      foodlists: foodlists == const $CopyWithPlaceholder() || foodlists == null
-          ? _value.foodlists
-          // ignore: cast_nullable_to_non_nullable
-          : foodlists as List<FFFoodlist>,
       formatName: formatName == const $CopyWithPlaceholder()
           ? _value.formatName
           // ignore: cast_nullable_to_non_nullable
@@ -202,10 +184,6 @@ class _$FFProductCWProxyImpl implements _$FFProductCWProxy {
           ? _value.productFormats
           // ignore: cast_nullable_to_non_nullable
           : productFormats as List<FFProduct>,
-      sectionId: sectionId == const $CopyWithPlaceholder() || sectionId == null
-          ? _value.sectionId
-          // ignore: cast_nullable_to_non_nullable
-          : sectionId as int,
     );
   }
 }
@@ -450,7 +428,7 @@ abstract class _$FFCookingTypeCWProxy {
 
   FFCookingType name(String? name);
 
-  FFCookingType priority(int? priority);
+  FFCookingType priority(int priority);
 
   /// This function **does support** nullification of nullable fields. All `null` values passed to `non-nullable` fields will be ignored. You can also use `FFCookingType(...).copyWith.fieldName(...)` to override fields one at a time with nullification support.
   ///
@@ -482,7 +460,7 @@ class _$FFCookingTypeCWProxyImpl implements _$FFCookingTypeCWProxy {
   FFCookingType name(String? name) => this(name: name);
 
   @override
-  FFCookingType priority(int? priority) => this(priority: priority);
+  FFCookingType priority(int priority) => this(priority: priority);
 
   @override
 
@@ -512,10 +490,10 @@ class _$FFCookingTypeCWProxyImpl implements _$FFCookingTypeCWProxy {
           ? _value.name
           // ignore: cast_nullable_to_non_nullable
           : name as String?,
-      priority: priority == const $CopyWithPlaceholder()
+      priority: priority == const $CopyWithPlaceholder() || priority == null
           ? _value.priority
           // ignore: cast_nullable_to_non_nullable
-          : priority as int?,
+          : priority as int,
     );
   }
 }
@@ -612,13 +590,17 @@ extension $FFFoodCopyWith on FFFood {
 abstract class _$FFFoodListsDefinitionCWProxy {
   FFFoodListsDefinition canAddQuantity(int canAddQuantity);
 
-  FFFoodListsDefinition foodListId(int foodListId);
+  FFFoodListsDefinition foods(List<FFFoodListDefinitionDetail> foods);
+
+  FFFoodListsDefinition id(int id);
 
   FFFoodListsDefinition maxQty(int maxQty);
 
   FFFoodListsDefinition minQty(int minQty);
 
-  FFFoodListsDefinition mode(Mode mode);
+  FFFoodListsDefinition mode(FFMode mode);
+
+  FFFoodListsDefinition name(String? name);
 
   /// This function **does support** nullification of nullable fields. All `null` values passed to `non-nullable` fields will be ignored. You can also use `FFFoodListsDefinition(...).copyWith.fieldName(...)` to override fields one at a time with nullification support.
   ///
@@ -628,10 +610,12 @@ abstract class _$FFFoodListsDefinitionCWProxy {
   /// ````
   FFFoodListsDefinition call({
     int? canAddQuantity,
-    int? foodListId,
+    List<FFFoodListDefinitionDetail>? foods,
+    int? id,
     int? maxQty,
     int? minQty,
-    Mode? mode,
+    FFMode? mode,
+    String? name,
   });
 }
 
@@ -647,8 +631,11 @@ class _$FFFoodListsDefinitionCWProxyImpl
       this(canAddQuantity: canAddQuantity);
 
   @override
-  FFFoodListsDefinition foodListId(int foodListId) =>
-      this(foodListId: foodListId);
+  FFFoodListsDefinition foods(List<FFFoodListDefinitionDetail> foods) =>
+      this(foods: foods);
+
+  @override
+  FFFoodListsDefinition id(int id) => this(id: id);
 
   @override
   FFFoodListsDefinition maxQty(int maxQty) => this(maxQty: maxQty);
@@ -657,7 +644,10 @@ class _$FFFoodListsDefinitionCWProxyImpl
   FFFoodListsDefinition minQty(int minQty) => this(minQty: minQty);
 
   @override
-  FFFoodListsDefinition mode(Mode mode) => this(mode: mode);
+  FFFoodListsDefinition mode(FFMode mode) => this(mode: mode);
+
+  @override
+  FFFoodListsDefinition name(String? name) => this(name: name);
 
   @override
 
@@ -669,10 +659,12 @@ class _$FFFoodListsDefinitionCWProxyImpl
   /// ````
   FFFoodListsDefinition call({
     Object? canAddQuantity = const $CopyWithPlaceholder(),
-    Object? foodListId = const $CopyWithPlaceholder(),
+    Object? foods = const $CopyWithPlaceholder(),
+    Object? id = const $CopyWithPlaceholder(),
     Object? maxQty = const $CopyWithPlaceholder(),
     Object? minQty = const $CopyWithPlaceholder(),
     Object? mode = const $CopyWithPlaceholder(),
+    Object? name = const $CopyWithPlaceholder(),
   }) {
     return FFFoodListsDefinition(
       canAddQuantity: canAddQuantity == const $CopyWithPlaceholder() ||
@@ -680,11 +672,14 @@ class _$FFFoodListsDefinitionCWProxyImpl
           ? _value.canAddQuantity
           // ignore: cast_nullable_to_non_nullable
           : canAddQuantity as int,
-      foodListId:
-          foodListId == const $CopyWithPlaceholder() || foodListId == null
-              ? _value.foodListId
-              // ignore: cast_nullable_to_non_nullable
-              : foodListId as int,
+      foods: foods == const $CopyWithPlaceholder() || foods == null
+          ? _value.foods
+          // ignore: cast_nullable_to_non_nullable
+          : foods as List<FFFoodListDefinitionDetail>,
+      id: id == const $CopyWithPlaceholder() || id == null
+          ? _value.id
+          // ignore: cast_nullable_to_non_nullable
+          : id as int,
       maxQty: maxQty == const $CopyWithPlaceholder() || maxQty == null
           ? _value.maxQty
           // ignore: cast_nullable_to_non_nullable
@@ -696,7 +691,11 @@ class _$FFFoodListsDefinitionCWProxyImpl
       mode: mode == const $CopyWithPlaceholder() || mode == null
           ? _value.mode
           // ignore: cast_nullable_to_non_nullable
-          : mode as Mode,
+          : mode as FFMode,
+      name: name == const $CopyWithPlaceholder()
+          ? _value.name
+          // ignore: cast_nullable_to_non_nullable
+          : name as String?,
     );
   }
 }
@@ -708,403 +707,102 @@ extension $FFFoodListsDefinitionCopyWith on FFFoodListsDefinition {
       _$FFFoodListsDefinitionCWProxyImpl(this);
 }
 
-abstract class _$FFFoodlistCWProxy {
-  FFFoodlist alternative(bool? alternative);
+abstract class _$FFFoodListDefinitionDetailCWProxy {
+  FFFoodListDefinitionDetail id(int id);
 
-  FFFoodlist foodIds(List<int> foodIds);
+  FFFoodListDefinitionDetail isSelected(bool isSelected);
 
-  FFFoodlist foods(List<FFFoodDetail>? foods);
+  FFFoodListDefinitionDetail name(String? name);
 
-  FFFoodlist hidden(bool? hidden);
+  FFFoodListDefinitionDetail price(double price);
 
-  FFFoodlist id(int? id);
+  FFFoodListDefinitionDetail timeSelected(DateTime? timeSelected);
 
-  FFFoodlist name(String? name);
-
-  FFFoodlist priceListIds(List<int> priceListIds);
-
-  /// This function **does support** nullification of nullable fields. All `null` values passed to `non-nullable` fields will be ignored. You can also use `FFFoodlist(...).copyWith.fieldName(...)` to override fields one at a time with nullification support.
+  /// This function **does support** nullification of nullable fields. All `null` values passed to `non-nullable` fields will be ignored. You can also use `FFFoodListDefinitionDetail(...).copyWith.fieldName(...)` to override fields one at a time with nullification support.
   ///
   /// Usage
   /// ```dart
-  /// FFFoodlist(...).copyWith(id: 12, name: "My name")
+  /// FFFoodListDefinitionDetail(...).copyWith(id: 12, name: "My name")
   /// ````
-  FFFoodlist call({
-    bool? alternative,
-    List<int>? foodIds,
-    List<FFFoodDetail>? foods,
-    bool? hidden,
+  FFFoodListDefinitionDetail call({
     int? id,
+    bool? isSelected,
     String? name,
-    List<int>? priceListIds,
-  });
-}
-
-/// Proxy class for `copyWith` functionality. This is a callable class and can be used as follows: `instanceOfFFFoodlist.copyWith(...)`. Additionally contains functions for specific fields e.g. `instanceOfFFFoodlist.copyWith.fieldName(...)`
-class _$FFFoodlistCWProxyImpl implements _$FFFoodlistCWProxy {
-  final FFFoodlist _value;
-
-  const _$FFFoodlistCWProxyImpl(this._value);
-
-  @override
-  FFFoodlist alternative(bool? alternative) => this(alternative: alternative);
-
-  @override
-  FFFoodlist foodIds(List<int> foodIds) => this(foodIds: foodIds);
-
-  @override
-  FFFoodlist foods(List<FFFoodDetail>? foods) => this(foods: foods);
-
-  @override
-  FFFoodlist hidden(bool? hidden) => this(hidden: hidden);
-
-  @override
-  FFFoodlist id(int? id) => this(id: id);
-
-  @override
-  FFFoodlist name(String? name) => this(name: name);
-
-  @override
-  FFFoodlist priceListIds(List<int> priceListIds) =>
-      this(priceListIds: priceListIds);
-
-  @override
-
-  /// This function **does support** nullification of nullable fields. All `null` values passed to `non-nullable` fields will be ignored. You can also use `FFFoodlist(...).copyWith.fieldName(...)` to override fields one at a time with nullification support.
-  ///
-  /// Usage
-  /// ```dart
-  /// FFFoodlist(...).copyWith(id: 12, name: "My name")
-  /// ````
-  FFFoodlist call({
-    Object? alternative = const $CopyWithPlaceholder(),
-    Object? foodIds = const $CopyWithPlaceholder(),
-    Object? foods = const $CopyWithPlaceholder(),
-    Object? hidden = const $CopyWithPlaceholder(),
-    Object? id = const $CopyWithPlaceholder(),
-    Object? name = const $CopyWithPlaceholder(),
-    Object? priceListIds = const $CopyWithPlaceholder(),
-  }) {
-    return FFFoodlist(
-      alternative: alternative == const $CopyWithPlaceholder()
-          ? _value.alternative
-          // ignore: cast_nullable_to_non_nullable
-          : alternative as bool?,
-      foodIds: foodIds == const $CopyWithPlaceholder() || foodIds == null
-          ? _value.foodIds
-          // ignore: cast_nullable_to_non_nullable
-          : foodIds as List<int>,
-      foods: foods == const $CopyWithPlaceholder()
-          ? _value.foods
-          // ignore: cast_nullable_to_non_nullable
-          : foods as List<FFFoodDetail>?,
-      hidden: hidden == const $CopyWithPlaceholder()
-          ? _value.hidden
-          // ignore: cast_nullable_to_non_nullable
-          : hidden as bool?,
-      id: id == const $CopyWithPlaceholder()
-          ? _value.id
-          // ignore: cast_nullable_to_non_nullable
-          : id as int?,
-      name: name == const $CopyWithPlaceholder()
-          ? _value.name
-          // ignore: cast_nullable_to_non_nullable
-          : name as String?,
-      priceListIds:
-          priceListIds == const $CopyWithPlaceholder() || priceListIds == null
-              ? _value.priceListIds
-              // ignore: cast_nullable_to_non_nullable
-              : priceListIds as List<int>,
-    );
-  }
-}
-
-extension $FFFoodlistCopyWith on FFFoodlist {
-  /// Returns a callable class that can be used as follows: `instanceOfFFFoodlist.copyWith(...)` or like so:`instanceOfFFFoodlist.copyWith.fieldName(...)`.
-  // ignore: library_private_types_in_public_api
-  _$FFFoodlistCWProxy get copyWith => _$FFFoodlistCWProxyImpl(this);
-}
-
-abstract class _$FFFoodDetailCWProxy {
-  FFFoodDetail allergenIds(List<int> allergenIds);
-
-  FFFoodDetail calories(int? calories);
-
-  FFFoodDetail canBeDeleted(bool? canBeDeleted);
-
-  FFFoodDetail categoryName(String? categoryName);
-
-  FFFoodDetail foodCategoryId(int? foodCategoryId);
-
-  FFFoodDetail forList(bool? forList);
-
-  FFFoodDetail fromPlatForm(bool? fromPlatForm);
-
-  FFFoodDetail hidden(bool? hidden);
-
-  FFFoodDetail hiddenPrice(bool hiddenPrice);
-
-  FFFoodDetail id(int? id);
-
-  FFFoodDetail isFree(bool isFree);
-
-  FFFoodDetail name(String? name);
-
-  FFFoodDetail productId(int? productId);
-
-  FFFoodDetail productsCounts(int? productsCounts);
-
-  FFFoodDetail selected(bool selected);
-
-  FFFoodDetail selectionPriority(int? selectionPriority);
-
-  FFFoodDetail shortName(String? shortName);
-
-  FFFoodDetail tags(String? tags);
-
-  FFFoodDetail timeSelected(DateTime? timeSelected);
-
-  FFFoodDetail translations(List<FFTranslation> translations);
-
-  FFFoodDetail variationPrice(double? variationPrice);
-
-  /// This function **does support** nullification of nullable fields. All `null` values passed to `non-nullable` fields will be ignored. You can also use `FFFoodDetail(...).copyWith.fieldName(...)` to override fields one at a time with nullification support.
-  ///
-  /// Usage
-  /// ```dart
-  /// FFFoodDetail(...).copyWith(id: 12, name: "My name")
-  /// ````
-  FFFoodDetail call({
-    List<int>? allergenIds,
-    int? calories,
-    bool? canBeDeleted,
-    String? categoryName,
-    int? foodCategoryId,
-    bool? forList,
-    bool? fromPlatForm,
-    bool? hidden,
-    bool? hiddenPrice,
-    int? id,
-    bool? isFree,
-    String? name,
-    int? productId,
-    int? productsCounts,
-    bool? selected,
-    int? selectionPriority,
-    String? shortName,
-    String? tags,
+    double? price,
     DateTime? timeSelected,
-    List<FFTranslation>? translations,
-    double? variationPrice,
   });
 }
 
-/// Proxy class for `copyWith` functionality. This is a callable class and can be used as follows: `instanceOfFFFoodDetail.copyWith(...)`. Additionally contains functions for specific fields e.g. `instanceOfFFFoodDetail.copyWith.fieldName(...)`
-class _$FFFoodDetailCWProxyImpl implements _$FFFoodDetailCWProxy {
-  final FFFoodDetail _value;
+/// Proxy class for `copyWith` functionality. This is a callable class and can be used as follows: `instanceOfFFFoodListDefinitionDetail.copyWith(...)`. Additionally contains functions for specific fields e.g. `instanceOfFFFoodListDefinitionDetail.copyWith.fieldName(...)`
+class _$FFFoodListDefinitionDetailCWProxyImpl
+    implements _$FFFoodListDefinitionDetailCWProxy {
+  final FFFoodListDefinitionDetail _value;
 
-  const _$FFFoodDetailCWProxyImpl(this._value);
-
-  @override
-  FFFoodDetail allergenIds(List<int> allergenIds) =>
-      this(allergenIds: allergenIds);
+  const _$FFFoodListDefinitionDetailCWProxyImpl(this._value);
 
   @override
-  FFFoodDetail calories(int? calories) => this(calories: calories);
+  FFFoodListDefinitionDetail id(int id) => this(id: id);
 
   @override
-  FFFoodDetail canBeDeleted(bool? canBeDeleted) =>
-      this(canBeDeleted: canBeDeleted);
+  FFFoodListDefinitionDetail isSelected(bool isSelected) =>
+      this(isSelected: isSelected);
 
   @override
-  FFFoodDetail categoryName(String? categoryName) =>
-      this(categoryName: categoryName);
+  FFFoodListDefinitionDetail name(String? name) => this(name: name);
 
   @override
-  FFFoodDetail foodCategoryId(int? foodCategoryId) =>
-      this(foodCategoryId: foodCategoryId);
+  FFFoodListDefinitionDetail price(double price) => this(price: price);
 
   @override
-  FFFoodDetail forList(bool? forList) => this(forList: forList);
-
-  @override
-  FFFoodDetail fromPlatForm(bool? fromPlatForm) =>
-      this(fromPlatForm: fromPlatForm);
-
-  @override
-  FFFoodDetail hidden(bool? hidden) => this(hidden: hidden);
-
-  @override
-  FFFoodDetail hiddenPrice(bool hiddenPrice) => this(hiddenPrice: hiddenPrice);
-
-  @override
-  FFFoodDetail id(int? id) => this(id: id);
-
-  @override
-  FFFoodDetail isFree(bool isFree) => this(isFree: isFree);
-
-  @override
-  FFFoodDetail name(String? name) => this(name: name);
-
-  @override
-  FFFoodDetail productId(int? productId) => this(productId: productId);
-
-  @override
-  FFFoodDetail productsCounts(int? productsCounts) =>
-      this(productsCounts: productsCounts);
-
-  @override
-  FFFoodDetail selected(bool selected) => this(selected: selected);
-
-  @override
-  FFFoodDetail selectionPriority(int? selectionPriority) =>
-      this(selectionPriority: selectionPriority);
-
-  @override
-  FFFoodDetail shortName(String? shortName) => this(shortName: shortName);
-
-  @override
-  FFFoodDetail tags(String? tags) => this(tags: tags);
-
-  @override
-  FFFoodDetail timeSelected(DateTime? timeSelected) =>
+  FFFoodListDefinitionDetail timeSelected(DateTime? timeSelected) =>
       this(timeSelected: timeSelected);
 
   @override
-  FFFoodDetail translations(List<FFTranslation> translations) =>
-      this(translations: translations);
 
-  @override
-  FFFoodDetail variationPrice(double? variationPrice) =>
-      this(variationPrice: variationPrice);
-
-  @override
-
-  /// This function **does support** nullification of nullable fields. All `null` values passed to `non-nullable` fields will be ignored. You can also use `FFFoodDetail(...).copyWith.fieldName(...)` to override fields one at a time with nullification support.
+  /// This function **does support** nullification of nullable fields. All `null` values passed to `non-nullable` fields will be ignored. You can also use `FFFoodListDefinitionDetail(...).copyWith.fieldName(...)` to override fields one at a time with nullification support.
   ///
   /// Usage
   /// ```dart
-  /// FFFoodDetail(...).copyWith(id: 12, name: "My name")
+  /// FFFoodListDefinitionDetail(...).copyWith(id: 12, name: "My name")
   /// ````
-  FFFoodDetail call({
-    Object? allergenIds = const $CopyWithPlaceholder(),
-    Object? calories = const $CopyWithPlaceholder(),
-    Object? canBeDeleted = const $CopyWithPlaceholder(),
-    Object? categoryName = const $CopyWithPlaceholder(),
-    Object? foodCategoryId = const $CopyWithPlaceholder(),
-    Object? forList = const $CopyWithPlaceholder(),
-    Object? fromPlatForm = const $CopyWithPlaceholder(),
-    Object? hidden = const $CopyWithPlaceholder(),
-    Object? hiddenPrice = const $CopyWithPlaceholder(),
+  FFFoodListDefinitionDetail call({
     Object? id = const $CopyWithPlaceholder(),
-    Object? isFree = const $CopyWithPlaceholder(),
+    Object? isSelected = const $CopyWithPlaceholder(),
     Object? name = const $CopyWithPlaceholder(),
-    Object? productId = const $CopyWithPlaceholder(),
-    Object? productsCounts = const $CopyWithPlaceholder(),
-    Object? selected = const $CopyWithPlaceholder(),
-    Object? selectionPriority = const $CopyWithPlaceholder(),
-    Object? shortName = const $CopyWithPlaceholder(),
-    Object? tags = const $CopyWithPlaceholder(),
+    Object? price = const $CopyWithPlaceholder(),
     Object? timeSelected = const $CopyWithPlaceholder(),
-    Object? translations = const $CopyWithPlaceholder(),
-    Object? variationPrice = const $CopyWithPlaceholder(),
   }) {
-    return FFFoodDetail(
-      allergenIds:
-          allergenIds == const $CopyWithPlaceholder() || allergenIds == null
-              ? _value.allergenIds
-              // ignore: cast_nullable_to_non_nullable
-              : allergenIds as List<int>,
-      calories: calories == const $CopyWithPlaceholder()
-          ? _value.calories
-          // ignore: cast_nullable_to_non_nullable
-          : calories as int?,
-      canBeDeleted: canBeDeleted == const $CopyWithPlaceholder()
-          ? _value.canBeDeleted
-          // ignore: cast_nullable_to_non_nullable
-          : canBeDeleted as bool?,
-      categoryName: categoryName == const $CopyWithPlaceholder()
-          ? _value.categoryName
-          // ignore: cast_nullable_to_non_nullable
-          : categoryName as String?,
-      foodCategoryId: foodCategoryId == const $CopyWithPlaceholder()
-          ? _value.foodCategoryId
-          // ignore: cast_nullable_to_non_nullable
-          : foodCategoryId as int?,
-      forList: forList == const $CopyWithPlaceholder()
-          ? _value.forList
-          // ignore: cast_nullable_to_non_nullable
-          : forList as bool?,
-      fromPlatForm: fromPlatForm == const $CopyWithPlaceholder()
-          ? _value.fromPlatForm
-          // ignore: cast_nullable_to_non_nullable
-          : fromPlatForm as bool?,
-      hidden: hidden == const $CopyWithPlaceholder()
-          ? _value.hidden
-          // ignore: cast_nullable_to_non_nullable
-          : hidden as bool?,
-      hiddenPrice:
-          hiddenPrice == const $CopyWithPlaceholder() || hiddenPrice == null
-              ? _value.hiddenPrice
-              // ignore: cast_nullable_to_non_nullable
-              : hiddenPrice as bool,
-      id: id == const $CopyWithPlaceholder()
+    return FFFoodListDefinitionDetail(
+      id: id == const $CopyWithPlaceholder() || id == null
           ? _value.id
           // ignore: cast_nullable_to_non_nullable
-          : id as int?,
-      isFree: isFree == const $CopyWithPlaceholder() || isFree == null
-          ? _value.isFree
-          // ignore: cast_nullable_to_non_nullable
-          : isFree as bool,
+          : id as int,
+      isSelected:
+          isSelected == const $CopyWithPlaceholder() || isSelected == null
+              ? _value.isSelected
+              // ignore: cast_nullable_to_non_nullable
+              : isSelected as bool,
       name: name == const $CopyWithPlaceholder()
           ? _value.name
           // ignore: cast_nullable_to_non_nullable
           : name as String?,
-      productId: productId == const $CopyWithPlaceholder()
-          ? _value.productId
+      price: price == const $CopyWithPlaceholder() || price == null
+          ? _value.price
           // ignore: cast_nullable_to_non_nullable
-          : productId as int?,
-      productsCounts: productsCounts == const $CopyWithPlaceholder()
-          ? _value.productsCounts
-          // ignore: cast_nullable_to_non_nullable
-          : productsCounts as int?,
-      selected: selected == const $CopyWithPlaceholder() || selected == null
-          ? _value.selected
-          // ignore: cast_nullable_to_non_nullable
-          : selected as bool,
-      selectionPriority: selectionPriority == const $CopyWithPlaceholder()
-          ? _value.selectionPriority
-          // ignore: cast_nullable_to_non_nullable
-          : selectionPriority as int?,
-      shortName: shortName == const $CopyWithPlaceholder()
-          ? _value.shortName
-          // ignore: cast_nullable_to_non_nullable
-          : shortName as String?,
-      tags: tags == const $CopyWithPlaceholder()
-          ? _value.tags
-          // ignore: cast_nullable_to_non_nullable
-          : tags as String?,
+          : price as double,
       timeSelected: timeSelected == const $CopyWithPlaceholder()
           ? _value.timeSelected
           // ignore: cast_nullable_to_non_nullable
           : timeSelected as DateTime?,
-      translations:
-          translations == const $CopyWithPlaceholder() || translations == null
-              ? _value.translations
-              // ignore: cast_nullable_to_non_nullable
-              : translations as List<FFTranslation>,
-      variationPrice: variationPrice == const $CopyWithPlaceholder()
-          ? _value.variationPrice
-          // ignore: cast_nullable_to_non_nullable
-          : variationPrice as double?,
     );
   }
 }
 
-extension $FFFoodDetailCopyWith on FFFoodDetail {
-  /// Returns a callable class that can be used as follows: `instanceOfFFFoodDetail.copyWith(...)` or like so:`instanceOfFFFoodDetail.copyWith.fieldName(...)`.
+extension $FFFoodListDefinitionDetailCopyWith on FFFoodListDefinitionDetail {
+  /// Returns a callable class that can be used as follows: `instanceOfFFFoodListDefinitionDetail.copyWith(...)` or like so:`instanceOfFFFoodListDefinitionDetail.copyWith.fieldName(...)`.
   // ignore: library_private_types_in_public_api
-  _$FFFoodDetailCWProxy get copyWith => _$FFFoodDetailCWProxyImpl(this);
+  _$FFFoodListDefinitionDetailCWProxy get copyWith =>
+      _$FFFoodListDefinitionDetailCWProxyImpl(this);
 }
 
 abstract class _$FFTranslationCWProxy {
@@ -1195,7 +893,6 @@ FFProduct _$FFProductFromJson(Map<String, dynamic> json) => FFProduct(
       minOrdinableQuantity: json['minOrdinableQuantity'] as int? ?? 0,
       newPrice: (json['newPrice'] as num?)?.toDouble() ?? 0,
       price: (json['price'] as num).toDouble(),
-      sectionId: json['sectionId'] as int? ?? 0,
       ingredients: (json['ingredients'] as List<dynamic>?)
               ?.map((e) => FFIngredient.fromJson(e as Map<String, dynamic>))
               .toList() ??
@@ -1211,10 +908,6 @@ FFProduct _$FFProductFromJson(Map<String, dynamic> json) => FFProduct(
       foodListsDefinition: (json['foodListsDefinition'] as List<dynamic>?)
               ?.map((e) =>
                   FFFoodListsDefinition.fromJson(e as Map<String, dynamic>))
-              .toList() ??
-          const [],
-      foodlists: (json['foodlists'] as List<dynamic>?)
-              ?.map((e) => FFFoodlist.fromJson(e as Map<String, dynamic>))
               .toList() ??
           const [],
     );
@@ -1234,17 +927,15 @@ Map<String, dynamic> _$FFProductToJson(FFProduct instance) {
   writeNotNull('formatName', instance.formatName);
   writeNotNull('preferredCookingTypeId', instance.preferredCookingTypeId);
   val['minOrdinableQuantity'] = instance.minOrdinableQuantity;
-  val['newPrice'] = instance.newPrice;
   val['price'] = instance.price;
-  val['sectionId'] = instance.sectionId;
   val['ingredients'] = instance.ingredients.map((e) => e.toJson()).toList();
   val['alternatives'] = instance.alternatives.map((e) => e.toJson()).toList();
   val['cookingTypes'] = instance.cookingTypes.map((e) => e.toJson()).toList();
-  val['foodlists'] = instance.foodlists.map((e) => e.toJson()).toList();
   val['foodListsDefinition'] =
       instance.foodListsDefinition.map((e) => e.toJson()).toList();
   val['productFormats'] =
       instance.productFormats.map((e) => e.toJson()).toList();
+  val['newPrice'] = instance.newPrice;
   return val;
 }
 
@@ -1314,7 +1005,7 @@ FFCookingType _$FFCookingTypeFromJson(Map<String, dynamic> json) =>
     FFCookingType(
       id: json['id'] as int,
       name: json['name'] as String?,
-      priority: json['priority'] as int?,
+      priority: json['priority'] as int,
       isSelected: json['isSelected'] as bool? ?? false,
     );
 
@@ -1330,7 +1021,7 @@ Map<String, dynamic> _$FFCookingTypeToJson(FFCookingType instance) {
   }
 
   writeNotNull('name', instance.name);
-  writeNotNull('priority', instance.priority);
+  val['priority'] = instance.priority;
   val['isSelected'] = instance.isSelected;
   return val;
 }
@@ -1362,49 +1053,28 @@ Map<String, dynamic> _$FFFoodToJson(FFFood instance) {
 FFFoodListsDefinition _$FFFoodListsDefinitionFromJson(
         Map<String, dynamic> json) =>
     FFFoodListsDefinition(
-      foodListId: json['foodListId'] as int,
+      id: json['id'] as int,
       maxQty: json['maxQty'] as int,
       minQty: json['minQty'] as int,
-      mode: $enumDecode(_$ModeEnumMap, json['mode']),
-      canAddQuantity: json['canAddQuantity'] as int,
+      mode: $enumDecode(_$FFModeEnumMap, json['mode']),
+      canAddQuantity: json['canAddQuantity'] as int? ?? 0,
+      name: json['name'] as String?,
+      foods: (json['foods'] as List<dynamic>?)
+              ?.map((e) => FFFoodListDefinitionDetail.fromJson(
+                  e as Map<String, dynamic>))
+              .toList() ??
+          const [],
     );
 
 Map<String, dynamic> _$FFFoodListsDefinitionToJson(
-        FFFoodListsDefinition instance) =>
-    <String, dynamic>{
-      'canAddQuantity': instance.canAddQuantity,
-      'maxQty': instance.maxQty,
-      'minQty': instance.minQty,
-      'foodListId': instance.foodListId,
-      'mode': _$ModeEnumMap[instance.mode]!,
-    };
-
-const _$ModeEnumMap = {
-  Mode.freeChoise: 0,
-  Mode.maxIngredientWithCost: 1,
-  Mode.maxIngredientFree: 2,
-  Mode.maxFreeAndOtherWithCost: 3,
-};
-
-FFFoodlist _$FFFoodlistFromJson(Map<String, dynamic> json) => FFFoodlist(
-      foods: (json['foods'] as List<dynamic>?)
-          ?.map((e) => FFFoodDetail.fromJson(e as Map<String, dynamic>))
-          .toList(),
-      id: json['id'] as int?,
-      name: json['name'] as String?,
-      priceListIds: (json['priceListIds'] as List<dynamic>?)
-              ?.map((e) => e as int)
-              .toList() ??
-          const [],
-      foodIds:
-          (json['foodIds'] as List<dynamic>?)?.map((e) => e as int).toList() ??
-              const [],
-      alternative: json['alternative'] as bool?,
-      hidden: json['hidden'] as bool?,
-    );
-
-Map<String, dynamic> _$FFFoodlistToJson(FFFoodlist instance) {
-  final val = <String, dynamic>{};
+    FFFoodListsDefinition instance) {
+  final val = <String, dynamic>{
+    'canAddQuantity': instance.canAddQuantity,
+    'maxQty': instance.maxQty,
+    'minQty': instance.minQty,
+    'id': instance.id,
+    'mode': _$FFModeEnumMap[instance.mode]!,
+  };
 
   void writeNotNull(String key, dynamic value) {
     if (value != null) {
@@ -1412,50 +1082,35 @@ Map<String, dynamic> _$FFFoodlistToJson(FFFoodlist instance) {
     }
   }
 
-  writeNotNull('foods', instance.foods?.map((e) => e.toJson()).toList());
-  writeNotNull('id', instance.id);
   writeNotNull('name', instance.name);
-  val['priceListIds'] = instance.priceListIds;
-  val['foodIds'] = instance.foodIds;
-  writeNotNull('alternative', instance.alternative);
-  writeNotNull('hidden', instance.hidden);
+  val['foods'] = instance.foods.map((e) => e.toJson()).toList();
   return val;
 }
 
-FFFoodDetail _$FFFoodDetailFromJson(Map<String, dynamic> json) => FFFoodDetail(
-      categoryName: json['categoryName'] as String?,
-      allergenIds: (json['allergenIds'] as List<dynamic>?)
-              ?.map((e) => e as int)
-              .toList() ??
-          const [],
-      productsCounts: json['productsCounts'] as int?,
-      canBeDeleted: json['canBeDeleted'] as bool?,
-      forList: json['forList'] as bool?,
-      productId: json['productId'] as int?,
-      fromPlatForm: json['fromPlatForm'] as bool?,
-      translations: (json['translations'] as List<dynamic>?)
-              ?.map((e) => FFTranslation.fromJson(e as Map<String, dynamic>))
-              .toList() ??
-          const [],
-      isFree: json['isFree'] as bool? ?? false,
-      selected: json['selected'] as bool? ?? false,
-      hiddenPrice: json['hiddenPrice'] as bool? ?? false,
-      id: json['id'] as int?,
+const _$FFModeEnumMap = {
+  FFMode.freeChoise: 0,
+  FFMode.maxIngredientWithCost: 1,
+  FFMode.maxIngredientFree: 2,
+  FFMode.maxFreeAndOtherWithCost: 3,
+};
+
+FFFoodListDefinitionDetail _$FFFoodListDefinitionDetailFromJson(
+        Map<String, dynamic> json) =>
+    FFFoodListDefinitionDetail(
+      id: json['id'] as int,
+      price: (json['price'] as num?)?.toDouble() ?? 0.0,
       name: json['name'] as String?,
-      shortName: json['shortName'] as String?,
-      variationPrice: (json['variationPrice'] as num?)?.toDouble(),
-      calories: json['calories'] as int?,
-      foodCategoryId: json['foodCategoryId'] as int?,
-      tags: json['tags'] as String?,
-      hidden: json['hidden'] as bool?,
-      selectionPriority: json['selectionPriority'] as int?,
+      isSelected: json['isSelected'] as bool? ?? false,
       timeSelected: json['timeSelected'] == null
           ? null
           : DateTime.parse(json['timeSelected'] as String),
     );
 
-Map<String, dynamic> _$FFFoodDetailToJson(FFFoodDetail instance) {
-  final val = <String, dynamic>{};
+Map<String, dynamic> _$FFFoodListDefinitionDetailToJson(
+    FFFoodListDefinitionDetail instance) {
+  final val = <String, dynamic>{
+    'id': instance.id,
+  };
 
   void writeNotNull(String key, dynamic value) {
     if (value != null) {
@@ -1463,26 +1118,9 @@ Map<String, dynamic> _$FFFoodDetailToJson(FFFoodDetail instance) {
     }
   }
 
-  writeNotNull('selectionPriority', instance.selectionPriority);
-  writeNotNull('categoryName', instance.categoryName);
-  val['allergenIds'] = instance.allergenIds;
-  writeNotNull('productsCounts', instance.productsCounts);
-  writeNotNull('canBeDeleted', instance.canBeDeleted);
-  writeNotNull('forList', instance.forList);
-  val['selected'] = instance.selected;
-  val['isFree'] = instance.isFree;
-  val['hiddenPrice'] = instance.hiddenPrice;
-  writeNotNull('productId', instance.productId);
-  writeNotNull('fromPlatForm', instance.fromPlatForm);
-  val['translations'] = instance.translations.map((e) => e.toJson()).toList();
-  writeNotNull('id', instance.id);
   writeNotNull('name', instance.name);
-  writeNotNull('shortName', instance.shortName);
-  writeNotNull('variationPrice', instance.variationPrice);
-  writeNotNull('calories', instance.calories);
-  writeNotNull('foodCategoryId', instance.foodCategoryId);
-  writeNotNull('tags', instance.tags);
-  writeNotNull('hidden', instance.hidden);
+  val['price'] = instance.price;
+  val['isSelected'] = instance.isSelected;
   writeNotNull('timeSelected', instance.timeSelected?.toIso8601String());
   return val;
 }

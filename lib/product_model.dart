@@ -11,16 +11,14 @@ class FFProduct {
   String? formatName;
   int? preferredCookingTypeId;
   int minOrdinableQuantity;
-  double newPrice;
   double price;
-  int sectionId;
   List<FFIngredient> ingredients;
   List<FFAlternative> alternatives;
   List<FFCookingType> cookingTypes;
-  List<FFFoodlist> foodlists;
   List<FFFoodListsDefinition> foodListsDefinition;
-
+  //* Variabili locali
   List<FFProduct> productFormats;
+  double newPrice;
 
   FFProduct({
     required this.id,
@@ -31,12 +29,10 @@ class FFProduct {
     this.minOrdinableQuantity = 0,
     this.newPrice = 0,
     required this.price,
-    this.sectionId = 0,
     this.ingredients = const [],
     this.alternatives = const [],
     this.cookingTypes = const [],
     this.foodListsDefinition = const [],
-    this.foodlists = const [],
   });
   factory FFProduct.fromJson(Map<String, dynamic> json) => _$FFProductFromJson(json);
   Map<String, dynamic> toJson() => _$FFProductToJson(this);
@@ -65,6 +61,7 @@ class FFIngredient {
   double price;
   bool canRemove;
   int canAddQuantity;
+  //* Variabili locali
   int? variationType;
   double? localVariationPrice;
 
@@ -108,13 +105,13 @@ class FFAlternative {
 class FFCookingType {
   int id;
   String? name;
-  int? priority;
+  int priority;
   bool isSelected;
 
   FFCookingType({
     required this.id,
     this.name,
-    this.priority,
+    required this.priority,
     this.isSelected = false,
   });
 
@@ -147,23 +144,26 @@ class FFFoodListsDefinition {
   int canAddQuantity;
   int maxQty;
   int minQty;
-  int foodListId;
-  Mode mode;
+  int id;
+  FFMode mode;
+  String? name;
+  List<FFFoodListDefinitionDetail> foods;
 
   FFFoodListsDefinition({
-    required this.foodListId,
+    required this.id,
     required this.maxQty,
     required this.minQty,
     required this.mode,
-    required this.canAddQuantity,
+    this.canAddQuantity = 0,
+    this.name,
+    this.foods = const [],
   });
 
-  factory FFFoodListsDefinition.fromJson(Map<String, dynamic> json) =>
-      _$FFFoodListsDefinitionFromJson(json);
+  factory FFFoodListsDefinition.fromJson(Map<String, dynamic> json) => _$FFFoodListsDefinitionFromJson(json);
   Map<String, dynamic> toJson() => _$FFFoodListsDefinitionToJson(this);
 }
 
-enum Mode {
+enum FFMode {
   @JsonValue(0)
   freeChoise,
   @JsonValue(1)
@@ -176,81 +176,78 @@ enum Mode {
 
 @CopyWith()
 @JsonSerializable(includeIfNull: false, explicitToJson: true)
-class FFFoodlist {
-  FFFoodlist({
-    this.foods,
-    this.id,
-    this.name,
-    this.priceListIds = const [],
-    this.foodIds = const [],
-    this.alternative,
-    this.hidden,
-  });
-
-  List<FFFoodDetail>? foods;
-  int? id;
+class FFFoodListDefinitionDetail {
+  int id;
   String? name;
-  List<int> priceListIds;
-  List<int> foodIds;
-  bool? alternative;
-  bool? hidden;
+  double price;
+  //* Variabili locali
+  bool isSelected;
+  DateTime? timeSelected;
 
-  factory FFFoodlist.fromJson(Map<String, dynamic> json) => _$FFFoodlistFromJson(json);
-  Map<String, dynamic> toJson() => _$FFFoodlistToJson(this);
-}
-
-@CopyWith()
-@JsonSerializable(includeIfNull: false, explicitToJson: true)
-class FFFoodDetail {
-  FFFoodDetail({
-    this.categoryName,
-    this.allergenIds = const [],
-    this.productsCounts,
-    this.canBeDeleted,
-    this.forList,
-    this.productId,
-    this.fromPlatForm,
-    this.translations = const [],
-    this.isFree = false,
-    this.selected = false,
-    this.hiddenPrice = false,
-    this.id,
+  FFFoodListDefinitionDetail({
+    required this.id,
+    this.price = 0.0,
     this.name,
-    this.shortName,
-    this.variationPrice,
-    this.calories,
-    this.foodCategoryId,
-    this.tags,
-    this.hidden,
-    this.selectionPriority,
+    this.isSelected = false,
     this.timeSelected,
   });
 
-  int? selectionPriority;
-  String? categoryName;
-  List<int> allergenIds;
-  int? productsCounts;
-  bool? canBeDeleted;
-  bool? forList;
-  bool selected;
-  bool isFree;
-  bool hiddenPrice;
-  int? productId;
-  bool? fromPlatForm;
-  List<FFTranslation> translations;
-  int? id;
-  String? name;
-  String? shortName;
-  double? variationPrice;
-  int? calories;
-  int? foodCategoryId;
-  String? tags;
-  bool? hidden;
-  DateTime? timeSelected;
-
-  factory FFFoodDetail.fromJson(Map<String, dynamic> json) => _$FFFoodDetailFromJson(json);
-  Map<String, dynamic> toJson() => _$FFFoodDetailToJson(this);
+  factory FFFoodListDefinitionDetail.fromJson(Map<String, dynamic> json) => _$FFFoodListDefinitionDetailFromJson(json);
+  Map<String, dynamic> toJson() => _$FFFoodListDefinitionDetailToJson(this);
 }
+
+// @CopyWith()
+// @JsonSerializable(includeIfNull: false, explicitToJson: true)
+// class FFFoodDetail {
+//   FFFoodDetail({
+//     this.categoryName,
+//     this.allergenIds = const [],
+//     this.productsCounts,
+//     this.canBeDeleted,
+//     this.forList,
+//     this.productId,
+//     this.fromPlatForm,
+//     this.translations = const [],
+//     this.isFree = false,
+//     this.selected = false,
+//     this.hiddenPrice = false,
+//     this.id,
+//     this.name,
+//     this.shortName,
+//     this.variationPrice,
+//     this.calories,
+//     this.foodCategoryId,
+//     this.tags,
+//     this.hidden,
+//     this.selectionPriority,
+//     this.timeSelected,
+//   });
+
+//   int? selectionPriority;
+//   String? categoryName;
+//   List<int> allergenIds;
+//   int? productsCounts;
+//   bool? canBeDeleted;
+//   bool? forList;
+//   bool selected;
+//   bool isFree;
+//   bool hiddenPrice;
+//   int? productId;
+//   bool? fromPlatForm;
+//   List<FFTranslation> translations;
+//   int? id;
+//   String? name;
+//   String? shortName;
+//   double? variationPrice;
+//   int? calories;
+//   int? foodCategoryId;
+//   String? tags;
+//   bool? hidden;
+//   DateTime? timeSelected;
+
+//   factory FFFoodDetail.fromJson(Map<String, dynamic> json) => _$FFFoodDetailFromJson(json);
+//   Map<String, dynamic> toJson() => _$FFFoodDetailToJson(this);
+// }
 
 @CopyWith()
 @JsonSerializable(includeIfNull: false)
