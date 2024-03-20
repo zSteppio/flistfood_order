@@ -28,7 +28,8 @@ class FlistfoodOrderBloc extends Bloc<FlistfoodOrderEvent, FlistfoodOrderState> 
     });
 
     on<_AddProductOrDetailToORder>((event, emit) async {
-      FFProduct? product = event.productJson != null ? FFProduct.fromJson(jsonDecode(event.productJson!)) : null;
+      FFProduct? product =
+          event.productJson != null ? FFProduct.fromJson(jsonDecode(event.productJson!)) : null;
       FFDetail? detailProduct = event.detailProduct;
       FFCurrentServicePoint currentServicePoint =
           FFCurrentServicePoint.fromJson(jsonDecode(event.currentServicePointJson));
@@ -38,7 +39,8 @@ class FlistfoodOrderBloc extends Bloc<FlistfoodOrderEvent, FlistfoodOrderState> 
       String ownerName = event.ownerName;
       String? userId = event.userId;
       DateTime opneDate = event.opneDate;
-      final double servicePrice = (deliveryCost ?? 0.0) + (currentServicePoint.supplementPrice ?? 0.0);
+      final double servicePrice =
+          (deliveryCost ?? 0.0) + (currentServicePoint.supplementPrice ?? 0.0);
       int productId = detailProduct?.productId ?? product!.id;
       String? cookingTypeName;
       int? cookingTypeId;
@@ -51,15 +53,16 @@ class FlistfoodOrderBloc extends Bloc<FlistfoodOrderEvent, FlistfoodOrderState> 
 
       //* Se NON ho un dettaglio ne creo uno nuovo, per ogni variazione del prodotto popolo i dati e creo una nuova variazione nella lista variazioni
       if (detailProduct == null) {
-        for (final FFCookingType cookingType
-            in product?.cookingTypes.where((e) => e.isSelected && product.preferredCookingTypeId != e.id) ?? []) {
+        for (final FFCookingType cookingType in product?.cookingTypes
+                .where((e) => e.isSelected && product.preferredCookingTypeId != e.id) ??
+            []) {
           cookingTypeName = cookingType.name ?? '';
           cookingTypeId = cookingType.id;
         }
 
         for (final FFAlternative alternative in product?.alternatives ?? []) {
-          for (final FFFood food
-              in alternative.foods.where((e) => e.isSelected == true && alternative.defaultFoodId != e.foodId)) {
+          for (final FFFood food in alternative.foods
+              .where((e) => e.isSelected == true && alternative.defaultFoodId != e.foodId)) {
             variations.add(FFVariation(
               foodId: food.foodId,
               price: food.price,
@@ -109,10 +112,9 @@ class FlistfoodOrderBloc extends Bloc<FlistfoodOrderEvent, FlistfoodOrderState> 
 
         //* Per ogni lista di foodListsDefinition popolo le variazioni in ordine di selezione
         for (final FFFoodListsDefinition foodListDefinition in product?.foodListsDefinition ?? []) {
-          final List<FFFoodListDefinitionDetail> foodListDefinitionDetailSorted = foodListDefinition.foods
-              .where((e) => e.isSelected && e.timeSelected != null)
-              .toList()
-            ..sort((a, b) => a.timeSelected!.compareTo(b.timeSelected!));
+          final List<FFFoodListDefinitionDetail> foodListDefinitionDetailSorted =
+              foodListDefinition.foods.where((e) => e.isSelected && e.timeSelected != null).toList()
+                ..sort((a, b) => a.timeSelected!.compareTo(b.timeSelected!));
 
           //* Aggiungo tutte le variazioni selezionate in ordine di selezione
           for (final FFFoodListDefinitionDetail food in foodListDefinitionDetailSorted) {
@@ -163,15 +165,18 @@ class FlistfoodOrderBloc extends Bloc<FlistfoodOrderEvent, FlistfoodOrderState> 
         } else {
           order.details.add(
             FFDetail(
-              formatId: product?.id,
+              formatId: formatName != null ? product?.id : null,
               format: formatName,
               productId: productId,
               productName: product?.name ?? detailProduct!.productName,
               sectionId: product?.sectionId ?? 0,
-              unitPrice: product?.newPrice != 0 ? product?.newPrice ?? detailProduct!.unitPrice : product?.price ?? 0.0,
+              unitPrice: product?.newPrice != 0
+                  ? product?.newPrice ?? detailProduct!.unitPrice
+                  : product?.price ?? 0.0,
               quantity: 1,
-              totalPrice:
-                  product?.newPrice != 0 ? product?.newPrice ?? detailProduct!.totalPrice : product?.price ?? 0.0,
+              totalPrice: product?.newPrice != 0
+                  ? product?.newPrice ?? detailProduct!.totalPrice
+                  : product?.price ?? 0.0,
               variations: variations,
               cookingTypeId: cookingTypeId,
               cookingType: cookingTypeName,
@@ -214,22 +219,24 @@ class FlistfoodOrderBloc extends Bloc<FlistfoodOrderEvent, FlistfoodOrderState> 
 
         orderProducts.add(
           FFDetail(
-            formatId: product?.id,
+            formatId: product?.formatName != null ? product?.id : null,
             format: product?.formatName,
             sectionId: product?.sectionId ?? 0,
             productId: productId,
             productName: product?.name ?? detailProduct!.productName,
-            unitPrice: product?.newPrice != 0.0 ? product?.newPrice ?? detailProduct!.unitPrice : product?.price ?? 0.0,
+            unitPrice: product?.newPrice != 0.0
+                ? product?.newPrice ?? detailProduct!.unitPrice
+                : product?.price ?? 0.0,
             quantity: 1,
-            totalPrice:
-                product?.newPrice != 0.0 ? product?.newPrice ?? detailProduct!.totalPrice : product?.price ?? 0.0,
+            totalPrice: product?.newPrice != 0.0
+                ? product?.newPrice ?? detailProduct!.totalPrice
+                : product?.price ?? 0.0,
             variations: variations,
             cookingTypeId: cookingTypeId,
             cookingType: cookingTypeName,
           ),
         );
 
-        //TODO qua errore, order risulta con format settato mentre nel detail non lo è
         double totalProduct = orderProducts.first.totalPrice;
         order = FFOrder(
           servicePointId: currentServicePoint.id,
@@ -239,7 +246,8 @@ class FlistfoodOrderBloc extends Bloc<FlistfoodOrderEvent, FlistfoodOrderState> 
           userId: userId,
           ownerId: ownerId,
           ownerName: ownerName,
-          totalPrice: totalProduct += currentServicePoint.type == _MenuServiceType.delivery ? servicePrice : 0.0,
+          totalPrice: totalProduct +=
+              currentServicePoint.type == _MenuServiceType.delivery ? servicePrice : 0.0,
           openDate: opneDate,
         );
       }
@@ -257,7 +265,8 @@ class FlistfoodOrderBloc extends Bloc<FlistfoodOrderEvent, FlistfoodOrderState> 
     });
 
     on<_RemoveProductToOrder>((event, emit) async {
-      FFProduct? product = event.productJson != null ? FFProduct.fromJson(jsonDecode(event.productJson!)) : null;
+      FFProduct? product =
+          event.productJson != null ? FFProduct.fromJson(jsonDecode(event.productJson!)) : null;
       FFDetail? detailProduct = event.detailProduct;
       FFCurrentServicePoint currentServicePoint =
           FFCurrentServicePoint.fromJson(jsonDecode(event.currentServicePointJson));
@@ -387,7 +396,9 @@ class FlistfoodOrderBloc extends Bloc<FlistfoodOrderEvent, FlistfoodOrderState> 
 
         if (hour != null && minute != null) {
           mustBeReadyOn =
-              DateTime(currentTime.year, currentTime.month, currentTime.day, hour, minute).toLocal().toUtc();
+              DateTime(currentTime.year, currentTime.month, currentTime.day, hour, minute)
+                  .toLocal()
+                  .toUtc();
         }
         order.mustBeReadyOn = mustBeReadyOn;
         log(jsonEncode(order), name: 'Body ordine');
