@@ -7,6 +7,7 @@ part 'product_model.g.dart';
 @JsonSerializable(includeIfNull: false, explicitToJson: true)
 class FFProduct {
   int id;
+  int sectionId;
   String? name;
   String? formatName;
   int? preferredCookingTypeId;
@@ -22,6 +23,7 @@ class FFProduct {
 
   FFProduct({
     required this.id,
+    required this.sectionId,
     this.formatName,
     this.productFormats = const [],
     this.name,

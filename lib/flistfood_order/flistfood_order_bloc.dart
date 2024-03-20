@@ -167,7 +167,7 @@ class FlistfoodOrderBloc extends Bloc<FlistfoodOrderEvent, FlistfoodOrderState> 
               format: formatName,
               productId: productId,
               productName: product?.name ?? detailProduct!.productName,
-              //sectionId: product?.sectionId ?? 0,
+              sectionId: product?.sectionId ?? 0,
               unitPrice: product?.newPrice != 0 ? product?.newPrice ?? detailProduct!.unitPrice : product?.price ?? 0.0,
               quantity: 1,
               totalPrice:
@@ -216,7 +216,7 @@ class FlistfoodOrderBloc extends Bloc<FlistfoodOrderEvent, FlistfoodOrderState> 
           FFDetail(
             formatId: product?.id,
             format: product?.formatName,
-            //sectionId: product?.sectionId ?? 0,
+            sectionId: product?.sectionId ?? 0,
             productId: productId,
             productName: product?.name ?? detailProduct!.productName,
             unitPrice: product?.newPrice != 0.0 ? product?.newPrice ?? detailProduct!.unitPrice : product?.price ?? 0.0,

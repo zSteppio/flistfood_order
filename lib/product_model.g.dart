@@ -32,6 +32,8 @@ abstract class _$FFProductCWProxy {
 
   FFProduct productFormats(List<FFProduct> productFormats);
 
+  FFProduct sectionId(int sectionId);
+
   /// This function **does support** nullification of nullable fields. All `null` values passed to `non-nullable` fields will be ignored. You can also use `FFProduct(...).copyWith.fieldName(...)` to override fields one at a time with nullification support.
   ///
   /// Usage
@@ -51,6 +53,7 @@ abstract class _$FFProductCWProxy {
     int? preferredCookingTypeId,
     double? price,
     List<FFProduct>? productFormats,
+    int? sectionId,
   });
 }
 
@@ -105,6 +108,9 @@ class _$FFProductCWProxyImpl implements _$FFProductCWProxy {
       this(productFormats: productFormats);
 
   @override
+  FFProduct sectionId(int sectionId) => this(sectionId: sectionId);
+
+  @override
 
   /// This function **does support** nullification of nullable fields. All `null` values passed to `non-nullable` fields will be ignored. You can also use `FFProduct(...).copyWith.fieldName(...)` to override fields one at a time with nullification support.
   ///
@@ -125,6 +131,7 @@ class _$FFProductCWProxyImpl implements _$FFProductCWProxy {
     Object? preferredCookingTypeId = const $CopyWithPlaceholder(),
     Object? price = const $CopyWithPlaceholder(),
     Object? productFormats = const $CopyWithPlaceholder(),
+    Object? sectionId = const $CopyWithPlaceholder(),
   }) {
     return FFProduct(
       alternatives:
@@ -184,6 +191,10 @@ class _$FFProductCWProxyImpl implements _$FFProductCWProxy {
           ? _value.productFormats
           // ignore: cast_nullable_to_non_nullable
           : productFormats as List<FFProduct>,
+      sectionId: sectionId == const $CopyWithPlaceholder() || sectionId == null
+          ? _value.sectionId
+          // ignore: cast_nullable_to_non_nullable
+          : sectionId as int,
     );
   }
 }
@@ -883,6 +894,7 @@ extension $FFTranslationCopyWith on FFTranslation {
 
 FFProduct _$FFProductFromJson(Map<String, dynamic> json) => FFProduct(
       id: json['id'] as int,
+      sectionId: json['sectionId'] as int,
       formatName: json['formatName'] as String?,
       productFormats: (json['productFormats'] as List<dynamic>?)
               ?.map((e) => FFProduct.fromJson(e as Map<String, dynamic>))
@@ -915,6 +927,7 @@ FFProduct _$FFProductFromJson(Map<String, dynamic> json) => FFProduct(
 Map<String, dynamic> _$FFProductToJson(FFProduct instance) {
   final val = <String, dynamic>{
     'id': instance.id,
+    'sectionId': instance.sectionId,
   };
 
   void writeNotNull(String key, dynamic value) {
