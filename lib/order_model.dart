@@ -79,7 +79,7 @@ class FFDetail {
   double? discount;
   int? cookingTypeId;
   String? format;
-  int? formatId;
+  //int? formatId;
   List<FFVariation> variations;
   String? menuId;
   //* dati vecchi
@@ -103,7 +103,7 @@ class FFDetail {
     this.totalPrice = 0,
     this.cookingType,
     this.id,
-    this.formatId,
+    // this.formatId,
   });
 
   factory FFDetail.fromJson(Map<String, dynamic> json) => _$FFDetailFromJson(json);

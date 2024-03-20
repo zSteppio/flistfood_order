@@ -319,8 +319,6 @@ abstract class _$FFDetailCWProxy {
 
   FFDetail format(String? format);
 
-  FFDetail formatId(int? formatId);
-
   FFDetail id(String? id);
 
   FFDetail menuId(String? menuId);
@@ -351,7 +349,6 @@ abstract class _$FFDetailCWProxy {
     double? discount,
     int? exitValue,
     String? format,
-    int? formatId,
     String? id,
     String? menuId,
     int? productId,
@@ -385,9 +382,6 @@ class _$FFDetailCWProxyImpl implements _$FFDetailCWProxy {
 
   @override
   FFDetail format(String? format) => this(format: format);
-
-  @override
-  FFDetail formatId(int? formatId) => this(formatId: formatId);
 
   @override
   FFDetail id(String? id) => this(id: id);
@@ -431,7 +425,6 @@ class _$FFDetailCWProxyImpl implements _$FFDetailCWProxy {
     Object? discount = const $CopyWithPlaceholder(),
     Object? exitValue = const $CopyWithPlaceholder(),
     Object? format = const $CopyWithPlaceholder(),
-    Object? formatId = const $CopyWithPlaceholder(),
     Object? id = const $CopyWithPlaceholder(),
     Object? menuId = const $CopyWithPlaceholder(),
     Object? productId = const $CopyWithPlaceholder(),
@@ -463,10 +456,6 @@ class _$FFDetailCWProxyImpl implements _$FFDetailCWProxy {
           ? _value.format
           // ignore: cast_nullable_to_non_nullable
           : format as String?,
-      formatId: formatId == const $CopyWithPlaceholder()
-          ? _value.formatId
-          // ignore: cast_nullable_to_non_nullable
-          : formatId as int?,
       id: id == const $CopyWithPlaceholder()
           ? _value.id
           // ignore: cast_nullable_to_non_nullable
@@ -918,7 +907,6 @@ FFDetail _$FFDetailFromJson(Map<String, dynamic> json) => FFDetail(
       totalPrice: (json['totalPrice'] as num?)?.toDouble() ?? 0,
       cookingType: json['cookingType'] as String?,
       id: json['id'] as String?,
-      formatId: json['formatId'] as int?,
     );
 
 Map<String, dynamic> _$FFDetailToJson(FFDetail instance) {
@@ -939,7 +927,6 @@ Map<String, dynamic> _$FFDetailToJson(FFDetail instance) {
   writeNotNull('discount', instance.discount);
   writeNotNull('cookingTypeId', instance.cookingTypeId);
   writeNotNull('format', instance.format);
-  writeNotNull('formatId', instance.formatId);
   val['variations'] = instance.variations.map((e) => e.toJson()).toList();
   writeNotNull('menuId', instance.menuId);
   writeNotNull('productName', instance.productName);

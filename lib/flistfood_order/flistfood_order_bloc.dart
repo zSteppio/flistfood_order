@@ -165,7 +165,7 @@ class FlistfoodOrderBloc extends Bloc<FlistfoodOrderEvent, FlistfoodOrderState> 
         } else {
           order.details.add(
             FFDetail(
-              formatId: formatName != null ? product?.id : null,
+              // formatId: formatName != null ? product?.id : null,
               format: formatName,
               productId: productId,
               productName: product?.name ?? detailProduct!.productName,
@@ -219,7 +219,7 @@ class FlistfoodOrderBloc extends Bloc<FlistfoodOrderEvent, FlistfoodOrderState> 
 
         orderProducts.add(
           FFDetail(
-            formatId: product?.formatName != null ? product?.id : null,
+            //formatId: product?.formatName != null ? product?.id : null,
             format: product?.formatName,
             sectionId: product?.sectionId ?? 0,
             productId: productId,
