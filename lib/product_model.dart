@@ -10,6 +10,7 @@ class FFProduct {
   int sectionId;
   String? name;
   String? formatName;
+  int? formatId;
   int? preferredCookingTypeId;
   int minOrdinableQuantity;
   double price;
@@ -31,6 +32,7 @@ class FFProduct {
     this.minOrdinableQuantity = 0,
     this.newPrice = 0,
     required this.price,
+    this.formatId,
     this.ingredients = const [],
     this.alternatives = const [],
     this.cookingTypes = const [],
@@ -161,7 +163,8 @@ class FFFoodListsDefinition {
     this.foods = const [],
   });
 
-  factory FFFoodListsDefinition.fromJson(Map<String, dynamic> json) => _$FFFoodListsDefinitionFromJson(json);
+  factory FFFoodListsDefinition.fromJson(Map<String, dynamic> json) =>
+      _$FFFoodListsDefinitionFromJson(json);
   Map<String, dynamic> toJson() => _$FFFoodListsDefinitionToJson(this);
 }
 
@@ -194,7 +197,8 @@ class FFFoodListDefinitionDetail {
     this.timeSelected,
   });
 
-  factory FFFoodListDefinitionDetail.fromJson(Map<String, dynamic> json) => _$FFFoodListDefinitionDetailFromJson(json);
+  factory FFFoodListDefinitionDetail.fromJson(Map<String, dynamic> json) =>
+      _$FFFoodListDefinitionDetailFromJson(json);
   Map<String, dynamic> toJson() => _$FFFoodListDefinitionDetailToJson(this);
 }
 

@@ -14,6 +14,8 @@ abstract class _$FFProductCWProxy {
   FFProduct foodListsDefinition(
       List<FFFoodListsDefinition> foodListsDefinition);
 
+  FFProduct formatId(int? formatId);
+
   FFProduct formatName(String? formatName);
 
   FFProduct id(int id);
@@ -44,6 +46,7 @@ abstract class _$FFProductCWProxy {
     List<FFAlternative>? alternatives,
     List<FFCookingType>? cookingTypes,
     List<FFFoodListsDefinition>? foodListsDefinition,
+    int? formatId,
     String? formatName,
     int? id,
     List<FFIngredient>? ingredients,
@@ -75,6 +78,9 @@ class _$FFProductCWProxyImpl implements _$FFProductCWProxy {
   FFProduct foodListsDefinition(
           List<FFFoodListsDefinition> foodListsDefinition) =>
       this(foodListsDefinition: foodListsDefinition);
+
+  @override
+  FFProduct formatId(int? formatId) => this(formatId: formatId);
 
   @override
   FFProduct formatName(String? formatName) => this(formatName: formatName);
@@ -122,6 +128,7 @@ class _$FFProductCWProxyImpl implements _$FFProductCWProxy {
     Object? alternatives = const $CopyWithPlaceholder(),
     Object? cookingTypes = const $CopyWithPlaceholder(),
     Object? foodListsDefinition = const $CopyWithPlaceholder(),
+    Object? formatId = const $CopyWithPlaceholder(),
     Object? formatName = const $CopyWithPlaceholder(),
     Object? id = const $CopyWithPlaceholder(),
     Object? ingredients = const $CopyWithPlaceholder(),
@@ -150,6 +157,10 @@ class _$FFProductCWProxyImpl implements _$FFProductCWProxy {
               ? _value.foodListsDefinition
               // ignore: cast_nullable_to_non_nullable
               : foodListsDefinition as List<FFFoodListsDefinition>,
+      formatId: formatId == const $CopyWithPlaceholder()
+          ? _value.formatId
+          // ignore: cast_nullable_to_non_nullable
+          : formatId as int?,
       formatName: formatName == const $CopyWithPlaceholder()
           ? _value.formatName
           // ignore: cast_nullable_to_non_nullable
@@ -905,6 +916,7 @@ FFProduct _$FFProductFromJson(Map<String, dynamic> json) => FFProduct(
       minOrdinableQuantity: json['minOrdinableQuantity'] as int? ?? 0,
       newPrice: (json['newPrice'] as num?)?.toDouble() ?? 0,
       price: (json['price'] as num).toDouble(),
+      formatId: json['formatId'] as int?,
       ingredients: (json['ingredients'] as List<dynamic>?)
               ?.map((e) => FFIngredient.fromJson(e as Map<String, dynamic>))
               .toList() ??
@@ -938,6 +950,7 @@ Map<String, dynamic> _$FFProductToJson(FFProduct instance) {
 
   writeNotNull('name', instance.name);
   writeNotNull('formatName', instance.formatName);
+  writeNotNull('formatId', instance.formatId);
   writeNotNull('preferredCookingTypeId', instance.preferredCookingTypeId);
   val['minOrdinableQuantity'] = instance.minOrdinableQuantity;
   val['price'] = instance.price;
